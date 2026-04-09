@@ -121,11 +121,15 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             <NavigationMenuList>
               {/* Home */}
               <NavigationMenuItem>
-                <Link href="/" onClick={scrollToHero} legacyBehavior passHref>
-                  <NavigationMenuLink className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none">
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/"
+                    onClick={scrollToHero}
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none"
+                  >
                     Home
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
               {/* Residential */}
