@@ -7,9 +7,14 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Professional Pressure Washing Services | Pressure Washing Xperts',
+  description: 'Expert pressure washing for residential, commercial & industrial properties. Licensed & insured. Get a free quote today! Call/Text: (800)-451-7213',
+  keywords: 'pressure washing, power washing, residential cleaning, commercial cleaning, roof cleaning, driveway cleaning, industrial cleaning',
+  openGraph: {
+    title: 'Pressure Washing Xperts - Where Pressure Meets Xpertise',
+    description: 'Professional pressure washing services for residential, commercial & industrial properties. Licensed & insured.',
+    type: 'website',
+  },
   icons: {
     icon: [
       {
