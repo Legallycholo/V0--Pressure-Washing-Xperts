@@ -10,19 +10,20 @@ interface HeroProps {
 
 export function Hero({ onOpenQuoteForm }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-section-dark">
-      {/* Background Image Placeholder */}
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
+      
+      {/* Dynamic Gradient Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-dark via-section-dark to-brand-blue opacity-90" />
-        {/* Placeholder for hero background image */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-5">
-          <div className="text-white text-9xl font-bold">HERO IMAGE</div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-dark/80 via-transparent to-brand-blue/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-dark/90 via-transparent to-transparent" />
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 left-10 w-64 h-64 bg-brand-yellow/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-brand-blue-light/10 rounded-full blur-3xl" />
+      {/* Decorative Elements - Enhanced */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-yellow/20 rounded-full blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-blue-light/15 rounded-full blur-3xl animate-pulse-slower" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-3xl" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32 text-center">
