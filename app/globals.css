@@ -204,3 +204,11 @@
   background-size: 80px 140px;
   background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
+
+/* Navbar dropdown dark theme override */
+[data-slot="navigation-menu-viewport"],
+[data-slot="navigation-menu-content"] {
+  background-color: #0d1b2a !important;
+  color: #ffffff;
+  border: none;
+}
