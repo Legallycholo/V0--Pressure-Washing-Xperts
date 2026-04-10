@@ -8,6 +8,7 @@ import { FloatingCallButton } from "@/components/FloatingCallButton"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Phone } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function WeDoXpertPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
@@ -18,8 +19,20 @@ export default function WeDoXpertPage() {
       
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-32">
+        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-header-offset">
           <div className="absolute inset-0 bg-hero-pattern opacity-10" />
+          <div className="hero-logo-anchor">
+            <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+              <Image
+                src="/images/logo-new.png"
+                alt="Pressure Washing Xperts Logo"
+                width={800}
+                height={280}
+                className="hero-logo-image"
+                priority
+              />
+            </Link>
+          </div>
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">

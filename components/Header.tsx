@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Menu, X, Phone, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -71,22 +70,10 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
       style={{ backgroundColor: isDropdownOpen ? 'rgba(13, 27, 42, 1)' : navBg }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
-        <div className="flex py-2 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <Image
-              src="/images/logo-new.png"
-              alt="Pressure Washing Xperts Logo"
-              width={800}
-              height={280}
-              className="h-[180px] w-auto object-contain"
-              priority
-            />
-          </Link>
-
+        <div className="relative flex min-h-[56px] items-center">
           {/* Desktop Navigation */}
           <NavigationMenu 
-            className="hidden lg:flex"
+            className="hidden lg:flex absolute left-1/2 -translate-x-1/2"
             viewport={false}
             onValueChange={(value) => setIsDropdownOpen(value !== "")}
           >
@@ -222,7 +209,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           </NavigationMenu>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex lg:items-center lg:gap-4">
+          <div className="hidden lg:flex lg:items-center lg:gap-4 ml-auto">
             <a
               href="tel:800-451-7213"
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans"
@@ -241,7 +228,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-white"
+            className="lg:hidden ml-auto p-2 text-white"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}

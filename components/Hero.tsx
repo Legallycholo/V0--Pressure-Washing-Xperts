@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Phone, ArrowDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -10,7 +11,7 @@ interface HeroProps {
 
 export function Hero({ onOpenQuoteForm }: HeroProps) {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
       
@@ -24,6 +25,18 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       <div className="absolute top-20 left-10 w-72 h-72 bg-brand-yellow/20 rounded-full blur-3xl animate-pulse-slow" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-blue-light/15 rounded-full blur-3xl animate-pulse-slower" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-3xl" />
+      <div className="hero-logo-anchor">
+        <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <Image
+            src="/images/logo-new.png"
+            alt="Pressure Washing Xperts Logo"
+            width={800}
+            height={280}
+            className="hero-logo-image"
+            priority
+          />
+        </Link>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32 text-center">

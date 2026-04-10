@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Phone, CheckCircle2, ArrowRight, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { ServiceAreaPageContent } from "@/data/service-areas"
@@ -13,8 +14,20 @@ interface ServiceAreaPageTemplateProps {
 export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPageTemplateProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-32">
+      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-header-offset">
         <div className="absolute inset-0 bg-hero-pattern opacity-10" />
+        <div className="hero-logo-anchor">
+          <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <Image
+              src="/images/logo-new.png"
+              alt="Pressure Washing Xperts Logo"
+              width={800}
+              height={280}
+              className="hero-logo-image"
+              priority
+            />
+          </Link>
+        </div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <span className="inline-block mb-4 px-4 py-2 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
