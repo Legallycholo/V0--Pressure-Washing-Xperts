@@ -69,6 +69,34 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
       className="fixed top-0 left-0 right-0 z-50 transition-[background-color] duration-300 backdrop-blur-sm shadow-sm"
       style={{ backgroundColor: isDropdownOpen ? 'rgba(13, 27, 42, 1)' : navBg }}
     >
+      <div className="hidden lg:block border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex min-h-10 items-center justify-between text-xs text-white/65">
+            <div className="flex items-center gap-4">
+              <span>Pressure Washing Xperts</span>
+              <span className="text-white/30">|</span>
+              <span>Where Pressure Meets Xpertise</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <span>Serving Metro Atlanta Area</span>
+              <span className="text-white/30">|</span>
+              <a
+                href="mailto:pressurewashingxperts@gmail.com"
+                className="hover:text-white transition-colors"
+              >
+                pressurewashingxperts@gmail.com
+              </a>
+              <span className="text-white/30">|</span>
+              <a
+                href="tel:800-451-7213"
+                className="font-semibold text-brand-blue-light hover:text-brand-yellow transition-colors"
+              >
+                (800)-451-7213
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
         <div className="relative flex min-h-[56px] items-center">
           {/* Desktop Navigation */}

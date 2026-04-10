@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { X, CheckCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -38,6 +37,7 @@ const howHeardOptions = [
 ]
 
 export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
+  const submissionType = "Contact Form"
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [formData, setFormData] = useState({
@@ -65,6 +65,12 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    // Keep a clear frontend-only marker for the submission type.
+    console.info("Form submitted", {
+      submissionType,
+      ...formData,
+    })
 
     // Simulate form submission (frontend only)
     await new Promise((resolve) => setTimeout(resolve, 1500))
@@ -124,34 +130,24 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             <p className="text-muted-foreground mb-4">
               Your quote request has been submitted successfully. We will contact you shortly.
             </p>
-            <Image
-              src="/images/mascot.png"
-              alt="Pressure Washing Expert"
-              width={100}
-              height={125}
-              className="h-24 w-auto mx-auto"
-            />
+            <p className="text-xs font-medium text-brand-blue">
+              Submission Type: {submissionType}
+            </p>
           </div>
         ) : (
           <>
             {/* Header */}
             <div className="bg-brand-blue p-6 rounded-t-2xl">
-              <div className="flex items-center gap-4">
-                <Image
-                  src="/images/mascot.png"
-                  alt="Pressure Washing Expert"
-                  width={60}
-                  height={75}
-                  className="h-16 w-auto"
-                />
-                <div>
-                  <h2 className="text-xl font-bold text-white">
-                    Get a Free Quote Today
-                  </h2>
-                  <p className="text-white/80 text-sm">
-                    Fill out the form below and {"we'll"} get back to you ASAP
-                  </p>
-                </div>
+              <div>
+                <h2 className="text-xl font-bold text-white">
+                  Get a Free Quote Today
+                </h2>
+                <p className="text-white/80 text-sm">
+                  Fill out the form below and {"we'll"} get back to you ASAP
+                </p>
+                <p className="mt-2 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">
+                  {submissionType}
+                </p>
               </div>
             </div>
 
@@ -314,7 +310,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                     Submitting...
                   </>
                 ) : (
-                  "Submit Quote Request"
+                  "Submit Contact Request"
                 )}
               </Button>
 

@@ -16,8 +16,8 @@ export default function CommercialServicesHubPage() {
       <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
       <ServiceCategoryHubTemplate
         categoryLabel="Commercial Services"
-        title="Commercial Pressure Washing"
-        description="Explore commercial service placeholders organized into a repeatable structure for content rollout."
+        title="Commercial Pressure Washing Services"
+        description="Reliable cleaning solutions for storefronts, business properties, parking areas, and high-traffic commercial spaces."
         services={commercialServices}
         onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
       />

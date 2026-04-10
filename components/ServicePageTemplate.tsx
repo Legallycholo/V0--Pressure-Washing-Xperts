@@ -108,14 +108,7 @@ export function ServicePageTemplate({
 
             {/* Image Placeholder */}
             <div className="relative h-96 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <Image
-                  src="/images/mascot.png"
-                  alt="Service Mascot"
-                  width={200}
-                  height={200}
-                  className="mx-auto mb-4"
-                />
+              <div className="text-center px-6">
                 <p className="text-gray-500 text-sm">Service Image Placeholder</p>
               </div>
             </div>

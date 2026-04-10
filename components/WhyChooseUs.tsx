@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { CheckCircle, Star, Clock, Shield, Award, Wrench } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -98,7 +97,7 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
             </div>
           </div>
 
-          {/* Right Column - Image & Mascot */}
+          {/* Right Column - Image */}
           <div className="order-1 lg:order-2 relative">
             {/* Background Shape */}
             <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-3xl -rotate-3" />
@@ -113,17 +112,6 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
                   <p>Work Image Placeholder</p>
                 </div>
               </div>
-            </div>
-
-            {/* Mascot Overlay */}
-            <div className="absolute -bottom-6 -right-6 z-10">
-              <Image
-                src="/images/mascot.png"
-                alt="Pressure Washing Expert"
-                width={180}
-                height={220}
-                className="h-44 w-auto drop-shadow-2xl"
-              />
             </div>
 
             {/* Stats Badge */}

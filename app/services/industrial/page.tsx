@@ -16,8 +16,8 @@ export default function IndustrialServicesHubPage() {
       <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
       <ServiceCategoryHubTemplate
         categoryLabel="Industrial Services"
-        title="Industrial Pressure Washing"
-        description="Explore industrial service placeholders organized into a repeatable structure for content rollout."
+        title="Industrial Pressure Washing Services"
+        description="Heavy-duty cleaning for warehouses, loading docks, equipment, and large-scale industrial facilities."
         services={industrialServices}
         onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
       />

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 const testimonials = [
@@ -244,16 +243,6 @@ export function Testimonials() {
           </button>
         </div>
 
-        {/* Mascot */}
-        <div className="mt-12 flex justify-center">
-          <Image
-            src="/images/mascot.png"
-            alt="Pressure Washing Expert"
-            width={120}
-            height={150}
-            className="h-28 w-auto opacity-80"
-          />
-        </div>
       </div>
     </section>
   )

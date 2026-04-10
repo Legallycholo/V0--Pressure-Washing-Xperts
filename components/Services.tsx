@@ -1,51 +1,56 @@
 "use client"
 
 import { useState } from "react"
-import { Home, Building2, Factory, Droplets, TreePine, Warehouse, ChevronRight } from "lucide-react"
+import Link from "next/link"
+import { Home, Building2, Factory, Droplets, Sparkles, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const services = [
+const primaryServices = [
   {
     id: "residential",
     icon: Home,
-    title: "Residential Cleaning",
-    description: "Complete home exterior cleaning including siding, decks, patios, and driveways. Restore your home's curb appeal.",
-    features: ["House Washing", "Deck & Patio Cleaning", "Driveway Cleaning", "Fence Cleaning"],
+    title: "Residential Services",
+    description:
+      "House washing, driveway cleaning, deck restoration, roof soft washing, and patio cleaning.",
+    href: "/services/residential",
+    imageLabel: "Residential service image",
   },
   {
     id: "commercial",
     icon: Building2,
-    title: "Commercial Cleaning",
-    description: "Professional cleaning services for storefronts, office buildings, parking lots, and commercial properties.",
-    features: ["Building Exteriors", "Parking Lots", "Sidewalks", "Signage Cleaning"],
+    title: "Commercial Services",
+    description:
+      "Storefronts, parking lots, building exteriors, sidewalks, and high-traffic common areas.",
+    href: "/services/commercial",
+    imageLabel: "Commercial service image",
   },
   {
     id: "industrial",
     icon: Factory,
-    title: "Industrial Cleaning",
-    description: "Heavy-duty cleaning for warehouses, manufacturing facilities, and industrial equipment.",
-    features: ["Warehouse Floors", "Equipment Cleaning", "Loading Docks", "Graffiti Removal"],
+    title: "Industrial Services",
+    description:
+      "Warehouses, manufacturing facilities, loading docks, and heavy-duty equipment cleaning.",
+    href: "/services/industrial",
+    imageLabel: "Industrial service image",
+  },
+]
+
+const supportingServices = [
+  {
+    id: "pressure-washing",
+    icon: Sparkles,
+    title: "Pressure Washing",
+    subtitle: "High-pressure surface cleaning",
+    description:
+      "Removes deep grime and buildup from concrete, brick, and other durable surfaces.",
   },
   {
-    id: "roof",
+    id: "soft-washing",
     icon: Droplets,
-    title: "Roof Cleaning",
-    description: "Safe soft washing techniques to remove algae, moss, and stains without damaging your roof.",
-    features: ["Soft Wash Method", "Algae & Moss Removal", "Stain Treatment", "Gutter Cleaning"],
-  },
-  {
-    id: "landscape",
-    icon: TreePine,
-    title: "HOA & Community",
-    description: "Comprehensive cleaning services for homeowner associations and community common areas.",
-    features: ["Common Areas", "Pool Decks", "Clubhouses", "Community Signs"],
-  },
-  {
-    id: "masonry",
-    icon: Warehouse,
-    title: "Masonry & Stone",
-    description: "Specialized cleaning for brick, stone, concrete, and other masonry surfaces.",
-    features: ["Brick Cleaning", "Stone Restoration", "Concrete Sealing", "Efflorescence Removal"],
+    title: "Soft Washing",
+    subtitle: "Low-pressure chemical cleaning",
+    description:
+      "A gentle approach for roofs, siding, stucco, and other delicate surfaces.",
   },
 ]
 
@@ -72,9 +77,9 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
+        {/* Primary Services */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {primaryServices.map((service, index) => (
             <div
               key={service.id}
               className={`group relative rounded-xl overflow-hidden transition-all duration-300 cursor-pointer animate-fade-in-up stagger-${index + 1}`}
@@ -95,51 +100,56 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
 
               {/* Content */}
               <div className="relative p-6 sm:p-8">
-                {/* Image Placeholder */}
-                <div className="mb-6 h-40 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 overflow-hidden">
+                <div className="mb-4 h-40 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 overflow-hidden">
                   <div className="text-white/30 text-sm text-center">
                     <service.icon className="size-12 mx-auto mb-2 opacity-50" />
-                    <span>Service Image</span>
+                    <span>{service.imageLabel}</span>
                   </div>
                 </div>
 
-                {/* Icon */}
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand-yellow text-brand-blue-dark">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-brand-blue-light/20 text-brand-blue-light">
                   <service.icon className="size-6" />
                 </div>
 
-                {/* Title & Description */}
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-yellow transition-colors">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-yellow transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-white/70 text-sm leading-relaxed mb-4">
+                <p className="text-white/75 text-sm leading-relaxed mb-6">
                   {service.description}
                 </p>
 
-                {/* Features List */}
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-white/60 text-sm">
-                      <ChevronRight className="size-4 text-brand-yellow" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Learn More Link */}
-                <button
-                  onClick={onOpenQuoteForm}
-                  className="flex items-center gap-1 text-brand-yellow font-medium text-sm hover:gap-2 transition-all"
+                <Link
+                  href={service.href}
+                  className="inline-flex items-center gap-1 text-brand-yellow font-semibold text-sm hover:gap-2 transition-all"
                 >
-                  Get a Quote
+                  Learn More
                   <ChevronRight className="size-4" />
-                </button>
+                </Link>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Supporting Services */}
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {supportingServices.map((service) => (
+            <div
+              key={service.id}
+              className="rounded-xl border border-white/15 bg-white/5 p-6 sm:p-7"
+            >
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md bg-brand-blue-light/15 text-brand-blue-light">
+                <service.icon className="size-5" />
+              </div>
+              <h3 className="text-xl font-bold text-white">{service.title}</h3>
+              <p className="mt-1 text-brand-blue-light text-xs uppercase tracking-wide font-semibold">
+                {service.subtitle}
+              </p>
+              <p className="mt-3 text-sm text-white/70 leading-relaxed">{service.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Section CTA */}
         <div className="mt-16 text-center">
           <p className="text-white/70 mb-6">
             {"Not sure which service you need? Let us help you find the right solution."}

@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -112,17 +111,6 @@ export function ContactSection({ onOpenQuoteForm }: ContactSectionProps) {
                   <p>Contact Image Placeholder</p>
                 </div>
               </div>
-            </div>
-
-            {/* Mascot */}
-            <div className="absolute -bottom-6 -left-6 z-10">
-              <Image
-                src="/images/mascot.png"
-                alt="Pressure Washing Expert"
-                width={150}
-                height={190}
-                className="h-40 w-auto drop-shadow-2xl"
-              />
             </div>
 
             {/* Quick Response Badge */}

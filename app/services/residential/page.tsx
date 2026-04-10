@@ -16,8 +16,8 @@ export default function ResidentialServicesHubPage() {
       <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
       <ServiceCategoryHubTemplate
         categoryLabel="Residential Services"
-        title="Residential Pressure Washing"
-        description="Explore residential service placeholders organized into a repeatable structure for content rollout."
+        title="Residential Pressure Washing Services"
+        description="Safe and effective exterior cleaning for homes, driveways, decks, roofs, and other residential surfaces."
         services={residentialServices}
         onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
       />

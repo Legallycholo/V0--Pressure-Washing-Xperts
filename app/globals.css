@@ -222,22 +222,22 @@
 .hero-logo-anchor {
   position: absolute;
   top: calc(var(--header-offset-mobile) - 0.5rem);
-  left: 1rem;
+  left: 0.5rem;
   z-index: 20;
 }
 
 .hero-logo-image {
-  height: 72px;
+  height: 84px;
   width: auto;
 }
 
 @media (min-width: 640px) {
   .hero-logo-anchor {
-    left: 1.5rem;
+    left: 0.75rem;
   }
 
   .hero-logo-image {
-    height: 90px;
+    height: 104px;
   }
 }
 
@@ -247,11 +247,11 @@
   }
 
   .hero-logo-anchor {
-    top: calc(var(--header-offset-desktop) - 0.5rem);
-    left: calc((100vw - min(100vw, 80rem)) / 2 + 1.5rem);
+    top: calc(var(--header-offset-desktop) - 0.75rem);
+    left: max(0.75rem, calc((100vw - min(100vw, 80rem)) / 2 - 1.25rem));
   }
 
   .hero-logo-image {
-    height: 120px;
+    height: 138px;
   }
 }

@@ -67,13 +67,7 @@ export default function WeDoXpertPage() {
               </div>
 
               <div className="relative h-96 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-lg flex items-center justify-center">
-                <Image
-                  src="/images/mascot.png"
-                  alt="Pressure Washing Xperts Mascot"
-                  width={300}
-                  height={300}
-                  className="mx-auto"
-                />
+                <p className="text-gray-500 text-sm px-6 text-center">Brand Story Image Placeholder</p>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ export function ServiceCategoryHubTemplate({
           </Link>
         </div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block mb-4 px-4 py-2 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
+          <span className="inline-block mb-4 px-4 py-2 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm uppercase tracking-wide">
             {categoryLabel}
           </span>
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">{title}</h1>
@@ -66,26 +66,45 @@ export function ServiceCategoryHubTemplate({
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-brand-blue-dark mb-8 text-center">Explore Services</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-brand-blue text-xs font-semibold uppercase tracking-[0.2em]">What We Clean</p>
+            <h2 className="mt-3 text-3xl font-bold text-brand-blue-dark sm:text-4xl">Our {categoryLabel}</h2>
+            <p className="mt-3 text-gray-600 max-w-3xl mx-auto">
+              Select a service below to view the dedicated service page. This structure is intentionally simple so it can scale as content is added.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
             {services.map((service) => (
               <Link
                 key={service.href}
                 href={service.href}
-                className="rounded-xl border border-brand-blue/10 bg-white p-6 shadow-sm hover:border-brand-blue/40 transition-colors"
+                className="rounded-lg border border-brand-blue/10 bg-white p-5 sm:p-6 shadow-sm hover:border-brand-blue/40 hover:shadow-md transition-all"
               >
-                <h3 className="text-lg font-semibold text-brand-blue-dark mb-3">{service.label}</h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  Placeholder copy for this service overview card. Replace with final service summary.
+                <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
+                <p className="text-sm text-gray-600 mb-3">
+                  Structured service placeholder page for upcoming content, FAQs, gallery samples, and pricing context.
                 </p>
-                <span className="inline-flex items-center text-brand-blue font-medium">
-                  View Details
+                <span className="inline-flex items-center text-brand-blue font-semibold text-sm">
+                  Learn More
                   <ArrowRight className="size-4 ml-1" />
                 </span>
               </Link>
             ))}
+          </div>
+
+          <div className="mt-10 rounded-xl border border-brand-blue/10 bg-white p-6 sm:p-7 text-center">
+            <p className="text-gray-600">
+              Need help choosing the right service? We can recommend the best process for your property type.
+            </p>
+            <Button
+              onClick={onOpenQuoteForm}
+              className="mt-5 bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+            >
+              Request a Free Estimate
+            </Button>
           </div>
         </div>
       </section>
