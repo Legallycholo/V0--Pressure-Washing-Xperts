@@ -37,25 +37,17 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <Image
-                src="/images/logo.png"
+                src="/images/logo-new.png"
                 alt="Pressure Washing Xperts Logo"
-                width={180}
-                height={70}
-                className="h-16 w-auto"
+                width={400}
+                height={140}
+                className="h-24 w-auto object-contain"
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Professional pressure washing services for residential, commercial, and industrial properties. 
               Licensed & Insured. Where Pressure Meets Xpertise.
             </p>
-            {/* Mascot */}
-            <Image
-              src="/images/mascot.png"
-              alt="Pressure Washing Expert"
-              width={80}
-              height={100}
-              className="h-20 w-auto opacity-80"
-            />
           </div>
 
           {/* Services Column */}

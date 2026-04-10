@@ -1,11 +1,30 @@
-import ServicePageTemplate from '@/components/ServicePageTemplate'
+"use client"
+
+import { useState } from "react"
+import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
+import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { ContactFormModal } from "@/components/ContactFormModal"
+import { FloatingCallButton } from "@/components/FloatingCallButton"
 
 export default function DistributionCentersPage() {
+  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+
   return (
-    <ServicePageTemplate
-      title="Distribution Center Cleaning"
-      description="Professional pressure washing for distribution centers and logistics facilities"
-      category="Industrial"
-    />
+    <>
+      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <ServicePageTemplate
+        title="Distribution Center Cleaning"
+        description="Professional pressure washing for distribution centers and logistics facilities"
+        category="Industrial"
+        onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
+      />
+      <Footer />
+      <FloatingCallButton />
+      <ContactFormModal
+        isOpen={isQuoteFormOpen}
+        onClose={() => setIsQuoteFormOpen(false)}
+      />
+    </>
   )
 }

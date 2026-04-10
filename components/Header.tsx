@@ -26,24 +26,18 @@ const residentialServices = [
 ]
 
 const commercialServices = [
-  { href: "/services/commercial/hoa-services", label: "HOA Services" },
-  { href: "/services/commercial/commercial-buildings", label: "Commercial Buildings" },
-  { href: "/services/commercial/office-buildings", label: "Office Buildings" },
-  { href: "/services/commercial/apartment-complexes", label: "Apartment Complexes" },
-  { href: "/services/commercial/hotels-hospitality", label: "Hotels & Hospitality" },
-  { href: "/services/commercial/government-complexes", label: "Government Complexes" },
-  { href: "/services/commercial/awning-cleaning", label: "Awning Cleaning" },
-  { href: "/services/commercial/gas-stations", label: "Gas Stations" },
+  { href: "/services/commercial/building-washing", label: "Commercial Building Washing" },
+  { href: "/services/commercial/parking-lots-garages", label: "Parking Lots & Garages" },
+  { href: "/services/commercial/storefronts", label: "Storefronts" },
   { href: "/services/commercial/graffiti-removal", label: "Graffiti Removal" },
-  { href: "/services/commercial/parking-decks", label: "Parking Decks" },
+  { href: "/services/commercial/dumpster-pads", label: "Dumpster Pads" },
+  { href: "/services/commercial/fleet-washing", label: "Fleet Washing" },
 ]
 
 const industrialServices = [
-  { href: "/services/industrial/warehouses", label: "Warehouses" },
+  { href: "/services/industrial/equipment-washing", label: "Industrial Equipment Washing" },
+  { href: "/services/industrial/warehouse-exteriors", label: "Warehouse Exteriors" },
   { href: "/services/industrial/loading-docks", label: "Loading Docks" },
-  { href: "/services/industrial/manufacturing-plants", label: "Manufacturing Plants" },
-  { href: "/services/industrial/distribution-centers", label: "Distribution Centers" },
-  { href: "/services/industrial/fleet-wash", label: "Fleet Wash" },
 ]
 
 const serviceAreas = [
@@ -68,14 +62,26 @@ interface HeaderProps {
 
 export function Header({ onOpenQuoteForm }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [navBg, setNavBg] = useState('rgba(13, 27, 42, 1)')
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      const scrollY = window.scrollY
+      const maxScroll = 300
+      
+      if (scrollY <= maxScroll) {
+        const opacity = 1 - (scrollY / maxScroll) * 0.4
+        setNavBg(`rgba(13, 27, 42, ${opacity.toFixed(3)})`)
+      } else {
+        setNavBg('rgba(13, 27, 42, 0.6)')
+      }
     }
-    window.addEventListener("scroll", handleScroll)
+    
+    handleScroll() // Initial check
+    
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -96,28 +102,29 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-brand-blue-dark/90 backdrop-blur-md shadow-lg"
-          : "bg-brand-blue-dark/70 backdrop-blur-sm"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-[background-color] duration-300 backdrop-blur-sm shadow-sm"
+      style={{ backgroundColor: isDropdownOpen ? 'rgba(13, 27, 42, 1)' : navBg }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
+        <div className="flex py-2 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <Image
               src="/images/logo-new.png"
               alt="Pressure Washing Xperts Logo"
-              width={220}
-              height={80}
-              className="h-20 w-auto"
+              width={800}
+              height={280}
+              className="h-[180px] w-auto object-contain"
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex">
+          <NavigationMenu 
+            className="hidden lg:flex"
+            viewport={false}
+            onValueChange={(value) => setIsDropdownOpen(value !== "")}
+          >
             <NavigationMenuList>
               {/* Home */}
               <NavigationMenuItem>
@@ -137,16 +144,16 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
                   Residential
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
+                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
                     {residentialServices.map((service) => (
                       <li key={service.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={service.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
                           >
-                            <div className="text-sm font-medium leading-none">{service.label}</div>
+                            <div className="font-medium leading-none">{service.label}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -160,16 +167,16 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
                   Commercial
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
+                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
                     {commercialServices.map((service) => (
                       <li key={service.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={service.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
                           >
-                            <div className="text-sm font-medium leading-none">{service.label}</div>
+                            <div className="font-medium leading-none">{service.label}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -183,16 +190,16 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
                   Industrial
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
+                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
                     {industrialServices.map((service) => (
                       <li key={service.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={service.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
                           >
-                            <div className="text-sm font-medium leading-none">{service.label}</div>
+                            <div className="font-medium leading-none">{service.label}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -206,16 +213,16 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
                   Service Areas
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[500px] grid-cols-2 gap-3 p-4">
+                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
+                  <ul className="grid grid-cols-2 w-max min-w-[340px] max-w-[440px] py-2 bg-[#0d1b2a]">
                     {serviceAreas.map((area) => (
                       <li key={area}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={`/service-areas/${area.toLowerCase().replace(/,?\s+/g, '-')}`}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
                           >
-                            <div className="text-sm font-medium leading-none">{area}</div>
+                            <div className="font-medium leading-none">{area}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -229,16 +236,16 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
                   About
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
+                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
                     {aboutLinks.map((link) => (
                       <li key={link.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={link.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
                           >
-                            <div className="text-sm font-medium leading-none">{link.label}</div>
+                            <div className="font-medium leading-none">{link.label}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -253,16 +260,16 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div className="hidden lg:flex lg:items-center lg:gap-4">
             <a
               href="tel:800-451-7213"
-              className="flex items-center gap-2 text-sm font-medium text-white transition-colors hover:text-brand-yellow"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans"
             >
               <Phone className="size-4" />
-              <span>Call/Text: (800)-451-7213</span>
+              <span>Call Now</span>
             </a>
             <Button
               onClick={onOpenQuoteForm}
-              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
             >
-              Get a Free Quote
+              Get a Quote
             </Button>
           </div>
 

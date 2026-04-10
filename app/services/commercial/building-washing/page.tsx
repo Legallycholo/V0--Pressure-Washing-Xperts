@@ -7,16 +7,24 @@ import { ServicePageTemplate } from "@/components/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 
-export default function BrickStoneMasonryPage() {
+export default function BuildingWashingPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
 
   return (
     <>
       <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
       <ServicePageTemplate
-        title="Brick, Stone & Masonry Cleaning"
-        description="Professional cleaning for brick, stone, and masonry surfaces"
-        category="Residential"
+        title="Commercial Building Washing"
+        description="Professional exterior cleaning for offices, retail centers & commercial properties across Metro Atlanta."
+        category="Commercial"
+        benefits={[
+          "Removes mold, mildew & environmental staining",
+          "Safe for brick, stucco, EIFS & metal panels",
+          "Soft wash or pressure wash by surface type",
+          "Enhances tenant satisfaction & curb appeal",
+          "Licensed, bonded & insured",
+          "Flexible scheduling including nights & weekends"
+        ]}
         onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
       />
       <Footer />
