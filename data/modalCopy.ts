@@ -3,7 +3,7 @@ export const modalCopyDefault = {
   headline: "Get a Free Quote Today",
   subline: "Fill out the form below and we'll get back to you ASAP",
   badge: "Contact Form",
-  submitLabel: "Submit Contact Request",
+  submitLabel: "Submit Request",
   successExtra: null as string | null,
 }
 

@@ -13,6 +13,7 @@ export type GalleryFilterId =
   | "hoa"
   | "masonry"
   | "before-after"
+  | "equipment"
 
 export type GalleryItemCategory = Exclude<GalleryFilterId, "all">
 
@@ -46,7 +47,64 @@ export const galleryCategories: GalleryCategory[] = [
   { id: "hoa", label: "HOA & Community" },
   { id: "masonry", label: "Masonry & Stone" },
   { id: "before-after", label: "Before & After" },
+  { id: "equipment", label: "Equipment" },
 ]
+
+export const galleryCtaByCategory: Record<
+  GalleryFilterId,
+  { title: string; description: string }
+> = {
+  all: {
+    title: "Ready for results like these?",
+    description:
+      "Tell us about your property and we’ll recommend the right soft wash or pressure washing approach.",
+  },
+  residential: {
+    title: "Love how a clean home looks?",
+    description:
+      "Schedule residential washing for siding, decks, and outdoor living spaces—done safely and thoroughly.",
+  },
+  roof: {
+    title: "Protect your roof and curb appeal",
+    description:
+      "Soft washing removes algae and stains without damaging shingles. Call to discuss your roof cleaning plan.",
+  },
+  commercial: {
+    title: "Keep your business looking its best",
+    description:
+      "From storefronts to offices, we help you make a strong first impression. Ask about commercial scheduling.",
+  },
+  industrial: {
+    title: "Heavy-duty sites need a pro crew",
+    description:
+      "Warehouses, docks, and industrial exteriors—we scale the job to your facility. Get a call-back today.",
+  },
+  driveways: {
+    title: "Restore driveways and patios",
+    description:
+      "Lift oil, mildew, and grime from concrete and pavers. We’ll walk you through what your surface needs.",
+  },
+  hoa: {
+    title: "HOA and community projects welcome",
+    description:
+      "Pool decks, common areas, and multi-home schedules—we coordinate with boards and managers.",
+  },
+  masonry: {
+    title: "Brick and stone deserve expert care",
+    description:
+      "Gentle cleaning protects mortar and finishes. Call to discuss masonry and stone washing options.",
+  },
+  "before-after": {
+    title: "Imagine your property transformed",
+    description:
+      "These projects started where yours might be now. Call and we’ll explain what’s possible for your home or site.",
+  },
+  equipment: {
+    title: "Industrial equipment cleaning",
+    description:
+      "Fleet and equipment washing with the right methods and runoff awareness. Talk to us about your assets.",
+  },
+}
 
 export const galleryItems: GalleryItem[] = [
   { id: 1, category: "residential", title: "House Exterior Cleaning" },
@@ -65,6 +123,8 @@ export const galleryItems: GalleryItem[] = [
   { id: 14, category: "masonry", title: "Stone Pathway" },
   { id: 15, category: "before-after", title: "Dramatic Transformation" },
   { id: 16, category: "before-after", title: "Deck Restoration" },
+  { id: 17, category: "equipment", title: "Pressure washing rig" },
+  { id: 18, category: "equipment", title: "Surface cleaner setup" },
 ]
 
 export function getGalleryCategoryLabel(categoryId: GalleryItemCategory): string {

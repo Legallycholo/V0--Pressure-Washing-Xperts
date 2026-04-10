@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { X, ChevronLeft, ChevronRight, Expand } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   GALLERY_TEASER_COUNT,
   galleryCategories,
+  galleryCtaByCategory,
   galleryItems,
   getGalleryCategoryLabel,
   isValidGalleryCategoryParam,
@@ -192,7 +193,7 @@ function GalleryTeaser() {
 
         <GalleryGrid itemsForView={itemsForView} onOpen={openLightbox} />
 
-        <div className="mt-10 text-center">
+        <div className="mt-10 flex flex-col items-center gap-4 text-center">
           <Button
             asChild
             size="lg"
@@ -200,6 +201,13 @@ function GalleryTeaser() {
           >
             <Link href="/gallery">View Full Gallery</Link>
           </Button>
+          <a
+            href="tel:800-451-7213"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark"
+          >
+            <Phone className="size-4 shrink-0" aria-hidden />
+            <span>Call Now</span>
+          </a>
         </div>
       </div>
 
@@ -256,6 +264,8 @@ function GalleryFull() {
   const { lightboxIndex, openLightbox, closeLightbox, navigateLightbox } =
     useGalleryLightbox(filteredItems)
 
+  const cta = galleryCtaByCategory[activeCategory]
+
   return (
     <section
       id="gallery"
@@ -279,11 +289,11 @@ function GalleryFull() {
           </p>
         </div>
 
-        <div className="mb-10 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="mb-10">
           <div
             role="tablist"
             aria-label="Filter gallery by category"
-            className="flex min-w-max justify-center gap-2"
+            className="flex flex-wrap justify-center gap-2"
           >
             {galleryCategories.map((category) => (
               <button
@@ -305,7 +315,33 @@ function GalleryFull() {
           </div>
         </div>
 
-        <GalleryGrid itemsForView={filteredItems} onOpen={openLightbox} />
+        {filteredItems.length === 0 ? (
+          <p className="py-12 text-center text-lg text-white/60">
+            No gallery items in this category yet.
+          </p>
+        ) : (
+          <GalleryGrid itemsForView={filteredItems} onOpen={openLightbox} />
+        )}
+
+        <div
+          className="mx-auto mt-12 max-w-2xl text-center"
+          aria-labelledby="gallery-cta-heading"
+        >
+          <h2
+            id="gallery-cta-heading"
+            className="text-balance text-2xl font-bold text-white sm:text-3xl"
+          >
+            {cta.title}
+          </h2>
+          <p className="mt-3 text-pretty text-lg text-white/70">{cta.description}</p>
+          <a
+            href="tel:800-451-7213"
+            className="mt-6 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark"
+          >
+            <Phone className="size-4 shrink-0" aria-hidden />
+            <span>Call Now</span>
+          </a>
+        </div>
 
         {lightboxIndex !== null && (
           <GalleryLightbox

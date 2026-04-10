@@ -1,7 +1,7 @@
 "use client"
 
 import { useId, useState } from "react"
-import { CheckCircle, Loader2 } from "lucide-react"
+import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 import { cn } from "@/lib/utils"
 import type { OfferId } from "@/data/offers"
 import { offers, OFFER_NONE } from "@/data/offers"
@@ -196,15 +197,19 @@ export function ContactQuoteForm({
       {!isInline ? (
         <div className="bg-brand-blue p-6 rounded-t-2xl">
           <h2 className="text-xl font-bold text-white">{copy.headline}</h2>
-          <p className="text-white/80 text-sm mt-1">{copy.subline}</p>
+          {copy.subline ? (
+            <p className="text-white/80 text-sm mt-1">{copy.subline}</p>
+          ) : null}
           <p className="mt-2 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">
             {copy.badge}
           </p>
         </div>
       ) : (
-        <div className="mb-6">
+        <div className={cn("mb-6", !copy.subline && "mb-4")}>
           <h3 className="text-xl font-bold text-white">{copy.headline}</h3>
-          <p className="text-white/70 text-sm mt-1">{copy.subline}</p>
+          {copy.subline ? (
+            <p className="text-white/70 text-sm mt-1">{copy.subline}</p>
+          ) : null}
         </div>
       )}
 
@@ -230,7 +235,7 @@ export function ContactQuoteForm({
               >
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent {...formSelectContentPlacementProps}>
                 <SelectItem value={OFFER_NONE}>
                   General quote — no specific offer
                 </SelectItem>
@@ -328,7 +333,7 @@ export function ContactQuoteForm({
               >
                 <SelectValue placeholder="State" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent {...formSelectContentPlacementProps}>
                 {usStates.map((state) => (
                   <SelectItem key={state} value={state}>
                     {state}
@@ -386,7 +391,7 @@ export function ContactQuoteForm({
             >
               <SelectValue placeholder="Select an option" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent {...formSelectContentPlacementProps}>
               {howHeardOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -399,15 +404,18 @@ export function ContactQuoteForm({
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg"
+          className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg inline-flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             <>
-              <Loader2 className="size-5 animate-spin mr-2" />
+              <Loader2 className="size-5 animate-spin shrink-0" />
               Submitting...
             </>
           ) : (
-            copy.submitLabel
+            <>
+              <Send className="size-5 shrink-0" aria-hidden />
+              {copy.submitLabel}
+            </>
           )}
         </Button>
 

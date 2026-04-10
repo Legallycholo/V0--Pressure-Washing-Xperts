@@ -1,26 +1,16 @@
 "use client"
 
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { ContactQuoteForm, type QuoteFormCopy } from "@/components/ContactQuoteForm"
 import { modalCopyDefault } from "@/data/modalCopy"
 import { businessAddress, businessMapsUrl } from "@/data/site"
 
 const inlineQuoteCopy = {
   ...modalCopyDefault,
-  headline: "Request your free quote",
-  subline: "We typically respond within 24–48 hours.",
-  submitLabel: "Submit Contact Request",
+  headline: "Request a Fast Quote",
+  subline: "",
+  submitLabel: "Submit Request",
 } satisfies QuoteFormCopy
-
-function scrollToQuoteForm() {
-  const el = document.getElementById("contact-form")
-  el?.scrollIntoView({ behavior: "smooth", block: "start" })
-  window.setTimeout(() => {
-    const input = el?.querySelector<HTMLInputElement>('input[name="fullName"]')
-    input?.focus({ preventScroll: true })
-  }, 450)
-}
 
 export function ContactSection() {
   return (
@@ -106,15 +96,13 @@ export function ContactSection() {
               </a>
             </div>
 
-            {/* CTA Button */}
-            <Button
-              type="button"
-              onClick={scrollToQuoteForm}
-              size="lg"
-              className="w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark text-lg px-8"
+            <a
+              href="tel:800-451-7213"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans"
             >
-              Get a Free Quote Today
-            </Button>
+              <Phone className="size-4 shrink-0" />
+              <span>Call Now</span>
+            </a>
           </div>
 
           {/* Right Column - Quote form */}
@@ -125,16 +113,11 @@ export function ContactSection() {
               id="contact-form"
               className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-brand-blue to-section-dark-alt p-6 sm:p-8 max-h-[min(90vh,52rem)] overflow-y-auto"
             >
-              <div className="absolute top-4 right-4 z-10 bg-brand-yellow text-brand-blue-dark rounded-xl px-4 py-3 shadow-lg pointer-events-none">
-                <p className="font-bold text-lg leading-tight">24-48 Hour</p>
-                <p className="text-sm">Response Time</p>
-              </div>
-
               <ContactQuoteForm
                 variant="inline"
                 copy={inlineQuoteCopy}
                 showOfferSelect={false}
-                className="pt-2 sm:pr-36"
+                className="pt-2"
               />
             </div>
           </div>

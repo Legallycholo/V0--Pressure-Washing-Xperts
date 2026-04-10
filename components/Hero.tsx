@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 
 interface HeroProps {
   onOpenQuoteForm: () => void
@@ -244,7 +245,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                         <SelectTrigger className="mt-1 w-full">
                           <SelectValue placeholder="State" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent {...formSelectContentPlacementProps}>
                           {usStates.map((state) => (
                             <SelectItem key={state} value={state}>
                               {state}
@@ -297,7 +298,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                       <SelectTrigger className="mt-1 w-full">
                         <SelectValue placeholder="Select an option" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent {...formSelectContentPlacementProps}>
                         {howHeardOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
