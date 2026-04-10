@@ -2,12 +2,27 @@
 
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ContactQuoteForm, type QuoteFormCopy } from "@/components/ContactQuoteForm"
+import { modalCopyDefault } from "@/data/modalCopy"
+import { businessAddress, businessMapsUrl } from "@/data/site"
 
-interface ContactSectionProps {
-  onOpenQuoteForm: () => void
+const inlineQuoteCopy = {
+  ...modalCopyDefault,
+  headline: "Request your free quote",
+  subline: "We typically respond within 24–48 hours.",
+  submitLabel: "Submit Contact Request",
+} satisfies QuoteFormCopy
+
+function scrollToQuoteForm() {
+  const el = document.getElementById("contact-form")
+  el?.scrollIntoView({ behavior: "smooth", block: "start" })
+  window.setTimeout(() => {
+    const input = el?.querySelector<HTMLInputElement>('input[name="fullName"]')
+    input?.focus({ preventScroll: true })
+  }, 450)
 }
 
-export function ContactSection({ onOpenQuoteForm }: ContactSectionProps) {
+export function ContactSection() {
   return (
     <section id="contact" className="py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -21,7 +36,7 @@ export function ContactSection({ onOpenQuoteForm }: ContactSectionProps) {
               Ready to Get Started?
             </h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              {"Let's"} transform your property! Contact us today for a free quote or call us directly. 
+              {"Let's"} transform your property! Contact us today for a free quote or call us directly.
               {"We're"} here to answer any questions you may have.
             </p>
 
@@ -72,23 +87,29 @@ export function ContactSection({ onOpenQuoteForm }: ContactSectionProps) {
                 </div>
               </div>
 
-              {/* Service Area */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-silver text-brand-blue-dark">
+              {/* Service Area / Address */}
+              <a
+                href={businessMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-silver text-brand-blue-dark">
                   <MapPin className="size-6" />
                 </div>
-                <div>
-                  <p className="text-white/60 text-sm">Service Area</p>
-                  <p className="text-white font-semibold">
-                    Serving Your Local Area
+                <div className="min-w-0">
+                  <p className="text-white/60 text-sm">Location</p>
+                  <p className="text-white font-semibold group-hover:text-brand-yellow transition-colors">
+                    {businessAddress}
                   </p>
                 </div>
-              </div>
+              </a>
             </div>
 
             {/* CTA Button */}
             <Button
-              onClick={onOpenQuoteForm}
+              type="button"
+              onClick={scrollToQuoteForm}
               size="lg"
               className="w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark text-lg px-8"
             >
@@ -96,27 +117,25 @@ export function ContactSection({ onOpenQuoteForm }: ContactSectionProps) {
             </Button>
           </div>
 
-          {/* Right Column - Visual */}
+          {/* Right Column - Quote form */}
           <div className="relative">
-            {/* Background Shape */}
             <div className="absolute inset-0 bg-gradient-to-br from-brand-yellow/20 to-brand-blue-light/20 rounded-3xl rotate-3" />
-            
-            {/* Image Placeholder */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-[4/3] bg-gradient-to-br from-brand-blue to-section-dark-alt flex items-center justify-center">
-                <div className="text-center text-white/30">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
-                    <span className="text-4xl">IMG</span>
-                  </div>
-                  <p>Contact Image Placeholder</p>
-                </div>
-              </div>
-            </div>
 
-            {/* Quick Response Badge */}
-            <div className="absolute top-4 right-4 bg-brand-yellow text-brand-blue-dark rounded-xl p-4 shadow-lg">
-              <p className="font-bold text-lg">24-48 Hour</p>
-              <p className="text-sm">Response Time</p>
+            <div
+              id="contact-form"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-brand-blue to-section-dark-alt p-6 sm:p-8 max-h-[min(90vh,52rem)] overflow-y-auto"
+            >
+              <div className="absolute top-4 right-4 z-10 bg-brand-yellow text-brand-blue-dark rounded-xl px-4 py-3 shadow-lg pointer-events-none">
+                <p className="font-bold text-lg leading-tight">24-48 Hour</p>
+                <p className="text-sm">Response Time</p>
+              </div>
+
+              <ContactQuoteForm
+                variant="inline"
+                copy={inlineQuoteCopy}
+                showOfferSelect={false}
+                className="pt-2 sm:pr-36"
+              />
             </div>
           </div>
         </div>

@@ -20,6 +20,7 @@ import {
   headerServiceAreaLinks,
   aboutLinks,
 } from "@/data/navigation"
+import { businessAddressLines, navSlogan } from "@/data/site"
 
 interface HeaderProps {
   onOpenQuoteForm: () => void
@@ -81,10 +82,19 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             <div className="flex items-center gap-4">
               <span>Pressure Washing Xperts</span>
               <span className="text-white/30">|</span>
-              <span>Where Pressure Meets Xpertise</span>
+              <span>{navSlogan}</span>
             </div>
             <div className="flex items-center gap-4">
-              <span>Serving Metro Atlanta Area</span>
+              <span className="hidden xl:inline text-right leading-tight">
+                {businessAddressLines.join(", ")}
+              </span>
+              <span className="xl:hidden text-right leading-tight">
+                {businessAddressLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </span>
               <span className="text-white/30">|</span>
               <a
                 href="mailto:pressurewashingxperts@gmail.com"

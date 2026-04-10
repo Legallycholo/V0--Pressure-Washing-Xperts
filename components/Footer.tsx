@@ -10,6 +10,7 @@ import {
   quickLinks,
   residentialServices,
 } from "@/data/navigation"
+import { businessAddress, businessMapsUrl } from "@/data/site"
 
 const services = [
   ...residentialServices.slice(0, 3),
@@ -109,10 +110,15 @@ export function Footer() {
                 <Mail className="size-5 text-brand-yellow" />
                 <span className="text-sm break-all">pressurewashingxperts@gmail.com</span>
               </a>
-              <div className="flex items-start gap-3 text-white/60">
-                <MapPin className="size-5 text-brand-yellow mt-0.5" />
-                <span className="text-sm">Serving Your Local Area</span>
-              </div>
+              <a
+                href={businessMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 text-white/60 hover:text-brand-yellow transition-colors"
+              >
+                <MapPin className="size-5 text-brand-yellow mt-0.5 shrink-0" />
+                <span className="text-sm">{businessAddress}</span>
+              </a>
             </div>
 
             {/* Social Media Placeholder */}

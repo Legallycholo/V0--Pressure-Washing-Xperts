@@ -44,7 +44,7 @@ export default function Home() {
         <BeforeAfter onOpenQuoteForm={openQuoteForm} />
         <Testimonials />
         <FAQ onOpenQuoteForm={openQuoteForm} />
-        <ContactSection onOpenQuoteForm={openQuoteForm} />
+        <ContactSection />
       </main>
 
       <Footer />

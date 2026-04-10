@@ -6,6 +6,7 @@ A fully responsive, modern landing page for **Pressure Washing Xperts** with emp
 **Key Information:**
 - **Business Name:** Pressure Washing Xperts
 - **Tagline:** Where Pressure Meets Xpertise
+- **Address:** 2193 Gateway Trl, Ellenwood, GA 30294
 - **Phone:** (800)-451-7213
 - **Email:** pressurewashingxperts@gmail.com
 - **Tagline CTA:** "Get a Free Quote Today"
