@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { X, CheckCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,10 +13,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import type { OfferId } from "@/data/offers"
+import { offers, OFFER_NONE } from "@/data/offers"
+import { modalCopyDefault, modalCopyOfferIntent } from "@/data/modalCopy"
 
 interface ContactFormModalProps {
   isOpen: boolean
   onClose: () => void
+  /** When set, form opens with this offer selected and offer-intent header copy */
+  initialOfferId?: OfferId
 }
 
 const usStates = [
@@ -36,20 +41,39 @@ const howHeardOptions = [
   { value: "ai", label: "AI (ChatGPT, etc.)" },
 ]
 
-export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
-  const submissionType = "Contact Form"
+const emptyForm = () => ({
+  fullName: "",
+  email: "",
+  phone: "",
+  city: "",
+  state: "",
+  zip: "",
+  message: "",
+  howHeard: "",
+  selectedOffer: OFFER_NONE as typeof OFFER_NONE | OfferId,
+})
+
+export function ContactFormModal({
+  isOpen,
+  onClose,
+  initialOfferId,
+}: ContactFormModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    city: "",
-    state: "",
-    zip: "",
-    message: "",
-    howHeard: "",
-  })
+  const [formData, setFormData] = useState(emptyForm)
+  const [openedWithOfferIntent, setOpenedWithOfferIntent] = useState(false)
+
+  const headerCopy = openedWithOfferIntent ? modalCopyOfferIntent : modalCopyDefault
+
+  useEffect(() => {
+    if (!isOpen) return
+    const intent = Boolean(initialOfferId)
+    setOpenedWithOfferIntent(intent)
+    setFormData({
+      ...emptyForm(),
+      selectedOffer: initialOfferId ?? OFFER_NONE,
+    })
+  }, [isOpen, initialOfferId])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -66,31 +90,22 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Keep a clear frontend-only marker for the submission type.
+    const submissionType = headerCopy.badge
+
     console.info("Form submitted", {
       submissionType,
+      openedWithOfferIntent,
       ...formData,
     })
 
-    // Simulate form submission (frontend only)
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
     setIsSubmitting(false)
     setIsSubmitted(true)
 
-    // Reset form after showing success
     setTimeout(() => {
       setIsSubmitted(false)
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        city: "",
-        state: "",
-        zip: "",
-        message: "",
-        howHeard: "",
-      })
+      setFormData(emptyForm())
       onClose()
     }, 3000)
   }
@@ -99,16 +114,14 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
 
-      {/* Modal */}
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto animate-fade-in-up">
-        {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors z-10"
           aria-label="Close form"
@@ -116,7 +129,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
           <X className="size-5" />
         </button>
 
-        {/* Success State */}
         {isSubmitted ? (
           <div className="p-8 text-center">
             <div className="mb-6">
@@ -130,30 +142,59 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             <p className="text-muted-foreground mb-4">
               Your quote request has been submitted successfully. We will contact you shortly.
             </p>
+            {openedWithOfferIntent && headerCopy.successExtra ? (
+              <p className="text-muted-foreground text-sm mb-4">
+                {headerCopy.successExtra}
+              </p>
+            ) : null}
             <p className="text-xs font-medium text-brand-blue">
-              Submission Type: {submissionType}
+              Submission Type: {headerCopy.badge}
             </p>
           </div>
         ) : (
           <>
-            {/* Header */}
             <div className="bg-brand-blue p-6 rounded-t-2xl">
               <div>
                 <h2 className="text-xl font-bold text-white">
-                  Get a Free Quote Today
+                  {headerCopy.headline}
                 </h2>
-                <p className="text-white/80 text-sm">
-                  Fill out the form below and {"we'll"} get back to you ASAP
+                <p className="text-white/80 text-sm mt-1">
+                  {headerCopy.subline}
                 </p>
                 <p className="mt-2 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">
-                  {submissionType}
+                  {headerCopy.badge}
                 </p>
               </div>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              {/* Full Name */}
+              <div>
+                <Label htmlFor="selectedOffer" className="text-foreground">
+                  Special offer <span className="text-destructive">*</span>
+                </Label>
+                <Select
+                  value={formData.selectedOffer}
+                  onValueChange={(value) =>
+                    handleSelectChange("selectedOffer", value)
+                  }
+                  required
+                >
+                  <SelectTrigger id="selectedOffer" className="mt-1 w-full">
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={OFFER_NONE}>
+                      General quote — no specific offer
+                    </SelectItem>
+                    {offers.map((o) => (
+                      <SelectItem key={o.id} value={o.id}>
+                        {o.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
               <div>
                 <Label htmlFor="fullName" className="text-foreground">
                   Full Name <span className="text-destructive">*</span>
@@ -170,7 +211,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                 />
               </div>
 
-              {/* Email & Phone Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="email" className="text-foreground">
@@ -204,7 +244,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                 </div>
               </div>
 
-              {/* City, State, ZIP Row */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div className="col-span-2 sm:col-span-1">
                   <Label htmlFor="city" className="text-foreground">
@@ -230,7 +269,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                     onValueChange={(value) => handleSelectChange("state", value)}
                     required
                   >
-                    <SelectTrigger className="mt-1 w-full">
+                    <SelectTrigger id="state" className="mt-1 w-full">
                       <SelectValue placeholder="State" />
                     </SelectTrigger>
                     <SelectContent>
@@ -259,7 +298,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                 </div>
               </div>
 
-              {/* Message */}
               <div>
                 <Label htmlFor="message" className="text-foreground">
                   How Can We Help? <span className="text-destructive">*</span>
@@ -275,7 +313,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                 />
               </div>
 
-              {/* How Did You Hear About Us */}
               <div>
                 <Label htmlFor="howHeard" className="text-foreground">
                   How Did You Hear About Us? <span className="text-destructive">*</span>
@@ -285,7 +322,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                   onValueChange={(value) => handleSelectChange("howHeard", value)}
                   required
                 >
-                  <SelectTrigger className="mt-1 w-full">
+                  <SelectTrigger id="howHeard" className="mt-1 w-full">
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                   <SelectContent>
@@ -298,7 +335,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                 </Select>
               </div>
 
-              {/* Submit Button */}
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -310,11 +346,10 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                     Submitting...
                   </>
                 ) : (
-                  "Submit Contact Request"
+                  headerCopy.submitLabel
                 )}
               </Button>
 
-              {/* Contact Info */}
               <p className="text-center text-sm text-muted-foreground">
                 Or call us directly at{" "}
                 <a href="tel:800-451-7213" className="text-brand-blue font-medium hover:underline">

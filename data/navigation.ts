@@ -37,7 +37,7 @@ export const industrialServices: NavLinkItem[] = [
 export const aboutLinks: NavLinkItem[] = [
   { href: "/about/we-do-xpert", label: "We do Xpert" },
   { href: "/about/pressure-vs-soft-washing", label: "Pressure Washing vs. Soft Washing" },
-  { href: "/#gallery", label: "Gallery" },
+  { href: "/gallery", label: "Gallery" },
 ]
 
 export const quickLinks: NavLinkItem[] = [

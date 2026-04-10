@@ -150,6 +150,16 @@
   animation: slide-in-right 0.5s ease-out forwards;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-slide-in-right {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
@@ -219,39 +229,8 @@
   padding-top: var(--header-offset-mobile);
 }
 
-.hero-logo-anchor {
-  position: absolute;
-  top: calc(var(--header-offset-mobile) - 0.5rem);
-  left: 0.5rem;
-  z-index: 20;
-}
-
-.hero-logo-image {
-  height: 84px;
-  width: auto;
-}
-
-@media (min-width: 640px) {
-  .hero-logo-anchor {
-    left: 0.75rem;
-  }
-
-  .hero-logo-image {
-    height: 104px;
-  }
-}
-
 @media (min-width: 1024px) {
   .pt-header-offset {
     padding-top: var(--header-offset-desktop);
-  }
-
-  .hero-logo-anchor {
-    top: calc(var(--header-offset-desktop) - 0.75rem);
-    left: max(0.75rem, calc((100vw - min(100vw, 80rem)) / 2 - 1.25rem));
-  }
-
-  .hero-logo-image {
-    height: 138px;
   }
 }

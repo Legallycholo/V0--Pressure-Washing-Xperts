@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X, Phone, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -29,6 +30,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
   const [navBg, setNavBg] = useState('rgba(13, 27, 42, 1)')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,8 +57,12 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
   }
 
   const scrollToHero = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    // Only hijack the click on the homepage (smooth scroll).
+    // On any other page, let Next.js navigate to "/" normally.
+    if (pathname === "/") {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
     handleNavClick()
   }
 
@@ -99,9 +105,10 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
         <div className="relative flex min-h-[56px] items-center">
+          <div className="hidden min-w-0 lg:flex lg:flex-1" aria-hidden />
           {/* Desktop Navigation */}
-          <NavigationMenu 
-            className="hidden lg:flex absolute left-1/2 -translate-x-1/2"
+          <NavigationMenu
+            className="relative z-20 hidden min-w-0 flex-none lg:flex"
             viewport={false}
             onValueChange={(value) => setIsDropdownOpen(value !== "")}
           >
@@ -237,7 +244,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           </NavigationMenu>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex lg:items-center lg:gap-4 ml-auto">
+          <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
             <a
               href="tel:800-451-7213"
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans"

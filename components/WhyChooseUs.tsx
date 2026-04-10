@@ -1,38 +1,70 @@
 "use client"
 
-import { CheckCircle, Star, Clock, Shield, Award, Wrench } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
+import {
+  CheckCircle,
+  Clock,
+  FileText,
+  FlaskConical,
+  GraduationCap,
+  Leaf,
+  Shield,
+  Star,
+  Users,
+  Wrench,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const features = [
+const features: { icon: LucideIcon; title: string; description: string }[] = [
   {
-    icon: Shield,
-    title: "Licensed & Insured",
-    description: "Fully licensed and insured professionals. Your property is protected with our comprehensive coverage.",
+    icon: CheckCircle,
+    title: "Quality workmanship",
+    description: "Consistent results on every job, from small homes to large commercial sites.",
   },
   {
-    icon: Star,
-    title: "5-Star Service",
-    description: "Consistently rated 5 stars by our customers. We take pride in delivering exceptional results.",
+    icon: FlaskConical,
+    title: "Safe cleaning methods",
+    description: "Soft wash and pressure washing chosen for your surfaces and environment.",
   },
   {
-    icon: Clock,
-    title: "Fast Turnaround",
-    description: "Quick response times and efficient service. We work around your schedule to minimize disruption.",
+    icon: FileText,
+    title: "Clear estimates",
+    description: "Straightforward quotes so you know what to expect before we start.",
   },
   {
     icon: Wrench,
-    title: "Professional Equipment",
-    description: "State-of-the-art pressure washing equipment for superior cleaning without surface damage.",
+    title: "Professional equipment",
+    description: "Commercial-grade tools maintained for reliable, effective cleaning.",
   },
   {
-    icon: Award,
-    title: "Satisfaction Guaranteed",
-    description: "We stand behind our work with a 100% satisfaction guarantee on every project.",
+    icon: Users,
+    title: "Experienced crew",
+    description: "A team that shows up on time and treats your property with respect.",
   },
   {
-    icon: CheckCircle,
-    title: "Free Estimates",
-    description: "No obligation quotes. We provide detailed estimates so you know exactly what to expect.",
+    icon: GraduationCap,
+    title: "Trained technicians",
+    description: "Technicians trained on proper techniques and safety best practices.",
+  },
+  {
+    icon: Shield,
+    title: "Licensed & insured",
+    description: "Coverage that protects you and your property while we work.",
+  },
+  {
+    icon: Leaf,
+    title: "Eco-conscious options",
+    description: "Biodegradable solutions where appropriate for plants and pets.",
+  },
+  {
+    icon: Star,
+    title: "Customer satisfaction",
+    description: "We aim to earn your referral with every project we complete.",
+  },
+  {
+    icon: Clock,
+    title: "Reliable scheduling",
+    description: "We work with your timeline and communicate if anything changes.",
   },
 ]
 
@@ -41,99 +73,77 @@ interface WhyChooseUsProps {
 }
 
 export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
-  return (
-    <section id="why-us" className="py-20 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-          {/* Left Column - Content */}
-          <div className="order-2 lg:order-1">
-            {/* Section Header */}
-            <p className="text-brand-blue font-semibold text-sm uppercase tracking-wider mb-3">
-              Why Choose Us
-            </p>
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance mb-6">
-              The Trusted Choice for
-              <span className="text-brand-blue"> Pressure Washing</span>
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              With years of experience serving residential, commercial, and industrial clients, 
-              we have built a reputation for quality workmanship and exceptional customer service.
-            </p>
+  const firstColumn = features.slice(0, 5)
+  const secondColumn = features.slice(5, 10)
 
-            {/* Features Grid */}
-            <div className="grid gap-6 sm:grid-cols-2">
-              {features.map((feature, index) => (
-                <div
-                  key={feature.title}
-                  className={`flex gap-4 animate-fade-in-up stagger-${index + 1}`}
-                  style={{ opacity: 0 }}
-                >
-                  <div className="flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
-                      <feature.icon className="size-5" />
-                    </div>
+  return (
+    <section
+      id="why-us"
+      aria-labelledby="why-us-heading"
+      className="animate-fade-in-up bg-section-light py-16 sm:py-20 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header className="mx-auto max-w-4xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue-light">
+            Trust the pros
+          </p>
+          <h2
+            id="why-us-heading"
+            className="text-balance text-3xl font-bold uppercase tracking-tight text-brand-blue-dark sm:text-4xl lg:text-5xl"
+          >
+            Why choose us?
+          </h2>
+          <p className="mt-4 text-lg font-semibold uppercase tracking-wide text-foreground">
+            Experience, safety &amp; quality you can count on
+          </p>
+        </header>
+
+        <div className="mt-12 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-6 lg:mt-16">
+          <ul className="flex list-none flex-col gap-4 p-0" aria-label="Reasons to choose us, part one">
+            {firstColumn.map((feature) => (
+              <li key={feature.title}>
+                <article className="flex gap-4 rounded-xl border border-border/60 bg-muted/80 px-4 py-4 sm:px-5 sm:py-5">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                    <feature.icon className="size-5" aria-hidden />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                  <div className="min-w-0 text-left">
+                    <h3 className="font-semibold text-foreground">{feature.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                       {feature.description}
                     </p>
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <div className="mt-10">
-              <Button
-                onClick={onOpenQuoteForm}
-                size="lg"
-                className="bg-brand-blue text-white font-bold hover:bg-brand-blue-light"
-              >
-                Get Your Free Quote
-              </Button>
-            </div>
-          </div>
-
-          {/* Right Column - Image */}
-          <div className="order-1 lg:order-2 relative">
-            {/* Background Shape */}
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-3xl -rotate-3" />
-            
-            {/* Main Image Placeholder */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-[4/3] bg-gradient-to-br from-section-dark to-brand-blue flex items-center justify-center">
-                <div className="text-center text-white/30">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
-                    <span className="text-4xl">IMG</span>
+                </article>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex list-none flex-col gap-4 p-0" aria-label="Reasons to choose us, part two">
+            {secondColumn.map((feature) => (
+              <li key={feature.title}>
+                <article className="flex gap-4 rounded-xl border border-border/60 bg-muted/80 px-4 py-4 sm:px-5 sm:py-5">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                    <feature.icon className="size-5" aria-hidden />
                   </div>
-                  <p>Work Image Placeholder</p>
-                </div>
-              </div>
-            </div>
+                  <div className="min-w-0 text-left">
+                    <h3 className="font-semibold text-foreground">{feature.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-            {/* Stats Badge */}
-            <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-brand-blue">500+</div>
-                <div className="text-sm text-muted-foreground">Projects Completed</div>
-              </div>
-            </div>
-
-            {/* Rating Badge */}
-            <div className="absolute top-1/2 -right-4 bg-brand-yellow rounded-xl shadow-lg p-4 z-10">
-              <div className="text-center">
-                <div className="flex gap-1 justify-center mb-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="size-4 fill-brand-blue-dark text-brand-blue-dark" />
-                  ))}
-                </div>
-                <div className="text-sm font-semibold text-brand-blue-dark">5.0 Rating</div>
-              </div>
-            </div>
-          </div>
+        <div className="mt-12 flex justify-center md:mt-14 lg:mt-16">
+          <Button
+            type="button"
+            onClick={onOpenQuoteForm}
+            size="lg"
+            className="min-w-[220px] bg-brand-yellow px-10 font-bold uppercase tracking-wide text-brand-blue-dark hover:bg-brand-yellow-dark"
+          >
+            Get started today
+          </Button>
         </div>
       </div>
     </section>

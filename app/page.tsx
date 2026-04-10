@@ -14,22 +14,32 @@ import { ContactSection } from "@/components/ContactSection"
 import { Footer } from "@/components/Footer"
 import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { isOfferId, type OfferId } from "@/data/offers"
 
 export default function Home() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const [pendingOfferId, setPendingOfferId] = useState<OfferId | undefined>()
 
-  const openQuoteForm = () => setIsQuoteFormOpen(true)
-  const closeQuoteForm = () => setIsQuoteFormOpen(false)
+  /** Accepts an optional offer id from Offers; ignores React click events from other CTAs */
+  const openQuoteForm = (maybeOffer?: unknown) => {
+    setPendingOfferId(isOfferId(maybeOffer) ? maybeOffer : undefined)
+    setIsQuoteFormOpen(true)
+  }
+
+  const closeQuoteForm = () => {
+    setIsQuoteFormOpen(false)
+    setPendingOfferId(undefined)
+  }
 
   return (
     <>
-      <Header onOpenQuoteForm={openQuoteForm} />
-      
+      <Header onOpenQuoteForm={() => openQuoteForm()} />
+
       <main>
         <Hero onOpenQuoteForm={openQuoteForm} />
         <Services onOpenQuoteForm={openQuoteForm} />
         <WhyChooseUs onOpenQuoteForm={openQuoteForm} />
-        <Gallery />
+        <Gallery variant="teaser" />
         <Offers onOpenQuoteForm={openQuoteForm} />
         <BeforeAfter onOpenQuoteForm={openQuoteForm} />
         <Testimonials />
@@ -41,9 +51,10 @@ export default function Home() {
 
       <FloatingCallButton />
 
-      <ContactFormModal 
-        isOpen={isQuoteFormOpen} 
-        onClose={closeQuoteForm} 
+      <ContactFormModal
+        isOpen={isQuoteFormOpen}
+        onClose={closeQuoteForm}
+        initialOfferId={pendingOfferId}
       />
     </>
   )

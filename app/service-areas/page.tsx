@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
@@ -23,19 +22,7 @@ export default function ServiceAreasPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-[#0d1b2a] via-[#1a2c42] to-[#0d1b2a] opacity-90" />
         </div>
-        <div className="hero-logo-anchor">
-          <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <Image
-              src="/images/logo-new.png"
-              alt="Pressure Washing Xperts Logo"
-              width={800}
-              height={280}
-              className="hero-logo-image"
-              priority
-            />
-          </Link>
-        </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-light mb-6">
             Our Service Areas
