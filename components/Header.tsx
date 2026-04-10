@@ -13,48 +13,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-
-const residentialServices = [
-  { href: "/services/residential/house-washing", label: "House Washing Services" },
-  { href: "/services/residential/decks-fences", label: "Decks and Fences" },
-  { href: "/services/residential/driveways-sidewalks", label: "Driveways and Sidewalks" },
-  { href: "/services/residential/roof-soft-washing", label: "Roof Soft Washing" },
-  { href: "/services/residential/brick-stone-masonry", label: "Brick, Stone & Masonry" },
-  { href: "/services/residential/gutters", label: "Gutters" },
-  { href: "/services/residential/landscape-features", label: "Landscape Features" },
-  { href: "/services/residential/curbing", label: "Curbing" },
-]
-
-const commercialServices = [
-  { href: "/services/commercial/building-washing", label: "Commercial Building Washing" },
-  { href: "/services/commercial/parking-lots-garages", label: "Parking Lots & Garages" },
-  { href: "/services/commercial/storefronts", label: "Storefronts" },
-  { href: "/services/commercial/graffiti-removal", label: "Graffiti Removal" },
-  { href: "/services/commercial/dumpster-pads", label: "Dumpster Pads" },
-  { href: "/services/commercial/fleet-washing", label: "Fleet Washing" },
-]
-
-const industrialServices = [
-  { href: "/services/industrial/equipment-washing", label: "Industrial Equipment Washing" },
-  { href: "/services/industrial/warehouse-exteriors", label: "Warehouse Exteriors" },
-  { href: "/services/industrial/loading-docks", label: "Loading Docks" },
-]
-
-const serviceAreas = [
-  "Atlanta, GA", "Alpharetta, GA", "Buford, GA", "College Park, GA", "Conyers, GA",
-  "Cumming, GA", "Covington, GA", "Dacula, GA", "Douglasville, GA", "Duluth, GA",
-  "Fairburn, GA", "Fayetteville, GA", "Grayson, GA", "Hiram, GA", "Johns Creek, GA",
-  "Jonesboro, GA", "Kennesaw, GA", "Lawrenceville, GA", "Lilburn, GA", "Lithonia, GA",
-  "Locust Grove, GA", "Mableton, GA", "Marietta, GA", "Milton, GA", "Norcross, GA",
-  "Newnan, GA", "Riverdale, GA", "Smyrna, GA", "Snellville, GA", "Stockbridge, GA",
-  "Stonecrest, GA", "Stone Mountain, GA", "Union City, GA", "Villa Rica, GA",
-]
-
-const aboutLinks = [
-  { href: "/about/we-do-xpert", label: "We do Xpert" },
-  { href: "/about/pressure-vs-soft-washing", label: "Pressure Washing vs. Soft Washing" },
-  { href: "/#gallery", label: "Gallery" },
-]
+import {
+  residentialServices,
+  commercialServices,
+  industrialServices,
+  headerServiceAreaLinks,
+  aboutLinks,
+} from "@/data/navigation"
 
 interface HeaderProps {
   onOpenQuoteForm: () => void
@@ -215,14 +180,14 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
                   <ul className="grid grid-cols-2 w-max min-w-[340px] max-w-[440px] py-2 bg-[#0d1b2a]">
-                    {serviceAreas.map((area) => (
-                      <li key={area}>
+                    {headerServiceAreaLinks.map((area) => (
+                      <li key={area.href}>
                         <NavigationMenuLink asChild>
                           <Link
-                            href={`/service-areas/${area.toLowerCase().replace(/,?\s+/g, '-')}`}
+                            href={area.href}
                             className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
                           >
-                            <div className="font-medium leading-none">{area}</div>
+                            <div className="font-medium leading-none">{area.label}</div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -386,14 +351,14 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             </button>
             {openMobileDropdown === 'areas' && (
               <div className="pl-4 space-y-2 mt-2 max-h-48 overflow-y-auto">
-                {serviceAreas.map((area) => (
+                {headerServiceAreaLinks.map((area) => (
                   <Link
-                    key={area}
-                    href={`/service-areas/${area.toLowerCase().replace(/,?\s+/g, '-')}`}
+                    key={area.href}
+                    href={area.href}
                     onClick={handleNavClick}
                     className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-1"
                   >
-                    {area}
+                    {area.label}
                   </Link>
                 ))}
               </div>

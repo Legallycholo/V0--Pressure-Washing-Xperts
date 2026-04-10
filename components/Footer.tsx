@@ -3,24 +3,18 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react"
+import {
+  commercialServices,
+  footerTopServiceAreaLinks,
+  industrialServices,
+  quickLinks,
+  residentialServices,
+} from "@/data/navigation"
 
 const services = [
-  "Residential Cleaning",
-  "Commercial Cleaning",
-  "Industrial Cleaning",
-  "Roof Cleaning",
-  "Driveway & Patio",
-  "HOA & Community",
-  "Masonry & Stone",
-]
-
-const quickLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#why-us", label: "Why Choose Us" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  ...residentialServices.slice(0, 3),
+  ...commercialServices.slice(0, 2),
+  ...industrialServices.slice(0, 2),
 ]
 
 export function Footer() {
@@ -55,12 +49,25 @@ export function Footer() {
             <h3 className="text-white font-bold text-lg mb-6">Our Services</h3>
             <ul className="space-y-3">
               {services.map((service) => (
-                <li key={service}>
+                <li key={service.href}>
                   <Link
-                    href="#services"
+                    href={service.href}
                     className="text-white/60 text-sm hover:text-brand-yellow transition-colors"
                   >
-                    {service}
+                    {service.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <h4 className="text-white font-semibold text-sm mt-6 mb-3">Top Service Areas</h4>
+            <ul className="space-y-2">
+              {footerTopServiceAreaLinks.map((area) => (
+                <li key={area.href}>
+                  <Link
+                    href={area.href}
+                    className="text-white/60 text-sm hover:text-brand-yellow transition-colors"
+                  >
+                    {area.label}
                   </Link>
                 </li>
               ))}

@@ -1,12 +1,19 @@
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import Gallery from '@/components/Gallery'
-import BeforeAfter from '@/components/BeforeAfter'
+"use client"
+
+import { useState } from "react"
+import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
+import { Gallery } from "@/components/Gallery"
+import { BeforeAfter } from "@/components/BeforeAfter"
+import { ContactFormModal } from "@/components/ContactFormModal"
+import { FloatingCallButton } from "@/components/FloatingCallButton"
 
 export default function GalleryPage() {
+  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
       
       <main className="pt-24">
         {/* Page Header */}
@@ -23,10 +30,15 @@ export default function GalleryPage() {
         <Gallery />
 
         {/* Before & After Section */}
-        <BeforeAfter />
+        <BeforeAfter onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
       </main>
 
       <Footer />
+      <FloatingCallButton />
+      <ContactFormModal
+        isOpen={isQuoteFormOpen}
+        onClose={() => setIsQuoteFormOpen(false)}
+      />
     </div>
   )
 }

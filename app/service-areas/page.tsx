@@ -1,20 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 import { MapPin } from "lucide-react"
-
-const serviceAreas = [
-  "Atlanta", "Alpharetta", "Marietta", "Roswell", "Sandy Springs",
-  "Johns Creek", "Duluth", "Norcross", "Peachtree Corners", "Suwanee",
-  "Cumming", "Decatur", "Smyrna", "Dunwoody", "Brookhaven", "Tucker"
-]
+import { getServiceAreasForNavigation } from "@/data/service-areas"
 
 export default function ServiceAreasPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const serviceAreas = getServiceAreasForNavigation()
 
   return (
     <div className="min-h-screen bg-navy flex flex-col">
@@ -63,18 +60,19 @@ export default function ServiceAreasPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {serviceAreas.map((area, idx) => (
-              <div 
-                key={idx}
+            {serviceAreas.map((area) => (
+              <Link
+                key={area.slug}
+                href={`/service-areas/${area.slug}`}
                 className="bg-navy/50 border border-white/10 rounded-xl p-6 text-center hover:border-brand/40 hover:bg-navy/80 transition-all duration-300 group shadow-lg"
               >
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand/10 text-brand mb-4 group-hover:scale-110 transition-transform">
                   <MapPin size={24} />
                 </div>
                 <h3 className="text-lg font-semibold text-white group-hover:text-brand transition-colors">
-                  {area}
+                  {area.cityName}
                 </h3>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
