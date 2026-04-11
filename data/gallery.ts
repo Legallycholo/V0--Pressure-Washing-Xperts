@@ -12,7 +12,6 @@ export type GalleryFilterId =
   | "hoa"
   | "masonry"
   | "before-after"
-  | "equipment"
 
 export type GalleryItemCategory = Exclude<GalleryFilterId, "all">
 
@@ -53,7 +52,6 @@ export const galleryCategories: GalleryCategory[] = [
   { id: "hoa", label: "HOA & Community" },
   { id: "masonry", label: "Masonry & Stone" },
   { id: "before-after", label: "Before & After" },
-  { id: "equipment", label: "Equipment" },
 ]
 
 export const galleryCtaByCategory: Record<
@@ -100,13 +98,9 @@ export const galleryCtaByCategory: Record<
     description:
       "These projects started where yours might be now. Call and we’ll explain what’s possible for your home or site.",
   },
-  equipment: {
-    title: "Fleet and equipment washing",
-    description:
-      "Vehicles and gear cleaned with the right methods and runoff awareness. Talk to us about your assets.",
-  },
 }
 
+/** Order is intentional: on the All tab, adjacent tiles use different `tagPlaceholder` values where possible. */
 export const galleryItems: GalleryItem[] = [
   {
     id: 1,
@@ -136,15 +130,6 @@ export const galleryItems: GalleryItem[] = [
     tagPlaceholder: "Residential",
   },
   {
-    id: 4,
-    category: "residential",
-    title: "Two-story home",
-    imageSrc: "/gallery/gallery-04.png",
-    thumbSrc: "/gallery/gallery-04.png",
-    alt: "Front of a split-level home with tan siding, brick, garage, and landscaping.",
-    tagPlaceholder: "Residential",
-  },
-  {
     id: 5,
     category: "driveways",
     title: "Concrete driveway",
@@ -152,6 +137,15 @@ export const galleryItems: GalleryItem[] = [
     thumbSrc: "/gallery/gallery-05.png",
     alt: "Long residential concrete driveway leading toward a garage.",
     tagPlaceholder: "Driveways & Patios",
+  },
+  {
+    id: 4,
+    category: "residential",
+    title: "Two-story home",
+    imageSrc: "/gallery/gallery-04.png",
+    thumbSrc: "/gallery/gallery-04.png",
+    alt: "Front of a split-level home with tan siding, brick, garage, and landscaping.",
+    tagPlaceholder: "Residential",
   },
   {
     id: 6,
@@ -163,6 +157,25 @@ export const galleryItems: GalleryItem[] = [
     tagPlaceholder: "Driveways & Patios",
   },
   {
+    id: 8,
+    category: "residential",
+    title: "Suburban home front",
+    imageSrc: "/gallery/gallery-08.png",
+    thumbSrc: "/gallery/gallery-08.png",
+    alt: "Front of a two-story home with light siding, brick around the garage, and landscaping.",
+    tagPlaceholder: "Residential",
+  },
+  {
+    id: 10,
+    category: "masonry",
+    title: "Stone pavers by foundation",
+    imageSrc: "/gallery/gallery-10.png",
+    thumbSrc: "/gallery/gallery-10.png",
+    alt: "A grid of dark square concrete pavers laid on a green lawn next to a light-colored brick house wall.",
+    tagPlaceholder: "Masonry & Stone",
+    thumbObjectPosition: "center 55%",
+  },
+  {
     id: 7,
     category: "driveways",
     title: "Patio & pergola",
@@ -172,30 +185,11 @@ export const galleryItems: GalleryItem[] = [
     tagPlaceholder: "Driveways & Patios",
   },
   {
-    id: 8,
-    category: "residential",
-    title: "Suburban home front",
-    imageSrc: "/gallery/gallery-08.png",
-    thumbSrc: "/gallery/gallery-08.png",
-    alt: "Front of a two-story home with light siding, brick around the garage, and landscaping.",
-    tagPlaceholder: "Residential",
-  },
-  { id: 9, category: "driveways", title: "Driveway Revival" },
-  { id: 10, category: "driveways", title: "Patio Cleaning" },
-  { id: 11, category: "hoa", title: "Community Pool Deck" },
-  { id: 12, category: "hoa", title: "Common Area" },
-  { id: 13, category: "masonry", title: "Brick Wall Cleaning" },
-  { id: 14, category: "masonry", title: "Stone Pathway" },
-  { id: 15, category: "before-after", title: "Dramatic Transformation" },
-  { id: 16, category: "before-after", title: "Deck Restoration" },
-  { id: 17, category: "equipment", title: "Pressure washing rig" },
-  { id: 18, category: "equipment", title: "Surface cleaner setup" },
-  {
-    id: 19,
+    id: 9,
     category: "residential",
     title: "Gutter cleaning",
-    imageSrc: "/gallery/gallery-19.png",
-    thumbSrc: "/gallery/gallery-19.png",
+    imageSrc: "/gallery/gallery-09.png",
+    thumbSrc: "/gallery/gallery-09.png",
     alt: "Residential roof with dark asphalt shingles and a white gutter full of granules and debris, with brackets visible, viewed from the roofline toward the yard below.",
     tagPlaceholder: "Residential",
     thumbObjectPosition: "48% 42%",

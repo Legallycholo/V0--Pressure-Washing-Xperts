@@ -402,7 +402,7 @@ function GalleryFull() {
 
         {filteredItems.length === 0 ? (
           <p className="py-12 text-center text-lg text-white/60">
-            No gallery items in this category yet.
+            Images coming soon.
           </p>
         ) : (
           <GalleryGrid itemsForView={filteredItems} onOpen={openLightbox} />
