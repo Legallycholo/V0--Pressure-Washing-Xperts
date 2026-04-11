@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { createPortal } from "react-dom"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -28,11 +29,14 @@ function GalleryLightbox({
   lightboxIndex,
   closeLightbox,
   navigateLightbox,
+  showTagPlaceholder = true,
 }: {
   itemsForView: GalleryItem[]
   lightboxIndex: number
   closeLightbox: () => void
   navigateLightbox: (direction: "prev" | "next") => void
+  /** When false, hides the yellow tag line (homepage Our Work teaser). */
+  showTagPlaceholder?: boolean
 }) {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -48,14 +52,15 @@ function GalleryLightbox({
   const item = itemsForView[lightboxIndex]
   if (!item) return null
 
-  return (
+  // Portal to body: animated sections use `transform`, which makes fixed children position against that box instead of the viewport (overlay/nav clash).
+  const overlay = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+      className="fixed inset-0 z-[100] flex h-[100dvh] max-h-[100dvh] flex-col bg-black/95"
       role="dialog"
       aria-modal="true"
       aria-label="Gallery image viewer"
     >
-      <div className="absolute left-0 right-0 top-0 z-20 flex flex-wrap items-center justify-end gap-2 p-3 sm:p-4">
+      <div className="flex shrink-0 flex-wrap items-center justify-end gap-2 px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-4">
         <Button
           type="button"
           variant="outline"
@@ -71,58 +76,64 @@ function GalleryLightbox({
         </Button>
       </div>
 
-      <button
-        type="button"
-        onClick={() => navigateLightbox("prev")}
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 p-2 text-white/70 transition-colors hover:text-white"
-        aria-label="Previous"
-      >
-        <ChevronLeft className="size-10" />
-      </button>
-
-      <button
-        type="button"
-        onClick={() => navigateLightbox("next")}
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 p-2 text-white/70 transition-colors hover:text-white"
-        aria-label="Next"
-      >
-        <ChevronRight className="size-10" />
-      </button>
-
-      <div className="mx-4 w-full max-w-5xl">
-        <div className="relative flex min-h-[40vh] max-h-[85vh] items-center justify-center rounded-xl bg-black/40">
-          {item.imageSrc ? (
-            <Image
-              src={item.imageSrc}
-              alt={item.alt ?? item.title}
-              width={1920}
-              height={1440}
-              className="max-h-[85vh] w-auto max-w-full rounded-xl object-contain"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-          ) : (
-            <div className="flex aspect-[4/3] w-full max-w-4xl items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
-              <div className="text-center text-white">
-                <div className="mb-4 text-6xl font-bold">{item.id}</div>
-                <h2 className="mb-2 text-2xl font-semibold">{item.title}</h2>
-                <p className="text-white/60">{getGalleryCategoryLabel(item.category)}</p>
+      <div className="relative min-h-0 flex-1">
+        <div className="absolute inset-0 px-2 pb-1 pt-0 sm:px-10 sm:pb-2">
+          <div className="relative h-full w-full">
+            {item.imageSrc ? (
+              <Image
+                src={item.imageSrc}
+                alt={item.alt ?? item.title}
+                fill
+                priority
+                className="object-contain"
+                sizes="(max-width: 640px) 100vw, (max-width: 1536px) 92vw, 1400px"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
+                <div className="text-center text-white">
+                  <div className="mb-4 text-6xl font-bold">{item.id}</div>
+                  <h2 className="mb-2 text-2xl font-semibold">{item.title}</h2>
+                  <p className="text-white/60">{getGalleryCategoryLabel(item.category)}</p>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-        <div className="mt-4 space-y-1 text-center">
-          <p className="text-sm font-medium text-white">{item.title}</p>
-          <p className="text-xs text-white/60">{getGalleryCategoryLabel(item.category)}</p>
-          {item.tagPlaceholder ? (
-            <p className="text-xs text-brand-yellow/90">{item.tagPlaceholder}</p>
-          ) : null}
-          <p className="text-sm text-white/50">
-            {lightboxIndex + 1} of {itemsForView.length}
-          </p>
-        </div>
+
+        <button
+          type="button"
+          onClick={() => navigateLightbox("prev")}
+          className="absolute left-1 top-1/2 z-20 -translate-y-1/2 p-2 text-white/70 transition-colors hover:text-white sm:left-3"
+          aria-label="Previous"
+        >
+          <ChevronLeft className="size-10 sm:size-12" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigateLightbox("next")}
+          className="absolute right-1 top-1/2 z-20 -translate-y-1/2 p-2 text-white/70 transition-colors hover:text-white sm:right-3"
+          aria-label="Next"
+        >
+          <ChevronRight className="size-10 sm:size-12" />
+        </button>
+      </div>
+
+      <div className="shrink-0 space-y-1 border-t border-white/10 bg-black/50 px-4 py-3 text-center pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <p className="text-sm font-medium text-white">{item.title}</p>
+        <p className="text-xs text-white/60">{getGalleryCategoryLabel(item.category)}</p>
+        {showTagPlaceholder && item.tagPlaceholder ? (
+          <p className="text-xs text-brand-yellow/90">{item.tagPlaceholder}</p>
+        ) : null}
+        <p className="text-sm text-white/50">
+          {lightboxIndex + 1} of {itemsForView.length}
+        </p>
       </div>
     </div>
   )
+
+  if (typeof document === "undefined") return null
+  return createPortal(overlay, document.body)
 }
 
 function useGalleryLightbox(itemsForView: GalleryItem[]) {
@@ -159,9 +170,12 @@ function useGalleryLightbox(itemsForView: GalleryItem[]) {
 function GalleryGrid({
   itemsForView,
   onOpen,
+  showTagChips = true,
 }: {
   itemsForView: GalleryItem[]
   onOpen: (index: number) => void
+  /** When false, hides tag pills on tiles (homepage Our Work teaser). */
+  showTagChips?: boolean
 }) {
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -202,7 +216,7 @@ function GalleryGrid({
               <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded bg-white/20 px-1.5 text-xs font-bold text-white">
                 {item.id}
               </span>
-              {item.tagPlaceholder ? (
+              {showTagChips && item.tagPlaceholder ? (
                 <span className="line-clamp-2 rounded-full bg-brand-yellow/95 px-2.5 py-0.5 text-left text-[10px] font-semibold leading-tight text-brand-blue-dark sm:text-xs">
                   {item.tagPlaceholder}
                 </span>
@@ -252,7 +266,11 @@ function GalleryTeaser() {
           </p>
         </div>
 
-        <GalleryGrid itemsForView={itemsForView} onOpen={openLightbox} />
+        <GalleryGrid
+          itemsForView={itemsForView}
+          onOpen={openLightbox}
+          showTagChips={false}
+        />
 
         <div className="mt-10 flex flex-col items-center gap-4 text-center">
           <Button
@@ -278,6 +296,7 @@ function GalleryTeaser() {
           lightboxIndex={lightboxIndex}
           closeLightbox={closeLightbox}
           navigateLightbox={navigateLightbox}
+          showTagPlaceholder={false}
         />
       )}
     </section>

@@ -32,8 +32,7 @@ export interface GalleryItem {
   /** Alt text for images (optional). */
   alt?: string
   /**
-   * Visible tag chip copy (placeholder until final labels are set).
-   * Shown with the gallery number on the homepage and full gallery.
+   * Visible tag chip on gallery tiles and in the lightbox (hidden on homepage teaser).
    */
   tagPlaceholder?: string
 }
@@ -112,7 +111,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-01.png",
     thumbSrc: "/gallery/gallery-01.png",
     alt: "Back of a home with white siding, windows, door, and concrete patio.",
-    tagPlaceholder: "Tag 1 — siding & patio",
+    tagPlaceholder: "Residential",
   },
   {
     id: 2,
@@ -121,7 +120,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-02.png",
     thumbSrc: "/gallery/gallery-02.png",
     alt: "Long one-story commercial building with block facade, metal siding, and parking lot.",
-    tagPlaceholder: "Tag 2 — commercial exterior",
+    tagPlaceholder: "Commercial",
   },
   {
     id: 3,
@@ -130,7 +129,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-03.png",
     thumbSrc: "/gallery/gallery-03.png",
     alt: "Elevated wood deck and railing on a multi-unit residential building.",
-    tagPlaceholder: "Tag 3 — deck / woodwork",
+    tagPlaceholder: "Residential",
   },
   {
     id: 4,
@@ -139,7 +138,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-04.png",
     thumbSrc: "/gallery/gallery-04.png",
     alt: "Front of a split-level home with tan siding, brick, garage, and landscaping.",
-    tagPlaceholder: "Tag 4 — residential facade",
+    tagPlaceholder: "Residential",
   },
   {
     id: 5,
@@ -148,7 +147,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-05.png",
     thumbSrc: "/gallery/gallery-05.png",
     alt: "Long residential concrete driveway leading toward a garage.",
-    tagPlaceholder: "Tag 5 — driveway",
+    tagPlaceholder: "Driveways & Patios",
   },
   {
     id: 6,
@@ -157,7 +156,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-06.png",
     thumbSrc: "/gallery/gallery-06.png",
     alt: "Driveway with cleaning solution on the surface in front of a garage.",
-    tagPlaceholder: "Tag 6 — during service",
+    tagPlaceholder: "Driveways & Patios",
   },
   {
     id: 7,
@@ -166,7 +165,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-07.png",
     thumbSrc: "/gallery/gallery-07.png",
     alt: "Backyard stone paver patio with a wooden pergola and outdoor seating.",
-    tagPlaceholder: "Tag 7 — patio / hardscape",
+    tagPlaceholder: "Driveways & Patios",
   },
   {
     id: 8,
@@ -175,7 +174,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/gallery/gallery-08.png",
     thumbSrc: "/gallery/gallery-08.png",
     alt: "Front of a two-story home with light siding, brick around the garage, and landscaping.",
-    tagPlaceholder: "Tag 8 — curb appeal",
+    tagPlaceholder: "Residential",
   },
   { id: 9, category: "driveways", title: "Driveway Revival" },
   { id: 10, category: "driveways", title: "Patio Cleaning" },
