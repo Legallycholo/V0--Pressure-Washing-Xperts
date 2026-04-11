@@ -16,7 +16,6 @@ import {
 import {
   residentialServices,
   commercialServices,
-  industrialServices,
   headerServiceAreaLinks,
   aboutLinks,
 } from "@/data/navigation"
@@ -182,29 +181,6 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {/* Industrial */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
-                  Industrial
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
-                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
-                    {industrialServices.map((service) => (
-                      <li key={service.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={service.href}
-                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
-                          >
-                            <div className="font-medium leading-none">{service.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
               {/* Service Areas */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
@@ -334,31 +310,6 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             {openMobileDropdown === 'commercial' && (
               <div className="pl-4 space-y-2 mt-2">
                 {commercialServices.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-1"
-                  >
-                    {service.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Industrial Dropdown */}
-          <div>
-            <button
-              onClick={() => toggleMobileDropdown('industrial')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-2"
-            >
-              Industrial
-              <ChevronDown className={`size-4 transition-transform ${openMobileDropdown === 'industrial' ? 'rotate-180' : ''}`} />
-            </button>
-            {openMobileDropdown === 'industrial' && (
-              <div className="pl-4 space-y-2 mt-2">
-                {industrialServices.map((service) => (
                   <Link
                     key={service.href}
                     href={service.href}

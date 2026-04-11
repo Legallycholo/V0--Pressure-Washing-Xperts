@@ -8,7 +8,6 @@ export type GalleryFilterId =
   | "residential"
   | "roof"
   | "commercial"
-  | "industrial"
   | "driveways"
   | "hoa"
   | "masonry"
@@ -47,7 +46,6 @@ export const galleryCategories: GalleryCategory[] = [
   { id: "residential", label: "Residential" },
   { id: "roof", label: "Roof Cleaning" },
   { id: "commercial", label: "Commercial" },
-  { id: "industrial", label: "Industrial" },
   { id: "driveways", label: "Driveways & Patios" },
   { id: "hoa", label: "HOA & Community" },
   { id: "masonry", label: "Masonry & Stone" },
@@ -79,11 +77,6 @@ export const galleryCtaByCategory: Record<
     description:
       "From storefronts to offices, we help you make a strong first impression. Ask about commercial scheduling.",
   },
-  industrial: {
-    title: "Heavy-duty sites need a pro crew",
-    description:
-      "Warehouses, docks, and industrial exteriors—we scale the job to your facility. Get a call-back today.",
-  },
   driveways: {
     title: "Restore driveways and patios",
     description:
@@ -105,9 +98,9 @@ export const galleryCtaByCategory: Record<
       "These projects started where yours might be now. Call and we’ll explain what’s possible for your home or site.",
   },
   equipment: {
-    title: "Industrial equipment cleaning",
+    title: "Fleet and equipment washing",
     description:
-      "Fleet and equipment washing with the right methods and runoff awareness. Talk to us about your assets.",
+      "Vehicles and gear cleaned with the right methods and runoff awareness. Talk to us about your assets.",
   },
 }
 

@@ -248,8 +248,7 @@ function GalleryTeaser() {
             Project Gallery
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
-            Browse our portfolio of completed projects across residential, commercial, and
-            industrial properties.
+            Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
           </p>
         </div>
 
@@ -346,8 +345,7 @@ function GalleryFull() {
             Project Gallery
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
-            Browse our portfolio of completed projects across residential, commercial, and
-            industrial properties.
+            Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
           </p>
         </div>
 

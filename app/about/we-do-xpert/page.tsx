@@ -44,7 +44,7 @@ export default function WeDoXpertPage() {
                     Pressure Washing Xperts was founded with a simple mission: to provide exceptional pressure washing services that exceed customer expectations every time.
                   </p>
                   <p>
-                    Our team of certified professionals brings years of experience and expertise to every project, whether it's a residential home, commercial property, or industrial facility.
+                    Our team of certified professionals brings years of experience and expertise to every project, from single-family homes to multi-site commercial work.
                   </p>
                   <p>
                     We believe in using the right techniques and eco-friendly solutions to deliver outstanding results while protecting your property and the environment.

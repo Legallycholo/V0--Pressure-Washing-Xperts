@@ -28,7 +28,7 @@ export default function ServiceAreasPage() {
             Our Service Areas
           </h1>
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed mb-10">
-            Pressure Washing Xperts proudly serves residential, commercial, and industrial properties across Metro Atlanta and surrounding communities.
+            Pressure Washing Xperts proudly serves homes and businesses across Metro Atlanta and surrounding communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 

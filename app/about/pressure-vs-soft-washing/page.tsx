@@ -50,7 +50,7 @@ export default function PressureVsSoftWashingPage() {
                 <ul className="space-y-2 text-gray-700 mb-6">
                   <li>• Concrete driveways and sidewalks</li>
                   <li>• Parking lots and garages</li>
-                  <li>• Heavy-duty industrial surfaces</li>
+                  <li>• Heavy-duty concrete and durable hardscapes</li>
                   <li>• Brick and stone (when appropriate)</li>
                   <li>• Remove tough stains and grime</li>
                 </ul>

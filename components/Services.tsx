@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Home, Building2, Factory, Droplets, Sparkles, ChevronRight } from "lucide-react"
+import { Home, Building2, Droplets, Sparkles, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const primaryServices = [
@@ -30,15 +30,6 @@ const primaryServices = [
     imageAlt:
       "Commercial building with block and metal facade, storefront windows, and parking lot.",
     imageLabel: "Commercial service image",
-  },
-  {
-    id: "industrial",
-    icon: Factory,
-    title: "Industrial Services",
-    description:
-      "Warehouses, manufacturing facilities, loading docks, and heavy-duty equipment cleaning.",
-    href: "/services/industrial",
-    imageLabel: "Industrial service image",
   },
 ]
 
@@ -80,12 +71,12 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             Our Professional Services
           </h2>
           <p className="mt-4 text-white/70 max-w-2xl mx-auto text-lg">
-            From residential homes to industrial facilities, we provide comprehensive pressure washing solutions tailored to your needs.
+            We focus on two core lines—residential curb appeal and commercial first impressions—with the right mix of pressure and soft washing for each surface.
           </p>
         </div>
 
         {/* Primary Services */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
           {primaryServices.map((service, index) => (
             <div
               key={service.id}
@@ -106,15 +97,15 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
               />
 
               {/* Content */}
-              <div className="relative p-6 sm:p-8">
-                <div className="relative mb-4 h-40 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+              <div className="relative p-7 sm:p-9">
+                <div className="relative mb-4 h-44 overflow-hidden rounded-lg border border-white/10 bg-white/5 sm:h-48">
                   {"imageSrc" in service && service.imageSrc ? (
                     <Image
                       src={service.imageSrc}
                       alt={service.imageAlt ?? service.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center text-center text-sm text-white/30">

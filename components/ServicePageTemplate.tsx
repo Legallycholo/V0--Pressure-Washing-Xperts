@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 interface ServicePageTemplateProps {
   title: string
   description: string
-  category: "Residential" | "Commercial" | "Industrial"
+  category: "Residential" | "Commercial"
   benefits?: string[]
   onOpenQuoteForm: () => void
 }

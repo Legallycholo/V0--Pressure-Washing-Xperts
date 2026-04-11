@@ -42,7 +42,7 @@ const testimonials = [
     location: "City, State",
     rating: 5,
     text: "Placeholder testimonial text. Quick response, fair pricing, and excellent results. Our warehouse floor has never looked this good. True professionals!",
-    service: "Industrial Cleaning",
+    service: "Commercial Floor Cleaning",
   },
   {
     id: 6,

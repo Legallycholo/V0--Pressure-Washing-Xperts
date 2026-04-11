@@ -28,12 +28,6 @@ export const commercialServices: NavLinkItem[] = [
   { href: "/services/commercial/fleet-washing", label: "Fleet Washing" },
 ]
 
-export const industrialServices: NavLinkItem[] = [
-  { href: "/services/industrial/equipment-washing", label: "Industrial Equipment Washing" },
-  { href: "/services/industrial/warehouse-exteriors", label: "Warehouse Exteriors" },
-  { href: "/services/industrial/loading-docks", label: "Loading Docks" },
-]
-
 export const aboutLinks: NavLinkItem[] = [
   { href: "/about/we-do-xpert", label: "We do Xpert" },
   { href: "/about/pressure-vs-soft-washing", label: "Pressure Washing vs. Soft Washing" },
@@ -43,7 +37,6 @@ export const aboutLinks: NavLinkItem[] = [
 export const quickLinks: NavLinkItem[] = [
   { href: "/services/residential", label: "Residential Services" },
   { href: "/services/commercial", label: "Commercial Services" },
-  { href: "/services/industrial", label: "Industrial Services" },
   { href: "/service-areas", label: "Service Areas" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contact", label: "Contact" },

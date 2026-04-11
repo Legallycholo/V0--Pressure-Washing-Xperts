@@ -53,9 +53,9 @@ const DEFAULT_LOCALIZED_SERVICE_CARDS = [
     href: "/services/commercial/building-washing",
   },
   {
-    title: "Industrial Pressure Washing",
-    description: "Placeholder copy for city-specific industrial cleaning needs.",
-    href: "/services/industrial/equipment-washing",
+    title: "Parking Lots & Garages",
+    description: "Placeholder copy for city-specific high-traffic concrete and garage cleaning.",
+    href: "/services/commercial/parking-lots-garages",
   },
 ]
 
@@ -143,7 +143,7 @@ function createServiceAreaContent(
     hero: {
       headline: `Pressure Washing Services in ${cityName}, Georgia`,
       subheadline:
-        `Top-rated residential, commercial, and industrial exterior cleaning for ${cityName} properties.`,
+        `Top-rated residential and commercial exterior cleaning for ${cityName} properties.`,
     },
     trustPoints: [
       "Licensed & insured team with local market experience.",

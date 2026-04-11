@@ -6,16 +6,14 @@ import { Phone, Mail, MapPin, ArrowUp } from "lucide-react"
 import {
   commercialServices,
   footerTopServiceAreaLinks,
-  industrialServices,
   quickLinks,
   residentialServices,
 } from "@/data/navigation"
 import { businessAddress, businessMapsUrl } from "@/data/site"
 
 const services = [
-  ...residentialServices.slice(0, 3),
-  ...commercialServices.slice(0, 2),
-  ...industrialServices.slice(0, 2),
+  ...residentialServices.slice(0, 4),
+  ...commercialServices.slice(0, 3),
 ]
 
 export function Footer() {
@@ -40,7 +38,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Professional pressure washing services for residential, commercial, and industrial properties. 
+              Professional pressure washing for homes and businesses across Metro Atlanta.
               Licensed & Insured. Where Pressure Meets Xpertise.
             </p>
           </div>
