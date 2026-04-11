@@ -3,8 +3,6 @@
 import { useState } from "react"
 import { Header } from "@/components/Header"
 import { Hero } from "@/components/Hero"
-import { TrustBadges } from "@/components/TrustBadges"
-import { StatsBar } from "@/components/StatsBar"
 import { Services } from "@/components/Services"
 import { WhyChooseUs } from "@/components/WhyChooseUs"
 import { Gallery } from "@/components/Gallery"
@@ -39,8 +37,6 @@ export default function Home() {
 
       <main>
         <Hero onOpenQuoteForm={openQuoteForm} />
-        <TrustBadges />
-        <StatsBar />
         <Services onOpenQuoteForm={openQuoteForm} />
         <BeforeAfter onOpenQuoteForm={openQuoteForm} />
         <WhyChooseUs onOpenQuoteForm={openQuoteForm} />
