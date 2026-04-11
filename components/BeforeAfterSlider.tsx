@@ -167,7 +167,7 @@ export function BeforeAfterSlider({
             style={{ objectPosition: afterObjectPosition ?? "50% 50%" }}
             sizes={sizes}
             priority
-            onLoadingComplete={() => setAfterLoaded(true)}
+            onLoad={() => setAfterLoaded(true)}
           />
 
           <div className="absolute inset-0 z-[1]" style={{ clipPath: clipBefore }}>
@@ -180,7 +180,7 @@ export function BeforeAfterSlider({
               style={{ objectPosition: beforeObjectPosition ?? "50% 50%" }}
               sizes={sizes}
               priority
-              onLoadingComplete={() => setBeforeLoaded(true)}
+              onLoad={() => setBeforeLoaded(true)}
             />
           </div>
 
