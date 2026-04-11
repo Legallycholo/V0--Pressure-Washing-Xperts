@@ -11,35 +11,43 @@ import { Button } from "@/components/ui/button"
 const faqs = [
   {
     question: "What types of surfaces can you pressure wash?",
-    answer: "Placeholder answer - We can pressure wash a wide variety of surfaces including concrete driveways, wooden decks, vinyl siding, brick, stone, asphalt, and more. Our team uses the appropriate pressure settings and techniques for each surface type to ensure thorough cleaning without damage.",
+    answer:
+      "We clean concrete driveways, brick walkways, wooden decks, vinyl and hardboard siding, asphalt, stone patios, fences, and roof shingles. Every surface gets the right pressure setting and cleaning solution to avoid damage while delivering a deep clean.",
   },
   {
     question: "How much does pressure washing cost?",
-    answer: "Placeholder answer - Pricing varies based on the size of the area, type of surface, level of soiling, and specific services needed. We provide free, no-obligation quotes so you know exactly what to expect before we begin. Contact us today for a personalized estimate.",
+    answer:
+      "Pricing depends on the surface type, square footage, and level of buildup. A driveway typically starts around $100–$150; a full house exterior ranges from $200–$500 depending on size. We provide free, no-obligation quotes so you know exactly what to expect before we begin.",
   },
   {
     question: "Is pressure washing safe for my property?",
-    answer: "Placeholder answer - Yes! Our trained professionals know exactly how to adjust pressure levels and techniques for different surfaces. For delicate surfaces like roofs and certain siding types, we use soft washing methods that rely on specialized cleaning solutions rather than high pressure.",
+    answer:
+      "Yes. Our technicians are trained to dial in the right PSI for each surface. For roofs, painted siding, and stucco we switch to soft washing — a low-pressure method using biodegradable solutions that kills mold and mildew at the root without blasting the surface.",
   },
   {
     question: "How often should I have my property pressure washed?",
-    answer: "Placeholder answer - We typically recommend annual pressure washing for most residential properties. However, high-traffic commercial areas, properties near trees, or those in humid climates may benefit from more frequent cleaning. We can help you determine the best schedule for your needs.",
+    answer:
+      "Most homes benefit from an annual cleaning. Properties near tree cover, in high-humidity areas, or with heavy foot traffic — like commercial storefronts and parking lots — may need service every 6 months. We can recommend a maintenance schedule during your free estimate.",
   },
   {
     question: "Do I need to be home during the service?",
-    answer: "Placeholder answer - You do not need to be home during the service as long as we have access to water and the areas being cleaned. However, we do recommend a brief walkthrough before we begin to discuss any specific concerns or areas that need special attention.",
+    answer:
+      "Not necessarily. We just need access to an outdoor water spigot and the areas being cleaned. That said, we always recommend a quick walkthrough before we start so we can note any specific concerns — cracked concrete, sensitive plants, parked vehicles, etc.",
   },
   {
-    question: "What is soft washing?",
-    answer: "Placeholder answer - Soft washing is a low-pressure cleaning method that uses specialized biodegradable cleaning solutions to safely remove mildew, algae, moss, and other organic stains. It is ideal for roofs, delicate siding, and surfaces that could be damaged by high-pressure washing.",
+    question: "What is soft washing and when do you use it?",
+    answer:
+      "Soft washing uses low pressure (under 500 PSI) combined with a biodegradable cleaning solution to remove algae, mold, lichen, and mildew. We use it on roofs, stucco, EIFS, cedar shake, and painted surfaces where high-pressure water could cause damage.",
   },
   {
     question: "Are your cleaning solutions environmentally friendly?",
-    answer: "Placeholder answer - Yes, we prioritize using eco-friendly, biodegradable cleaning solutions that are safe for your landscaping, pets, and the environment. We take care to protect surrounding plants and grass during our cleaning process.",
+    answer:
+      "Yes. We use biodegradable, plant-safe detergents wherever possible. Before we rinse, we wet down nearby landscaping to dilute any runoff. We follow PWNA best practices for chemical handling and disposal.",
   },
   {
     question: "How do I prepare for my pressure washing appointment?",
-    answer: "Placeholder answer - We recommend removing any fragile items, outdoor furniture, or decorations from the areas being cleaned. Please ensure vehicles are moved from driveways if applicable. We will handle the rest and leave your property looking great!",
+    answer:
+      "Move any patio furniture, potted plants, and vehicles away from the work area. Close all windows and doors. We'll handle the rest — setup, cleaning, rinse-down, and cleanup — and leave your property looking fresh.",
   },
 ]
 

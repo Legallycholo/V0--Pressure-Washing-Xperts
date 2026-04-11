@@ -21,9 +21,6 @@ interface HeroProps {
 }
 
 export function Hero({ onOpenQuoteForm }: HeroProps) {
-  // Kept for compatibility with parent props while CTA is phone-first.
-  void onOpenQuoteForm
-
   const howHeardOptions = [
     { value: "search", label: "Search / Google" },
     { value: "referral", label: "Referral / Friends & Family" },
@@ -130,6 +127,14 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                 className="w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-lg px-8 py-6 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg"
               >
                 <a href="tel:800-451-7213">Call now</a>
+              </Button>
+              <Button
+                type="button"
+                onClick={onOpenQuoteForm}
+                size="lg"
+                className="w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-lg px-8 py-6 hover:bg-white/10 hover:border-white transition-all duration-300"
+              >
+                Get a Free Quote
               </Button>
             </div>
           </div>

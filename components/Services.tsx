@@ -81,7 +81,6 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             <div
               key={service.id}
               className={`group relative rounded-xl overflow-hidden transition-all duration-300 cursor-pointer animate-fade-in-up stagger-${index + 1}`}
-              style={{ opacity: 0 }}
               onMouseEnter={() => setHoveredService(service.id)}
               onMouseLeave={() => setHoveredService(null)}
             >

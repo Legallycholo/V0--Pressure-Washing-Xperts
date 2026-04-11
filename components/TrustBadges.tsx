@@ -32,7 +32,6 @@ export function TrustBadges() {
             <div
               key={badge.title}
               className={`flex flex-col items-center text-center animate-fade-in-up stagger-${index + 1}`}
-              style={{ opacity: 0 }}
             >
               <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue text-white">
                 <badge.icon className="size-7" />

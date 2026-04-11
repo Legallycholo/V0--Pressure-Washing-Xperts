@@ -1,56 +1,66 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { Star, ChevronLeft, ChevronRight, Quote, ExternalLink } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+const GOOGLE_BUSINESS_REVIEW_URL =
+  "https://www.google.com/maps/place/Pressure+Washing+Xperts/@33.6543368,-84.2940254,12z/data=!4m12!1m2!2m1!1sPressure+Washing+Xperts+LLC+dekalb!3m8!1s0x88f4ff586effbf87:0xdce4ba9e7e2c13d9!8m2!3d33.6542916!4d-84.2938419!9m1!1b1!15sCiJQcmVzc3VyZSBXYXNoaW5nIFhwZXJ0cyBMTEMgZGVrYWxiWiQiInByZXNzdXJlIHdhc2hpbmcgeHBlcnRzIGxsYyBkZWthbGKSARhwcmVzc3VyZV93YXNoaW5nX3NlcnZpY2WaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjV3UzJScVdYUk5WM2hoVVZkS1JGUnNSbmxWU0ZJelRsUkdhRTFJWXhBQuABAPoBBAgAED4!16s%2Fg%2F11vpwbzydj?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
 
 const testimonials = [
   {
     id: 1,
-    name: "Customer Name",
-    location: "City, State",
+    name: "Giselle",
+    location: "Atlanta, GA",
     rating: 5,
-    text: "Placeholder testimonial text. The team at Pressure Washing Xperts did an amazing job on our driveway and patio. Highly recommend their services!",
-    service: "Residential Cleaning",
+    text: "Arthur did an amazing job! My house looks brand new! He did a walk through with me and fully explained what to expect. Will definitely use his services again. Try him! You won't regret it.",
+    service: "House Washing",
+    source: "Groupon · Top Reviewer",
   },
   {
     id: 2,
-    name: "Customer Name",
-    location: "City, State",
+    name: "Jasmin",
+    location: "Atlanta, GA",
     rating: 5,
-    text: "Placeholder testimonial text. Professional service from start to finish. Our commercial building looks brand new thanks to their expert pressure washing.",
-    service: "Commercial Cleaning",
+    text: "Arthur was prompt and professional. He did an amazing job pressure washing my home and patio area. Will definitely use him again!",
+    service: "House & Patio Washing",
+    source: "Google · Top Reviewer",
   },
   {
     id: 3,
-    name: "Customer Name",
-    location: "City, State",
+    name: "Keera",
+    location: "Atlanta, GA",
     rating: 5,
-    text: "Placeholder testimonial text. We manage several HOA communities and Pressure Washing Xperts handles all our pressure washing needs. Consistent quality every time.",
-    service: "HOA & Community",
+    text: "Great communication and speedy service! Worked diligently around our home and has it looking brand new. Most definitely recommend!",
+    service: "Residential Cleaning",
+    source: "Groupon · Verified Review",
   },
   {
     id: 4,
-    name: "Customer Name",
-    location: "City, State",
+    name: "Lynette",
+    location: "Atlanta, GA",
     rating: 5,
-    text: "Placeholder testimonial text. The roof soft wash service was exactly what our home needed. No damage, just a beautifully clean roof. Will use again!",
-    service: "Roof Cleaning",
+    text: "Art did an amazing job on the house. He was thorough and on time. My house looks as good as the day we moved in.",
+    service: "House Washing",
+    source: "Google · Verified Review",
   },
   {
     id: 5,
-    name: "Customer Name",
-    location: "City, State",
+    name: "Ben",
+    location: "Atlanta, GA",
     rating: 5,
-    text: "Placeholder testimonial text. Quick response, fair pricing, and excellent results. Our warehouse floor has never looked this good. True professionals!",
-    service: "Commercial Floor Cleaning",
+    text: "Was able to come to do the job very quickly, great service and will use again!",
+    service: "Pressure Washing",
+    source: "Google · Verified Review",
   },
   {
     id: 6,
-    name: "Customer Name",
-    location: "City, State",
+    name: "Yvonne",
+    location: "Atlanta, GA",
     rating: 5,
-    text: "Placeholder testimonial text. The before and after difference was incredible. Our brick pathway looks restored to its original beauty. Thank you!",
-    service: "Masonry & Stone",
+    text: "Great service.",
+    service: "Residential Cleaning",
+    source: "Groupon · Verified Review",
   },
 ]
 
@@ -104,8 +114,29 @@ export function Testimonials() {
             What Our Customers Say
           </h2>
           <p className="mt-4 text-white/70 max-w-2xl mx-auto text-lg">
-            {"Don't just take our word for it. Here's what our satisfied customers have to say about our services."}
+            {"Don't just take our word for it."} Rated{" "}
+            <span className="text-brand-yellow font-semibold">5.0 ★</span> across{" "}
+            <span className="text-white font-semibold">32+ verified reviews</span>{" "}
+            on Google &amp; Groupon.
           </p>
+          <div className="mt-6 flex justify-center">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-brand-yellow/80 text-brand-yellow hover:bg-brand-yellow hover:text-brand-blue-dark gap-2"
+            >
+              <a
+                href={GOOGLE_BUSINESS_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Leave us a review on Google (opens in a new tab)"
+              >
+                Leave us a review
+                <ExternalLink className="size-4" aria-hidden />
+              </a>
+            </Button>
+          </div>
         </div>
 
         {/* Testimonials Carousel */}
@@ -145,6 +176,7 @@ export function Testimonials() {
                   <div>
                     <p className="font-semibold text-white">{testimonial.name}</p>
                     <p className="text-white/60 text-sm">{testimonial.location}</p>
+                    <p className="text-white/40 text-xs mt-0.5">{testimonial.source}</p>
                   </div>
                 </div>
 
@@ -182,6 +214,7 @@ export function Testimonials() {
                 <div>
                   <p className="font-semibold text-white">{testimonials[currentIndex].name}</p>
                   <p className="text-white/60 text-sm">{testimonials[currentIndex].location}</p>
+                  <p className="text-white/40 text-xs mt-0.5">{testimonials[currentIndex].source}</p>
                 </div>
               </div>
 

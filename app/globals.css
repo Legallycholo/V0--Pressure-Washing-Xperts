@@ -57,7 +57,12 @@
   --color-brand-yellow: var(--brand-yellow);
   --color-brand-yellow-dark: var(--brand-yellow-dark);
   --color-brand-silver: var(--brand-silver);
-  
+  /* Aliases used in service-areas/page.tsx */
+  --color-navy: var(--brand-blue-dark);
+  --color-navy-light: var(--brand-blue);
+  --color-brand: var(--brand-yellow);
+  --color-brand-light: var(--brand-yellow-dark);
+
   /* Section Colors */
   --color-section-dark: var(--section-dark);
   --color-section-dark-alt: var(--section-dark-alt);
