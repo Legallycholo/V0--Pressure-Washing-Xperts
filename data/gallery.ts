@@ -38,6 +38,22 @@ export interface GalleryItem {
    * CSS `object-position` for grid thumbnails only (helps portrait assets fill 4:3 tiles without awkward crops).
    */
   thumbObjectPosition?: string
+  /** Before image for interactive comparison (use with `afterSrc`). */
+  beforeSrc?: string
+  /** After image for interactive comparison (use with `beforeSrc`). */
+  afterSrc?: string
+  beforeAlt?: string
+  afterAlt?: string
+  /** Fine-tune alignment between before/after layers (`object-position`). */
+  beforeObjectPosition?: string
+  afterObjectPosition?: string
+  /** Tailwind aspect class for the comparison frame (e.g. `aspect-[4/3]`). */
+  comparisonAspect?: string
+}
+
+/** True when the item should open the interactive before/after slider in the lightbox. */
+export function galleryItemIsComparison(item: GalleryItem): boolean {
+  return Boolean(item.beforeSrc && item.afterSrc)
 }
 
 /** Number of tiles shown on the homepage teaser (4×2 grid at lg). */
@@ -193,6 +209,186 @@ export const galleryItems: GalleryItem[] = [
     alt: "Residential roof with dark asphalt shingles and a white gutter full of granules and debris, with brackets visible, viewed from the roofline toward the yard below.",
     tagPlaceholder: "Residential",
     thumbObjectPosition: "48% 42%",
+  },
+  {
+    id: 11,
+    category: "before-after",
+    title: "Vinyl siding — side wall",
+    imageSrc: "/gallery/before-after/01-after.png",
+    thumbSrc: "/gallery/before-after/01-after.png",
+    alt: "Clean white vinyl siding on a long side wall after house washing.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/01-before.png",
+    afterSrc: "/gallery/before-after/01-after.png",
+    beforeAlt:
+      "Side of a house with white vinyl siding heavily stained with dirt and mildew before washing.",
+    afterAlt:
+      "Same long side wall with bright, clean white siding after soft washing.",
+  },
+  {
+    id: 12,
+    category: "before-after",
+    title: "Siding — window & utilities",
+    imageSrc: "/gallery/before-after/02-after.png",
+    thumbSrc: "/gallery/before-after/02-after.png",
+    alt: "House siding with window and meter area after exterior cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/02-before.png",
+    afterSrc: "/gallery/before-after/02-after.png",
+    beforeAlt:
+      "Light vinyl siding with heavy grime around a window and electrical meter before cleaning.",
+    afterAlt:
+      "Same wall with clean siding, crisp window, and tidier utility fixtures after washing.",
+  },
+  {
+    id: 13,
+    category: "before-after",
+    title: "Driveway & curb",
+    imageSrc: "/gallery/before-after/03-after.png",
+    thumbSrc: "/gallery/before-after/03-after.png",
+    alt: "Concrete driveway and curb at the street after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/03-before.png",
+    afterSrc: "/gallery/before-after/03-after.png",
+    beforeAlt:
+      "Concrete driveway and curb with dark staining and weathering before pressure washing.",
+    afterAlt:
+      "Same driveway and curb looking brighter and cleaner after washing.",
+  },
+  {
+    id: 14,
+    category: "before-after",
+    title: "Driveway & garage",
+    imageSrc: "/gallery/before-after/04-after.png",
+    thumbSrc: "/gallery/before-after/04-after.png",
+    alt: "Residential driveway leading to a white garage door after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/04-before.png",
+    afterSrc: "/gallery/before-after/04-after.png",
+    beforeAlt:
+      "Stained concrete driveway with hoses and a covered vehicle parked near the garage before cleaning.",
+    afterAlt:
+      "Same driveway with a fresher, more uniform concrete surface after washing.",
+  },
+  {
+    id: 15,
+    category: "before-after",
+    title: "Patio & brick exterior",
+    imageSrc: "/gallery/before-after/05-after.png",
+    thumbSrc: "/gallery/before-after/05-after.png",
+    alt: "Concrete patio beside a white brick home after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/05-before.png",
+    afterSrc: "/gallery/before-after/05-after.png",
+    beforeAlt:
+      "Stained concrete patio and walkway by a white brick wall and doors before cleaning.",
+    afterAlt:
+      "Same patio area with cleaner concrete and a brighter appearance after washing.",
+  },
+  {
+    id: 16,
+    category: "before-after",
+    title: "Foundation pavers",
+    imageSrc: "/gallery/before-after/06-after.png",
+    thumbSrc: "/gallery/before-after/06-after.png",
+    alt: "Square pavers beside a foundation after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/06-before.png",
+    afterSrc: "/gallery/before-after/06-after.png",
+    beforeAlt:
+      "Dark, weathered pavers with grass in the joints beside a brick wall before cleaning.",
+    afterAlt:
+      "Same paver pad looking cleaner and more uniform after washing.",
+  },
+  {
+    id: 17,
+    category: "before-after",
+    title: "Residential driveway",
+    imageSrc: "/gallery/before-after/07-after.png",
+    thumbSrc: "/gallery/before-after/07-after.png",
+    alt: "Concrete driveway slabs toward the house after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/07-before.png",
+    afterSrc: "/gallery/before-after/07-after.png",
+    beforeAlt:
+      "Concrete driveway with damp-looking stains and uneven tone before cleaning.",
+    afterAlt:
+      "Same driveway with a more even, refreshed concrete appearance after washing.",
+  },
+  {
+    id: 18,
+    category: "before-after",
+    title: "Driveway & landscape beds",
+    imageSrc: "/gallery/before-after/08-after.png",
+    thumbSrc: "/gallery/before-after/08-after.png",
+    alt: "Driveway with mulch beds and house in the background after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/08-before.png",
+    afterSrc: "/gallery/before-after/08-after.png",
+    beforeAlt:
+      "Long driveway with dark patches and a center crack line flanked by trees and mulch beds before cleaning.",
+    afterAlt:
+      "Same driveway looking cleaner and more consistent after pressure washing.",
+  },
+  {
+    id: 19,
+    category: "before-after",
+    title: "Retaining wall & walk",
+    imageSrc: "/gallery/before-after/09-after.png",
+    thumbSrc: "/gallery/before-after/09-after.png",
+    alt: "Low retaining wall and sidewalk after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/09-before.png",
+    afterSrc: "/gallery/before-after/09-after.png",
+    beforeAlt:
+      "Concrete retaining wall and sidewalk with weathered surfaces before cleaning.",
+    afterAlt:
+      "Same wall and walk looking cleaner and brighter after washing.",
+  },
+  {
+    id: 20,
+    category: "before-after",
+    title: "Lap siding — side elevation",
+    imageSrc: "/gallery/before-after/10-after.png",
+    thumbSrc: "/gallery/before-after/10-after.png",
+    alt: "Tan horizontal siding on the side of a home after washing.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/10-before.png",
+    afterSrc: "/gallery/before-after/10-after.png",
+    beforeAlt:
+      "Tan lap siding with mildew and mud staining along the bottom edge before house washing.",
+    afterAlt:
+      "Same elevation with clean siding and a tidier appearance after soft washing.",
+  },
+  {
+    id: 21,
+    category: "before-after",
+    title: "Siding — satellite & meters",
+    imageSrc: "/gallery/before-after/11-after.png",
+    thumbSrc: "/gallery/before-after/11-after.png",
+    alt: "House wall with utilities and satellite dish after exterior cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/11-before.png",
+    afterSrc: "/gallery/before-after/11-after.png",
+    beforeAlt:
+      "Beige siding with satellite dish and utility meters on soiled, stained siding before cleaning.",
+    afterAlt:
+      "Same area with cleaner siding and brighter trim around utilities after washing.",
+  },
+  {
+    id: 22,
+    category: "before-after",
+    title: "Rear patio & doors",
+    imageSrc: "/gallery/before-after/12-after.png",
+    thumbSrc: "/gallery/before-after/12-after.png",
+    alt: "Back of a home with white siding, patio slab, and rear door after cleaning.",
+    tagPlaceholder: "Before & After",
+    beforeSrc: "/gallery/before-after/12-before.png",
+    afterSrc: "/gallery/before-after/12-after.png",
+    beforeAlt:
+      "Rear patio and siding before cleaning (paired angle with the after photo).",
+    afterAlt:
+      "Rear patio with clean white siding, windows, and door—same home after washing.",
   },
 ]
 

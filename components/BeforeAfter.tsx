@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import Image from "next/image"
+import { useMemo, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider"
+import { galleryItemIsComparison, galleryItems } from "@/data/gallery"
 
 type Comparison = {
   id: number
@@ -20,51 +21,49 @@ type Comparison = {
   afterObjectPosition?: string
 }
 
-const comparisons: Comparison[] = [
-  {
-    id: 1,
-    title: "Driveway cleaning",
-    description:
-      "Heavy grime and staining removed from the same concrete slabs—slide to compare the transformation.",
-    location: "Residential driveway",
-    beforeSrc: "/before-after/driveway-before.png",
-    afterSrc: "/before-after/driveway-after.png",
-    beforeAlt:
-      "Residential concrete driveway before cleaning, with dark stains and a covered vehicle on the left.",
-    afterAlt:
-      "Same driveway after professional washing, with a clean surface and matching framing to the before photo.",
-    // Before: lower camera; after: more street-level—offset vertical anchor so garage, cover, and joints meet at the slider.
-    beforeObjectPosition: "49% 44%",
-    afterObjectPosition: "51% 54%",
-  },
-]
+const HOMEPAGE_BLURB =
+  "Slide the handle to compare the same property before and after our wash."
+
+function buildComparisons(): Comparison[] {
+  return galleryItems
+    .filter((item) => item.category === "before-after" && galleryItemIsComparison(item))
+    .sort((a, b) => a.id - b.id)
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      description: HOMEPAGE_BLURB,
+      location: "Metro Atlanta area",
+      beforeSrc: item.beforeSrc!,
+      afterSrc: item.afterSrc!,
+      beforeAlt: item.beforeAlt!,
+      afterAlt: item.afterAlt!,
+      beforeObjectPosition: item.beforeObjectPosition,
+      afterObjectPosition: item.afterObjectPosition,
+    }))
+}
 
 interface BeforeAfterProps {
   onOpenQuoteForm: () => void
 }
 
 export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
+  const comparisons = useMemo(() => buildComparisons(), [])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [sliderPosition, setSliderPosition] = useState(50)
 
   const current = comparisons[currentIndex]
   const showCarousel = comparisons.length > 1
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev - 1 + comparisons.length) % comparisons.length)
-    setSliderPosition(50)
   }
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % comparisons.length)
-    setSliderPosition(50)
   }
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderPosition(Number(e.target.value))
+  if (!current) {
+    return null
   }
-
-  const clipBefore = `inset(0 ${100 - sliderPosition}% 0 0)`
 
   return (
     <section className="bg-background py-20">
@@ -82,74 +81,17 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
         </div>
 
         <div className="mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5">
-            <div
-              className="relative aspect-[4/3] select-none touch-pan-y"
-              role="img"
-              aria-label={`Before and after: ${current.title}. Slider at ${sliderPosition} percent.`}
-            >
-              {/* After: native assets are 4:3; matching aspect avoids extra crop skew vs a wider frame */}
-              <Image
-                src={current.afterSrc}
-                alt={current.afterAlt}
-                fill
-                draggable={false}
-                className="object-cover"
-                style={{ objectPosition: current.afterObjectPosition ?? "50% 50%" }}
-                sizes="(max-width: 896px) 100vw, 896px"
-                priority
-              />
-
-              {/* Before: same object-fit + tuned object-position so static features line up at the slider edge */}
-              <div
-                className="absolute inset-0 z-[1]"
-                style={{ clipPath: clipBefore }}
-              >
-                <Image
-                  src={current.beforeSrc}
-                  alt={current.beforeAlt}
-                  fill
-                  draggable={false}
-                  className="object-cover"
-                  style={{ objectPosition: current.beforeObjectPosition ?? "50% 50%" }}
-                  sizes="(max-width: 896px) 100vw, 896px"
-                  priority
-                />
-              </div>
-
-              <div
-                className="pointer-events-none absolute inset-y-0 z-10 w-0.5 bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)]"
-                style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
-              >
-                <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg ring-2 ring-white/80">
-                  <div className="flex gap-0">
-                    <ChevronLeft className="size-4 text-brand-blue" aria-hidden />
-                    <ChevronRight className="size-4 text-brand-blue" aria-hidden />
-                  </div>
-                </div>
-              </div>
-
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={sliderPosition}
-                onChange={handleSliderChange}
-                className="absolute inset-0 z-20 h-full w-full cursor-ew-resize opacity-0"
-                aria-label="Before and after comparison slider"
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={sliderPosition}
-              />
-
-              <div className="pointer-events-none absolute bottom-3 left-3 z-[5] rounded-full bg-black/65 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
-                Before
-              </div>
-              <div className="pointer-events-none absolute bottom-3 right-3 z-[5] rounded-full bg-white/90 px-3 py-1 text-sm font-medium text-brand-blue-dark shadow-sm backdrop-blur-sm">
-                After
-              </div>
-            </div>
-          </div>
+          <BeforeAfterSlider
+            key={current.id}
+            beforeSrc={current.beforeSrc}
+            afterSrc={current.afterSrc}
+            beforeAlt={current.beforeAlt}
+            afterAlt={current.afterAlt}
+            beforeObjectPosition={current.beforeObjectPosition}
+            afterObjectPosition={current.afterObjectPosition}
+            comparisonLabel={current.title}
+            variant="section"
+          />
 
           <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="text-center md:text-left">
@@ -168,14 +110,13 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
                 >
                   <ChevronLeft className="size-5" />
                 </button>
-                <div className="flex gap-2">
-                  {comparisons.map((_, index) => (
+                <div className="flex max-w-[min(100%,280px)] flex-wrap justify-center gap-2">
+                  {comparisons.map((c, index) => (
                     <button
-                      key={comparisons[index].id}
+                      key={c.id}
                       type="button"
                       onClick={() => {
                         setCurrentIndex(index)
-                        setSliderPosition(50)
                       }}
                       className={`h-2 rounded-full transition-all ${
                         index === currentIndex

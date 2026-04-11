@@ -1,16 +1,19 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider"
+import { cn } from "@/lib/utils"
 import {
   GALLERY_TEASER_COUNT,
   galleryCategories,
   galleryCtaByCategory,
+  galleryItemIsComparison,
   galleryItems,
   getGalleryCategoryLabel,
   isValidGalleryCategoryParam,
@@ -38,6 +41,9 @@ function GalleryLightbox({
   /** When false, hides the yellow tag line (homepage Our Work teaser). */
   showTagPlaceholder?: boolean
 }) {
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -49,45 +55,93 @@ function GalleryLightbox({
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [closeLightbox])
 
+  useEffect(() => {
+    closeButtonRef.current?.focus()
+  }, [lightboxIndex])
+
   const item = itemsForView[lightboxIndex]
   if (!item) return null
+
+  const isComparison = galleryItemIsComparison(item)
+
+  const handleOverlayKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Tab" || !overlayRef.current) return
+    const focusables = overlayRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), a[href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+    const list = Array.from(focusables).filter(
+      (el) => !el.hasAttribute("hidden") && (el.offsetParent !== null || el.getClientRects().length > 0)
+    )
+    if (list.length === 0) return
+    const first = list[0]
+    const last = list[list.length - 1]
+    const active = document.activeElement
+    if (!e.shiftKey && active === last) {
+      e.preventDefault()
+      first.focus()
+    } else if (e.shiftKey && active === first) {
+      e.preventDefault()
+      last.focus()
+    }
+  }
 
   // Portal to body: animated sections use `transform`, which makes fixed children position against that box instead of the viewport (overlay/nav clash).
   const overlay = (
     <div
-      className="fixed inset-0 z-[100] flex h-[100dvh] max-h-[100dvh] flex-col bg-black/95"
+      ref={overlayRef}
+      onKeyDown={handleOverlayKeyDown}
+      className="fixed inset-0 z-[100] flex h-[100dvh] max-h-[100dvh] flex-col bg-black/95 outline-none"
       role="dialog"
       aria-modal="true"
       aria-label="Gallery image viewer"
     >
       <div className="flex shrink-0 flex-wrap items-center justify-end gap-2 px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-4">
-        <Button
+        <button
+          ref={closeButtonRef}
           type="button"
-          variant="outline"
-          size="lg"
           onClick={closeLightbox}
           title="Close viewer (Escape)"
           aria-label="Exit gallery viewer"
-          className="border-white/80 bg-black/60 font-semibold text-white shadow-lg hover:bg-white/15 hover:text-white"
+          className={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "border-white/80 bg-black/60 font-semibold text-white shadow-lg hover:bg-white/15 hover:text-white"
+          )}
         >
           <X className="size-5" aria-hidden />
           Exit
           <span className="ml-1 hidden text-xs font-normal text-white/70 sm:inline">(Esc)</span>
-        </Button>
+        </button>
       </div>
 
       <div className="relative min-h-0 flex-1">
-        <div className="absolute inset-0 px-2 pb-1 pt-0 sm:px-10 sm:pb-2">
-          <div className="relative h-full w-full">
-            {item.imageSrc ? (
-              <Image
-                src={item.imageSrc}
-                alt={item.alt ?? item.title}
-                fill
-                priority
-                className="object-contain"
+        <div className="absolute inset-0 flex items-center justify-center px-2 pb-1 pt-0 sm:px-10 sm:pb-2">
+          <div className="relative flex h-full w-full min-h-0 items-center justify-center">
+            {isComparison && item.beforeSrc && item.afterSrc ? (
+              <BeforeAfterSlider
+                key={`${item.id}-${lightboxIndex}`}
+                beforeSrc={item.beforeSrc}
+                afterSrc={item.afterSrc}
+                beforeAlt={item.beforeAlt ?? `Before — ${item.title}`}
+                afterAlt={item.afterAlt ?? `After — ${item.title}`}
+                beforeObjectPosition={item.beforeObjectPosition}
+                afterObjectPosition={item.afterObjectPosition}
+                comparisonLabel={item.title}
+                aspectClassName={item.comparisonAspect ?? "aspect-[4/3]"}
                 sizes="(max-width: 640px) 100vw, (max-width: 1536px) 92vw, 1400px"
+                variant="lightbox"
+                className="w-full max-h-[min(72dvh,85svh)] max-w-5xl shadow-black/40"
               />
+            ) : item.imageSrc ? (
+              <div className="relative h-full w-full min-h-0">
+                <Image
+                  src={item.imageSrc}
+                  alt={item.alt ?? item.title}
+                  fill
+                  priority
+                  className="object-contain"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1536px) 92vw, 1400px"
+                />
+              </div>
             ) : (
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
                 <div className="text-center text-white">
@@ -138,8 +192,10 @@ function GalleryLightbox({
 
 function useGalleryLightbox(itemsForView: GalleryItem[]) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const activatorRef = useRef<Element | null>(null)
 
-  const openLightbox = (index: number) => {
+  const openLightbox = (index: number, activator?: Element | null) => {
+    activatorRef.current = activator ?? null
     setLightboxIndex(index)
     document.body.style.overflow = "hidden"
   }
@@ -147,6 +203,10 @@ function useGalleryLightbox(itemsForView: GalleryItem[]) {
   const closeLightbox = useCallback(() => {
     setLightboxIndex(null)
     document.body.style.overflow = ""
+    requestAnimationFrame(() => {
+      const el = activatorRef.current
+      if (el instanceof HTMLElement) el.focus()
+    })
   }, [])
 
   const navigateLightbox = (direction: "prev" | "next") => {
@@ -173,7 +233,7 @@ function GalleryGrid({
   showTagChips = true,
 }: {
   itemsForView: GalleryItem[]
-  onOpen: (index: number) => void
+  onOpen: (index: number, activator?: Element | null) => void
   /** When false, hides tag pills on tiles (homepage Our Work teaser). */
   showTagChips?: boolean
 }) {
@@ -183,11 +243,11 @@ function GalleryGrid({
         <div
           key={item.id}
           className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl"
-          onClick={() => onOpen(index)}
+          onClick={(e) => onOpen(index, e.currentTarget)}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault()
-              onOpen(index)
+              onOpen(index, e.currentTarget)
             }
           }}
           role="button"
