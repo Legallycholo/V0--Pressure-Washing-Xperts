@@ -195,13 +195,19 @@ function GalleryGrid({
           aria-label={`Open ${item.title} in viewer`}
         >
           {item.thumbSrc || item.imageSrc ? (
-            <Image
-              src={item.thumbSrc ?? item.imageSrc!}
-              alt={item.alt ?? item.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            />
+            <div className="absolute inset-0 overflow-hidden">
+              <Image
+                src={item.thumbSrc ?? item.imageSrc!}
+                alt={item.alt ?? item.title}
+                fill
+                className="h-full w-full object-cover transition-transform duration-300 will-change-transform [transform:translateZ(0)] group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: item.thumbObjectPosition ?? "center",
+                }}
+              />
+            </div>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
               <div className="text-center text-white/40">

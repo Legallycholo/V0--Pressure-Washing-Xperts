@@ -35,6 +35,10 @@ export interface GalleryItem {
    * Visible tag chip on gallery tiles and in the lightbox (hidden on homepage teaser).
    */
   tagPlaceholder?: string
+  /**
+   * CSS `object-position` for grid thumbnails only (helps portrait assets fill 4:3 tiles without awkward crops).
+   */
+  thumbObjectPosition?: string
 }
 
 /** Number of tiles shown on the homepage teaser (4×2 grid at lg). */
@@ -186,6 +190,16 @@ export const galleryItems: GalleryItem[] = [
   { id: 16, category: "before-after", title: "Deck Restoration" },
   { id: 17, category: "equipment", title: "Pressure washing rig" },
   { id: 18, category: "equipment", title: "Surface cleaner setup" },
+  {
+    id: 19,
+    category: "residential",
+    title: "Gutter cleaning",
+    imageSrc: "/gallery/gallery-19.png",
+    thumbSrc: "/gallery/gallery-19.png",
+    alt: "Residential roof with dark asphalt shingles and a white gutter full of granules and debris, with brackets visible, viewed from the roofline toward the yard below.",
+    tagPlaceholder: "Residential",
+    thumbObjectPosition: "48% 42%",
+  },
 ]
 
 export function getGalleryCategoryLabel(categoryId: GalleryItemCategory): string {
