@@ -2,7 +2,7 @@
 
 **Spec reference:** [COPY_PLAN.md](./COPY_PLAN.md) — authoritative step-by-step instructions and copy/paste snippets.
 
-**Last verified (optional):** _Edit this date when you refresh the repo snapshot table._
+**Last verified (optional):** 2026-04-11
 
 ---
 
@@ -20,12 +20,12 @@ Record findings so the next dev does not re-discover the same state.
 
 | Area | Expected state (from COPY_PLAN) | Current snapshot |
 |------|--------------------------------|------------------|
-| `components/TrustBadges.tsx` | Exists; no `style={{ opacity: 0 }}` on animated items | **Missing** — recreate per COPY_PLAN Steps 1 & 4 |
-| `components/StatsBar.tsx` | New file from Step 5 | **Missing** — create per Step 5 |
-| `app/page.tsx` | `TrustBadges` + `StatsBar` + CRO section order (Step 6) | **Not done** — no TrustBadges/StatsBar; order not yet CRO layout |
-| `components/Hero.tsx` | Secondary “Get a Free Quote” CTA (Step 3) | **Likely complete** — secondary CTA present |
-| `app/globals.css` | `navy` / `brand` Tailwind aliases (Step 2) | **Likely complete** — aliases in `@theme inline` |
-| `components/Services.tsx` | No inline `opacity: 0` on primary service card | **Likely complete** — no offending inline style on primary card |
+| `components/TrustBadges.tsx` | (COPY_PLAN) optional trust band | **Removed** — component deleted; not used on homepage (2026-04-11) |
+| `components/StatsBar.tsx` | (COPY_PLAN) stats band | **Removed** — component deleted; not used on homepage (2026-04-11) |
+| `app/page.tsx` | Homepage section order | **Current** — Hero → Services → BeforeAfter → … (no TrustBadges/StatsBar) |
+| `components/Hero.tsx` | Secondary “Get a Free Quote” CTA (Step 3) | **Done** — secondary button calls `onOpenQuoteForm` |
+| `app/globals.css` | `navy` / `brand` Tailwind aliases (Step 2) | **Done** — aliases after `--color-brand-silver` in `@theme inline` |
+| `components/Services.tsx` | No inline `opacity: 0` on primary service card | **Done** — no `style={{ opacity: 0 }}` on primary cards |
 
 Re-verify each row before closing the milestone; git history may change.
 
@@ -56,27 +56,27 @@ Check items off as you complete them.
 
 ### Foundation
 
-- [ ] **Step 1 — `components/Services.tsx`:** Confirm primary service cards have no inline `style={{ opacity: 0 }}` conflicting with animations (see COPY_PLAN Step 1).
-- [ ] **Step 1 — `components/TrustBadges.tsx`:** Restore/create component; remove any inline `opacity: 0` on badge rows per COPY_PLAN.
-- [ ] **Step 2 — `app/globals.css`:** Confirm `@theme inline` includes `navy`, `navy-light`, `brand`, `brand-light` aliases used by `app/service-areas/page.tsx`.
+- [x] **Step 1 — `components/Services.tsx`:** Confirm primary service cards have no inline `style={{ opacity: 0 }}` conflicting with animations (see COPY_PLAN Step 1).
+- [ ] **Step 1 — `components/TrustBadges.tsx`:** Restore/create component; remove any inline `opacity: 0` on badge rows per COPY_PLAN. _(N/A — component removed.)_
+- [x] **Step 2 — `app/globals.css`:** Confirm `@theme inline` includes `navy`, `navy-light`, `brand`, `brand-light` aliases used by `app/service-areas/page.tsx`.
 
 ### Hero and homepage structure
 
-- [ ] **Step 3 — `components/Hero.tsx`:** Secondary “Get a Free Quote” button wired to `onOpenQuoteForm` (verify against COPY_PLAN if design drifts).
-- [ ] **Step 4 — `app/page.tsx`:** Import and render `<TrustBadges />` between `<Hero />` and `<Services />`.
-- [ ] **Step 5 — `components/StatsBar.tsx`:** Add new component exactly as COPY_PLAN Step 5 (icons, tokens, `aria-label`).
-- [ ] **Step 6 — `app/page.tsx`:** CRO order: Hero → TrustBadges → StatsBar → Services → BeforeAfter → WhyChooseUs → Gallery → Testimonials → Offers → FAQ → ContactSection (match COPY_PLAN).
+- [x] **Step 3 — `components/Hero.tsx`:** Secondary “Get a Free Quote” button wired to `onOpenQuoteForm` (verify against COPY_PLAN if design drifts).
+- [ ] **Step 4 — `app/page.tsx`:** Import and render `<TrustBadges />` between `<Hero />` and `<Services />`. _(Superseded: trust band removed from site.)_
+- [ ] **Step 5 — `components/StatsBar.tsx`:** Add new component exactly as COPY_PLAN Step 5 (icons, tokens, `aria-label`). _(Superseded: stats band removed from site.)_
+- [ ] **Step 6 — `app/page.tsx`:** CRO order: Hero → TrustBadges → StatsBar → Services → … _(Superseded: COPY_PLAN order not used; see repo snapshot.)_
 
 ### Testimonials and FAQ (visible UI + copy)
 
-- [ ] **Step 7 — `components/Testimonials.tsx`:** Add `source` field, replace testimonial data, update header subcopy (5.0 / 32+ reviews), render `source` on desktop and mobile cards.
-- [ ] **Step 8 — `components/FAQ.tsx`:** Replace placeholder answers in `faqs` array with COPY_PLAN copy.
+- [x] **Step 7 — `components/Testimonials.tsx`:** Add `source` field, replace testimonial data, update header subcopy (5.0 / 32+ reviews), render `source` on desktop and mobile cards.
+- [x] **Step 8 — `components/FAQ.tsx`:** Replace placeholder answers in `faqs` array with COPY_PLAN copy.
 
 ### Verification
 
-- [ ] Run `npm run build` (or the project’s lint/build script) with no errors.
-- [ ] Visual pass: homepage fold shows trust band + stats after hero; no invisible cards; service-areas page classes resolve (no “missing color” look).
-- [ ] Quick accessibility pass: `StatsBar` section label; interactive CTAs keyboard-focusable.
+- [x] Run `npm run build` (or the project’s lint/build script) with no errors.
+- [ ] Visual pass: homepage fold; no invisible cards; service-areas page classes resolve (no “missing color” look).
+- [ ] Quick accessibility pass: interactive CTAs keyboard-focusable.
 
 ---
 
