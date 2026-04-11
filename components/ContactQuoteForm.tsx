@@ -18,19 +18,9 @@ import { cn } from "@/lib/utils"
 import type { OfferId } from "@/data/offers"
 import { offers, OFFER_NONE } from "@/data/offers"
 import { modalCopyDefault } from "@/data/modalCopy"
+import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
 
 export type QuoteFormCopy = typeof modalCopyDefault
-
-const usStates = [
-  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
-  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
-  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
-  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
-  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
-  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
-  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
-  "Wisconsin", "Wyoming",
-]
 
 const howHeardOptions = [
   { value: "search", label: "Search / Google" },
@@ -334,7 +324,7 @@ export function ContactQuoteForm({
                 <SelectValue placeholder="State" />
               </SelectTrigger>
               <SelectContent {...formSelectContentPlacementProps}>
-                {usStates.map((state) => (
+                {CONTACT_FORM_STATES.map((state) => (
                   <SelectItem key={state} value={state}>
                     {state}
                   </SelectItem>

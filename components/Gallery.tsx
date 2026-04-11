@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
@@ -33,6 +34,17 @@ function GalleryLightbox({
   closeLightbox: () => void
   navigateLightbox: (direction: "prev" | "next") => void
 }) {
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        closeLightbox()
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [closeLightbox])
+
   const item = itemsForView[lightboxIndex]
   if (!item) return null
 
@@ -43,14 +55,21 @@ function GalleryLightbox({
       aria-modal="true"
       aria-label="Gallery image viewer"
     >
-      <button
-        type="button"
-        onClick={closeLightbox}
-        className="absolute right-4 top-4 z-10 p-2 text-white/70 transition-colors hover:text-white"
-        aria-label="Close viewer"
-      >
-        <X className="size-8" />
-      </button>
+      <div className="absolute left-0 right-0 top-0 z-20 flex flex-wrap items-center justify-end gap-2 p-3 sm:p-4">
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          onClick={closeLightbox}
+          title="Close viewer (Escape)"
+          aria-label="Exit gallery viewer"
+          className="border-white/80 bg-black/60 font-semibold text-white shadow-lg hover:bg-white/15 hover:text-white"
+        >
+          <X className="size-5" aria-hidden />
+          Exit
+          <span className="ml-1 hidden text-xs font-normal text-white/70 sm:inline">(Esc)</span>
+        </Button>
+      </div>
 
       <button
         type="button"
@@ -70,16 +89,36 @@ function GalleryLightbox({
         <ChevronRight className="size-10" />
       </button>
 
-      <div className="mx-4 w-full max-w-4xl">
-        <div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
-          <div className="text-center text-white">
-            <div className="mb-4 text-6xl font-bold">{item.id}</div>
-            <h2 className="mb-2 text-2xl font-semibold">{item.title}</h2>
-            <p className="text-white/60">{getGalleryCategoryLabel(item.category)}</p>
-          </div>
+      <div className="mx-4 w-full max-w-5xl">
+        <div className="relative flex min-h-[40vh] max-h-[85vh] items-center justify-center rounded-xl bg-black/40">
+          {item.imageSrc ? (
+            <Image
+              src={item.imageSrc}
+              alt={item.alt ?? item.title}
+              width={1920}
+              height={1440}
+              className="max-h-[85vh] w-auto max-w-full rounded-xl object-contain"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+          ) : (
+            <div className="flex aspect-[4/3] w-full max-w-4xl items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
+              <div className="text-center text-white">
+                <div className="mb-4 text-6xl font-bold">{item.id}</div>
+                <h2 className="mb-2 text-2xl font-semibold">{item.title}</h2>
+                <p className="text-white/60">{getGalleryCategoryLabel(item.category)}</p>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="mt-4 text-center text-sm text-white/50">
-          {lightboxIndex + 1} of {itemsForView.length}
+        <div className="mt-4 space-y-1 text-center">
+          <p className="text-sm font-medium text-white">{item.title}</p>
+          <p className="text-xs text-white/60">{getGalleryCategoryLabel(item.category)}</p>
+          {item.tagPlaceholder ? (
+            <p className="text-xs text-brand-yellow/90">{item.tagPlaceholder}</p>
+          ) : null}
+          <p className="text-sm text-white/50">
+            {lightboxIndex + 1} of {itemsForView.length}
+          </p>
         </div>
       </div>
     </div>
@@ -94,10 +133,10 @@ function useGalleryLightbox(itemsForView: GalleryItem[]) {
     document.body.style.overflow = "hidden"
   }
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxIndex(null)
     document.body.style.overflow = ""
-  }
+  }, [])
 
   const navigateLightbox = (direction: "prev" | "next") => {
     if (lightboxIndex === null || itemsForView.length === 0) return
@@ -141,15 +180,38 @@ function GalleryGrid({
           tabIndex={0}
           aria-label={`Open ${item.title} in viewer`}
         >
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
-            <div className="text-center text-white/40">
-              <div className="mb-1 text-4xl font-bold">{item.id}</div>
-              <div className="text-xs">{item.title}</div>
+          {item.thumbSrc || item.imageSrc ? (
+            <Image
+              src={item.thumbSrc ?? item.imageSrc!}
+              alt={item.alt ?? item.title}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-blue/40 to-section-dark-alt">
+              <div className="text-center text-white/40">
+                <div className="mb-1 text-4xl font-bold">{item.id}</div>
+                <div className="text-xs">{item.title}</div>
+              </div>
+            </div>
+          )}
+
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-3 pb-3 pt-10">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded bg-white/20 px-1.5 text-xs font-bold text-white">
+                {item.id}
+              </span>
+              {item.tagPlaceholder ? (
+                <span className="line-clamp-2 rounded-full bg-brand-yellow/95 px-2.5 py-0.5 text-left text-[10px] font-semibold leading-tight text-brand-blue-dark sm:text-xs">
+                  {item.tagPlaceholder}
+                </span>
+              ) : null}
             </div>
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center bg-brand-blue-dark/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <div className="text-center">
+            <div className="text-center px-2">
               <Expand className="mx-auto mb-2 size-8 text-brand-yellow" aria-hidden />
               <p className="text-sm font-medium text-white">{item.title}</p>
               <p className="text-xs text-white/60">{getGalleryCategoryLabel(item.category)}</p>

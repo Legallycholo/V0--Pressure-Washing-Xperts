@@ -32,6 +32,11 @@ export interface GalleryItem {
   thumbSrc?: string
   /** Alt text for images (optional). */
   alt?: string
+  /**
+   * Visible tag chip copy (placeholder until final labels are set).
+   * Shown with the gallery number on the homepage and full gallery.
+   */
+  tagPlaceholder?: string
 }
 
 /** Number of tiles shown on the homepage teaser (4×2 grid at lg). */
@@ -107,14 +112,78 @@ export const galleryCtaByCategory: Record<
 }
 
 export const galleryItems: GalleryItem[] = [
-  { id: 1, category: "residential", title: "House Exterior Cleaning" },
-  { id: 2, category: "residential", title: "Deck Restoration" },
-  { id: 3, category: "roof", title: "Roof Soft Wash" },
-  { id: 4, category: "roof", title: "Moss Removal" },
-  { id: 5, category: "commercial", title: "Storefront Cleaning" },
-  { id: 6, category: "commercial", title: "Office Building" },
-  { id: 7, category: "industrial", title: "Warehouse Floor" },
-  { id: 8, category: "industrial", title: "Loading Dock" },
+  {
+    id: 1,
+    category: "residential",
+    title: "House exterior",
+    imageSrc: "/gallery/gallery-01.png",
+    thumbSrc: "/gallery/gallery-01.png",
+    alt: "Back of a home with white siding, windows, door, and concrete patio.",
+    tagPlaceholder: "Tag 1 — siding & patio",
+  },
+  {
+    id: 2,
+    category: "commercial",
+    title: "Commercial building",
+    imageSrc: "/gallery/gallery-02.png",
+    thumbSrc: "/gallery/gallery-02.png",
+    alt: "Long one-story commercial building with block facade, metal siding, and parking lot.",
+    tagPlaceholder: "Tag 2 — commercial exterior",
+  },
+  {
+    id: 3,
+    category: "residential",
+    title: "Deck & balcony",
+    imageSrc: "/gallery/gallery-03.png",
+    thumbSrc: "/gallery/gallery-03.png",
+    alt: "Elevated wood deck and railing on a multi-unit residential building.",
+    tagPlaceholder: "Tag 3 — deck / woodwork",
+  },
+  {
+    id: 4,
+    category: "residential",
+    title: "Two-story home",
+    imageSrc: "/gallery/gallery-04.png",
+    thumbSrc: "/gallery/gallery-04.png",
+    alt: "Front of a split-level home with tan siding, brick, garage, and landscaping.",
+    tagPlaceholder: "Tag 4 — residential facade",
+  },
+  {
+    id: 5,
+    category: "driveways",
+    title: "Concrete driveway",
+    imageSrc: "/gallery/gallery-05.png",
+    thumbSrc: "/gallery/gallery-05.png",
+    alt: "Long residential concrete driveway leading toward a garage.",
+    tagPlaceholder: "Tag 5 — driveway",
+  },
+  {
+    id: 6,
+    category: "driveways",
+    title: "Driveway cleaning",
+    imageSrc: "/gallery/gallery-06.png",
+    thumbSrc: "/gallery/gallery-06.png",
+    alt: "Driveway with cleaning solution on the surface in front of a garage.",
+    tagPlaceholder: "Tag 6 — during service",
+  },
+  {
+    id: 7,
+    category: "driveways",
+    title: "Patio & pergola",
+    imageSrc: "/gallery/gallery-07.png",
+    thumbSrc: "/gallery/gallery-07.png",
+    alt: "Backyard stone paver patio with a wooden pergola and outdoor seating.",
+    tagPlaceholder: "Tag 7 — patio / hardscape",
+  },
+  {
+    id: 8,
+    category: "residential",
+    title: "Suburban home front",
+    imageSrc: "/gallery/gallery-08.png",
+    thumbSrc: "/gallery/gallery-08.png",
+    alt: "Front of a two-story home with light siding, brick around the garage, and landscaping.",
+    tagPlaceholder: "Tag 8 — curb appeal",
+  },
   { id: 9, category: "driveways", title: "Driveway Revival" },
   { id: 10, category: "driveways", title: "Patio Cleaning" },
   { id: 11, category: "hoa", title: "Community Pool Deck" },

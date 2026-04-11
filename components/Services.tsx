@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Home, Building2, Factory, Droplets, Sparkles, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,9 @@ const primaryServices = [
     description:
       "House washing, driveway cleaning, deck restoration, roof soft washing, and patio cleaning.",
     href: "/services/residential",
+    imageSrc: "/services/home-residential.png",
+    imageAlt:
+      "Residential backyard concrete patio with outdoor seating, grill, and brick home exterior.",
     imageLabel: "Residential service image",
   },
   {
@@ -22,6 +26,9 @@ const primaryServices = [
     description:
       "Storefronts, parking lots, building exteriors, sidewalks, and high-traffic common areas.",
     href: "/services/commercial",
+    imageSrc: "/services/home-commercial.png",
+    imageAlt:
+      "Commercial building with block and metal facade, storefront windows, and parking lot.",
     imageLabel: "Commercial service image",
   },
   {
@@ -100,11 +107,23 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
 
               {/* Content */}
               <div className="relative p-6 sm:p-8">
-                <div className="mb-4 h-40 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 overflow-hidden">
-                  <div className="text-white/30 text-sm text-center">
-                    <service.icon className="size-12 mx-auto mb-2 opacity-50" />
-                    <span>{service.imageLabel}</span>
-                  </div>
+                <div className="relative mb-4 h-40 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                  {"imageSrc" in service && service.imageSrc ? (
+                    <Image
+                      src={service.imageSrc}
+                      alt={service.imageAlt ?? service.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-center text-sm text-white/30">
+                      <div>
+                        <service.icon className="mx-auto mb-2 size-12 opacity-50" />
+                        <span>{service.imageLabel}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-brand-blue-light/20 text-brand-blue-light">

@@ -1,33 +1,41 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const comparisons = [
+type Comparison = {
+  id: number
+  title: string
+  description: string
+  location: string
+  beforeSrc: string
+  afterSrc: string
+  beforeAlt: string
+  afterAlt: string
+  /** CSS object-position for the before layer (fine-tune alignment vs after). */
+  beforeObjectPosition?: string
+  /** CSS object-position for the after layer. */
+  afterObjectPosition?: string
+}
+
+const comparisons: Comparison[] = [
   {
     id: 1,
-    title: "Driveway Cleaning",
-    description: "Complete transformation of a heavily stained concrete driveway.",
-    location: "Residential Property",
-  },
-  {
-    id: 2,
-    title: "Deck Restoration",
-    description: "Wood deck restored from years of weathering and mold buildup.",
-    location: "Family Home",
-  },
-  {
-    id: 3,
-    title: "Commercial Storefront",
-    description: "Storefront sidewalk cleaning for improved customer experience.",
-    location: "Retail Location",
-  },
-  {
-    id: 4,
-    title: "Roof Soft Wash",
-    description: "Algae and moss removal using safe soft washing techniques.",
-    location: "Residential Roof",
+    title: "Driveway cleaning",
+    description:
+      "Heavy grime and staining removed from the same concrete slabs—slide to compare the transformation.",
+    location: "Residential driveway",
+    beforeSrc: "/before-after/driveway-before.png",
+    afterSrc: "/before-after/driveway-after.png",
+    beforeAlt:
+      "Residential concrete driveway before cleaning, with dark stains and a covered vehicle on the left.",
+    afterAlt:
+      "Same driveway after professional washing, with a clean surface and matching framing to the before photo.",
+    // Before: lower camera; after: more street-level—offset vertical anchor so garage, cover, and joints meet at the slider.
+    beforeObjectPosition: "49% 44%",
+    afterObjectPosition: "51% 54%",
   },
 ]
 
@@ -39,7 +47,8 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [sliderPosition, setSliderPosition] = useState(50)
 
-  const currentComparison = comparisons[currentIndex]
+  const current = comparisons[currentIndex]
+  const showCarousel = comparisons.length > 1
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev - 1 + comparisons.length) % comparisons.length)
@@ -55,145 +64,146 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
     setSliderPosition(Number(e.target.value))
   }
 
+  const clipBefore = `inset(0 ${100 - sliderPosition}% 0 0)`
+
   return (
-    <section className="py-20 bg-background">
+    <section className="bg-background py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <p className="text-brand-blue font-semibold text-sm uppercase tracking-wider mb-3">
+        <div className="mb-12 text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-blue">
             See The Difference
           </p>
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+          <h2 className="text-balance text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Before & After Results
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
-            Slide to compare and see the dramatic transformations we achieve with our professional pressure washing services.
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+            Slide to compare and see the transformations we achieve with professional pressure washing.
           </p>
         </div>
 
-        {/* Comparison Container */}
-        <div className="max-w-4xl mx-auto">
-          {/* Main Comparison */}
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-            {/* Before/After Container */}
-            <div className="relative aspect-[16/10]">
-              {/* After Image (Full width background) */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/30 to-brand-blue/40 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="text-6xl font-bold mb-2">AFTER</div>
-                  <p className="text-lg opacity-80">Clean & Restored</p>
-                </div>
-              </div>
+        <div className="mx-auto max-w-4xl">
+          <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5">
+            <div
+              className="relative aspect-[4/3] select-none touch-pan-y"
+              role="img"
+              aria-label={`Before and after: ${current.title}. Slider at ${sliderPosition} percent.`}
+            >
+              {/* After: native assets are 4:3; matching aspect avoids extra crop skew vs a wider frame */}
+              <Image
+                src={current.afterSrc}
+                alt={current.afterAlt}
+                fill
+                draggable={false}
+                className="object-cover"
+                style={{ objectPosition: current.afterObjectPosition ?? "50% 50%" }}
+                sizes="(max-width: 896px) 100vw, 896px"
+                priority
+              />
 
-              {/* Before Image (Clipped based on slider) */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-br from-amber-900/60 to-gray-800/80 flex items-center justify-center"
-                style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+              {/* Before: same object-fit + tuned object-position so static features line up at the slider edge */}
+              <div
+                className="absolute inset-0 z-[1]"
+                style={{ clipPath: clipBefore }}
               >
-                <div className="text-center text-white">
-                  <div className="text-6xl font-bold mb-2">BEFORE</div>
-                  <p className="text-lg opacity-80">Dirty & Stained</p>
-                </div>
+                <Image
+                  src={current.beforeSrc}
+                  alt={current.beforeAlt}
+                  fill
+                  draggable={false}
+                  className="object-cover"
+                  style={{ objectPosition: current.beforeObjectPosition ?? "50% 50%" }}
+                  sizes="(max-width: 896px) 100vw, 896px"
+                  priority
+                />
               </div>
 
-              {/* Slider Line */}
-              <div 
-                className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-10"
+              <div
+                className="pointer-events-none absolute inset-y-0 z-10 w-0.5 bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)]"
                 style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
               >
-                {/* Slider Handle */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center">
-                  <div className="flex gap-0.5">
-                    <ChevronLeft className="size-5 text-brand-blue" />
-                    <ChevronRight className="size-5 text-brand-blue" />
+                <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg ring-2 ring-white/80">
+                  <div className="flex gap-0">
+                    <ChevronLeft className="size-4 text-brand-blue" aria-hidden />
+                    <ChevronRight className="size-4 text-brand-blue" aria-hidden />
                   </div>
                 </div>
               </div>
 
-              {/* Slider Input (invisible, covers the whole area) */}
               <input
                 type="range"
-                min="0"
-                max="100"
+                min={0}
+                max={100}
                 value={sliderPosition}
                 onChange={handleSliderChange}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
-                aria-label="Comparison slider"
+                className="absolute inset-0 z-20 h-full w-full cursor-ew-resize opacity-0"
+                aria-label="Before and after comparison slider"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={sliderPosition}
               />
 
-              {/* Labels */}
-              <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium">
+              <div className="pointer-events-none absolute bottom-3 left-3 z-[5] rounded-full bg-black/65 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
                 Before
               </div>
-              <div className="absolute bottom-4 right-4 bg-white/90 text-brand-blue-dark px-3 py-1 rounded-full text-sm font-medium">
+              <div className="pointer-events-none absolute bottom-3 right-3 z-[5] rounded-full bg-white/90 px-3 py-1 text-sm font-medium text-brand-blue-dark shadow-sm backdrop-blur-sm">
                 After
               </div>
             </div>
           </div>
 
-          {/* Info & Navigation */}
-          <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            {/* Info */}
+          <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-foreground mb-1">
-                {currentComparison.title}
-              </h3>
-              <p className="text-muted-foreground mb-1">
-                {currentComparison.description}
-              </p>
-              <p className="text-sm text-brand-blue font-medium">
-                {currentComparison.location}
-              </p>
+              <h3 className="mb-1 text-xl font-bold text-foreground">{current.title}</h3>
+              <p className="mb-1 text-muted-foreground">{current.description}</p>
+              <p className="text-sm font-medium text-brand-blue">{current.location}</p>
             </div>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-4">
-              <button
-                onClick={goToPrevious}
-                className="p-3 rounded-full bg-section-light hover:bg-brand-blue hover:text-white transition-colors"
-                aria-label="Previous comparison"
-              >
-                <ChevronLeft className="size-5" />
-              </button>
-
-              {/* Dots */}
-              <div className="flex gap-2">
-                {comparisons.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentIndex(index)
-                      setSliderPosition(50)
-                    }}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex
-                        ? "bg-brand-blue w-6"
-                        : "bg-gray-300 hover:bg-gray-400"
-                    }`}
-                    aria-label={`Go to comparison ${index + 1}`}
-                  />
-                ))}
+            {showCarousel ? (
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={goToPrevious}
+                  className="rounded-full bg-section-light p-3 transition-colors hover:bg-brand-blue hover:text-white"
+                  aria-label="Previous comparison"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+                <div className="flex gap-2">
+                  {comparisons.map((_, index) => (
+                    <button
+                      key={comparisons[index].id}
+                      type="button"
+                      onClick={() => {
+                        setCurrentIndex(index)
+                        setSliderPosition(50)
+                      }}
+                      className={`h-2 rounded-full transition-all ${
+                        index === currentIndex
+                          ? "w-6 bg-brand-blue"
+                          : "w-2 bg-gray-300 hover:bg-gray-400"
+                      }`}
+                      aria-label={`Go to comparison ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={goToNext}
+                  className="rounded-full bg-section-light p-3 transition-colors hover:bg-brand-blue hover:text-white"
+                  aria-label="Next comparison"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
               </div>
-
-              <button
-                onClick={goToNext}
-                className="p-3 rounded-full bg-section-light hover:bg-brand-blue hover:text-white transition-colors"
-                aria-label="Next comparison"
-              >
-                <ChevronRight className="size-5" />
-              </button>
-            </div>
+            ) : null}
           </div>
 
-          {/* CTA */}
           <div className="mt-10 text-center">
-            <p className="text-muted-foreground mb-4">
-              Want results like these for your property?
-            </p>
+            <p className="mb-4 text-muted-foreground">Want results like these for your property?</p>
             <Button
               onClick={onOpenQuoteForm}
               size="lg"
-              className="bg-brand-blue text-white font-bold hover:bg-brand-blue-light"
+              className="bg-brand-blue font-bold text-white hover:bg-brand-blue-light"
             >
               Get Your Free Quote Today
             </Button>
