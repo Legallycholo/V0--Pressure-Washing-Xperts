@@ -9,13 +9,6 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Professional Pressure Washing Services | Pressure Washing Xperts',
-  description: 'Expert pressure washing for residential and commercial properties. Licensed & insured. Get a free quote today! Call/Text: (800)-451-7213',
-  keywords: 'pressure washing, power washing, residential cleaning, commercial cleaning, roof cleaning, driveway cleaning',
-  openGraph: {
-    title: 'Pressure Washing Xperts - Where Pressure Meets Xpertise',
-    description: 'Professional pressure washing for residential and commercial properties. Licensed & insured.',
-    type: 'website',
-  },
   icons: {
     icon: [
       {
