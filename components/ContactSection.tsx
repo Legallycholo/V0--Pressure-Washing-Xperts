@@ -1,8 +1,17 @@
 "use client"
 
+import { Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { ContactQuoteForm, type QuoteFormCopy } from "@/components/ContactQuoteForm"
-import { modalCopyDefault } from "@/data/modalCopy"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { contactIconDark, contactRowDark, ctaPress } from "@/lib/ctaInteraction"
+import { modalCopyDefault, modalCopyOfferIntent } from "@/data/modalCopy"
+import { isOfferId } from "@/data/offers"
 import { businessAddress, businessMapsUrl } from "@/data/site"
 
 const inlineQuoteCopy = {
@@ -12,9 +21,29 @@ const inlineQuoteCopy = {
   submitLabel: "Submit Request",
 } satisfies QuoteFormCopy
 
+function ContactQuoteFormWithOfferFromUrl() {
+  const searchParams = useSearchParams()
+  const offerRaw = searchParams.get("offer")
+  const initialOfferId = isOfferId(offerRaw) ? offerRaw : undefined
+  const copy: QuoteFormCopy = initialOfferId
+    ? { ...inlineQuoteCopy, ...modalCopyOfferIntent }
+    : inlineQuoteCopy
+
+  return (
+    <ContactQuoteForm
+      key={offerRaw ?? "default"}
+      variant="inline"
+      copy={copy}
+      showOfferSelect
+      initialOfferId={initialOfferId}
+      className="pt-2"
+    />
+  )
+}
+
 export function ContactSection() {
   return (
-    <section id="contact" className="py-20 bg-section-dark">
+    <section id="contact" className="scroll-offset-header py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           {/* Left Column - Contact Info */}
@@ -33,27 +62,29 @@ export function ContactSection() {
             {/* Contact Cards */}
             <div className="space-y-4 mb-8">
               {/* Phone */}
-              <a
-                href="tel:800-451-7213"
-                className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-yellow text-brand-blue-dark">
-                  <Phone className="size-6" />
-                </div>
-                <div>
-                  <p className="text-white/60 text-sm">Call / Text</p>
-                  <p className="text-white font-semibold text-lg group-hover:text-brand-yellow transition-colors">
-                    (800)-451-7213
-                  </p>
-                </div>
-              </a>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a href="tel:800-451-7213" className={contactRowDark}>
+                    <div className={`${contactIconDark} bg-brand-yellow text-brand-blue-dark`}>
+                      <Phone className="size-6" />
+                    </div>
+                    <div>
+                      <p className="text-white/60 text-sm">Call / Text</p>
+                      <p className="text-white font-semibold text-lg group-hover:text-brand-yellow transition-colors">
+                        (800)-451-7213
+                      </p>
+                    </div>
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="right">Tap to call from your phone</TooltipContent>
+              </Tooltip>
 
               {/* Email */}
               <a
                 href="mailto:pressurewashingxperts@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+                className={contactRowDark}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-blue-light text-white">
+                <div className={`${contactIconDark} bg-brand-blue-light text-white`}>
                   <Mail className="size-6" />
                 </div>
                 <div>
@@ -82,9 +113,9 @@ export function ContactSection() {
                 href={businessMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+                className={contactRowDark}
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-silver text-brand-blue-dark">
+                <div className={`${contactIconDark} shrink-0 bg-brand-silver text-brand-blue-dark`}>
                   <MapPin className="size-6" />
                 </div>
                 <div className="min-w-0">
@@ -98,7 +129,7 @@ export function ContactSection() {
 
             <a
               href="tel:800-451-7213"
-              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans"
+              className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans ${ctaPress}`}
             >
               <Phone className="size-4 shrink-0" />
               <span>Call Now</span>
@@ -113,12 +144,18 @@ export function ContactSection() {
               id="contact-form"
               className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-brand-blue to-section-dark-alt p-6 sm:p-8 max-h-[min(90vh,52rem)] overflow-y-auto"
             >
-              <ContactQuoteForm
-                variant="inline"
-                copy={inlineQuoteCopy}
-                showOfferSelect={false}
-                className="pt-2"
-              />
+              <Suspense
+                fallback={
+                  <ContactQuoteForm
+                    variant="inline"
+                    copy={inlineQuoteCopy}
+                    showOfferSelect
+                    className="pt-2"
+                  />
+                }
+              >
+                <ContactQuoteFormWithOfferFromUrl />
+              </Suspense>
             </div>
           </div>
         </div>

@@ -1,21 +1,23 @@
 "use client"
 
-import { useState } from "react"
+import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
+
 import Link from "next/link"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
-import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 import { MapPin } from "lucide-react"
 import { getServiceAreasForNavigation } from "@/data/service-areas"
+import { ctaPress } from "@/lib/ctaInteraction"
 
 export default function ServiceAreasPage() {
-  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const goQuote = useGoToHomeQuoteSection()
+
   const serviceAreas = getServiceAreasForNavigation()
 
   return (
     <div className="min-h-screen bg-navy flex flex-col">
-      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <Header onOpenQuoteForm={() => goQuote()} />
       
       {/* Hero Section */}
       <section className="relative pt-header-offset pb-20 overflow-hidden bg-[#0d1b2a]">
@@ -32,14 +34,14 @@ export default function ServiceAreasPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
-              onClick={() => setIsQuoteFormOpen(true)}
-              className="bg-brand text-navy px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-light transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
+              onClick={() => goQuote()}
+              className="bg-brand text-navy px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-light transition-all transform hover:-translate-y-1 active:scale-[0.98] motion-reduce:transform-none shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
             >
               Check My Area
             </button>
             <a 
               href="tel:8004517213" 
-              className="bg-white/10 text-white border-2 border-white/20 px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-navy transition-all"
+              className={`bg-white/10 text-white border-2 border-white/20 px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-navy transition-all ${ctaPress}`}
             >
               Call: (800) 451-7213
             </a>
@@ -91,7 +93,7 @@ export default function ServiceAreasPage() {
             Contact us today for a free, no-obligation estimate on our exterior cleaning services.
           </p>
           <button 
-            onClick={() => setIsQuoteFormOpen(true)}
+            onClick={() => goQuote()}
             className="bg-navy text-white hover:text-brand px-10 py-4 rounded-xl font-bold text-lg hover:bg-navy-light transition-all transform hover:-translate-y-1 shadow-[0_10px_20px_rgba(13,27,42,0.3)]"
           >
             Get a Free Quote
@@ -101,10 +103,6 @@ export default function ServiceAreasPage() {
 
       <Footer />
       <FloatingCallButton />
-      <ContactFormModal
-        isOpen={isQuoteFormOpen}
-        onClose={() => setIsQuoteFormOpen(false)}
-      />
     </div>
   )
 }

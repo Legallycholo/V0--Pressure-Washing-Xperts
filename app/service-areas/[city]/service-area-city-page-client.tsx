@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
-import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 import { ServiceAreaPageTemplate } from "@/components/ServiceAreaPageTemplate"
 import type { ServiceAreaPageContent } from "@/data/service-areas"
@@ -13,18 +12,14 @@ interface ServiceAreaCityPageClientProps {
 }
 
 export function ServiceAreaCityPageClient({ city }: ServiceAreaCityPageClientProps) {
-  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
-      <ServiceAreaPageTemplate city={city} onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <Header onOpenQuoteForm={() => goQuote()} />
+      <ServiceAreaPageTemplate city={city} onOpenQuoteForm={() => goQuote()} />
       <Footer />
       <FloatingCallButton />
-      <ContactFormModal
-        isOpen={isQuoteFormOpen}
-        onClose={() => setIsQuoteFormOpen(false)}
-      />
     </>
   )
 }

@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
+import { ctaPress } from "@/lib/ctaInteraction"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
 
 interface HeroProps {
@@ -72,7 +73,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset"
+      className="scroll-offset-header relative min-h-screen overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset"
     >
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
@@ -124,7 +125,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
               <Button
                 asChild
                 size="lg"
-                className="w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-lg px-8 py-6 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg"
+                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-lg px-8 py-6 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg ${ctaPress}`}
               >
                 <a href="tel:800-451-7213">Call now</a>
               </Button>
@@ -132,7 +133,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                 type="button"
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className="w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-lg px-8 py-6 hover:bg-white/10 hover:border-white transition-all duration-300"
+                className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-lg px-8 py-6 hover:bg-white/10 hover:border-white transition-all duration-300 ${ctaPress}`}
               >
                 Get a Free Quote
               </Button>

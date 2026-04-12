@@ -1,18 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
+
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ServicePageTemplate } from "@/components/ServicePageTemplate"
-import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 
 export default function StorefrontsPage() {
-  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Storefront Washing"
         description="Make a strong first impression with a clean, professional-looking storefront."
@@ -25,14 +25,10 @@ export default function StorefrontsPage() {
           "Enhances customer-facing appearance",
           "Licensed & insured professionals"
         ]}
-        onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
+        onOpenQuoteForm={() => goQuote()}
       />
       <Footer />
       <FloatingCallButton />
-      <ContactFormModal
-        isOpen={isQuoteFormOpen}
-        onClose={() => setIsQuoteFormOpen(false)}
-      />
     </>
   )
 }

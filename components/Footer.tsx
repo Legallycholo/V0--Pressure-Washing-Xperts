@@ -10,6 +10,7 @@ import {
   residentialServices,
 } from "@/data/navigation"
 import { businessAddress, businessMapsUrl } from "@/data/site"
+import { ctaPress } from "@/lib/ctaInteraction"
 
 const services = [
   ...residentialServices.slice(0, 4),
@@ -96,14 +97,14 @@ export function Footer() {
             <div className="space-y-4">
               <a
                 href="tel:800-451-7213"
-                className="flex items-center gap-3 text-white/60 hover:text-brand-yellow transition-colors"
+                className={`flex items-center gap-3 rounded-md text-white/60 transition-colors hover:text-brand-yellow hover:bg-white/5 ${ctaPress}`}
               >
                 <Phone className="size-5 text-brand-yellow" />
                 <span className="text-sm">(800)-451-7213</span>
               </a>
               <a
                 href="mailto:pressurewashingxperts@gmail.com"
-                className="flex items-center gap-3 text-white/60 hover:text-brand-yellow transition-colors"
+                className={`flex items-center gap-3 rounded-md text-white/60 transition-colors hover:text-brand-yellow hover:bg-white/5 ${ctaPress}`}
               >
                 <Mail className="size-5 text-brand-yellow" />
                 <span className="text-sm break-all">pressurewashingxperts@gmail.com</span>
@@ -112,7 +113,7 @@ export function Footer() {
                 href={businessMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 text-white/60 hover:text-brand-yellow transition-colors"
+                className={`flex items-start gap-3 rounded-md text-white/60 transition-colors hover:text-brand-yellow hover:bg-white/5 ${ctaPress}`}
               >
                 <MapPin className="size-5 text-brand-yellow mt-0.5 shrink-0" />
                 <span className="text-sm">{businessAddress}</span>

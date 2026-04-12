@@ -20,6 +20,12 @@ import {
   aboutLinks,
 } from "@/data/navigation"
 import { businessAddressLines, navSlogan } from "@/data/site"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { ctaPress } from "@/lib/ctaInteraction"
 
 interface HeaderProps {
   onOpenQuoteForm: () => void
@@ -102,12 +108,17 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 pressurewashingxperts@gmail.com
               </a>
               <span className="text-white/30">|</span>
-              <a
-                href="tel:800-451-7213"
-                className="font-semibold text-brand-blue-light hover:text-brand-yellow transition-colors"
-              >
-                (800)-451-7213
-              </a>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a
+                    href="tel:800-451-7213"
+                    className={`font-semibold text-brand-blue-light hover:text-brand-yellow transition-colors ${ctaPress} inline-block rounded-sm`}
+                  >
+                    (800)-451-7213
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Tap to call</TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </div>
@@ -231,19 +242,31 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
 
           {/* Desktop CTA */}
           <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
-            <a
-              href="tel:800-451-7213"
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans"
-            >
-              <Phone className="size-4" />
-              <span>Call Now</span>
-            </a>
-            <Button
-              onClick={onOpenQuoteForm}
-              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
-            >
-              Get a Quote
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  href="tel:800-451-7213"
+                  className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans ${ctaPress}`}
+                >
+                  <span className="inline-flex size-8 items-center justify-center rounded-md bg-white/10 animate-pulse-glow motion-reduce:animate-none">
+                    <Phone className="size-4" />
+                  </span>
+                  <span>Call Now</span>
+                </a>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Tap to call — free estimates</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={onOpenQuoteForm}
+                  className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
+                >
+                  Get a Quote
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Free quote — no obligation</TooltipContent>
+            </Tooltip>
           </div>
 
           {/* Mobile Menu Button */}
@@ -376,7 +399,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div className="pt-4 border-t border-white/10 space-y-4">
             <a
               href="tel:800-451-7213"
-              className="flex items-center gap-2 text-base font-medium text-white transition-colors hover:text-brand-yellow"
+              className={`flex items-center gap-2 text-base font-medium text-white transition-colors hover:text-brand-yellow ${ctaPress}`}
             >
               <Phone className="size-5" />
               <span>Call/Text: (800)-451-7213</span>

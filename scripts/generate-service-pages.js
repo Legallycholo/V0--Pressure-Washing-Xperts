@@ -34,31 +34,26 @@ const servicePages = [
 
 const template = (title, category, desc) => `"use client"
 
-import { useState } from "react"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { ServicePageTemplate } from "@/components/ServicePageTemplate"
-import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 export default function ServicePage() {
-  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="${title}"
         description="${desc}"
         category="${category}"
-        onOpenQuoteForm={() => setIsQuoteFormOpen(true)}
+        onOpenQuoteForm={() => goQuote()}
       />
       <Footer />
       <FloatingCallButton />
-      <ContactFormModal
-        isOpen={isQuoteFormOpen}
-        onClose={() => setIsQuoteFormOpen(false)}
-      />
     </>
   )
 }

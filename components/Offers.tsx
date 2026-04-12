@@ -35,7 +35,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           {offers.map((offer, index) => (
             <article
               key={offer.id}
-              className={`relative flex h-full flex-col rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-in-up stagger-${index + 1} ${
+              className={`relative flex h-full flex-col rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-xl active:scale-[0.99] motion-reduce:hover:scale-100 animate-fade-in-up stagger-${index + 1} ${
                 offer.highlight
                   ? "order-first lg:order-none bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white ring-2 ring-brand-yellow"
                   : "bg-white text-foreground shadow-lg"

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { NavLinkItem } from "@/data/navigation"
+import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
 
 interface ServiceCategoryHubTemplateProps {
   categoryLabel: string
@@ -44,7 +45,7 @@ export function ServiceCategoryHubTemplate({
               variant="outline"
               className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
             >
-              <a href="tel:800-451-7213" className="flex items-center gap-2">
+              <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
                 <Phone className="size-5" />
                 Call/Text: (800)-451-7213
               </a>
@@ -68,7 +69,7 @@ export function ServiceCategoryHubTemplate({
               <Link
                 key={service.href}
                 href={service.href}
-                className="rounded-lg border border-brand-blue/10 bg-white p-5 sm:p-6 shadow-sm hover:border-brand-blue/40 hover:shadow-md transition-all"
+                className={hubCardLight}
               >
                 <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
                 <p className="text-sm text-gray-600 mb-3">

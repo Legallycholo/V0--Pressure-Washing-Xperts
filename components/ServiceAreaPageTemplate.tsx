@@ -4,6 +4,8 @@ import Link from "next/link"
 import { Phone, CheckCircle2, ArrowRight, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { ServiceAreaPageContent } from "@/data/service-areas"
+import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
+import { cn } from "@/lib/utils"
 
 interface ServiceAreaPageTemplateProps {
   city: ServiceAreaPageContent
@@ -43,7 +45,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
                 variant="outline"
                 className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
               >
-                <a href="tel:800-451-7213" className="flex items-center gap-2">
+                <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
                   <Phone className="size-5" />
                   {city.ctaPlaceholders.secondary}
                 </a>
@@ -92,11 +94,18 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {city.localizedServiceCards.map((service) => (
-              <div key={service.title} className="rounded-xl border border-brand-blue/10 bg-white p-6 shadow-sm">
+              <div
+                key={service.title}
+                className={cn(hubCardLight, "flex h-full flex-col rounded-xl")}
+              >
                 <h3 className="text-xl font-semibold text-brand-blue-dark mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <Link href={service.href} className="text-brand-blue font-medium hover:text-brand-blue-dark">
+                <p className="text-gray-600 mb-4 flex-1">{service.description}</p>
+                <Link
+                  href={service.href}
+                  className="text-brand-blue font-medium hover:text-brand-blue-dark inline-flex items-center gap-1"
+                >
                   View Service
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             ))}

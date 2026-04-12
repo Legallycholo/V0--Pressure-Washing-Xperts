@@ -123,7 +123,7 @@ export function ContactQuoteForm({
     return (
       <div
         className={cn(
-          "text-center",
+          "animate-success-pop-in text-center",
           isInline ? "py-10 px-4" : "p-8",
           className
         )}

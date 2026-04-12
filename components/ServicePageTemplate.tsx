@@ -2,6 +2,7 @@
 
 import { Phone, CheckCircle2, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ctaPress } from "@/lib/ctaInteraction"
 
 interface ServicePageTemplateProps {
   title: string
@@ -55,7 +56,7 @@ export function ServicePageTemplate({
                 variant="outline"
                 className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
               >
-                <a href="tel:800-451-7213" className="flex items-center gap-2">
+                <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
                   <Phone className="size-5" />
                   Call/Text: (800)-451-7213
                 </a>
@@ -158,7 +159,7 @@ export function ServicePageTemplate({
               variant="outline"
               className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
             >
-              <a href="tel:800-451-7213" className="flex items-center gap-2">
+              <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
                 <Phone className="size-5" />
                 Call Now
               </a>

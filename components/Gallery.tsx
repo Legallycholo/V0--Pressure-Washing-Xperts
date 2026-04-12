@@ -9,6 +9,7 @@ import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider"
 import { cn } from "@/lib/utils"
+import { ctaPress } from "@/lib/ctaInteraction"
 import {
   GALLERY_TEASER_COUNT,
   galleryCategories,
@@ -348,7 +349,7 @@ function GalleryTeaser() {
           </Button>
           <a
             href="tel:800-451-7213"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark"
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
           >
             <Phone className="size-4 shrink-0" aria-hidden />
             <span>Call Now</span>
@@ -481,7 +482,7 @@ function GalleryFull() {
           <p className="mt-3 text-pretty text-lg text-white/70">{cta.description}</p>
           <a
             href="tel:800-451-7213"
-            className="mt-6 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark"
+            className={`mt-6 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
           >
             <Phone className="size-4 shrink-0" aria-hidden />
             <span>Call Now</span>

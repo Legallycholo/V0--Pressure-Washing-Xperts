@@ -1,19 +1,19 @@
 "use client"
+import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
-import { useState } from "react"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
-import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Phone } from "lucide-react"
+import { ctaPress } from "@/lib/ctaInteraction"
 
 export default function WeDoXpertPage() {
-  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const goHomeQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <Header onOpenQuoteForm={() => goHomeQuote({ target: "contact" })} />
       
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         {/* Hero Section */}
@@ -97,7 +97,7 @@ export default function WeDoXpertPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => setIsQuoteFormOpen(true)}
+                onClick={() => goHomeQuote({ target: "contact" })}
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
               >
@@ -109,7 +109,7 @@ export default function WeDoXpertPage() {
                 variant="outline"
                 className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
               >
-                <a href="tel:800-451-7213" className="flex items-center gap-2">
+                <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
                   <Phone className="size-5" />
                   Call Now
                 </a>
@@ -121,10 +121,6 @@ export default function WeDoXpertPage() {
 
       <Footer />
       <FloatingCallButton />
-      <ContactFormModal
-        isOpen={isQuoteFormOpen}
-        onClose={() => setIsQuoteFormOpen(false)}
-      />
     </>
   )
 }

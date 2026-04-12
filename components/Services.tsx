@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Home, Building2, Droplets, Sparkles, ChevronRight } from "lucide-react"
@@ -57,8 +56,6 @@ interface ServicesProps {
 }
 
 export function Services({ onOpenQuoteForm }: ServicesProps) {
-  const [hoveredService, setHoveredService] = useState<string | null>(null)
-
   return (
     <section id="services" className="py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -78,24 +75,19 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
         {/* Primary Services */}
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
           {primaryServices.map((service, index) => (
-            <div
+            <Link
               key={service.id}
-              className={`group relative rounded-xl overflow-hidden transition-all duration-300 cursor-pointer animate-fade-in-up stagger-${index + 1}`}
-              onMouseEnter={() => setHoveredService(service.id)}
-              onMouseLeave={() => setHoveredService(null)}
+              href={service.href}
+              className={`group relative block overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.99] motion-reduce:hover:translate-y-0 animate-fade-in-up stagger-${index + 1}`}
             >
-              {/* Card Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm" />
-              <div className="absolute inset-0 border border-white/10 rounded-xl" />
-              
-              {/* Hover Effect */}
-              <div 
-                className={`absolute inset-0 bg-brand-yellow/10 transition-opacity duration-300 ${
-                  hoveredService === service.id ? "opacity-100" : "opacity-0"
-                }`} 
+              <div className="absolute inset-0 rounded-xl border border-white/10" />
+
+              <div
+                className="absolute inset-0 bg-brand-yellow/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                aria-hidden
               />
 
-              {/* Content */}
               <div className="relative p-7 sm:p-9">
                 <div className="relative mb-4 h-44 overflow-hidden rounded-lg border border-white/10 bg-white/5 sm:h-48">
                   {"imageSrc" in service && service.imageSrc ? (
@@ -116,26 +108,30 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                   )}
                 </div>
 
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-brand-blue-light/20 text-brand-blue-light">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-brand-blue-light/20 text-brand-blue-light transition-transform duration-300 group-hover:scale-110">
                   <service.icon className="size-6" />
                 </div>
 
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-yellow transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-white/75 text-sm leading-relaxed mb-6">
+                <p className="text-white/75 text-sm leading-relaxed mb-4">
                   {service.description}
                 </p>
 
-                <Link
-                  href={service.href}
-                  className="inline-flex items-center gap-1 text-brand-yellow font-semibold text-sm hover:gap-2 transition-all"
-                >
-                  Learn More
+                <span className="inline-flex items-center gap-1 text-brand-yellow font-semibold text-sm group-hover:gap-2 transition-all">
+                  Learn more
                   <ChevronRight className="size-4" />
-                </Link>
+                </span>
               </div>
-            </div>
+
+              {/* Hover “peek” — quote CTA */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-full items-end justify-center bg-gradient-to-t from-brand-blue-dark via-brand-blue-dark/95 to-transparent pb-5 pt-16 transition-transform duration-300 ease-out group-hover:translate-y-0 motion-reduce:translate-y-full">
+                <span className="text-center text-xs font-bold uppercase tracking-wide text-brand-yellow">
+                  Get a free quote for {service.title.replace(" Services", "")}
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
 
@@ -144,7 +140,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           {supportingServices.map((service) => (
             <div
               key={service.id}
-              className="rounded-xl border border-white/15 bg-white/5 p-6 sm:p-7"
+              className="rounded-xl border border-white/15 bg-white/5 p-6 sm:p-7 transition-all duration-300 hover:border-brand-yellow/25 hover:bg-white/[0.07]"
             >
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md bg-brand-blue-light/15 text-brand-blue-light">
                 <service.icon className="size-5" />
@@ -166,7 +162,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           <Button
             onClick={onOpenQuoteForm}
             size="lg"
-            className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark"
+            className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
           >
             Request a Free Consultation
           </Button>

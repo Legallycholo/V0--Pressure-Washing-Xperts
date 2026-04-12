@@ -1,10 +1,11 @@
 "use client"
 
-import { Suspense, useState } from "react"
+import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
+
+import { Suspense } from "react"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { Gallery } from "@/components/Gallery"
-import { ContactFormModal } from "@/components/ContactFormModal"
 import { FloatingCallButton } from "@/components/FloatingCallButton"
 
 function GalleryFallback() {
@@ -18,11 +19,11 @@ function GalleryFallback() {
 }
 
 export default function GalleryPage() {
-  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
+  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onOpenQuoteForm={() => setIsQuoteFormOpen(true)} />
+      <Header onOpenQuoteForm={() => goQuote()} />
 
       <main className="pt-header-offset">
         <Suspense fallback={<GalleryFallback />}>
@@ -32,7 +33,6 @@ export default function GalleryPage() {
 
       <Footer />
       <FloatingCallButton />
-      <ContactFormModal isOpen={isQuoteFormOpen} onClose={() => setIsQuoteFormOpen(false)} />
     </div>
   )
 }
