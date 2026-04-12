@@ -15,7 +15,7 @@ export default function OdorRemovalPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Odor Removal"
-        description="Address stubborn household odors at the source—not just with fragrance. We evaluate soft surfaces and areas where smells linger and recommend a cleaning plan tailored to your home."
+        description="Address stubborn household odors at the source, not just with fragrance. We evaluate soft surfaces and areas where smells linger and recommend a cleaning plan tailored to your home."
         category="Residential"
         benefits={[
           "Targets odor sources, not only masking",

@@ -82,7 +82,7 @@ export const galleryCtaByCategory: Record<
   residential: {
     title: "Love how a clean home looks?",
     description:
-      "Schedule residential washing for siding, decks, and outdoor living spaces—done safely and thoroughly.",
+      "Schedule residential washing for siding, decks, and outdoor living spaces, done safely and thoroughly.",
   },
   roof: {
     title: "Protect your roof and curb appeal",
@@ -102,7 +102,7 @@ export const galleryCtaByCategory: Record<
   hoa: {
     title: "HOA and community projects welcome",
     description:
-      "Pool decks, common areas, and multi-home schedules—we coordinate with boards and managers.",
+      "Pool decks, common areas, and multi-home schedules: we coordinate with boards and managers.",
   },
   masonry: {
     title: "Brick and stone deserve expert care",
@@ -213,7 +213,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 11,
     category: "before-after",
-    title: "Vinyl siding — side wall",
+    title: "Vinyl siding: side wall",
     imageSrc: "/gallery/before-after/01-after.png",
     thumbSrc: "/gallery/before-after/01-after.png",
     alt: "Clean white vinyl siding on a long side wall after house washing.",
@@ -228,7 +228,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 12,
     category: "before-after",
-    title: "Siding — window & utilities",
+    title: "Siding: window & utilities",
     imageSrc: "/gallery/before-after/02-after.png",
     thumbSrc: "/gallery/before-after/02-after.png",
     alt: "House siding with window and meter area after exterior cleaning.",
@@ -348,7 +348,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 20,
     category: "before-after",
-    title: "Lap siding — side elevation",
+    title: "Lap siding: side elevation",
     imageSrc: "/gallery/before-after/10-after.png",
     thumbSrc: "/gallery/before-after/10-after.png",
     alt: "Tan horizontal siding on the side of a home after washing.",
@@ -363,7 +363,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 21,
     category: "before-after",
-    title: "Siding — satellite & meters",
+    title: "Siding: satellite & meters",
     imageSrc: "/gallery/before-after/11-after.png",
     thumbSrc: "/gallery/before-after/11-after.png",
     alt: "House wall with utilities and satellite dish after exterior cleaning.",
@@ -388,7 +388,7 @@ export const galleryItems: GalleryItem[] = [
     beforeAlt:
       "Rear patio and siding before cleaning (paired angle with the after photo).",
     afterAlt:
-      "Rear patio with clean white siding, windows, and door—same home after washing.",
+      "Rear patio with clean white siding, windows, and door: same home after washing.",
   },
 ]
 

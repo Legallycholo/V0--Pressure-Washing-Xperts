@@ -26,7 +26,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
             Save on Bundles &amp; Seasonal Service
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
-            Pick the promo that fits your job—new customers, multi-service
+            Pick the promo that fits your job: new customers, multi-service
             visits, spring and fall scheduling, and neighbor referrals.
           </p>
         </div>
@@ -91,8 +91,8 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                 </p>
 
                 <small
-                  className={`text-xs block mb-4 ${
-                    offer.highlight ? "text-white/60" : "text-muted-foreground/70"
+                  className={`text-sm leading-relaxed block mb-4 ${
+                    offer.highlight ? "text-white/80" : "text-muted-foreground"
                   }`}
                 >
                   {offer.terms}
@@ -117,10 +117,17 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-muted-foreground max-w-3xl mx-auto">
-          Offers cannot be combined. A $250 minimum job total applies before any
+        <p className="mt-8 text-center text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          Offers cannot be combined. Minimum job total applies before any
           discount. Referral credits are issued after the referred customer
-          completes a paid service. Contact us for full terms.
+          completes a paid service. Call{" "}
+          <a
+            href="tel:18004517213"
+            className="font-semibold text-brand-blue underline-offset-2 hover:underline"
+          >
+            1-800-451-7213
+          </a>{" "}
+          for full terms.
         </p>
       </div>
     </section>

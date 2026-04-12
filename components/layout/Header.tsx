@@ -254,7 +254,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                   <span>Call Now</span>
                 </a>
               </TooltipTrigger>
-              <TooltipContent side="bottom">Tap to call — free estimates</TooltipContent>
+              <TooltipContent side="bottom">Tap to call: free estimates</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -265,7 +265,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                   Get a Quote
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="bottom">Free quote — no obligation</TooltipContent>
+              <TooltipContent side="bottom">Free quote, no obligation</TooltipContent>
             </Tooltip>
           </div>
 

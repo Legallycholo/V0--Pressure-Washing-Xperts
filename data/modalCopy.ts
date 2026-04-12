@@ -2,7 +2,7 @@
 export const modalCopyDefault = {
   headline: "Get your free estimate",
   subline:
-    "Tell us what you need—we usually reply within one business day. No obligation.",
+    "Tell us what you need. We usually reply within one business day. No obligation.",
   badge: "Free estimate",
   submitLabel: "Send my quote request",
   successExtra: null as string | null,
@@ -13,7 +13,7 @@ export const modalCopyDefault = {
     "Licensed and insured. Free estimate, no obligation. We use your contact info only to follow up on this request.",
 }
 
-/** Opened from Special Offers — Claim Offer */
+/** Opened from Special Offers: Claim Offer */
 export const modalCopyOfferIntent = {
   ...modalCopyDefault,
   headline: "Claim your offer",

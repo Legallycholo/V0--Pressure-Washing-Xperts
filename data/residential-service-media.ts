@@ -1,5 +1,5 @@
 /**
- * Central config for residential leaf service pages — benefits-column imagery.
+ * Central config for residential leaf service pages: benefits-column imagery.
  * Paths are under /public/residential-services/.
  */
 
@@ -9,7 +9,7 @@ const R = "/residential-services"
 export const residentialHouseWashingMedia = {
   imageSrc: `${R}/house-washing-01.png`,
   imageAlt:
-    "Residential home with white horizontal siding, windows, and entry door — exterior ready for soft washing",
+    "Residential home with white horizontal siding, windows, and entry door: exterior ready for soft washing",
 } as const
 
 export const residentialDecksFencesMedia = {

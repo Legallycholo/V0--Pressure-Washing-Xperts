@@ -68,7 +68,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             Our Professional Services
           </h2>
           <p className="mt-4 text-white/70 max-w-2xl mx-auto text-lg">
-            We focus on two core lines—residential curb appeal and commercial first impressions—with the right mix of pressure and soft washing for each surface.
+            We focus on two core lines (residential curb appeal and commercial first impressions) with the right mix of pressure and soft washing for each surface.
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                 </span>
               </div>
 
-              {/* Hover “peek” — quote CTA */}
+              {/* Hover "peek": quote CTA */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-full items-end justify-center bg-gradient-to-t from-brand-blue-dark via-brand-blue-dark/95 to-transparent pb-5 pt-16 transition-transform duration-300 ease-out group-hover:translate-y-0 motion-reduce:translate-y-full">
                 <span className="text-center text-xs font-bold uppercase tracking-wide text-brand-yellow">
                   Get a free quote for {service.title.replace(" Services", "")}

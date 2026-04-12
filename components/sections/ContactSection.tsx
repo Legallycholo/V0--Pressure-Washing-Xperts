@@ -14,9 +14,9 @@ export function ContactSection() {
   return (
     <section id="contact" className="scroll-offset-header py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-start xl:items-center">
           {/* Left Column - Contact Info */}
-          <div>
+          <div className="lg:col-span-5">
             <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-3">
               Contact Us
             </p>
@@ -24,7 +24,7 @@ export function ContactSection() {
               Ready for a Free Estimate?
             </h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Tell us what you would like cleaned—we usually reply within one business day
+              Tell us what you would like cleaned. We usually reply within one business day
               with next steps. Prefer the phone? Call or text anytime during business hours.
             </p>
 
@@ -105,8 +105,10 @@ export function ContactSection() {
             </a>
           </div>
 
-          {/* Right Column - Quote form */}
-          <ContactQuoteFormCard />
+          {/* Right Column - Quote form (width matches hero quote card) */}
+          <div className="lg:col-span-7">
+            <ContactQuoteFormCard />
+          </div>
         </div>
       </div>
     </section>

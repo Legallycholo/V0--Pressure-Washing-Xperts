@@ -103,7 +103,7 @@ export default function PressureVsSoftWashingPage() {
             <p className="text-lg text-gray-700 mb-8">
               At Pressure Washing Xperts, we don't believe in a one-size-fits-all approach. 
               Our trained professionals assess each project individually and use the appropriate 
-              method—or combination of methods—to deliver the best results while protecting your property.
+              method (or combination of methods) to deliver the best results while protecting your property.
             </p>
             <div className="bg-brand-yellow/10 p-6 rounded-lg">
               <p className="text-xl font-semibold text-brand-blue-dark">

@@ -44,7 +44,7 @@ export function FloatingCallButton() {
             <span>Call</span>
           </a>
         </TooltipTrigger>
-        <TooltipContent side="top">Tap to call — we answer 7 days a week</TooltipContent>
+        <TooltipContent side="top">Tap to call: we answer 7 days a week</TooltipContent>
       </Tooltip>
 
       <Tooltip>
@@ -58,7 +58,7 @@ export function FloatingCallButton() {
             <span>Quote</span>
           </Link>
         </TooltipTrigger>
-        <TooltipContent side="top">Free quote — no obligation</TooltipContent>
+        <TooltipContent side="top">Free quote, no obligation</TooltipContent>
       </Tooltip>
     </div>
   )

@@ -122,8 +122,8 @@ function GalleryLightbox({
                 key={`${item.id}-${lightboxIndex}`}
                 beforeSrc={item.beforeSrc}
                 afterSrc={item.afterSrc}
-                beforeAlt={item.beforeAlt ?? `Before — ${item.title}`}
-                afterAlt={item.afterAlt ?? `After — ${item.title}`}
+                beforeAlt={item.beforeAlt ?? `Before: ${item.title}`}
+                afterAlt={item.afterAlt ?? `After: ${item.title}`}
                 beforeObjectPosition={item.beforeObjectPosition}
                 afterObjectPosition={item.afterObjectPosition}
                 comparisonLabel={item.title}

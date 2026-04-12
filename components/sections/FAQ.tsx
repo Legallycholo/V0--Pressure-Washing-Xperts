@@ -17,22 +17,22 @@ const faqs = [
   {
     question: "How much does pressure washing cost?",
     answer:
-      "Pricing depends on the surface type, square footage, and level of buildup. A driveway typically starts around $100–$150; a full house exterior ranges from $200–$500 depending on size. We provide free, no-obligation quotes so you know exactly what to expect before we begin.",
+      "Pricing depends on the surface type, square footage, and level of buildup. A driveway typically starts around $100 to $150; a full house exterior ranges from $200 to $500 depending on size. We provide free, no-obligation quotes so you know exactly what to expect before we begin.",
   },
   {
     question: "Is pressure washing safe for my property?",
     answer:
-      "Yes. Our technicians are trained to dial in the right PSI for each surface. For roofs, painted siding, and stucco we switch to soft washing — a low-pressure method using biodegradable solutions that kills mold and mildew at the root without blasting the surface.",
+      "Yes. Our technicians are trained to dial in the right PSI for each surface. For roofs, painted siding, and stucco we switch to soft washing: a low-pressure method using biodegradable solutions that kills mold and mildew at the root without blasting the surface.",
   },
   {
     question: "How often should I have my property pressure washed?",
     answer:
-      "Most homes benefit from an annual cleaning. Properties near tree cover, in high-humidity areas, or with heavy foot traffic — like commercial storefronts and parking lots — may need service every 6 months. We can recommend a maintenance schedule during your free estimate.",
+      "Most homes benefit from an annual cleaning. Properties near tree cover, in high-humidity areas, or with heavy foot traffic (like commercial storefronts and parking lots) may need service every 6 months. We can recommend a maintenance schedule during your free estimate.",
   },
   {
     question: "Do I need to be home during the service?",
     answer:
-      "Not necessarily. We just need access to an outdoor water spigot and the areas being cleaned. That said, we always recommend a quick walkthrough before we start so we can note any specific concerns — cracked concrete, sensitive plants, parked vehicles, etc.",
+      "Not necessarily. We just need access to an outdoor water spigot and the areas being cleaned. That said, we always recommend a quick walkthrough before we start so we can note any specific concerns: cracked concrete, sensitive plants, parked vehicles, etc.",
   },
   {
     question: "What is soft washing and when do you use it?",
@@ -47,7 +47,7 @@ const faqs = [
   {
     question: "How do I prepare for my pressure washing appointment?",
     answer:
-      "Move any patio furniture, potted plants, and vehicles away from the work area. Close all windows and doors. We'll handle the rest — setup, cleaning, rinse-down, and cleanup — and leave your property looking fresh.",
+      "Move any patio furniture, potted plants, and vehicles away from the work area. Close all windows and doors. We'll handle the rest (setup, cleaning, rinse-down, and cleanup) and leave your property looking fresh.",
   },
 ]
 

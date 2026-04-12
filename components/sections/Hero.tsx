@@ -97,8 +97,8 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-3xl" />
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-          <div className="animate-fade-in-up lg:col-span-7 text-center lg:text-left">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start xl:items-center">
+          <div className="animate-fade-in-up lg:col-span-5 text-center lg:text-left">
             <p className="mb-4 text-brand-yellow font-semibold text-sm sm:text-base tracking-[0.24em] uppercase">
               Atlanta&apos;s top-rated service
             </p>
@@ -147,7 +147,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
             </div>
           </div>
 
-          <div className="animate-fade-in-up lg:col-span-5">
+          <div className="animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10">
             <div className="rounded-2xl bg-white/95 shadow-2xl border border-white/30 overflow-hidden backdrop-blur-sm">
               <div className="bg-brand-blue p-5 sm:p-6">
                 <h2 className="text-xl sm:text-2xl font-bold text-white">
@@ -187,179 +187,197 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                   </Button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4">
-                  <div>
-                    <Label htmlFor="fullName" className="text-foreground">
-                      Full Name <span className="text-destructive">*</span>
-                    </Label>
-                    <Input
-                      id="fullName"
-                      name="fullName"
-                      type="text"
-                      required
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      placeholder="Your full name"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="p-5 sm:p-6 space-y-4 lg:grid lg:grid-cols-2 lg:gap-x-6 lg:gap-y-4 lg:space-y-0"
+                >
+                  <div className="space-y-4">
                     <div>
-                      <Label htmlFor="email" className="text-foreground">
-                        Email <span className="text-destructive">*</span>
+                      <Label htmlFor="fullName" className="text-foreground">
+                        Full Name <span className="text-destructive">*</span>
                       </Label>
                       <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="john@example.com"
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone" className="text-foreground">
-                        Phone <span className="text-destructive">*</span>
-                      </Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="(555) 123-4567"
-                        className="mt-1"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    <div className="col-span-2 sm:col-span-1">
-                      <Label htmlFor="city" className="text-foreground">
-                        City <span className="text-destructive">*</span>
-                      </Label>
-                      <Input
-                        id="city"
-                        name="city"
+                        id="fullName"
+                        name="fullName"
                         type="text"
                         required
-                        value={formData.city}
+                        value={formData.fullName}
                         onChange={handleInputChange}
-                        placeholder="City"
+                        placeholder="Your full name"
                         className="mt-1"
                       />
                     </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="email" className="text-foreground">
+                          Email <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          placeholder="john@example.com"
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="phone" className="text-foreground">
+                          Phone <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          required
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          placeholder="(555) 123-4567"
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                      <div className="col-span-2 sm:col-span-1">
+                        <Label htmlFor="city" className="text-foreground">
+                          City <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="city"
+                          name="city"
+                          type="text"
+                          required
+                          value={formData.city}
+                          onChange={handleInputChange}
+                          placeholder="City"
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="state" className="text-foreground">
+                          State <span className="text-destructive">*</span>
+                        </Label>
+                        <Select
+                          value={formData.state}
+                          onValueChange={(value) =>
+                            handleSelectChange("state", value)
+                          }
+                          required
+                        >
+                          <SelectTrigger className="mt-1 w-full">
+                            <SelectValue placeholder="State" />
+                          </SelectTrigger>
+                          <SelectContent {...formSelectContentPlacementProps}>
+                            {CONTACT_FORM_STATES.map((state) => (
+                              <SelectItem key={state} value={state}>
+                                {state}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="zip" className="text-foreground">
+                          ZIP <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="zip"
+                          name="zip"
+                          type="text"
+                          required
+                          value={formData.zip}
+                          onChange={handleInputChange}
+                          placeholder="12345"
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 lg:flex lg:flex-col">
+                    <div className="lg:flex-1">
+                      <Label htmlFor="message" className="text-foreground">
+                        Project details <span className="text-destructive">*</span>
+                      </Label>
+                      <p className="mt-1 text-xs text-muted-foreground leading-snug">
+                        Surfaces (siding, driveway, deck, roof, etc.), rough size
+                        or photos if you have them, and when you would like
+                        service.
+                      </p>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        required
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
+                        className="mt-2 min-h-[100px] lg:min-h-[140px] xl:min-h-[120px]"
+                      />
+                    </div>
+
                     <div>
-                      <Label htmlFor="state" className="text-foreground">
-                        State <span className="text-destructive">*</span>
+                      <Label htmlFor="howHeard" className="text-foreground">
+                        How Did You Hear About Us?{" "}
+                        <span className="text-destructive">*</span>
                       </Label>
                       <Select
-                        value={formData.state}
-                        onValueChange={(value) => handleSelectChange("state", value)}
+                        value={formData.howHeard}
+                        onValueChange={(value) =>
+                          handleSelectChange("howHeard", value)
+                        }
                         required
                       >
                         <SelectTrigger className="mt-1 w-full">
-                          <SelectValue placeholder="State" />
+                          <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
                         <SelectContent {...formSelectContentPlacementProps}>
-                          {CONTACT_FORM_STATES.map((state) => (
-                            <SelectItem key={state} value={state}>
-                              {state}
+                          {howHeardOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
-                    <div>
-                      <Label htmlFor="zip" className="text-foreground">
-                        ZIP <span className="text-destructive">*</span>
-                      </Label>
-                      <Input
-                        id="zip"
-                        name="zip"
-                        type="text"
-                        required
-                        value={formData.zip}
-                        onChange={handleInputChange}
-                        placeholder="12345"
-                        className="mt-1"
-                      />
-                    </div>
                   </div>
 
-                  <div>
-                    <Label htmlFor="message" className="text-foreground">
-                      Project details <span className="text-destructive">*</span>
-                    </Label>
-                    <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                      Surfaces (siding, driveway, deck, roof, etc.), rough size or
-                      photos if you have them, and when you would like service.
-                    </p>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      required
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
-                      className="mt-2 min-h-[100px]"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="howHeard" className="text-foreground">
-                      How Did You Hear About Us? <span className="text-destructive">*</span>
-                    </Label>
-                    <Select
-                      value={formData.howHeard}
-                      onValueChange={(value) => handleSelectChange("howHeard", value)}
-                      required
+                  <div className="space-y-3 lg:col-span-2">
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg inline-flex items-center justify-center gap-2"
                     >
-                      <SelectTrigger className="mt-1 w-full">
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent {...formSelectContentPlacementProps}>
-                        {howHeardOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="size-5 animate-spin shrink-0" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="size-5 shrink-0" aria-hidden />
+                          {modalCopyDefault.submitLabel}
+                        </>
+                      )}
+                    </Button>
+
+                    <p className="text-center text-xs text-muted-foreground leading-relaxed">
+                      {modalCopyDefault.trustNote}
+                    </p>
+
+                    <p className="text-center text-sm text-muted-foreground">
+                      Or call us directly at{" "}
+                      <a
+                        href="tel:800-451-7213"
+                        className="text-brand-blue font-medium hover:underline"
+                      >
+                        (800)-451-7213
+                      </a>
+                    </p>
                   </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg inline-flex items-center justify-center gap-2"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="size-5 animate-spin shrink-0" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="size-5 shrink-0" aria-hidden />
-                        {modalCopyDefault.submitLabel}
-                      </>
-                    )}
-                  </Button>
-
-                  <p className="text-center text-xs text-muted-foreground leading-relaxed">
-                    {modalCopyDefault.trustNote}
-                  </p>
-
-                  <p className="text-center text-sm text-muted-foreground">
-                    Or call us directly at{" "}
-                    <a href="tel:800-451-7213" className="text-brand-blue font-medium hover:underline">
-                      (800)-451-7213
-                    </a>
-                  </p>
                 </form>
               )}
             </div>

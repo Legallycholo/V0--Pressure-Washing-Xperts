@@ -15,7 +15,7 @@ export default function ResidentialPropertiesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Residential Properties"
-        description="Whole-property cleaning coordination for homeowners who want one trusted team across interior and exterior needs. Bundle priorities—from soft surfaces to outdoor areas—into a clear scope and schedule."
+        description="Whole-property cleaning coordination for homeowners who want one trusted team across interior and exterior needs. Bundle priorities (from soft surfaces to outdoor areas) into a clear scope and schedule."
         category="Residential"
         benefits={[
           "Single point of contact for multi-area work",
