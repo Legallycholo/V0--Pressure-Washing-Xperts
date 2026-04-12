@@ -25,14 +25,25 @@ export function useGoToHomeQuoteSection() {
   const router = useRouter()
 
   return useCallback(
-    (opts?: { target?: HomeQuoteTarget; offerId?: OfferId }) => {
+    (opts?: {
+      target?: HomeQuoteTarget
+      offerId?: OfferId
+      utm?: { source: string; medium: string; campaign: string }
+    }) => {
       const target = opts?.target ?? "contact"
       const sectionId = target === "hero" ? "hero" : "contact"
       const offer = opts?.offerId
+      const utm = opts?.utm
 
-      const path = offer
-        ? `/?offer=${encodeURIComponent(offer)}#${sectionId}`
-        : `/#${sectionId}`
+      const params = new URLSearchParams()
+      if (offer) params.set("offer", offer)
+      if (utm) {
+        params.set("utm_source", utm.source)
+        params.set("utm_medium", utm.medium)
+        params.set("utm_campaign", utm.campaign)
+      }
+      const qs = params.toString()
+      const path = qs ? `/?${qs}#${sectionId}` : `/#${sectionId}`
 
       if (pathname === "/") {
         window.history.replaceState(null, "", path)

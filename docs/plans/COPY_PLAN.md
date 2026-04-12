@@ -1,45 +1,45 @@
-# COPY_PLAN.md — Pressure Washing Xperts CRO Implementation
+# COPY_PLAN.md - Pressure Washing Xperts CRO Implementation
 
 Step-by-step file-by-file instructions. Execute in the order listed.
 No new npm dependencies required.
 
 ---
 
-## STEP 1 — Fix: Remove Invisible Content Bug
+## STEP 1 - Fix: Remove Invisible Content Bug
 
 ### Files: `components/Services.tsx` and `components/TrustBadges.tsx`
 
 Both files have cards/items that use `style={{ opacity: 0 }}` inline combined with CSS animation classes. Because `opacity: 0` is set as an inline style (highest CSS specificity), elements that have already animated or are reduced-motion will remain invisible to the user permanently.
 
-**In `components/Services.tsx`** — find and remove `style={{ opacity: 0 }}` from the primary service card `<div>`:
+**In `components/Services.tsx`** - find and remove `style={{ opacity: 0 }}` from the primary service card `<div>`:
 
 ```tsx
 // BEFORE (line ~83):
 className={`group relative rounded-xl overflow-hidden transition-all duration-300 cursor-pointer animate-fade-in-up stagger-${index + 1}`}
 style={{ opacity: 0 }}
 
-// AFTER — remove style prop entirely:
+// AFTER - remove style prop entirely:
 className={`group relative rounded-xl overflow-hidden transition-all duration-300 cursor-pointer animate-fade-in-up stagger-${index + 1}`}
 ```
 
-**In `components/TrustBadges.tsx`** — find and remove `style={{ opacity: 0 }}` from the badge `<div>`:
+**In `components/TrustBadges.tsx`** - find and remove `style={{ opacity: 0 }}` from the badge `<div>`:
 
 ```tsx
 // BEFORE (line ~34):
 className={`flex flex-col items-center text-center animate-fade-in-up stagger-${index + 1}`}
 style={{ opacity: 0 }}
 
-// AFTER — remove style prop entirely:
+// AFTER - remove style prop entirely:
 className={`flex flex-col items-center text-center animate-fade-in-up stagger-${index + 1}`}
 ```
 
 ---
 
-## STEP 2 — Fix: Broken Tailwind Color Tokens in Service Areas Page
+## STEP 2 - Fix: Broken Tailwind Color Tokens in Service Areas Page
 
 ### File: `app/globals.css`
 
-The file `app/service-areas/page.tsx` uses Tailwind classes `bg-navy`, `text-navy`, `hover:text-navy`, `bg-brand`, `text-brand`, `hover:text-brand`, `bg-brand-light`, `border-brand`, `navy-light` — none of which exist in the current `@theme` block and silently produce no CSS output in Tailwind v4.
+The file `app/service-areas/page.tsx` uses Tailwind classes `bg-navy`, `text-navy`, `hover:text-navy`, `bg-brand`, `text-brand`, `hover:text-brand`, `bg-brand-light`, `border-brand`, `navy-light` - none of which exist in the current `@theme` block and silently produce no CSS output in Tailwind v4.
 
 Add the following tokens inside the `@theme inline { ... }` block in `app/globals.css`, immediately after the existing brand color entries:
 
@@ -58,7 +58,7 @@ Place these inside the existing `@theme inline { }` block right after line:
 
 ---
 
-## STEP 3 — Add Secondary "Get a Free Quote" CTA to Hero
+## STEP 3 - Add Secondary "Get a Free Quote" CTA to Hero
 
 ### File: `components/Hero.tsx`
 
@@ -98,7 +98,7 @@ Find the CTA button row (currently lines ~126–134). Add a second button **with
 
 ---
 
-## STEP 4 — Deploy `TrustBadges` Component (Currently Unused)
+## STEP 4 - Deploy `TrustBadges` Component (Currently Unused)
 
 ### File: `app/page.tsx`
 
@@ -121,7 +121,7 @@ import { TrustBadges } from "@/components/TrustBadges"
 
 ---
 
-## STEP 5 — Create `StatsBar` Component
+## STEP 5 - Create `StatsBar` Component
 
 ### New file: `components/StatsBar.tsx`
 
@@ -158,7 +158,7 @@ export function StatsBar() {
 
 ---
 
-## STEP 6 — Reorder Homepage Sections for CRO
+## STEP 6 - Reorder Homepage Sections for CRO
 
 ### File: `app/page.tsx`
 
@@ -193,7 +193,7 @@ The only change is ordering + two new insertions (`TrustBadges` from Step 4, `St
 
 ---
 
-## STEP 7 — Replace Placeholder Testimonials with Real Reviews
+## STEP 7 - Replace Placeholder Testimonials with Real Reviews
 
 ### File: `components/Testimonials.tsx`
 
@@ -317,7 +317,7 @@ Apply this to **both** the desktop card author block and the mobile card author 
 
 ---
 
-## STEP 8 — Replace Placeholder FAQ Answers
+## STEP 8 - Replace Placeholder FAQ Answers
 
 ### File: `components/FAQ.tsx`
 
@@ -338,17 +338,17 @@ const faqs = [
   {
     question: "Is pressure washing safe for my property?",
     answer:
-      "Yes. Our technicians are trained to dial in the right PSI for each surface. For roofs, painted siding, and stucco we switch to soft washing — a low-pressure method using biodegradable solutions that kills mold and mildew at the root without blasting the surface.",
+      "Yes. Our technicians are trained to dial in the right PSI for each surface. For roofs, painted siding, and stucco we switch to soft washing - a low-pressure method using biodegradable solutions that kills mold and mildew at the root without blasting the surface.",
   },
   {
     question: "How often should I have my property pressure washed?",
     answer:
-      "Most homes benefit from an annual cleaning. Properties near tree cover, in high-humidity areas, or with heavy foot traffic — like commercial storefronts and parking lots — may need service every 6 months. We can recommend a maintenance schedule during your free estimate.",
+      "Most homes benefit from an annual cleaning. Properties near tree cover, in high-humidity areas, or with heavy foot traffic - like commercial storefronts and parking lots - may need service every 6 months. We can recommend a maintenance schedule during your free estimate.",
   },
   {
     question: "Do I need to be home during the service?",
     answer:
-      "Not necessarily. We just need access to an outdoor water spigot and the areas being cleaned. That said, we always recommend a quick walkthrough before we start so we can note any specific concerns — cracked concrete, sensitive plants, parked vehicles, etc.",
+      "Not necessarily. We just need access to an outdoor water spigot and the areas being cleaned. That said, we always recommend a quick walkthrough before we start so we can note any specific concerns - cracked concrete, sensitive plants, parked vehicles, etc.",
   },
   {
     question: "What is soft washing and when do you use it?",
@@ -363,7 +363,7 @@ const faqs = [
   {
     question: "How do I prepare for my pressure washing appointment?",
     answer:
-      "Move any patio furniture, potted plants, and vehicles away from the work area. Close all windows and doors. We'll handle the rest — setup, cleaning, rinse-down, and cleanup — and leave your property looking fresh.",
+      "Move any patio furniture, potted plants, and vehicles away from the work area. Close all windows and doors. We'll handle the rest - setup, cleaning, rinse-down, and cleanup - and leave your property looking fresh.",
   },
 ]
 ```

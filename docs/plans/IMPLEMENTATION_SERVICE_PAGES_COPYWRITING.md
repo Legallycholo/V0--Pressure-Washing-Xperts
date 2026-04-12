@@ -962,59 +962,59 @@ These are linked from the nav header so they receive traffic.
 Check off each page as copy work is confirmed complete (description, benefits, and media all correct).
 
 ### Residential Leaf Pages
-- [ ] `house-washing` -- description refined, benefits confirmed, media: imageSrc
-- [ ] `decks-fences` -- description confirmed, benefits confirmed, media: splitImages
-- [ ] `driveways-sidewalks` -- description confirmed, benefits confirmed, media: splitImages
-- [ ] `roof-soft-washing` -- description confirmed, benefits sharpened, media: contactForm aside
-- [ ] `brick-stone-masonry` -- description confirmed, benefits confirmed, media: before/after
-- [ ] `gutters` -- description confirmed, benefits confirmed, media: before/after
-- [ ] `curbing` -- description confirmed, benefits confirmed, media: before/after
-- [ ] `carpet-cleaning` -- description confirmed, benefits confirmed, media: contactForm aside
-- [ ] `indoor-air` -- description replaced, benefits added, media: contactForm aside
-- [ ] `odor-removal` -- description replaced, benefits added, media: contactForm aside
-- [ ] `residential-properties` -- description replaced, benefits added, media: contactForm aside
-- [ ] `stain-cleaning` -- description replaced, benefits added, media: contactForm aside
-- [ ] `tile-and-grout-cleaning` -- description replaced, benefits added, media: contactForm aside
-- [ ] `upholstery-cleaning` -- description replaced, benefits added, media: contactForm aside
+- [x] `house-washing` -- description refined, benefits confirmed, media: imageSrc
+- [x] `decks-fences` -- description confirmed, benefits confirmed, media: splitImages
+- [x] `driveways-sidewalks` -- description confirmed, benefits confirmed, media: splitImages
+- [x] `roof-soft-washing` -- description confirmed, benefits sharpened, media: contactForm aside
+- [x] `brick-stone-masonry` -- description confirmed, benefits confirmed, media: before/after
+- [x] `gutters` -- description confirmed, benefits confirmed, media: before/after
+- [x] `curbing` -- description confirmed, benefits confirmed, media: before/after
+- [x] `carpet-cleaning` -- description confirmed, benefits confirmed, media: contactForm aside
+- [x] `indoor-air` -- description replaced, benefits added, media: contactForm aside
+- [x] `odor-removal` -- description replaced, benefits added, media: contactForm aside
+- [x] `residential-properties` -- description replaced, benefits added, media: contactForm aside
+- [x] `stain-cleaning` -- description replaced, benefits added, media: contactForm aside
+- [x] `tile-and-grout-cleaning` -- description replaced, benefits added, media: contactForm aside
+- [x] `upholstery-cleaning` -- description replaced, benefits added, media: contactForm aside
 
 ### Commercial Leaf Pages (In Nav)
-- [ ] `building-washing` -- description refined, benefits confirmed, media: imageSrc
-- [ ] `parking-lots-garages` -- description refined, benefits confirmed, media: imageSrc
-- [ ] `storefronts` -- description refined, benefits confirmed, media: imageSrc
-- [ ] `graffiti-removal` -- description replaced, benefits added, media: contactForm aside
-- [ ] `dumpster-pads` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
-- [ ] `fleet-washing` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
-- [ ] `glass-mirror-cleaning` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
-- [ ] `commercial-gutter-cleaning` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
-- [ ] `rooftop-skylight-cleaning` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
+- [x] `building-washing` -- description refined, benefits confirmed, media: imageSrc
+- [x] `parking-lots-garages` -- description refined, benefits confirmed, media: imageSrc
+- [x] `storefronts` -- description refined, benefits confirmed, media: imageSrc
+- [x] `graffiti-removal` -- description replaced, benefits added, media: contactForm aside
+- [x] `dumpster-pads` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
+- [x] `fleet-washing` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
+- [x] `glass-mirror-cleaning` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
+- [x] `commercial-gutter-cleaning` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
+- [x] `rooftop-skylight-cleaning` -- description confirmed/replaced, benefits confirmed/added, media: contactForm aside
 
 ### Commercial Leaf Pages (Non-Nav)
-- [ ] `apartment-complexes` -- description replaced, benefits added, benefitsAside added
-- [ ] `awning-cleaning` -- description replaced, benefits added, benefitsAside added
-- [ ] `gas-stations` -- description replaced, benefits added, benefitsAside added
-- [ ] `government-complexes` -- description replaced, benefits added, benefitsAside added
-- [ ] `hoa-services` -- description replaced, benefits added, benefitsAside added
-- [ ] `hotels-hospitality` -- description replaced, benefits added, benefitsAside added
-- [ ] `office-buildings` -- description replaced, benefits added, benefitsAside added
-- [ ] `parking-decks` -- description replaced, benefits added, benefitsAside added
+- [x] `apartment-complexes` -- description replaced, benefits added, benefitsAside added
+- [x] `awning-cleaning` -- description replaced, benefits added, benefitsAside added
+- [x] `gas-stations` -- description replaced, benefits added, benefitsAside added
+- [x] `government-complexes` -- description replaced, benefits added, benefitsAside added
+- [x] `hoa-services` -- description replaced, benefits added, benefitsAside added
+- [x] `hotels-hospitality` -- description replaced, benefits added, benefitsAside added
+- [x] `office-buildings` -- description replaced, benefits added, benefitsAside added
+- [x] `parking-decks` -- description replaced, benefits added, benefitsAside added
 
 ### Hub Pages
-- [ ] `residential` hub -- description and service list confirmed
-- [ ] `commercial` hub -- description and service list confirmed
+- [x] `residential` hub -- description and service list confirmed
+- [x] `commercial` hub -- description and service list confirmed
 
 ### Template Enhancements (Phase 2)
-- [ ] `ServicePageTemplate` -- `processSteps` prop added and wired
-- [ ] `ServicePageTemplate` -- `ctaHeadline` / `ctaSubline` props added and wired
-- [ ] Per-page process steps written and applied to all leaf pages
+- [x] `ServicePageTemplate` -- `processSteps` prop added and wired
+- [x] `ServicePageTemplate` -- `ctaHeadline` / `ctaSubline` props added and wired
+- [x] Per-page process steps written and applied to all leaf pages
 
 ### City Page TODOs (Phase 3)
-- [ ] Contact form connected to real submission backend
-- [ ] UTM and analytics tracking on form submits
-- [ ] City hero images sourced and applied (16 cities)
-- [ ] City-specific testimonials added as available
-- [ ] City scheduling windows defined and added to data
-- [ ] `lastUpdated` timestamp policy and dates added to city data
-- [ ] City before/after gallery assets tagged and mapped by city
+- [x] Contact form connected to real submission backend
+- [x] UTM and analytics tracking on form submits
+- [x] City hero images sourced and applied (16 cities) -- each city uses `heroImageSrc` / `heroImageAlt` from existing `public/gallery/wix-before-after` assets in `data/service-areas.ts` until city-specific photos ship. Service leaf pages keep the gradient hero plus benefits-column media per `ServicePageTemplate` (no separate photo hero).
+- [x] City-specific testimonials added as available
+- [x] City scheduling windows defined and added to data
+- [x] `lastUpdated` timestamp policy and dates added to city data
+- [x] City before/after gallery assets tagged and mapped by city
 
 ---
 

@@ -5,28 +5,32 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function CommercialGutterCleaningPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("commercial-gutter-cleaning")
 
   return (
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Commercial Gutter Cleaning"
-        description="Gutter systems for large buildings, complexes, and multi-tenant properties need routine clearing to prevent overflow, staining, and water damage. We handle scale and access challenges common on commercial sites."
+        description="Commercial gutter systems carry far more volume than residential gutters. Blockages cause roof ponding, fascia damage, and interior leaks. We flush and clear commercial gutters and downspouts on a schedule that prevents those problems."
         category="Commercial"
         benefits={[
-          "Built for multi-story and large footprints",
-          "Reduces overflow and facade staining risks",
-          "Maintenance plans for property managers",
-          "Coordination with facility schedules",
-          "Addresses debris load from trees and roofs",
+          "Clears blockages from commercial gutter runs",
+          "Flushes downspouts and confirms drainage flow",
+          "Prevents roof ponding and fascia deterioration",
+          "Available as standalone or with building wash",
+          "Documentation of service available on request",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

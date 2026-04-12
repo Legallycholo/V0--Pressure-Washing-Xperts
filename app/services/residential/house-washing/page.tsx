@@ -5,18 +5,20 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialHouseWashingMedia } from "@/data/residential-service-media"
 
 export default function HouseWashingPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("house-washing")
 
   return (
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="House Washing Services"
-        description="Professional exterior house washing to restore your home's beauty. We use soft washing techniques to safely remove dirt, mold, mildew, and stains without damaging your siding or paint."
+        description="Soft washing for vinyl, hardboard, brick, and painted siding. Safe pressure settings remove mold, mildew, and weathering without damaging your exterior."
         category="Residential"
         benefits={[
           "Soft washing for delicate surfaces",
@@ -28,6 +30,8 @@ export default function HouseWashingPage() {
         ]}
         onOpenQuoteForm={() => goQuote()}
         {...residentialHouseWashingMedia}
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

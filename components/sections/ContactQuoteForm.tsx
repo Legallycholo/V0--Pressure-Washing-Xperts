@@ -1,6 +1,7 @@
 "use client"
 
 import { useId, useState } from "react"
+import { usePathname } from "next/navigation"
 import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,6 +20,8 @@ import type { OfferId } from "@/data/offers"
 import { offers, OFFER_NONE } from "@/data/offers"
 import { modalCopyDefault } from "@/data/modalCopy"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
+import { submitLeadRequest } from "@/lib/submitLead"
+import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
 
 export type QuoteFormCopy = typeof modalCopyDefault
 
@@ -60,9 +63,11 @@ export function ContactQuoteForm({
 }: ContactQuoteFormProps) {
   const uid = useId()
   const fieldId = (name: string) => `${uid}-${name}`
+  const pathname = usePathname()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [formData, setFormData] = useState(() => ({
     ...emptyForm(),
     selectedOffer: initialOfferId ?? OFFER_NONE,
@@ -84,16 +89,47 @@ export function ContactQuoteForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError(null)
 
-    console.info("Form submitted", {
+    const sp =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search)
+        : new URLSearchParams()
+    const utmSource = sp.get("utm_source") ?? undefined
+    const utmMedium = sp.get("utm_medium") ?? undefined
+    const utmCampaign = sp.get("utm_campaign") ?? undefined
+
+    const result = await submitLeadRequest({
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      city: formData.city,
+      state: formData.state,
+      zip: formData.zip,
+      message: formData.message,
+      howHeard: formData.howHeard,
+      selectedOffer: formData.selectedOffer,
       submissionType: copy.badge,
-      openedWithOfferIntent,
-      ...formData,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      pagePath: pathname ?? undefined,
     })
 
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
     setIsSubmitting(false)
+
+    if (!result.ok) {
+      setSubmitError(result.error)
+      return
+    }
+
+    trackLeadFormSubmit({
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      pagePath: pathname ?? undefined,
+    })
+
     setIsSubmitted(true)
 
     window.setTimeout(() => {
@@ -421,6 +457,17 @@ export function ContactQuoteForm({
         </div>
 
         <div className={cn("space-y-3", isInline && "lg:col-span-2")}>
+          {submitError ? (
+            <p
+              className={cn(
+                "rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm",
+                isInline ? "text-red-100" : "text-red-800"
+              )}
+              role="alert"
+            >
+              {submitError}
+            </p>
+          ) : null}
           <Button
             type="submit"
             disabled={isSubmitting}

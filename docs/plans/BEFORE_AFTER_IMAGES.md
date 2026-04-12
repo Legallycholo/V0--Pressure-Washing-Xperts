@@ -1,4 +1,4 @@
-# Before / After gallery — implementation reference
+# Before / After gallery - implementation reference
 
 ## 1. Context (from codebase)
 
@@ -43,7 +43,7 @@ flowchart LR
 2. **`object-cover`** on both layers; tune alignment with **`beforeObjectPosition` / `afterObjectPosition`**.
 3. **Letterboxing**: If needed later, use **`object-contain`** on **both** layers for specific pairs.
 4. **`sizes`**: Passed through for responsive `next/image` selection.
-5. **Resize**: Both layers are `absolute inset-0` in one `relative` box—layout stays locked.
+5. **Resize**: Both layers are `absolute inset-0` in one `relative` box-layout stays locked.
 
 ---
 

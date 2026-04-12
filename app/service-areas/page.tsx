@@ -30,7 +30,7 @@ export default function ServiceAreasPage() {
             Our Service Areas
           </h1>
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed mb-10">
-            Pressure Washing Xperts proudly serves homes and businesses across Metro Atlanta and surrounding communities.
+            Homes and businesses across Metro Atlanta and the nearby towns we list below. Pick your city or send a quote and we will confirm the route.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
@@ -57,7 +57,7 @@ export default function ServiceAreasPage() {
               Communities We Serve
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto text-lg">
-              We bring professional pressure washing equipment and expertise directly to your doorstep. If you don't see your city listed, give us a call!
+              We roll up with the right gear for your surfaces. Do not see your town? Call and we will tell you if the next route covers you.
             </p>
           </div>
 
@@ -87,10 +87,10 @@ export default function ServiceAreasPage() {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
-            Ready to Schedule Your Service?
+            Want a number for your property?
           </h2>
           <p className="text-xl mb-10 opacity-90 font-medium">
-            Contact us today for a free, no-obligation estimate on our exterior cleaning services.
+            Free quote, clear scope, no pressure to book on the spot.
           </p>
           <button 
             onClick={() => goQuote()}

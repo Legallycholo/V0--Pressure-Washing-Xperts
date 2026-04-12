@@ -1,4 +1,4 @@
-# CODE_REMOVAL — Structure & UI prototype
+# CODE_REMOVAL - Structure & UI prototype
 
 This document records what was identified for removal to keep a **structure-and-UI-only** Next.js prototype: no database, no API layer, and no unused component library surface area.
 
@@ -32,14 +32,14 @@ Audit performed:
 
 | Target | Action |
 |--------|--------|
-| [`app/layout.tsx`](app/layout.tsx) — `@vercel/analytics` | **Removed** (production-only analytics script). |
-| [`package.json`](package.json) — `@vercel/analytics` | **Removed** dependency. |
+| [`app/layout.tsx`](app/layout.tsx) - `@vercel/analytics` | **Removed** (production-only analytics script). |
+| [`package.json`](package.json) - `@vercel/analytics` | **Removed** dependency. |
 
 ---
 
 ## 3. Redundant logic
 
-### 3.1 Deleted — `components/ui/` (unused shadcn-style primitives)
+### 3.1 Deleted - `components/ui/` (unused shadcn-style primitives)
 
 These files were not imported from `app/` or feature components under `components/` (only from other removed UI files):
 
@@ -93,7 +93,7 @@ These files were not imported from `app/` or feature components under `component
 - `use-mobile.tsx`
 - `use-toast.ts`
 
-### 3.2 Kept — `components/ui/` (required by live pages)
+### 3.2 Kept - `components/ui/` (required by live pages)
 
 - `accordion.tsx`
 - `button.tsx`
@@ -103,7 +103,7 @@ These files were not imported from `app/` or feature components under `component
 - `select.tsx`
 - `textarea.tsx`
 
-### 3.3 Deleted — hooks and theme wrapper
+### 3.3 Deleted - hooks and theme wrapper
 
 | File | Reason |
 |------|--------|
@@ -114,7 +114,7 @@ These files were not imported from `app/` or feature components under `component
 
 ### 3.4 Intentionally not treated as “redundant”
 
-- Duplicate US state lists and separate hero vs. modal form implementations in [`components/Hero.tsx`](components/Hero.tsx) and [`components/ContactQuoteForm.tsx`](components/ContactQuoteForm.tsx) — **UI/copy structure**; left as-is (consolidation is a separate refactor).
+- Duplicate US state lists and separate hero vs. modal form implementations in [`components/Hero.tsx`](components/Hero.tsx) and [`components/ContactQuoteForm.tsx`](components/ContactQuoteForm.tsx) - **UI/copy structure**; left as-is (consolidation is a separate refactor).
 - Forms already use mock submit (`console.info` / delay); no backend POST.
 
 ### 3.5 `package.json` dependency removals
@@ -137,9 +137,9 @@ Removed npm packages that only supported deleted UI or analytics (exact set appl
 
 For future edits, use explicit **Authorized** per section before bulk deletes:
 
-- [x] **Database** — N/A; no action.
-- [x] **API / Backend** — Analytics removal (if desired).
-- [x] **Redundant logic** — Unused UI, hooks, theme wrapper, then `npm install` / `npm run build`.
+- [x] **Database** - N/A; no action.
+- [x] **API / Backend** - Analytics removal (if desired).
+- [x] **Redundant logic** - Unused UI, hooks, theme wrapper, then `npm install` / `npm run build`.
 
 ---
 

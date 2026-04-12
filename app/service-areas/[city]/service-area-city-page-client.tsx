@@ -11,13 +11,26 @@ interface ServiceAreaCityPageClientProps {
   city: ServiceAreaPageContent
 }
 
+const CITY_HEADER_UTM_SLUGS = new Set(["alpharetta", "marietta", "roswell"])
+
 export function ServiceAreaCityPageClient({ city }: ServiceAreaCityPageClientProps) {
   const goQuote = useGoToHomeQuoteSection()
 
+  const cityPageUtm = {
+    source: "city-page" as const,
+    medium: "organic" as const,
+    campaign: city.slug,
+  }
+
+  const openQuoteWithCityUtm = () => goQuote({ utm: cityPageUtm })
+  const headerOpenQuote = CITY_HEADER_UTM_SLUGS.has(city.slug)
+    ? openQuoteWithCityUtm
+    : () => goQuote()
+
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
-      <ServiceAreaPageTemplate city={city} onOpenQuoteForm={() => goQuote()} />
+      <Header onOpenQuoteForm={headerOpenQuote} />
+      <ServiceAreaPageTemplate city={city} onOpenQuoteForm={openQuoteWithCityUtm} />
       <Footer />
       <FloatingCallButton />
     </>

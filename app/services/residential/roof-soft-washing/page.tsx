@@ -5,10 +5,12 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function RoofSoftWashingPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("roof-soft-washing")
 
   return (
     <>
@@ -18,15 +20,17 @@ export default function RoofSoftWashingPage() {
         description="Specialized soft washing for roofs to safely remove algae, moss, and black streaks. Our low-pressure method protects your shingles while delivering superior cleaning results."
         category="Residential"
         benefits={[
-          "Safe for all roof types",
-          "Removes algae and moss",
-          "Extends roof lifespan",
-          "Improves energy efficiency",
-          "Low-pressure cleaning method",
-          "Manufacturer-approved techniques"
+          "Low-pressure soft wash safe for asphalt shingles",
+          "Kills algae and moss at the root, not just the surface",
+          "Removes black streak staining (Gloeocapsa magma)",
+          "Extends shingle life by eliminating damaging organisms",
+          "Manufacturer-compatible cleaning methods",
+          "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

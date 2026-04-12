@@ -5,28 +5,32 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function OdorRemovalPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("odor-removal")
 
   return (
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Odor Removal"
-        description="Address stubborn household odors at the source, not just with fragrance. We evaluate soft surfaces and areas where smells linger and recommend a cleaning plan tailored to your home."
+        description="Some odors do not go away with surface cleaning. Pet accidents, smoke, mildew, and organic waste embed into flooring, fabric, and walls. We treat and eliminate odors at the source rather than masking them."
         category="Residential"
         benefits={[
-          "Targets odor sources, not only masking",
-          "Works on carpets, upholstery, and problem zones",
-          "Pet- and family-friendly approach",
-          "Honest expectations on what can be improved",
-          "Coordinated with deep cleaning where needed",
+          "Targets pet, smoke, mildew & organic odors",
+          "Treats source material, not just the surface",
+          "Safe for carpets, upholstery & hard surfaces",
+          "No heavy perfume masking agents",
+          "Residential and commercial applications",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

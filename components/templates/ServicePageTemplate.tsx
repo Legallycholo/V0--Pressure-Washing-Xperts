@@ -8,12 +8,20 @@ import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard
 import { ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
 
+export type ServiceProcessStep = { title: string; description: string }
+
 interface ServicePageTemplateProps {
   title: string
   description: string
   category: "Residential" | "Commercial"
   benefits?: string[]
   onOpenQuoteForm: () => void
+  /** When set, replaces the default four process cards. */
+  processSteps?: ServiceProcessStep[]
+  ctaHeadline?: string
+  ctaSubline?: string
+  /** Shown at the bottom of the page for content freshness. */
+  contentRevised?: string
   /** Single benefits-column image */
   imageSrc?: string
   imageAlt?: string
@@ -63,6 +71,10 @@ export function ServicePageTemplate({
   beforeImageClassName,
   afterImageClassName,
   benefitsAside,
+  processSteps,
+  ctaHeadline,
+  ctaSubline,
+  contentRevised,
 }: ServicePageTemplateProps) {
   const showContactFormAside = benefitsAside === "contactForm"
   const showBeforeAfter =
@@ -79,6 +91,21 @@ export function ServicePageTemplate({
     !showBeforeAfter &&
     !showSplit &&
     Boolean(imageSrc && imageAlt)
+
+  const processItems =
+    processSteps && processSteps.length > 0
+      ? processSteps.map((step, i) => ({
+          step: String(i + 1),
+          title: step.title,
+          desc: step.description,
+        }))
+      : [
+          { step: "1", title: "Contact Us", desc: "Reach out for a free quote" },
+          { step: "2", title: "Assessment", desc: "We evaluate your needs" },
+          { step: "3", title: "Service", desc: "Professional cleaning" },
+          { step: "4", title: "Satisfaction", desc: "Guaranteed results" },
+        ]
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
       {/* Hero Section */}
@@ -216,18 +243,13 @@ export function ServicePageTemplate({
               Our Process
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We follow a proven process to deliver exceptional results every time.
+              Four steps from your first message to the final walkthrough.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { step: "1", title: "Contact Us", desc: "Reach out for a free quote" },
-              { step: "2", title: "Assessment", desc: "We evaluate your needs" },
-              { step: "3", title: "Service", desc: "Professional cleaning" },
-              { step: "4", title: "Satisfaction", desc: "Guaranteed results" },
-            ].map((item) => (
-              <div key={item.step} className="text-center">
+            {processItems.map((item) => (
+              <div key={`${item.step}-${item.title}`} className="text-center">
                 <div className="mx-auto w-16 h-16 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-2xl font-bold mb-4">
                   {item.step}
                 </div>
@@ -245,10 +267,11 @@ export function ServicePageTemplate({
       <section className="py-16 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Transform Your Property?
+            {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
           </h2>
           <p className="text-lg text-white/80 mb-8">
-            Get your free quote today and experience the Pressure Washing Xperts difference.
+            {ctaSubline ??
+              "Straightforward quotes so you know what to expect before we start."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -272,6 +295,12 @@ export function ServicePageTemplate({
           </div>
         </div>
       </section>
+
+      {contentRevised ? (
+        <p className="text-center text-xs text-gray-500 py-6 px-4">
+          Content reviewed {contentRevised}
+        </p>
+      ) : null}
     </div>
   )
 }

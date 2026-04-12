@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import { Check, CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -17,12 +18,15 @@ import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
 import { modalCopyDefault } from "@/data/modalCopy"
+import { submitLeadRequest } from "@/lib/submitLead"
+import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
 
 interface HeroProps {
   onOpenQuoteForm: () => void
 }
 
 export function Hero({ onOpenQuoteForm }: HeroProps) {
+  const pathname = usePathname()
   const howHeardOptions = [
     { value: "search", label: "Search / Google" },
     { value: "referral", label: "Referral / Friends & Family" },
@@ -31,6 +35,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -52,14 +57,47 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError(null)
 
-    console.info("Hero quote form submitted", {
+    const sp =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search)
+        : new URLSearchParams()
+    const utmSource = sp.get("utm_source") ?? undefined
+    const utmMedium = sp.get("utm_medium") ?? undefined
+    const utmCampaign = sp.get("utm_campaign") ?? undefined
+
+    const result = await submitLeadRequest({
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      city: formData.city,
+      state: formData.state,
+      zip: formData.zip,
+      message: formData.message,
+      howHeard: formData.howHeard,
+      selectedOffer: "",
       submissionType: modalCopyDefault.badge,
-      ...formData,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      pagePath: pathname ?? undefined,
     })
 
-    await new Promise((resolve) => setTimeout(resolve, 1200))
     setIsSubmitting(false)
+
+    if (!result.ok) {
+      setSubmitError(result.error)
+      return
+    }
+
+    trackLeadFormSubmit({
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      pagePath: pathname ?? undefined,
+    })
+
     setIsSubmitted(true)
     setFormData({
       fullName: "",
@@ -346,6 +384,14 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                   </div>
 
                   <div className="space-y-3 lg:col-span-2">
+                    {submitError ? (
+                      <p
+                        className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+                        role="alert"
+                      >
+                        {submitError}
+                      </p>
+                    ) : null}
                     <Button
                       type="submit"
                       disabled={isSubmitting}

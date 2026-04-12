@@ -189,7 +189,7 @@ export function ExitIntentPopup() {
     }
   }, [openPopup])
 
-  // Timed auto-open: omit when reduced motion — user still gets scroll + exit-intent.
+  // Timed auto-open: omit when reduced motion - user still gets scroll + exit-intent.
   useEffect(() => {
     if (!mounted || reducedMotion) return
     const id = window.setTimeout(() => openPopup(), AUTO_OPEN_DELAY_MS)
@@ -443,7 +443,7 @@ export function ExitIntentPopup() {
   const reopenChip =
     showReopenChip &&
     !isOpen && (
-      <div className="pointer-events-none fixed bottom-24 left-4 right-4 z-[105] flex justify-center p-0 pb-[max(0px,env(safe-area-inset-bottom))] md:bottom-6 md:left-auto md:right-6 md:justify-end md:p-0">
+      <div className="pointer-events-none fixed bottom-24 left-4 right-4 z-[105] flex justify-start p-0 pb-[max(0px,env(safe-area-inset-bottom))] md:bottom-6 md:left-6 md:right-auto md:justify-start md:p-0">
         <button
           type="button"
           onClick={openFromChip}

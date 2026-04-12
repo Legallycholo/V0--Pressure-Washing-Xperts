@@ -5,28 +5,32 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function IndoorAirPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("indoor-air")
 
   return (
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Indoor Air Quality"
-        description="Support a healthier home environment by reducing dust, dander, and allergens that circulate through your living space. We focus on cleaning approaches that complement good ventilation and HVAC care."
+        description="Indoor air quality affects your family's health every day. We remove dust, allergens, and contaminants from air vents, ductwork, and surfaces so your HVAC circulates clean air instead of recycling buildup."
         category="Residential"
         benefits={[
-          "Targets dust and allergen reservoirs in the home",
-          "Complements regular HVAC filter maintenance",
-          "Ideal for allergy-sensitive households",
-          "Whole-home assessment mindset",
-          "Clear explanation of what we clean and why",
+          "Cleans air vents, returns & ductwork surfaces",
+          "Reduces airborne allergens and dust circulation",
+          "Improves HVAC efficiency after cleaning",
+          "Safe for residential HVAC systems",
+          "Helps households with allergies or respiratory conditions",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

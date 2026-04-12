@@ -9,7 +9,7 @@ Implementation specification for residential service page imagery, template wiri
 1. Add real photos to **Residential** leaf service pages by replacing the **“Service Image Placeholder”** block in [`components/templates/ServicePageTemplate.tsx`](../../components/templates/ServicePageTemplate.tsx) (benefits section, ~lines 96–101).
 2. Use the **11 images** supplied for this project; copy them into **`public/residential-services/`** with **stable, readable names** so `next/image` paths are clean and cacheable.
 3. **Remove Landscape Features** from the site: navbar, hub, generators, and **delete** [`app/services/residential/landscape-features/`](../../app/services/residential/landscape-features/).
-4. **Roof Soft Washing:** **no image work** in this milestone—leave the placeholder until a future pass.
+4. **Roof Soft Washing:** **no image work** in this milestone-leave the placeholder until a future pass.
 
 ---
 
@@ -19,17 +19,17 @@ Copy originals (see [Original filenames](#original-filenames-cursor-assets)) int
 
 | # | Public filename | Page / use |
 |---|-----------------|------------|
-| 1 | `house-washing-01.png` | House Washing — single benefits-column image |
-| 2 | `decks-fences-01.png` | Decks and Fences — split (first panel) |
-| 3 | `decks-fences-02.png` | Decks and Fences — split (second panel) |
-| 4 | `driveways-sidewalks-01.png` | Driveways and Sidewalks — split |
-| 5 | `driveways-sidewalks-02.png` | Driveways and Sidewalks — split |
-| 6 | `masonry-before.png` | Brick, Stone & Masonry — before |
-| 7 | `masonry-after.png` | Brick, Stone & Masonry — after |
-| 8 | `gutters-before.png` | Gutter Cleaning — before |
-| 9 | `gutters-after.png` | Gutter Cleaning — after |
-| 10 | `curbing-before.png` | Curbing Cleaning — before |
-| 11 | `curbing-after.png` | Curbing Cleaning — after |
+| 1 | `house-washing-01.png` | House Washing - single benefits-column image |
+| 2 | `decks-fences-01.png` | Decks and Fences - split (first panel) |
+| 3 | `decks-fences-02.png` | Decks and Fences - split (second panel) |
+| 4 | `driveways-sidewalks-01.png` | Driveways and Sidewalks - split |
+| 5 | `driveways-sidewalks-02.png` | Driveways and Sidewalks - split |
+| 6 | `masonry-before.png` | Brick, Stone & Masonry - before |
+| 7 | `masonry-after.png` | Brick, Stone & Masonry - after |
+| 8 | `gutters-before.png` | Gutter Cleaning - before |
+| 9 | `gutters-after.png` | Gutter Cleaning - after |
+| 10 | `curbing-before.png` | Curbing Cleaning - before |
+| 11 | `curbing-after.png` | Curbing Cleaning - after |
 
 **Note:** One curbing asset may need **EXIF/CSS rotation** after visual QA (sideways source photo). Fix during implementation if the crop looks wrong.
 
@@ -56,9 +56,9 @@ If files were saved by Cursor under the workspace `assets/` folder (or `.cursor/
 | Route | Images | UI approach |
 |-------|--------|-------------|
 | `/services/residential/house-washing` | **1** | Single `next/image` (replace placeholder). |
-| `/services/residential/decks-fences` | **2 + 3** | Two-image split: **2-column grid** on `md+`, stack on mobile; or [`BeforeAfterSlider`](../../components/sections/BeforeAfterSlider.tsx) if the pair reads as before/after—choose in implementation from visual fit. |
+| `/services/residential/decks-fences` | **2 + 3** | Two-image split: **2-column grid** on `md+`, stack on mobile; or [`BeforeAfterSlider`](../../components/sections/BeforeAfterSlider.tsx) if the pair reads as before/after-choose in implementation from visual fit. |
 | `/services/residential/driveways-sidewalks` | **4 + 5** | Same as decks: **split** (grid or slider). |
-| `/services/residential/roof-soft-washing` | — | **Skip** — keep placeholder. |
+| `/services/residential/roof-soft-washing` | - | **Skip** - keep placeholder. |
 | `/services/residential/brick-stone-masonry` | **6 + 7** | **BeforeAfterSlider** with clear alt text. |
 | `/services/residential/gutters` | **8 + 9** | **BeforeAfterSlider**. |
 | `/services/residential/curbing` | **10 + 11** | **BeforeAfterSlider** or two-column split; prefer slider when it reads as before/after. |

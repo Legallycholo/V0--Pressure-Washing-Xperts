@@ -12,6 +12,7 @@ interface ServiceCategoryHubTemplateProps {
   description: string
   services: NavLinkItem[]
   onOpenQuoteForm: () => void
+  contentRevised?: string
 }
 
 export function ServiceCategoryHubTemplate({
@@ -20,6 +21,7 @@ export function ServiceCategoryHubTemplate({
   description,
   services,
   onOpenQuoteForm,
+  contentRevised,
 }: ServiceCategoryHubTemplateProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
@@ -60,7 +62,7 @@ export function ServiceCategoryHubTemplate({
             <p className="text-brand-blue text-xs font-semibold uppercase tracking-[0.2em]">What We Clean</p>
             <h2 className="mt-3 text-3xl font-bold text-brand-blue-dark sm:text-4xl">Our {categoryLabel}</h2>
             <p className="mt-3 text-gray-600 max-w-3xl mx-auto">
-              Select a service below to view the dedicated service page. This structure is intentionally simple so it can scale as content is added.
+              Open any service for scope, benefits, how we work, and the fastest way to get a quote.
             </p>
           </div>
 
@@ -73,7 +75,8 @@ export function ServiceCategoryHubTemplate({
               >
                 <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
                 <p className="text-sm text-gray-600 mb-3">
-                  Structured service placeholder page for upcoming content, FAQs, gallery samples, and pricing context.
+                  {service.summary ??
+                    "See how we approach this service, typical surfaces, and how to request a quote."}
                 </p>
                 <span className="inline-flex items-center text-brand-blue font-semibold text-sm">
                   Learn More
@@ -96,6 +99,12 @@ export function ServiceCategoryHubTemplate({
           </div>
         </div>
       </section>
+
+      {contentRevised ? (
+        <p className="text-center text-xs text-gray-500 py-8 px-4">
+          Content reviewed {contentRevised}
+        </p>
+      ) : null}
     </div>
   )
 }

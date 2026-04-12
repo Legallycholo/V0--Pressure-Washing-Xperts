@@ -5,28 +5,32 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function GlassMirrorCleaningPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("glass-mirror-cleaning")
 
   return (
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Glass & Mirror Cleaning"
-        description="Crystal-clear glass and mirrors for offices, storefronts, and lobbies where first impressions matter. We remove fingerprints, film, and environmental buildup on interior and exterior-facing glass."
+        description="Glass building facades, lobby mirrors, and storefront windows require streak-free cleaning with the right squeegee technique and products. We handle commercial glass and mirror cleaning from ground level to multi-story applications."
         category="Commercial"
         benefits={[
-          "Storefront and entry glass that invites customers in",
-          "Interior partitions, doors, and mirrored surfaces",
-          "Streak-aware methods for professional results",
-          "Flexible scheduling around business hours",
-          "Scales from single suites to multi-story facades",
+          "Streak-free results on commercial glass",
+          "Handles single-story to multi-story applications",
+          "Safe for tempered, laminated & treated glass",
+          "Removes mineral deposits, bird droppings & film buildup",
+          "Lobby mirrors and interior glass included",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

@@ -390,7 +390,7 @@ export const galleryItems: GalleryItem[] = [
     afterAlt:
       "Rear patio with clean white siding, windows, and door: same home after washing.",
   },
-  // Wix gallery import — visually matched before/after pairs
+  // Wix gallery import - visually matched before/after pairs
   {
     id: 23,
     category: "before-after",

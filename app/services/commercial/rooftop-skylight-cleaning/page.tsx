@@ -5,28 +5,32 @@ import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function RooftopSkylightCleaningPage() {
   const goQuote = useGoToHomeQuoteSection()
+  const leaf = getServiceLeafCopy("rooftop-skylight-cleaning")
 
   return (
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Rooftop & Skylight Cleaning"
-        description="Maximize natural light and maintain a polished building envelope with cleaning for commercial rooftops, skylights, and related glass. Focused on safety, access, and results appropriate for flat roofs and elevated glazing."
+        description="Rooftop HVAC equipment pads, mechanical areas, and skylights collect debris, bird droppings, and algae that reduce light transmission and create maintenance headaches. We clean these areas safely without damaging mechanical components."
         category="Commercial"
         benefits={[
-          "Skylights and rooftop glazing that stay clear longer",
-          "Suited to offices, retail, and institutional buildings",
-          "Mindful of weathering, seals, and access constraints",
-          "Improves daylighting and interior appearance",
-          "Commercial-scale scheduling and documentation",
+          "Safe cleaning around rooftop HVAC units and curbs",
+          "Restores skylight and glazing light transmission",
+          "Removes bird droppings, algae & debris buildup",
+          "Low-pressure method for fragile skylight frames",
+          "Coordination with facility maintenance teams",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
+        {...leaf}
+        contentRevised="April 2026"
       />
       <Footer />
       <FloatingCallButton />

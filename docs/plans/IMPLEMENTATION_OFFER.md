@@ -3,10 +3,10 @@
 ## Scope Guardrails
 
 - Change only these files:
-  - `data/offers.ts` — offer card terms/fine print copy
-  - `components/sections/Offers.tsx` — section-level disclaimer line only if needed for consistency
-  - `components/layout/ExitIntentPopup.tsx` — new self-contained popup component (created fresh)
-  - `components/providers/AppProviders.tsx` — single import/render of `ExitIntentPopup`
+  - `data/offers.ts` - offer card terms/fine print copy
+  - `components/sections/Offers.tsx` - section-level disclaimer line only if needed for consistency
+  - `components/layout/ExitIntentPopup.tsx` - new self-contained popup component (created fresh)
+  - `components/providers/AppProviders.tsx` - single import/render of `ExitIntentPopup`
 - Keep all existing layouts, card structures, and styles intact outside these targeted areas.
 - No third-party popup libraries.
 
@@ -15,8 +15,8 @@
 ## Change 1: Special Offers Pricing Accuracy
 
 ### Target files
-- `data/offers.ts` — update `standardTerms` and each card's `terms` string
-- `components/sections/Offers.tsx` — update the section footer disclaimer if dollar figure changes
+- `data/offers.ts` - update `standardTerms` and each card's `terms` string
+- `components/sections/Offers.tsx` - update the section footer disclaimer if dollar figure changes
 
 ### Actual service prices (source: pressurewashingxpert.com/services)
 
@@ -40,7 +40,7 @@ The `$250` minimum is not grounded in any listed service price. The cheapest lis
 
 ### Changes to make
 
-**`standardTerms`** — replace the stale `$250` minimum:
+**`standardTerms`** - replace the stale `$250` minimum:
 ```
 Cannot be combined with other offers. Minimum job total applies; ask us to confirm based on your service selection.
 ```
@@ -50,28 +50,28 @@ Or if a numeric minimum is preferred, anchor to the lowest real single-service t
 Cannot be combined with other offers. $230 minimum job total required for discount to apply.
 ```
 
-**Card 1 — `first-time` (15% OFF — New Customer Welcome)**
+**Card 1 - `first-time` (15% OFF - New Customer Welcome)**
 - Terms currently: `"New customers only, first completed job. ${standardTerms}"`
 - Updated terms should note example savings against real prices so customers can calibrate:
 ```
 New customers only, first completed job. Example: 15% off a $230 house wash saves you $34.50. Cannot be combined with other offers. Minimum job total applies.
 ```
 
-**Card 2 — `bundle` (20% OFF — Curb Appeal Bundle)**
+**Card 2 - `bundle` (20% OFF - Curb Appeal Bundle)**
 - Terms currently: `"At least two qualifying services on one scheduled visit. ${standardTerms}"`
 - Bundle example using real prices (house wash + driveway = $230 + $235 = $465):
 ```
 At least two qualifying services on one scheduled visit. Example: house wash + driveway ($230 + $235 = $465) at 20% off saves you $93. Cannot be combined with other offers. Minimum job total applies.
 ```
 
-**Card 3 — `seasonal` (10% OFF — Spring & Fall Refresh)**
+**Card 3 - `seasonal` (10% OFF - Spring & Fall Refresh)**
 - Terms currently: `"Valid for jobs scheduled in March–May or September–November. ${standardTerms}"`
 - Updated with real example:
 ```
 Valid for jobs scheduled in March–May or September–November. Example: 10% off a $230 house wash saves you $23. Cannot be combined with other offers. Minimum job total applies.
 ```
 
-**Card 4 — `referral` ($50 EACH — Refer a Neighbor)**
+**Card 4 - `referral` ($50 EACH - Refer a Neighbor)**
 - Terms currently: `"Referral must mention you and complete a paid service. Credits apply to your next qualifying job. ${standardTerms}"`
 - $50 credit is meaningful context against real prices:
 ```
@@ -93,7 +93,7 @@ Offers cannot be combined. Minimum job total applies before any discount. Referr
 `components/layout/ExitIntentPopup.tsx`
 
 ### Mount point (single line change)
-`components/providers/AppProviders.tsx` — import and render `<ExitIntentPopup />` alongside `{children}` inside `TooltipProvider`.
+`components/providers/AppProviders.tsx` - import and render `<ExitIntentPopup />` alongside `{children}` inside `TooltipProvider`.
 
 ---
 
@@ -143,13 +143,13 @@ useEffect(() => {
 
 ---
 
-### Animation classes (Tailwind inline styles — no new CSS files)
+### Animation classes (Tailwind inline styles - no new CSS files)
 
 | Element | Open | Close |
 |---|---|---|
 | Backdrop | `opacity-0 -> opacity-60`, `300ms` | reverse `300ms` |
 | Modal card | `translateY(-40px) + opacity-0 -> translateY(0) + opacity-100`, `400ms ease-out` | reverse `300ms` |
-| CTA button | `@keyframes pulse-cta` — scale 1 → 1.04 → 1 every 1.8s | N/A |
+| CTA button | `@keyframes pulse-cta` - scale 1 → 1.04 → 1 every 1.8s | N/A |
 
 Animations use inline `style` + `transition` / `animation` properties (same pattern as `BeforeAfterSlider.tsx`) to avoid requiring Tailwind config changes.
 
@@ -159,34 +159,34 @@ Animations use inline `style` + `transition` / `animation` properties (same patt
 
 ```
 [Portal → document.body]
-  [Backdrop — fixed inset-0 z-[110] bg-black/60]
-    [Modal — bg-#1a2744, rounded-xl, max-w-lg, shadow-2xl]
+  [Backdrop - fixed inset-0 z-[110] bg-black/60]
+    [Modal - bg-#1a2744, rounded-xl, max-w-lg, shadow-2xl]
 
       ── Section A: Scarcity Banner ──
-      "🔴 April Slots Filling Fast — Only 3 Spots Left This Month!"
+      "🔴 April Slots Filling Fast - Only 3 Spots Left This Month!"
       [10 slot blocks: 7 × red #e53e3e | 3 × green #38a169]
       "7 of 10 April spots claimed"
 
       ── Section B: Offer Block ──
-      [H2] "Wait — Don't Miss This April Special!"
+      [H2] "Wait - Don't Miss This April Special!"
       [Sub] "Spring is peak season. Lock in your rate before May pricing kicks in."
       [Gold text]
         🏠 House Wash + Driveway Bundle
         Regular: $230 + $235 = $465
         April Exclusive: $380 (you save $85)
-      [Countdown] "⏳ Expires in: 2d 14h 33m 12s" — updates every second
+      [Countdown] "⏳ Expires in: 2d 14h 33m 12s" - updates every second
 
       ── Section C: CTA ──
-      [Button — gold, full-width, pulsing]
-        "📞 Claim Your Spot — Call 1-800-451-7213"
+      [Button - gold, full-width, pulsing]
+        "📞 Claim Your Spot - Call 1-800-451-7213"
         href: tel:18004517213
-      [Fine print — muted gray, small]
+      [Fine print - muted gray, small]
         "Cannot be combined with other offers.
          Minimum job total applies. Call to confirm availability."
-      [Dismiss link — very small, low contrast gray]
+      [Dismiss link - very small, low contrast gray]
         "No thanks, I'll take my chances in May →"
 
-      [X button — top-right, small, low contrast, aria-label="Close offer"]
+      [X button - top-right, small, low contrast, aria-label="Close offer"]
 ```
 
 ---
@@ -300,7 +300,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
 ## Verification Checklist
 
 - [ ] Only these files are modified/created: `data/offers.ts`, `components/sections/Offers.tsx`, `components/layout/ExitIntentPopup.tsx`, `components/providers/AppProviders.tsx`
-- [ ] Offer cards render with same layout, discount labels, icons, and button styles — only `terms` text changed
+- [ ] Offer cards render with same layout, discount labels, icons, and button styles - only `terms` text changed
 - [ ] Section disclaimer matches updated terms language
 - [ ] Exit-intent popup fires on top-edge mouse leave only
 - [ ] 200ms delay before opening
