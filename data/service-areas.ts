@@ -51,71 +51,83 @@ export interface ServiceAreaPageContent {
   nearbyAreaSlugs: string[]
 }
 
-/** Existing gallery assets used as city hero backdrops until city-specific photos ship. */
+/**
+ * Service-area hero + “Trust the Xperts” image: clean exterior finals only.
+ *
+ * Policy: prefer `/gallery/gallery-*.png` residential or flatwork shots, then
+ * `/gallery/before-after/*-after.png`. Do not use `gallery-06` (mid-wash) or
+ * `gallery-09` (gutter debris) as heroes. Blocklist Wix `pair-05-after` (interior rug)
+ * and other non-exterior Wix files for this slot.
+ *
+ * Checklist (finish each row before changing the next slug): atlanta PNG · alpharetta PNG ·
+ * marietta PNG · roswell PNG · sandy-springs PNG · johns-creek PNG · duluth PNG · norcross PNG ·
+ * peachtree-corners after · suwanee after · cumming after · decatur after · smyrna after ·
+ * dunwoody after · brookhaven after · tucker after — all verified clean exterior finals.
+ */
 const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
   atlanta: {
-    src: "/gallery/wix-before-after/pair-01-after.jpg",
-    alt: "Metro Atlanta home exterior after soft washing, similar results in intown neighborhoods",
+    src: "/gallery/gallery-01.png",
+    alt: "Back of a home with white siding, windows, door, and concrete patio after exterior cleaning",
   },
   alpharetta: {
-    src: "/gallery/wix-before-after/pair-02-after.jpg",
-    alt: "North Fulton style home and siding after exterior cleaning",
+    src: "/gallery/gallery-03.png",
+    alt: "Elevated wood deck and railing on a residential building after washing",
   },
   marietta: {
-    src: "/gallery/wix-before-after/pair-03-after.jpg",
-    alt: "East Cobb area home with refreshed siding and trim after washing",
+    src: "/gallery/gallery-04.png",
+    alt: "Front of a split-level home with tan siding, brick, garage, and landscaping after washing",
   },
   roswell: {
-    src: "/gallery/wix-before-after/pair-04-after.jpg",
-    alt: "Roswell area residential exterior after mold and algae removal",
+    src: "/gallery/gallery-08.png",
+    alt: "Front of a two-story home with light siding, brick around the garage, and landscaping after cleaning",
   },
   "sandy-springs": {
-    src: "/gallery/wix-before-after/pair-05-after.jpg",
-    alt: "Sandy Springs home facade after soft wash",
+    src: "/gallery/gallery-05.png",
+    alt: "Long residential concrete driveway leading toward a garage after pressure washing",
   },
   "johns-creek": {
-    src: "/gallery/wix-before-after/pair-06-after.jpg",
-    alt: "Johns Creek residential exterior after cleaning",
+    src: "/gallery/gallery-07.png",
+    alt: "Backyard stone paver patio with a wooden pergola and outdoor seating after cleaning",
   },
   duluth: {
-    src: "/gallery/wix-before-after/pair-07-after.jpg",
-    alt: "Gwinnett County home exterior after pressure washing",
+    src: "/gallery/gallery-10.png",
+    alt: "Stone pavers by a foundation next to a brick house wall after exterior washing",
   },
   norcross: {
-    src: "/gallery/wix-before-after/pair-08-after.jpg",
-    alt: "Norcross area siding and trim after wash",
+    src: "/gallery/gallery-02.png",
+    alt: "Commercial building facade and parking area after exterior cleaning",
   },
   "peachtree-corners": {
-    src: "/gallery/wix-before-after/pair-09-after.jpg",
-    alt: "Peachtree Corners home after exterior cleaning",
+    src: "/gallery/before-after/01-after.png",
+    alt: "Clean white vinyl siding on a long side wall after house washing",
   },
   suwanee: {
-    src: "/gallery/wix-before-after/pair-10-after.jpg",
-    alt: "Suwanee residential exterior after wash",
+    src: "/gallery/before-after/02-after.png",
+    alt: "House siding with window and meter area after exterior cleaning",
   },
   cumming: {
-    src: "/gallery/wix-before-after/pair-11-after.jpg",
-    alt: "Forsyth County home exterior after cleaning",
+    src: "/gallery/before-after/03-after.png",
+    alt: "Concrete driveway and curb at the street after cleaning",
   },
   decatur: {
-    src: "/gallery/wix-before-after/pair-12-after.jpg",
-    alt: "DeKalb County home siding after soft washing",
+    src: "/gallery/before-after/04-after.png",
+    alt: "Residential driveway leading to a white garage door after cleaning",
   },
   smyrna: {
-    src: "/gallery/wix-before-after/overflow-01.jpg",
-    alt: "Cobb County residential concrete and siding after cleaning",
+    src: "/gallery/before-after/05-after.png",
+    alt: "Concrete patio beside a white brick home after cleaning",
   },
   dunwoody: {
-    src: "/gallery/wix-before-after/overflow-02.jpg",
-    alt: "Dunwoody area home exterior after wash",
+    src: "/gallery/before-after/06-after.png",
+    alt: "Square pavers beside a foundation after cleaning",
   },
   brookhaven: {
-    src: "/gallery/wix-before-after/overflow-03.jpg",
-    alt: "Brookhaven residential exterior after cleaning",
+    src: "/gallery/before-after/07-after.png",
+    alt: "Concrete driveway slabs toward the house after cleaning",
   },
   tucker: {
-    src: "/gallery/wix-before-after/overflow-04.jpg",
-    alt: "Tucker area home after exterior washing",
+    src: "/gallery/before-after/08-after.png",
+    alt: "Driveway with mulch beds and house in the background after cleaning",
   },
 }
 

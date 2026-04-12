@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Phone, CheckCircle2, ArrowRight, MapPin, Star } from "lucide-react"
+import { Phone, CheckCircle2, ArrowRight, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { ServiceAreaPageContent } from "@/data/service-areas"
 import { getCityGalleryComparisonItems } from "@/data/city-gallery"
@@ -106,11 +106,20 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
                   sizes="(max-width: 896px) 100vw, 50vw"
                 />
               ) : (
-                <div className="text-center px-6">
-                  <MapPin className="size-14 text-brand-blue-dark/50 mx-auto mb-4" />
-                  <p className="text-gray-600 text-sm max-w-xs mx-auto">
-                    Add a coverage map here when you have one. Until then we still walk the property and lock the scope on site.
+                <div className="text-center px-6 py-8 flex flex-col items-center gap-4 max-w-sm mx-auto">
+                  <p className="text-gray-700 text-base font-medium">
+                    See your neighborhood on the schedule — call for a quote.
                   </p>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+                  >
+                    <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
+                      <Phone className="size-5" />
+                      Call now
+                    </a>
+                  </Button>
                 </div>
               )}
             </div>
