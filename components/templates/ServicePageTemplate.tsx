@@ -225,10 +225,33 @@ export function ServicePageTemplate({
                 />
               </div>
             ) : (
-              <div className="relative h-96 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-lg flex items-center justify-center">
-                <div className="text-center px-6">
-                  <p className="text-gray-500 text-sm">Service Image Placeholder</p>
-                </div>
+              <div className="relative flex min-h-96 flex-col items-center justify-center rounded-lg border border-brand-blue/15 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 p-8 text-center shadow-sm">
+                <Phone className="size-12 text-brand-blue-dark mb-4" aria-hidden />
+                <h3 className="text-xl font-bold text-brand-blue-dark mb-2">
+                  See it in person—start with a call
+                </h3>
+                <p className="text-gray-600 mb-6 max-w-sm text-pretty">
+                  No photo here yet? Talk to our team about your property and get a straightforward quote.
+                </p>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+                >
+                  <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
+                    <Phone className="size-5" aria-hidden />
+                    Call Now
+                  </a>
+                </Button>
+                <p className="mt-4 text-sm font-medium text-brand-blue-dark">(800)-451-7213</p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="mt-4 border-brand-blue/30 text-brand-blue-dark hover:bg-brand-blue/5"
+                  onClick={onOpenQuoteForm}
+                >
+                  Get a Free Quote
+                </Button>
               </div>
             )}
           </div>

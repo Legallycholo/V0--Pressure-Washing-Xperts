@@ -106,7 +106,7 @@ export function ContactSection() {
           </div>
 
           {/* Right Column - Quote form (width matches hero quote card) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-14">
             <ContactQuoteFormCard />
           </div>
         </div>

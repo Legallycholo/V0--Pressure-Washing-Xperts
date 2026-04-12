@@ -118,7 +118,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
   return (
     <section
       id="hero"
-      className="scroll-offset-header relative min-h-screen overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset"
+      className="scroll-offset-header relative overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset"
     >
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
@@ -134,8 +134,8 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-blue-light/15 rounded-full blur-3xl animate-pulse-slower" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-3xl" />
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start xl:items-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-20 lg:pb-24">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="animate-fade-in-up lg:col-span-5 text-center lg:text-left">
             <p className="mb-4 text-brand-yellow font-semibold text-sm sm:text-base tracking-[0.24em] uppercase">
               Atlanta&apos;s top-rated service
@@ -185,7 +185,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
             </div>
           </div>
 
-          <div className="animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10">
+          <div className="animate-fade-in-up lg:col-span-7 lg:pl-8 xl:pl-12 2xl:pl-16">
             <div className="rounded-2xl bg-white/95 shadow-2xl border border-white/30 overflow-hidden backdrop-blur-sm">
               <div className="bg-brand-blue p-5 sm:p-6">
                 <h2 className="text-xl sm:text-2xl font-bold text-white">
@@ -336,8 +336,8 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                     </div>
                   </div>
 
-                  <div className="space-y-4 lg:flex lg:flex-col">
-                    <div className="lg:flex-1">
+                  <div className="space-y-4">
+                    <div>
                       <Label htmlFor="message" className="text-foreground">
                         Project details <span className="text-destructive">*</span>
                       </Label>
