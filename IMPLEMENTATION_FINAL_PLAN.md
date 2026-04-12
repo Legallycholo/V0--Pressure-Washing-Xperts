@@ -11,7 +11,7 @@
 
 ---
 
-## Already Working
+## Already Working--- brand new push into github
 
 - Next.js 16 App Router; [`lib/submitLead.ts`](lib/submitLead.ts) validates and inserts into [`public.leads`](supabase/migrations/20260412120000_create_leads.sql) via `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
 - UI: success state (“Thank You!”) and error state (`submitError`) on [`components/sections/ContactQuoteForm.tsx`](components/sections/ContactQuoteForm.tsx) and [`components/sections/Hero.tsx`](components/sections/Hero.tsx); HTML5 `required` on fields.
