@@ -66,46 +66,49 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
   }
 
   return (
-    <section className="bg-background py-20">
+    <section className="bg-background py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-blue">
+        <div className="mb-7 text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-blue">
             See The Difference
           </p>
-          <h2 className="text-balance text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="text-balance text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
             Before & After Results
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
             Slide to compare and see the transformations we achieve with professional pressure washing.
           </p>
         </div>
 
         <div className="mx-auto max-w-4xl">
-          <BeforeAfterSlider
-            key={current.id}
-            beforeSrc={current.beforeSrc}
-            afterSrc={current.afterSrc}
-            beforeAlt={current.beforeAlt}
-            afterAlt={current.afterAlt}
-            beforeObjectPosition={current.beforeObjectPosition}
-            afterObjectPosition={current.afterObjectPosition}
-            comparisonLabel={current.title}
-            variant="section"
-          />
+          <div className="mx-auto w-full max-w-4xl md:w-[58%] md:max-w-3xl">
+            <BeforeAfterSlider
+              key={current.id}
+              beforeSrc={current.beforeSrc}
+              afterSrc={current.afterSrc}
+              beforeAlt={current.beforeAlt}
+              afterAlt={current.afterAlt}
+              beforeObjectPosition={current.beforeObjectPosition}
+              afterObjectPosition={current.afterObjectPosition}
+              comparisonLabel={current.title}
+              variant="section"
+              aspectClassName="aspect-video"
+            />
+          </div>
 
-          <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="text-center md:text-left">
-              <h3 className="mb-1 text-xl font-bold text-foreground">{current.title}</h3>
+              <h3 className="mb-1 text-lg font-bold text-foreground">{current.title}</h3>
               <p className="mb-1 text-muted-foreground">{current.description}</p>
               <p className="text-sm font-medium text-brand-blue">{current.location}</p>
             </div>
 
             {showCarousel ? (
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-3">
                 <button
                   type="button"
                   onClick={goToPrevious}
-                  className="rounded-full bg-section-light p-3 transition-colors hover:bg-brand-blue hover:text-white"
+                  className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
                   aria-label="Previous comparison"
                 >
                   <ChevronLeft className="size-5" />
@@ -130,7 +133,7 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
                 <button
                   type="button"
                   onClick={goToNext}
-                  className="rounded-full bg-section-light p-3 transition-colors hover:bg-brand-blue hover:text-white"
+                  className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
                   aria-label="Next comparison"
                 >
                   <ChevronRight className="size-5" />
@@ -139,8 +142,8 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
             ) : null}
           </div>
 
-          <div className="mt-10 text-center">
-            <p className="mb-4 text-muted-foreground">Want results like these for your property?</p>
+          <div className="mt-7 text-center">
+            <p className="mb-3 text-muted-foreground text-sm sm:text-base">Want results like these for your property?</p>
             <Button
               onClick={onOpenQuoteForm}
               size="lg"

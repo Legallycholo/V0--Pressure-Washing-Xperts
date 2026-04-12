@@ -134,24 +134,24 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-blue-light/15 rounded-full blur-3xl animate-pulse-slower" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-3xl" />
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-20 lg:pb-24">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-10 sm:pb-12 lg:pb-14">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
           <div className="animate-fade-in-up lg:col-span-5 text-center lg:text-left">
-            <p className="mb-4 text-brand-yellow font-semibold text-sm sm:text-base tracking-[0.24em] uppercase">
+            <p className="mb-3 text-brand-yellow font-semibold text-sm sm:text-base tracking-[0.24em] uppercase">
               Atlanta&apos;s top-rated service
             </p>
 
-            <h1 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl xl:text-7xl">
+            <h1 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
               Professional Pressure Washing &{" "}
               <span className="block text-brand-blue-light mt-1">Soft Wash Cleaning</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg text-white/85 leading-relaxed sm:text-xl lg:mx-0 mx-auto">
+            <p className="mt-4 max-w-2xl text-base text-white/85 leading-relaxed sm:text-lg lg:mx-0 mx-auto">
               Restore your home or business with safe, effective exterior cleaning.
               Industry-proven techniques that protect your property and boost curb appeal.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm sm:text-base text-white/85 lg:justify-start">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-white/85 lg:justify-start">
               <span className="inline-flex items-center gap-2">
                 <Check className="size-4 text-brand-blue-light" />
                 Licensed & Insured
@@ -166,11 +166,11 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
               </span>
             </div>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Button
                 asChild
                 size="lg"
-                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-lg px-8 py-6 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg ${ctaPress}`}
+                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg ${ctaPress}`}
               >
                 <a href="tel:800-451-7213">Call now</a>
               </Button>
@@ -178,17 +178,17 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                 type="button"
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-lg px-8 py-6 hover:bg-white/10 hover:border-white transition-all duration-300 ${ctaPress}`}
+                className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-base px-6 py-4 hover:bg-white/10 hover:border-white transition-all duration-300 ${ctaPress}`}
               >
                 Get your free estimate
               </Button>
             </div>
           </div>
 
-          <div className="animate-fade-in-up lg:col-span-7 lg:pl-8 xl:pl-12 2xl:pl-16">
+          <div className="animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-12">
             <div className="rounded-2xl bg-white/95 shadow-2xl border border-white/30 overflow-hidden backdrop-blur-sm">
-              <div className="bg-brand-blue p-5 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-white">
+              <div className="bg-brand-blue p-4 sm:p-5">
+                <h2 className="text-lg sm:text-xl font-bold text-white">
                   {modalCopyDefault.headline}
                 </h2>
                 {modalCopyDefault.subline ? (
@@ -202,11 +202,11 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
               </div>
 
               {isSubmitted ? (
-                <div className="p-6 sm:p-8 text-center">
-                  <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-green-100">
-                    <CheckCircle className="size-8 text-green-600" aria-hidden />
+                <div className="p-5 sm:p-6 text-center">
+                  <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-green-100">
+                    <CheckCircle className="size-7 text-green-600" aria-hidden />
                   </div>
-                  <p className="text-xl font-bold text-brand-blue-dark">Thank you!</p>
+                  <p className="text-lg font-bold text-brand-blue-dark">Thank you!</p>
                   <p className="mt-2 text-sm text-muted-foreground">
                     {modalCopyDefault.successLead}
                   </p>
@@ -219,7 +219,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                   <Button
                     type="button"
                     onClick={() => setIsSubmitted(false)}
-                    className="mt-6 w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark"
+                    className="mt-4 w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark"
                   >
                     Send another request
                   </Button>
@@ -227,9 +227,9 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="p-5 sm:p-6 space-y-4 lg:grid lg:grid-cols-2 lg:gap-x-6 lg:gap-y-4 lg:space-y-0"
+                  className="p-4 sm:p-5 space-y-3 lg:grid lg:grid-cols-2 lg:gap-x-4 lg:gap-y-3 lg:space-y-0"
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div>
                       <Label htmlFor="fullName" className="text-foreground">
                         Full Name <span className="text-destructive">*</span>
@@ -246,7 +246,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <Label htmlFor="email" className="text-foreground">
                           Email <span className="text-destructive">*</span>
@@ -279,7 +279,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       <div className="col-span-2 sm:col-span-1">
                         <Label htmlFor="city" className="text-foreground">
                           City <span className="text-destructive">*</span>
@@ -336,7 +336,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                     </div>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div>
                       <Label htmlFor="message" className="text-foreground">
                         Project details <span className="text-destructive">*</span>
@@ -353,7 +353,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                         value={formData.message}
                         onChange={handleInputChange}
                         placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
-                        className="mt-2 min-h-[100px] lg:min-h-[140px] xl:min-h-[120px]"
+                        className="mt-2 min-h-[88px] lg:min-h-[120px] xl:min-h-[100px]"
                       />
                     </div>
 
@@ -383,7 +383,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                     </div>
                   </div>
 
-                  <div className="space-y-3 lg:col-span-2">
+                  <div className="space-y-2 lg:col-span-2">
                     {submitError ? (
                       <p
                         className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
@@ -395,7 +395,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg inline-flex items-center justify-center gap-2"
+                      className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-4 text-base inline-flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
                         <>

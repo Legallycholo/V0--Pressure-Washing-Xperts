@@ -12,24 +12,24 @@ import { businessAddress, businessMapsUrl } from "@/data/site"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="scroll-offset-header py-20 bg-section-dark">
+    <section id="contact" className="scroll-offset-header py-12 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start xl:items-center">
+        <div className="grid gap-7 lg:grid-cols-12 lg:items-start xl:items-center">
           {/* Left Column - Contact Info */}
           <div className="lg:col-span-5">
-            <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-3">
+            <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-2">
               Contact Us
             </p>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl text-balance mb-6">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance mb-4">
               Ready for a Free Estimate?
             </h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-8">
+            <p className="text-white/70 text-base leading-relaxed mb-6">
               Tell us what you would like cleaned. We usually reply within one business day
               with next steps. Prefer the phone? Call or text anytime during business hours.
             </p>
 
             {/* Contact Cards */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-6">
               {/* Phone */}
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -39,7 +39,7 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p className="text-white/60 text-sm">Call / Text</p>
-                      <p className="text-white font-semibold text-lg group-hover:text-brand-yellow transition-colors">
+                      <p className="text-white font-semibold text-base group-hover:text-brand-yellow transition-colors">
                         (800)-451-7213
                       </p>
                     </div>
@@ -65,9 +65,9 @@ export function ContactSection() {
               </a>
 
               {/* Hours */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500 text-white">
-                  <Clock className="size-6" />
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500 text-white">
+                  <Clock className="size-5" />
                 </div>
                 <div>
                   <p className="text-white/60 text-sm">Business Hours</p>
@@ -106,7 +106,7 @@ export function ContactSection() {
           </div>
 
           {/* Right Column - Quote form (width matches hero quote card) */}
-          <div className="lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-14">
+          <div className="lg:col-span-7 lg:pl-5 xl:pl-8 2xl:pl-10">
             <ContactQuoteFormCard />
           </div>
         </div>

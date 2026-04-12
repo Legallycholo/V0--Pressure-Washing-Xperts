@@ -160,20 +160,20 @@ export function ContactQuoteForm({
       <div
         className={cn(
           "animate-success-pop-in text-center",
-          isInline ? "py-10 px-4" : "p-8",
+          isInline ? "py-8 px-3" : "p-6",
           className
         )}
       >
-        <div className="mb-6">
+        <div className="mb-4">
           <div
             className={cn(
-              "mx-auto w-16 h-16 rounded-full flex items-center justify-center",
+              "mx-auto w-14 h-14 rounded-full flex items-center justify-center",
               isInline ? "bg-white/10" : "bg-green-100"
             )}
           >
             <CheckCircle
               className={cn(
-                "size-8",
+                "size-7",
                 isInline ? "text-emerald-400" : "text-green-600"
               )}
             />
@@ -181,7 +181,7 @@ export function ContactQuoteForm({
         </div>
         <h3
           className={cn(
-            "text-2xl font-bold mb-2",
+            "text-xl font-bold mb-2",
             isInline ? "text-white" : "text-foreground"
           )}
         >
@@ -228,8 +228,8 @@ export function ContactQuoteForm({
   return (
     <div className={className}>
       {!isInline ? (
-        <div className="bg-brand-blue p-6 rounded-t-2xl">
-          <h2 className="text-xl font-bold text-white">{copy.headline}</h2>
+        <div className="bg-brand-blue p-4 rounded-t-2xl">
+          <h2 className="text-lg font-bold text-white">{copy.headline}</h2>
           {copy.subline ? (
             <p className="text-white/80 text-sm mt-1">{copy.subline}</p>
           ) : null}
@@ -238,8 +238,8 @@ export function ContactQuoteForm({
           </p>
         </div>
       ) : (
-        <div className={cn("mb-6", !copy.subline && "mb-4")}>
-          <h3 className="text-xl font-bold text-white">{copy.headline}</h3>
+        <div className={cn("mb-4", !copy.subline && "mb-3")}>
+          <h3 className="text-lg font-bold text-white">{copy.headline}</h3>
           {copy.subline ? (
             <p className="text-white/70 text-sm mt-1">{copy.subline}</p>
           ) : null}
@@ -249,10 +249,10 @@ export function ContactQuoteForm({
       <form
         onSubmit={handleSubmit}
         className={cn(
-          "space-y-4",
-          !isInline && "p-6",
+          "space-y-3",
+          !isInline && "p-4",
           isInline &&
-            "lg:grid lg:grid-cols-2 lg:gap-x-6 lg:gap-y-4 lg:space-y-0"
+            "lg:grid lg:grid-cols-2 lg:gap-x-4 lg:gap-y-3 lg:space-y-0"
         )}
       >
         {showOfferSelect ? (
@@ -287,7 +287,7 @@ export function ContactQuoteForm({
           </div>
         ) : null}
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div>
             <Label htmlFor={fieldId("fullName")} className={labelClass}>
               Full Name <span className="text-destructive">*</span>
@@ -305,7 +305,7 @@ export function ContactQuoteForm({
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <Label htmlFor={fieldId("email")} className={labelClass}>
                 Email <span className="text-destructive">*</span>
@@ -340,7 +340,7 @@ export function ContactQuoteForm({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <div className="col-span-2 sm:col-span-1">
               <Label htmlFor={fieldId("city")} className={labelClass}>
                 City <span className="text-destructive">*</span>
@@ -400,7 +400,7 @@ export function ContactQuoteForm({
           </div>
         </div>
 
-        <div className={cn(isInline && "space-y-4 lg:flex lg:flex-col")}>
+        <div className={cn(isInline && "space-y-3 lg:flex lg:flex-col")}>
           <div className={cn(isInline && "lg:flex-1")}>
             <Label htmlFor={fieldId("message")} className={labelClass}>
               Project details <span className="text-destructive">*</span>
@@ -422,9 +422,9 @@ export function ContactQuoteForm({
               onChange={handleInputChange}
               placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
               className={cn(
-                "mt-2 min-h-[100px]",
+                "mt-2 min-h-[88px]",
                 isInline && fieldClass,
-                isInline && "lg:min-h-[140px] xl:min-h-[120px]"
+                isInline && "lg:min-h-[120px] xl:min-h-[100px]"
               )}
             />
           </div>
@@ -456,7 +456,7 @@ export function ContactQuoteForm({
           </div>
         </div>
 
-        <div className={cn("space-y-3", isInline && "lg:col-span-2")}>
+        <div className={cn("space-y-2", isInline && "lg:col-span-2")}>
           {submitError ? (
             <p
               className={cn(
@@ -471,7 +471,7 @@ export function ContactQuoteForm({
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg inline-flex items-center justify-center gap-2"
+            className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-4 text-base inline-flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
               <>

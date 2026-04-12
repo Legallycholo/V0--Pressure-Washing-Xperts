@@ -39,7 +39,7 @@ export function ContactQuoteFormCard({ className }: { className?: string }) {
 
       <div
         id="contact-form"
-        className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-brand-blue to-section-dark-alt p-5 sm:p-6 max-h-[min(90vh,52rem)] overflow-y-auto"
+        className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-brand-blue to-section-dark-alt p-4 sm:p-5 max-h-[min(88vh,44rem)] overflow-y-auto"
       >
         <Suspense
           fallback={

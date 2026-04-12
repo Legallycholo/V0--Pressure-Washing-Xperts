@@ -20,7 +20,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-header-offset overflow-hidden">
+      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset overflow-hidden">
         {city.heroImageSrc ? (
           <Image
             src={city.heroImageSrc}
@@ -35,20 +35,20 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         <div className="absolute inset-0 bg-hero-pattern opacity-10" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="inline-block mb-4 px-4 py-2 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
+            <span className="inline-block mb-3 px-3 py-1.5 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
               Service Area
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
               {city.hero.headline}
             </h1>
-            <p className="mx-auto max-w-3xl text-lg text-white/80 leading-relaxed mb-2">
+            <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-2">
               {city.hero.subheadline}
             </p>
             <p className="mx-auto max-w-3xl text-sm text-white/70 mb-4">
               Serving {city.cityName}, {city.stateCode} in {city.county}
             </p>
-            <p className="mx-auto max-w-2xl text-sm text-white/75 mb-8">{city.serviceAvailability}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <p className="mx-auto max-w-2xl text-sm text-white/75 mb-5">{city.serviceAvailability}</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={onOpenQuoteForm}
                 size="lg"
@@ -72,23 +72,23 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-7 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-brand-blue-dark mb-6">
+              <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
                 Trust the Xperts in {city.cityName}
               </h2>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {city.trustPoints.map((point) => (
                   <li key={point} className="flex items-start gap-3">
-                    <CheckCircle2 className="size-6 text-brand-yellow flex-shrink-0 mt-1" />
-                    <span className="text-lg text-gray-700">{point}</span>
+                    <CheckCircle2 className="size-5 text-brand-yellow flex-shrink-0 mt-1" />
+                    <span className="text-base text-gray-700">{point}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="relative h-96 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-lg overflow-hidden flex items-center justify-center ring-1 ring-black/5">
+            <div className="relative h-72 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 rounded-lg overflow-hidden flex items-center justify-center ring-1 ring-black/5 md:mx-auto md:max-w-[90%]">
               {city.heroImageSrc ? (
                 <Image
                   src={city.heroImageSrc}
@@ -128,7 +128,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
       </section>
 
       {city.coverageMapImageSrc ? (
-        <section className="py-12 bg-section-light">
+        <section className="py-8 bg-section-light">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">Coverage area</h2>
             <div className="relative aspect-[16/10] rounded-lg overflow-hidden shadow-md ring-1 ring-black/5">
@@ -144,24 +144,24 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </section>
       ) : null}
 
-      <section className="py-16 bg-section-light">
+      <section className="py-10 bg-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-blue-dark mb-4">
+          <div className="text-center mb-7">
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-3">
               Popular work in {city.cityName}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base text-gray-600 max-w-2xl mx-auto">
               Open any link for photos, benefits, and how we run the job. Same crew habits wherever we go in the metro.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4">
             {city.localizedServiceCards.map((service) => (
               <div
                 key={service.title}
                 className={cn(hubCardLight, "flex h-full flex-col rounded-xl")}
               >
-                <h3 className="text-xl font-semibold text-brand-blue-dark mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4 flex-1">{service.description}</p>
+                <h3 className="text-lg font-semibold text-brand-blue-dark mb-2">{service.title}</h3>
+                <p className="text-gray-600 mb-3 flex-1 text-sm">{service.description}</p>
                 <Link
                   href={service.href}
                   className="text-brand-blue font-medium hover:text-brand-blue-dark inline-flex items-center gap-1"
@@ -176,15 +176,15 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
       </section>
 
       {galleryPairs.length > 0 ? (
-        <section className="py-16">
+        <section className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-brand-blue-dark mb-2 text-center">
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-2 text-center">
               Before and after from our crew
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto text-sm">
+            <p className="text-gray-600 text-center mb-6 max-w-2xl mx-auto text-sm">
               Real jobs from the gallery. Ask if you want photos from a neighborhood like yours in {city.cityName}.
             </p>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-5">
               {galleryPairs.map((item) => (
                 <BeforeAfterSlider
                   key={item.id}
@@ -196,6 +196,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
                   beforeObjectPosition={item.beforeObjectPosition}
                   afterObjectPosition={item.afterObjectPosition}
                   sizes="(max-width: 896px) 100vw, 42rem"
+                  aspectClassName="aspect-video"
                 />
               ))}
             </div>
@@ -203,18 +204,18 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </section>
       ) : null}
 
-      <section className="py-16 bg-white">
+      <section className="py-10 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-blue-dark mb-4">Our Process</h2>
+          <div className="text-center mb-7">
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-3">Our Process</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {city.processSteps.map((step, index) => (
               <div key={step.title} className="text-center">
-                <div className="mx-auto w-16 h-16 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-2xl font-bold mb-4">
+                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3">
                   {index + 1}
                 </div>
-                <h3 className="text-xl font-semibold text-brand-blue-dark mb-2">{step.title}</h3>
+                <h3 className="text-lg font-semibold text-brand-blue-dark mb-1.5">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
               </div>
             ))}
@@ -222,16 +223,16 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </div>
       </section>
 
-      <section className="py-16 bg-section-light">
+      <section className="py-10 bg-section-light">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-brand-blue-dark mb-8 text-center">
+          <h2 className="text-2xl font-bold text-brand-blue-dark mb-6 text-center">
             What {city.cityName} neighbors say
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
             {city.testimonials.map((t) => (
               <div
                 key={`${t.name}-${t.service}`}
-                className="rounded-xl border border-brand-blue/10 bg-white p-6 shadow-sm"
+                className="rounded-xl border border-brand-blue/10 bg-white p-4 shadow-sm"
               >
                 <div className="flex gap-1 mb-3" aria-label={`${t.rating} out of 5 stars`}>
                   {Array.from({ length: t.rating }).map((_, i) => (
@@ -248,14 +249,14 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-10 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-brand-blue-dark mb-8 text-center">
+          <h2 className="text-2xl font-bold text-brand-blue-dark mb-6 text-center">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {city.faqItems.map((faq) => (
-              <div key={faq.question} className="rounded-lg border border-brand-blue/10 bg-section-light/50 p-5">
+              <div key={faq.question} className="rounded-lg border border-brand-blue/10 bg-section-light/50 p-4">
                 <h3 className="font-semibold text-brand-blue-dark mb-2">{faq.question}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
               </div>
@@ -264,9 +265,9 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </div>
       </section>
 
-      <section className="py-16 bg-section-light">
+      <section className="py-10 bg-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">Nearby areas we also serve</h2>
+          <h2 className="text-xl font-bold text-brand-blue-dark mb-3">Nearby areas we also serve</h2>
           <p className="text-gray-600 mb-4 max-w-3xl leading-relaxed">{city.nearbyAreasNote}</p>
           <div className="flex flex-wrap gap-3 mb-6">
             {city.nearbyAreaSlugs.map((slug) => (
@@ -283,15 +284,15 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
+      <section className="py-10 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-2xl font-bold mb-3">
             Ready to Refresh Your {city.cityName} Property?
           </h2>
-          <p className="text-lg text-white/80 mb-4">
+          <p className="text-base text-white/80 mb-3">
             Request a quote and we will hold a slot that fits your week.
           </p>
-          <p className="text-sm text-white/70 mb-8">{city.serviceAvailability}</p>
+          <p className="text-sm text-white/70 mb-6">{city.serviceAvailability}</p>
           <Button
             onClick={onOpenQuoteForm}
             size="lg"

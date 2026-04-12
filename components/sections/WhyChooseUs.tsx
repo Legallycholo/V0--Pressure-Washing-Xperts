@@ -80,31 +80,31 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
     <section
       id="why-us"
       aria-labelledby="why-us-heading"
-      className="animate-fade-in-up bg-section-light py-16 sm:py-20 lg:py-24"
+      className="animate-fade-in-up bg-section-light py-10 sm:py-12 lg:py-14"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-4xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue-light">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue-light">
             Trust the Xperts
           </p>
           <h2
             id="why-us-heading"
-            className="text-balance text-3xl font-bold uppercase tracking-tight text-brand-blue-dark sm:text-4xl lg:text-5xl"
+            className="text-balance text-2xl font-bold uppercase tracking-tight text-brand-blue-dark sm:text-3xl lg:text-4xl"
           >
             Why choose us?
           </h2>
-          <p className="mt-4 text-lg font-semibold uppercase tracking-wide text-foreground">
+          <p className="mt-3 text-base font-semibold uppercase tracking-wide text-foreground sm:text-lg">
             Experience, safety &amp; quality you can count on
           </p>
         </header>
 
-        <div className="mt-12 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-6 lg:mt-16">
-          <ul className="flex list-none flex-col gap-4 p-0" aria-label="Reasons to choose us, part one">
+        <div className="mt-8 grid gap-3 md:mt-9 md:grid-cols-2 md:gap-4 lg:mt-10">
+          <ul className="flex list-none flex-col gap-3 p-0" aria-label="Reasons to choose us, part one">
             {firstColumn.map((feature) => (
               <li key={feature.title}>
-                <article className="flex gap-4 rounded-xl border border-border/60 bg-muted/80 px-4 py-4 sm:px-5 sm:py-5">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
-                    <feature.icon className="size-5" aria-hidden />
+                <article className="flex gap-3 rounded-xl border border-border/60 bg-muted/80 px-3 py-3 sm:px-4 sm:py-4">
+                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                    <feature.icon className="size-4" aria-hidden />
                   </div>
                   <div className="min-w-0 text-left">
                     <h3 className="font-semibold text-foreground">{feature.title}</h3>
@@ -116,12 +116,12 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
               </li>
             ))}
           </ul>
-          <ul className="flex list-none flex-col gap-4 p-0" aria-label="Reasons to choose us, part two">
+          <ul className="flex list-none flex-col gap-3 p-0" aria-label="Reasons to choose us, part two">
             {secondColumn.map((feature) => (
               <li key={feature.title}>
-                <article className="flex gap-4 rounded-xl border border-border/60 bg-muted/80 px-4 py-4 sm:px-5 sm:py-5">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
-                    <feature.icon className="size-5" aria-hidden />
+                <article className="flex gap-3 rounded-xl border border-border/60 bg-muted/80 px-3 py-3 sm:px-4 sm:py-4">
+                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                    <feature.icon className="size-4" aria-hidden />
                   </div>
                   <div className="min-w-0 text-left">
                     <h3 className="font-semibold text-foreground">{feature.title}</h3>
@@ -135,12 +135,12 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
           </ul>
         </div>
 
-        <div className="mt-12 flex justify-center md:mt-14 lg:mt-16">
+        <div className="mt-8 flex justify-center md:mt-9 lg:mt-10">
           <Button
             type="button"
             onClick={onOpenQuoteForm}
             size="lg"
-            className="min-w-[220px] bg-brand-yellow px-10 font-bold uppercase tracking-wide text-brand-blue-dark hover:bg-brand-yellow-dark"
+            className="min-w-[200px] bg-brand-yellow px-8 font-bold uppercase tracking-wide text-brand-blue-dark hover:bg-brand-yellow-dark text-base"
           >
             Get started today
           </Button>

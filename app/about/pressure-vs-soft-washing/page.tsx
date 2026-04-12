@@ -17,14 +17,14 @@ export default function PressureVsSoftWashingPage() {
       
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-header-offset">
+        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
           <div className="absolute inset-0 bg-hero-pattern opacity-10" />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
                 Pressure Washing vs. Soft Washing
               </h1>
-              <p className="mx-auto max-w-3xl text-lg text-white/80 leading-relaxed">
+              <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed">
                 Understanding the difference helps us choose the right method for your property
               </p>
             </div>
@@ -32,30 +32,30 @@ export default function PressureVsSoftWashingPage() {
         </section>
 
         {/* Comparison Section */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-5">
               {/* Pressure Washing */}
-              <div className="bg-white p-8 rounded-lg shadow-lg border-2 border-brand-blue">
-                <div className="flex items-center gap-3 mb-6">
-                  <Gauge className="size-12 text-brand-blue" />
-                  <h2 className="text-3xl font-bold text-brand-blue-dark">
+              <div className="bg-white p-5 rounded-lg shadow-lg border-2 border-brand-blue">
+                <div className="flex items-center gap-3 mb-4">
+                  <Gauge className="size-10 text-brand-blue" />
+                  <h2 className="text-2xl font-bold text-brand-blue-dark">
                     Pressure Washing
                   </h2>
                 </div>
-                <p className="text-lg text-gray-700 mb-6">
+                <p className="text-base text-gray-700 mb-4">
                   High-pressure water cleaning for tough, durable surfaces that can withstand intense cleaning power.
                 </p>
-                <h3 className="font-semibold text-xl mb-3">Best For:</h3>
-                <ul className="space-y-2 text-gray-700 mb-6">
+                <h3 className="font-semibold text-lg mb-2">Best For:</h3>
+                <ul className="space-y-2 text-gray-700 mb-4 text-sm">
                   <li>• Concrete driveways and sidewalks</li>
                   <li>• Parking lots and garages</li>
                   <li>• Heavy-duty concrete and durable hardscapes</li>
                   <li>• Brick and stone (when appropriate)</li>
                   <li>• Remove tough stains and grime</li>
                 </ul>
-                <h3 className="font-semibold text-xl mb-3">Features:</h3>
-                <ul className="space-y-2 text-gray-700">
+                <h3 className="font-semibold text-lg mb-2">Features:</h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
                   <li>• High PSI (pounds per square inch)</li>
                   <li>• Effective for stubborn stains</li>
                   <li>• Fast cleaning results</li>
@@ -64,26 +64,26 @@ export default function PressureVsSoftWashingPage() {
               </div>
 
               {/* Soft Washing */}
-              <div className="bg-white p-8 rounded-lg shadow-lg border-2 border-brand-yellow">
-                <div className="flex items-center gap-3 mb-6">
-                  <Droplets className="size-12 text-brand-yellow" />
-                  <h2 className="text-3xl font-bold text-brand-blue-dark">
+              <div className="bg-white p-5 rounded-lg shadow-lg border-2 border-brand-yellow">
+                <div className="flex items-center gap-3 mb-4">
+                  <Droplets className="size-10 text-brand-yellow" />
+                  <h2 className="text-2xl font-bold text-brand-blue-dark">
                     Soft Washing
                   </h2>
                 </div>
-                <p className="text-lg text-gray-700 mb-6">
+                <p className="text-base text-gray-700 mb-4">
                   Low-pressure cleaning with specialized solutions for delicate surfaces that require gentle care.
                 </p>
-                <h3 className="font-semibold text-xl mb-3">Best For:</h3>
-                <ul className="space-y-2 text-gray-700 mb-6">
+                <h3 className="font-semibold text-lg mb-2">Best For:</h3>
+                <ul className="space-y-2 text-gray-700 mb-4 text-sm">
                   <li>• House siding and exterior walls</li>
                   <li>• Roofs and shingles</li>
                   <li>• Windows and glass surfaces</li>
                   <li>• Wood decks and fences</li>
                   <li>• Painted or delicate surfaces</li>
                 </ul>
-                <h3 className="font-semibold text-xl mb-3">Features:</h3>
-                <ul className="space-y-2 text-gray-700">
+                <h3 className="font-semibold text-lg mb-2">Features:</h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
                   <li>• Low PSI with cleaning solutions</li>
                   <li>• Kills mold, mildew, and algae</li>
                   <li>• Safe for all surfaces</li>
@@ -95,18 +95,18 @@ export default function PressureVsSoftWashingPage() {
         </section>
 
         {/* Expert Approach */}
-        <section className="py-16 bg-section-light">
+        <section className="py-10 bg-section-light">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-brand-blue-dark mb-6">
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
               Our Xpert Approach
             </h2>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-base text-gray-700 mb-5">
               At Pressure Washing Xperts, we don't believe in a one-size-fits-all approach. 
               Our trained professionals assess each project individually and use the appropriate 
               method (or combination of methods) to deliver the best results while protecting your property.
             </p>
-            <div className="bg-brand-yellow/10 p-6 rounded-lg">
-              <p className="text-xl font-semibold text-brand-blue-dark">
+            <div className="bg-brand-yellow/10 p-4 rounded-lg">
+              <p className="text-lg font-semibold text-brand-blue-dark">
                 "The right technique for the right surface, every time."
               </p>
             </div>
@@ -114,15 +114,15 @@ export default function PressureVsSoftWashingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
+        <section className="py-10 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-2xl font-bold mb-3">
               Not Sure Which Method You Need?
             </h2>
-            <p className="text-lg text-white/80 mb-8">
+            <p className="text-base text-white/80 mb-6">
               Contact our experts today for a free consultation and quote.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={() => goHomeQuote({ target: "contact" })}
                 size="lg"

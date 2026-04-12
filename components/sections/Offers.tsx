@@ -11,27 +11,27 @@ interface OffersProps {
 export function Offers({ onOpenQuoteForm }: OffersProps) {
   return (
     <section
-      className="py-20 bg-section-light"
+      className="py-12 bg-section-light"
       aria-labelledby="offers-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-brand-blue font-semibold text-sm uppercase tracking-wider mb-3">
+        <div className="text-center mb-9">
+          <p className="text-brand-blue font-semibold text-sm uppercase tracking-wider mb-2">
             Special Offers
           </p>
           <h2
             id="offers-heading"
-            className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance"
+            className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl text-balance"
           >
             Save on Bundles &amp; Seasonal Service
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-base">
             Pick the promo that fits your job: new customers, multi-service
             visits, spring and fall scheduling, and neighbor referrals.
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {offers.map((offer, index) => (
             <article
               key={offer.id}
@@ -60,30 +60,30 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                 </div>
               )}
 
-              <div className="relative p-6 flex flex-col flex-1 min-h-0">
+              <div className="relative p-4 sm:p-5 flex flex-col flex-1 min-h-0">
                 <div
-                  className={`mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${
+                  className={`mb-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
                     offer.highlight ? "bg-white/20" : "bg-brand-blue/10"
                   }`}
                 >
                   <offer.icon
-                    className={`size-6 ${offer.highlight ? "text-white" : "text-brand-blue"}`}
+                    className={`size-5 ${offer.highlight ? "text-white" : "text-brand-blue"}`}
                     aria-hidden
                   />
                 </div>
 
                 <div
-                  className={`text-3xl font-bold mb-2 ${
+                  className={`text-2xl font-bold mb-2 ${
                     offer.highlight ? "text-brand-yellow" : "text-brand-blue"
                   }`}
                 >
                   {offer.discount}
                 </div>
 
-                <h3 className="text-lg font-bold mb-2">{offer.title}</h3>
+                <h3 className="text-base font-bold mb-1.5">{offer.title}</h3>
 
                 <p
-                  className={`text-sm leading-relaxed mb-4 ${
+                  className={`text-sm leading-relaxed mb-3 ${
                     offer.highlight ? "text-white/80" : "text-muted-foreground"
                   }`}
                 >
@@ -117,7 +117,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <p className="mt-6 text-center text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           Offers cannot be combined. Minimum job total applies before any
           discount. Referral credits are issued after the referred customer
           completes a paid service. Call{" "}

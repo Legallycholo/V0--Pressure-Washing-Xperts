@@ -113,23 +113,23 @@ export function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="py-20 bg-section-dark overflow-hidden">
+    <section id="testimonials" className="py-12 bg-section-dark overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-3">
+        <div className="text-center mb-9">
+          <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-2">
             Testimonials
           </p>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl text-balance">
+          <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance">
             What Our Customers Say
           </h2>
-          <p className="mt-4 text-white/70 max-w-2xl mx-auto text-lg">
+          <p className="mt-3 text-white/70 max-w-2xl mx-auto text-base">
             {"Don't just take our word for it."} Rated{" "}
             <span className="text-brand-yellow font-semibold">5.0 ★</span> across{" "}
             <span className="text-white font-semibold">32+ verified reviews</span>{" "}
             on Google &amp; Groupon.
           </p>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-4 flex justify-center">
             <Button
               asChild
               size="lg"
@@ -152,28 +152,28 @@ export function Testimonials() {
         {/* Testimonials Carousel */}
         <div className="relative">
           {/* Desktop View - 3 cards */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6">
+          <div className="hidden md:grid md:grid-cols-3 gap-4">
             {getVisibleTestimonials().map((testimonial, index) => (
               <div
                 key={`${testimonial.id}-${index}`}
-                className={`relative rounded-xl p-6 transition-all duration-500 ${
+                className={`relative rounded-xl p-4 transition-all duration-500 ${
                   index === 1
-                    ? "bg-white/10 border-2 border-brand-yellow scale-105"
+                    ? "bg-white/10 border-2 border-brand-yellow scale-[1.02]"
                     : "bg-white/5 border border-white/10"
                 }`}
               >
                 {/* Quote Icon */}
-                <Quote className="absolute top-4 right-4 size-8 text-brand-yellow/20" />
+                <Quote className="absolute top-3 right-3 size-7 text-brand-yellow/20" />
 
                 {/* Rating */}
-                <div className="flex gap-1 mb-4">
+                <div className="flex gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="size-4 fill-brand-yellow text-brand-yellow" />
                   ))}
                 </div>
 
                 {/* Text */}
-                <p className="text-white/80 text-sm leading-relaxed mb-6 min-h-[100px]">
+                <p className="text-white/80 text-sm leading-relaxed mb-4 min-h-[88px]">
                   {`"${testimonial.text}"`}
                 </p>
 
@@ -200,9 +200,9 @@ export function Testimonials() {
 
           {/* Mobile View - Single card */}
           <div className="md:hidden">
-            <div className="relative rounded-xl bg-white/10 border border-white/10 p-6">
+            <div className="relative rounded-xl bg-white/10 border border-white/10 p-4">
               {/* Quote Icon */}
-              <Quote className="absolute top-4 right-4 size-8 text-brand-yellow/20" />
+              <Quote className="absolute top-3 right-3 size-7 text-brand-yellow/20" />
 
               {/* Rating */}
               <div className="flex gap-1 mb-4">
@@ -212,7 +212,7 @@ export function Testimonials() {
               </div>
 
               {/* Text */}
-              <p className="text-white/80 text-sm leading-relaxed mb-6">
+              <p className="text-white/80 text-sm leading-relaxed mb-4">
                 {`"${testimonials[currentIndex].text}"`}
               </p>
 
@@ -253,7 +253,7 @@ export function Testimonials() {
         </div>
 
         {/* Dots Navigation */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-2 mt-6">
           {testimonials.map((_, index) => (
             <button
               key={index}
@@ -269,7 +269,7 @@ export function Testimonials() {
         </div>
 
         {/* Mobile Navigation Arrows */}
-        <div className="flex justify-center gap-4 mt-6 md:hidden">
+        <div className="flex justify-center gap-3 mt-4 md:hidden">
           <button
             onClick={goToPrevious}
             className="p-3 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors"

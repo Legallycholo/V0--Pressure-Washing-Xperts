@@ -239,7 +239,7 @@ function GalleryGrid({
   showTagChips?: boolean
 }) {
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
       {itemsForView.map((item, index) => (
         <div
           key={item.id}
@@ -315,20 +315,20 @@ function GalleryTeaser() {
     <section
       id="gallery"
       aria-labelledby="gallery-heading"
-      className="animate-fade-in-up bg-section-dark py-20"
+      className="animate-fade-in-up bg-section-dark py-12"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-yellow">
+        <div className="mb-7 text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-yellow">
             Our Work
           </p>
           <h2
             id="gallery-heading"
-            className="text-balance text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+            className="text-balance text-2xl font-bold text-white sm:text-3xl lg:text-4xl"
           >
             Project Gallery
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
+          <p className="mx-auto mt-3 max-w-2xl text-base text-white/70">
             Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
           </p>
         </div>
@@ -339,7 +339,7 @@ function GalleryTeaser() {
           showTagChips={false}
         />
 
-        <div className="mt-10 flex flex-col items-center gap-4 text-center">
+        <div className="mt-7 flex flex-col items-center gap-3 text-center">
           <Button
             asChild
             size="lg"
@@ -417,25 +417,25 @@ function GalleryFull() {
     <section
       id="gallery"
       aria-labelledby="gallery-heading"
-      className="animate-fade-in-up bg-section-dark py-20"
+      className="animate-fade-in-up bg-section-dark py-12"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-yellow">
+        <div className="mb-7 text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-yellow">
             Our Work
           </p>
           <h1
             id="gallery-heading"
-            className="text-balance text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+            className="text-balance text-2xl font-bold text-white sm:text-3xl lg:text-4xl"
           >
             Project Gallery
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
+          <p className="mx-auto mt-3 max-w-2xl text-base text-white/70">
             Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
           </p>
         </div>
 
-        <div className="mb-10">
+        <div className="mb-6">
           <div
             role="tablist"
             aria-label="Filter gallery by category"
@@ -462,7 +462,7 @@ function GalleryFull() {
         </div>
 
         {filteredItems.length === 0 ? (
-          <p className="py-12 text-center text-lg text-white/60">
+          <p className="py-8 text-center text-base text-white/60">
             Images coming soon.
           </p>
         ) : (
@@ -470,19 +470,19 @@ function GalleryFull() {
         )}
 
         <div
-          className="mx-auto mt-12 max-w-2xl text-center"
+          className="mx-auto mt-8 max-w-2xl text-center"
           aria-labelledby="gallery-cta-heading"
         >
           <h2
             id="gallery-cta-heading"
-            className="text-balance text-2xl font-bold text-white sm:text-3xl"
+            className="text-balance text-xl font-bold text-white sm:text-2xl"
           >
             {cta.title}
           </h2>
-          <p className="mt-3 text-pretty text-lg text-white/70">{cta.description}</p>
+          <p className="mt-2 text-pretty text-base text-white/70">{cta.description}</p>
           <a
             href="tel:800-451-7213"
-            className={`mt-6 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
+            className={`mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
           >
             <Phone className="size-4 shrink-0" aria-hidden />
             <span>Call Now</span>

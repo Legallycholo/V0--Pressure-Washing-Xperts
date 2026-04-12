@@ -83,7 +83,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
     >
       <div className="hidden lg:block border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex min-h-10 items-center justify-between text-xs text-white/65">
+          <div className="flex min-h-9 items-center justify-between text-xs text-white/65">
             <div className="flex items-center gap-4">
               <span>Pressure Washing Xperts LLC</span>
               <span className="text-white/30">|</span>
@@ -124,7 +124,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
         </div>
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
-        <div className="relative flex min-h-[56px] items-center">
+        <div className="relative flex min-h-[48px] items-center">
           <div className="hidden min-w-0 lg:flex lg:flex-1" aria-hidden />
           {/* Desktop Navigation */}
           <NavigationMenu
@@ -286,7 +286,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           isMenuOpen ? "max-h-[80vh] overflow-y-auto" : "max-h-0"
         }`}
       >
-        <nav className="bg-brand-blue-dark/95 backdrop-blur-md px-4 py-6 space-y-2">
+        <nav className="bg-brand-blue-dark/95 backdrop-blur-md px-4 py-4 space-y-2">
           {/* Home */}
           <Link
             href="/"

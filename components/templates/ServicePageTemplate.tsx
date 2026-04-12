@@ -109,20 +109,20 @@ export function ServicePageTemplate({
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-20 pt-header-offset">
+      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
         <div className="absolute inset-0 bg-hero-pattern opacity-10" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="inline-block mb-4 px-4 py-2 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
+            <span className="inline-block mb-3 px-3 py-1.5 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
               {category} Services
             </span>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
               {title}
             </h1>
-            <p className="mx-auto max-w-3xl text-lg text-white/80 leading-relaxed mb-8">
+            <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-5">
               {description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={onOpenQuoteForm}
                 size="lg"
@@ -147,27 +147,27 @@ export function ServicePageTemplate({
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={cn(
-              "grid md:grid-cols-2 gap-12",
+              "grid md:grid-cols-2 gap-7",
               showContactFormAside ? "md:items-start" : "items-center"
             )}
           >
             <div>
-              <h2 className="text-3xl font-bold text-brand-blue-dark mb-6">
+              <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
                 Why Choose Our {title} Service?
               </h2>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="size-6 text-brand-yellow flex-shrink-0 mt-1" />
-                    <span className="text-lg text-gray-700">{benefit}</span>
+                    <CheckCircle2 className="size-5 text-brand-yellow flex-shrink-0 mt-1" />
+                    <span className="text-base text-gray-700">{benefit}</span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-8">
+              <div className="mt-6">
                 <Button
                   onClick={onOpenQuoteForm}
                   className="bg-brand-blue text-white hover:bg-brand-blue-dark"
@@ -192,9 +192,10 @@ export function ServicePageTemplate({
                 beforeImageClassName={beforeImageClassName}
                 afterImageClassName={afterImageClassName}
                 sizes="(max-width: 896px) 100vw, 42rem"
+                aspectClassName="aspect-video"
               />
             ) : showSplit && splitImages ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {splitImages.map((img) => (
                   <div
                     key={img.src}
@@ -211,7 +212,7 @@ export function ServicePageTemplate({
                 ))}
               </div>
             ) : showSingle && imageSrc && imageAlt ? (
-              <div className="relative h-96 overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
+              <div className="relative h-72 overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 md:mx-auto md:max-w-[90%]">
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
@@ -225,12 +226,12 @@ export function ServicePageTemplate({
                 />
               </div>
             ) : (
-              <div className="relative flex min-h-96 flex-col items-center justify-center rounded-lg border border-brand-blue/15 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 p-8 text-center shadow-sm">
-                <Phone className="size-12 text-brand-blue-dark mb-4" aria-hidden />
-                <h3 className="text-xl font-bold text-brand-blue-dark mb-2">
+              <div className="relative flex min-h-72 flex-col items-center justify-center rounded-lg border border-brand-blue/15 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 p-6 text-center shadow-sm">
+                <Phone className="size-10 text-brand-blue-dark mb-3" aria-hidden />
+                <h3 className="text-lg font-bold text-brand-blue-dark mb-2">
                   See it in person—start with a call
                 </h3>
-                <p className="text-gray-600 mb-6 max-w-sm text-pretty">
+                <p className="text-gray-600 mb-4 max-w-sm text-pretty text-sm">
                   No photo here yet? Talk to our team about your property and get a straightforward quote.
                 </p>
                 <Button
@@ -259,24 +260,24 @@ export function ServicePageTemplate({
       </section>
 
       {/* Process Section */}
-      <section className="py-16 bg-section-light">
+      <section className="py-10 bg-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-blue-dark mb-4">
+          <div className="text-center mb-7">
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-3">
               Our Process
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base text-gray-600 max-w-2xl mx-auto">
               Four steps from your first message to the final walkthrough.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {processItems.map((item) => (
               <div key={`${item.step}-${item.title}`} className="text-center">
-                <div className="mx-auto w-16 h-16 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-2xl font-bold mb-4">
+                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3">
                   {item.step}
                 </div>
-                <h3 className="text-xl font-semibold text-brand-blue-dark mb-2">
+                <h3 className="text-lg font-semibold text-brand-blue-dark mb-1.5">
                   {item.title}
                 </h3>
                 <p className="text-gray-600">{item.desc}</p>
@@ -287,16 +288,16 @@ export function ServicePageTemplate({
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
+      <section className="py-10 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-2xl font-bold mb-3">
             {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
           </h2>
-          <p className="text-lg text-white/80 mb-8">
+          <p className="text-base text-white/80 mb-6">
             {ctaSubline ??
               "Straightforward quotes so you know what to expect before we start."}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={onOpenQuoteForm}
               size="lg"
@@ -320,7 +321,7 @@ export function ServicePageTemplate({
       </section>
 
       {contentRevised ? (
-        <p className="text-center text-xs text-gray-500 py-6 px-4">
+        <p className="text-center text-xs text-gray-500 py-4 px-4">
           Content reviewed {contentRevised}
         </p>
       ) : null}

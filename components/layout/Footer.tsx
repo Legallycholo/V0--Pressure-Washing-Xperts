@@ -24,17 +24,17 @@ export function Footer() {
   return (
     <footer className="bg-section-dark-alt border-t border-white/10">
       {/* Main Footer */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link
               href="/"
-              className="inline-block mb-6 text-xl font-bold text-white tracking-tight hover:text-brand-yellow transition-colors"
+              className="inline-block mb-4 text-lg font-bold text-white tracking-tight hover:text-brand-yellow transition-colors"
             >
               Pressure Washing Xperts
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-white/60 text-sm leading-relaxed mb-4">
               Professional pressure washing for homes and businesses across Metro Atlanta.
               Licensed & Insured. We don't do "good enough." We do Xpert
             </p>
@@ -42,7 +42,7 @@ export function Footer() {
 
           {/* Services Column */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Our Services</h3>
+            <h3 className="text-white font-bold text-base mb-4">Our Services</h3>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.href}>
@@ -55,7 +55,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="text-white font-semibold text-sm mt-6 mb-3">Top Service Areas</h4>
+            <h4 className="text-white font-semibold text-sm mt-4 mb-2">Top Service Areas</h4>
             <ul className="space-y-2">
               {footerTopServiceAreaLinks.map((area) => (
                 <li key={area.href}>
@@ -72,7 +72,7 @@ export function Footer() {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Quick Links</h3>
+            <h3 className="text-white font-bold text-base mb-4">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -89,8 +89,8 @@ export function Footer() {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Contact Us</h3>
-            <div className="space-y-4">
+            <h3 className="text-white font-bold text-base mb-4">Contact Us</h3>
+            <div className="space-y-3">
               <a
                 href="tel:800-451-7213"
                 className={`flex items-center gap-3 rounded-md text-white/60 transition-colors hover:text-brand-yellow hover:bg-white/5 ${ctaPress}`}
@@ -117,8 +117,8 @@ export function Footer() {
             </div>
 
             {/* Social Media Placeholder */}
-            <div className="mt-6">
-              <p className="text-white/40 text-sm mb-3">Follow Us</p>
+            <div className="mt-4">
+              <p className="text-white/40 text-sm mb-2">Follow Us</p>
               <div className="flex gap-3">
                 {/* Placeholder social icons */}
                 {["FB", "IG", "YT", "TW"].map((social) => (
@@ -137,8 +137,8 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <p className="text-white/40 text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Pressure Washing Xperts. All rights reserved.
             </p>
