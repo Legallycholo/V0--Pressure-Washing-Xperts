@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { residentialCurbingMedia } from "@/data/residential-service-media"
 
 export default function CurbingPage() {
   const goQuote = useGoToHomeQuoteSection()
@@ -18,6 +19,7 @@ export default function CurbingPage() {
         description="Professional curbing and edging cleaning services"
         category="Residential"
         onOpenQuoteForm={() => goQuote()}
+        {...residentialCurbingMedia}
       />
       <Footer />
       <FloatingCallButton />

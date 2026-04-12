@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react"
 import {
@@ -29,14 +28,11 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
-              <Image
-                src="/images/logo-new.png"
-                alt="Pressure Washing Xperts Logo"
-                width={400}
-                height={140}
-                className="h-24 w-auto object-contain"
-              />
+            <Link
+              href="/"
+              className="inline-block mb-6 text-xl font-bold text-white tracking-tight hover:text-brand-yellow transition-colors"
+            >
+              Pressure Washing Xperts
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Professional pressure washing for homes and businesses across Metro Atlanta.

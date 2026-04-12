@@ -15,7 +15,6 @@ export const residentialServices: NavLinkItem[] = [
   { href: "/services/residential/roof-soft-washing", label: "Roof Soft Washing" },
   { href: "/services/residential/brick-stone-masonry", label: "Brick, Stone & Masonry" },
   { href: "/services/residential/gutters", label: "Gutters" },
-  { href: "/services/residential/landscape-features", label: "Landscape Features" },
   { href: "/services/residential/curbing", label: "Curbing" },
 ]
 

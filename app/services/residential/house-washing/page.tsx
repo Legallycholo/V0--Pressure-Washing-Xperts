@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { residentialHouseWashingMedia } from "@/data/residential-service-media"
 
 export default function HouseWashingPage() {
   const goQuote = useGoToHomeQuoteSection()
@@ -26,6 +27,7 @@ export default function HouseWashingPage() {
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        {...residentialHouseWashingMedia}
       />
       <Footer />
       <FloatingCallButton />

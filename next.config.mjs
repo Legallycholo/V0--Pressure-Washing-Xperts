@@ -6,6 +6,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/services/residential/landscape-features",
+        destination: "/services/residential",
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig

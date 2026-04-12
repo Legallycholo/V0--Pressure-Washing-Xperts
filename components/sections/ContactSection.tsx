@@ -1,45 +1,14 @@
 "use client"
 
-import { Suspense } from "react"
-import { useSearchParams } from "next/navigation"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-import { ContactQuoteForm, type QuoteFormCopy } from "@/components/sections/ContactQuoteForm"
+import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { contactIconDark, contactRowDark, ctaPress } from "@/lib/ctaInteraction"
-import { modalCopyDefault, modalCopyOfferIntent } from "@/data/modalCopy"
-import { isOfferId } from "@/data/offers"
 import { businessAddress, businessMapsUrl } from "@/data/site"
-
-const inlineQuoteCopy = {
-  ...modalCopyDefault,
-  headline: "Request a Fast Quote",
-  subline: "",
-  submitLabel: "Submit Request",
-} satisfies QuoteFormCopy
-
-function ContactQuoteFormWithOfferFromUrl() {
-  const searchParams = useSearchParams()
-  const offerRaw = searchParams.get("offer")
-  const initialOfferId = isOfferId(offerRaw) ? offerRaw : undefined
-  const copy: QuoteFormCopy = initialOfferId
-    ? { ...inlineQuoteCopy, ...modalCopyOfferIntent }
-    : inlineQuoteCopy
-
-  return (
-    <ContactQuoteForm
-      key={offerRaw ?? "default"}
-      variant="inline"
-      copy={copy}
-      showOfferSelect
-      initialOfferId={initialOfferId}
-      className="pt-2"
-    />
-  )
-}
 
 export function ContactSection() {
   return (
@@ -137,27 +106,7 @@ export function ContactSection() {
           </div>
 
           {/* Right Column - Quote form */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-yellow/20 to-brand-blue-light/20 rounded-3xl rotate-3" />
-
-            <div
-              id="contact-form"
-              className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-brand-blue to-section-dark-alt p-6 sm:p-8 max-h-[min(90vh,52rem)] overflow-y-auto"
-            >
-              <Suspense
-                fallback={
-                  <ContactQuoteForm
-                    variant="inline"
-                    copy={inlineQuoteCopy}
-                    showOfferSelect
-                    className="pt-2"
-                  />
-                }
-              >
-                <ContactQuoteFormWithOfferFromUrl />
-              </Suspense>
-            </div>
-          </div>
+          <ContactQuoteFormCard />
         </div>
       </div>
     </section>

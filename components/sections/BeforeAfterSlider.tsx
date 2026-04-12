@@ -14,6 +14,10 @@ export type BeforeAfterSliderProps = {
   afterAlt: string
   beforeObjectPosition?: string
   afterObjectPosition?: string
+  /** Appended to the before image (e.g. rotation fixes for odd EXIF) */
+  beforeImageClassName?: string
+  /** Appended to the after image */
+  afterImageClassName?: string
   /** Used in aria labels, e.g. comparison title */
   comparisonLabel: string
   /** Tailwind aspect classes for the frame (e.g. aspect-[4/3] or arbitrary aspect-[16/9]) */
@@ -45,6 +49,8 @@ export function BeforeAfterSlider({
   afterAlt,
   beforeObjectPosition,
   afterObjectPosition,
+  beforeImageClassName,
+  afterImageClassName,
   comparisonLabel,
   aspectClassName = "aspect-[4/3]",
   sizes = "(max-width: 896px) 100vw, 896px",
@@ -163,7 +169,7 @@ export function BeforeAfterSlider({
             alt={afterAlt}
             fill
             draggable={false}
-            className="object-cover"
+            className={cn("object-cover", afterImageClassName)}
             style={{ objectPosition: afterObjectPosition ?? "50% 50%" }}
             sizes={sizes}
             priority
@@ -176,7 +182,7 @@ export function BeforeAfterSlider({
               alt={beforeAlt}
               fill
               draggable={false}
-              className="object-cover"
+              className={cn("object-cover", beforeImageClassName)}
               style={{ objectPosition: beforeObjectPosition ?? "50% 50%" }}
               sizes={sizes}
               priority

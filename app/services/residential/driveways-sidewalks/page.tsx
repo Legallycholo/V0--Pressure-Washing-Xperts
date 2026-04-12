@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { residentialDrivewaysSidewalksMedia } from "@/data/residential-service-media"
 
 export default function DrivewaySidewalkPage() {
   const goQuote = useGoToHomeQuoteSection()
@@ -26,6 +27,7 @@ export default function DrivewaySidewalkPage() {
           "Safe for all concrete surfaces"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        {...residentialDrivewaysSidewalksMedia}
       />
       <Footer />
       <FloatingCallButton />

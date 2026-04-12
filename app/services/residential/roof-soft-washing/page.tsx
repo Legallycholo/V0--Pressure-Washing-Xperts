@@ -26,6 +26,7 @@ export default function RoofSoftWashingPage() {
           "Manufacturer-approved techniques"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        benefitsAside="contactForm"
       />
       <Footer />
       <FloatingCallButton />

@@ -9,7 +9,6 @@ const servicePages = [
   // Residential
   { path: 'services/residential/brick-stone-masonry', title: 'Brick, Stone & Masonry', category: 'Residential', desc: 'Professional cleaning for brick, stone, and masonry surfaces to restore original beauty and remove stains.' },
   { path: 'services/residential/gutters', title: 'Gutters', category: 'Residential', desc: 'Thorough gutter cleaning and exterior gutter washing to prevent clogs and maintain proper drainage.' },
-  { path: 'services/residential/landscape-features', title: 'Landscape Features', category: 'Residential', desc: 'Clean and restore your outdoor landscape features including retaining walls, fountains, and decorative structures.' },
   { path: 'services/residential/curbing', title: 'Curbing', category: 'Residential', desc: 'Professional curb cleaning to remove dirt, oil stains, and grime for improved curb appeal.' },
   
   // Commercial
