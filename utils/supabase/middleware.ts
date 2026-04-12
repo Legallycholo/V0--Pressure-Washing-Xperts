@@ -2,11 +2,11 @@ import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 export const updateSession = async (request: NextRequest) => {
   // Fail open so a missing env var does not take down the whole site.
-  if (!supabaseUrl?.trim() || !supabasePublishableKey?.trim()) {
+  if (!supabaseUrl?.trim() || !supabaseAnonKey?.trim()) {
     return NextResponse.next({
       request,
     })
@@ -17,7 +17,7 @@ export const updateSession = async (request: NextRequest) => {
   })
 
   try {
-    const supabase = createServerClient(supabaseUrl, supabasePublishableKey, {
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll()

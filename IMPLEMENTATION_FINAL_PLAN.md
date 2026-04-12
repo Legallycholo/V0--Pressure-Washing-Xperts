@@ -5,7 +5,7 @@
 | Layer | Detail |
 | --- | --- |
 | Frontend | Next.js 16 (App Router), React 19, TypeScript |
-| Lead API | `POST /api/leads` — [`app/api/leads/route.ts`](app/api/leads/route.ts) |
+| Lead capture | [`lib/submitLead.ts`](lib/submitLead.ts) → Supabase browser client → insert into `public.leads` (anon key + RLS insert policy) |
 | Database | Supabase Postgres — project `uljtanpaligqwqtojhdt` (“Pressure Contacts”) |
 | Deployment | Vercel — project `v0-pressure-washing-xperts` |
 
@@ -13,40 +13,38 @@
 
 ## Already Working
 
-- Next.js 16 App Router; client [`lib/submitLead.ts`](lib/submitLead.ts) → server [`app/api/leads/route.ts`](app/api/leads/route.ts); server-side validation and optional Resend email.
+- Next.js 16 App Router; [`lib/submitLead.ts`](lib/submitLead.ts) validates and inserts into [`public.leads`](supabase/migrations/20260412120000_create_leads.sql) via `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
 - UI: success state (“Thank You!”) and error state (`submitError`) on [`components/sections/ContactQuoteForm.tsx`](components/sections/ContactQuoteForm.tsx) and [`components/sections/Hero.tsx`](components/sections/Hero.tsx); HTML5 `required` on fields.
 - Vercel: production deployments **READY** for `v0-pressure-washing-xperts`; primary domain includes `v0-pressure-washing-xperts.vercel.app`.
 - Favicon/icons in [`app/layout.tsx`](app/layout.tsx).
 - [`next/image`](components/sections/Gallery.tsx) used in key sections; [`.gitignore`](.gitignore) excludes `.env*.local`; no API keys committed in source.
-- Repo migration [`supabase/migrations/20260412120000_create_leads.sql`](supabase/migrations/20260412120000_create_leads.sql) defines the **intended** `public.leads` table (not yet applied to the remote Supabase project at audit time).
+- Repo migration [`supabase/migrations/20260412120000_create_leads.sql`](supabase/migrations/20260412120000_create_leads.sql) defines `public.leads` (uuid `id`, `name`, nullable optional fields, RLS + anon insert).
 
 ---
 
 ## CRITICAL — Must Fix Before Launch
 
-### Database: `leads` missing; `Contact_form` incomplete
+### Database: apply `leads` migration
 
-- **Problem:** The API inserts into **`public.leads`** (`.from("leads")`). The live Supabase project only had **`public.Contact_form`** with columns **`id`** and **`created_at`**. There was **no `leads` table** — inserts fail once env vars are configured. `Contact_form` did not match the payload (`full_name`, `email`, `phone`, etc.).
-- **File(s):** [`app/api/leads/route.ts`](app/api/leads/route.ts); [`supabase/migrations/20260412120000_create_leads.sql`](supabase/migrations/20260412120000_create_leads.sql); optionally [`README.md`](README.md).
-- **Solution (choose one):**
-  - **A — Minimal code change:** Apply the existing migration to Supabase (CLI `db push`, SQL Editor, or MCP migration) so **`public.leads`** exists and matches the route. Optionally remove or repurpose unused `Contact_form` after review.
-  - **B — Match table name `Contact_form`:** Add all required columns to `Contact_form`, then change `.from("leads")` to `.from("Contact_form")` with correct PostgREST table name/casing.
+- **Problem:** Inserts target **`public.leads`**. If that table does not exist or column names/types differ, submissions fail.
+- **File(s):** [`supabase/migrations/20260412120000_create_leads.sql`](supabase/migrations/20260412120000_create_leads.sql); [`README.md`](README.md).
+- **Solution:** Apply the migration to Supabase (CLI `db push`, SQL Editor, or linked workflow). If an older `leads` or `Contact_form` table exists, reconcile schema (columns: `name`, `email`, `phone`, optional fields as in migration) before go-live.
 
 ### Production environment variables
 
-- **Problem:** If `SUPABASE_URL` or `SUPABASE_SERVICE_ROLE_KEY` are missing, the API returns **503**. Email notifications are skipped without Resend configuration.
-- **File(s):** Vercel project → Settings → Environment Variables; local `.env.local` (gitignored).
-- **Solution:** Set **`SUPABASE_URL`**, **`SUPABASE_SERVICE_ROLE_KEY`**, **`RESEND_API_KEY`**, **`RESEND_FROM_EMAIL`**, and optionally **`LEAD_NOTIFICATION_EMAIL`** on Vercel (Production and Preview as needed). Per product decision: add **`NEXT_PUBLIC_SUPABASE_URL`** and **`NEXT_PUBLIC_SUPABASE_ANON_KEY`** only if you add a **browser** Supabase client; the current lead path is **server-only** and does not require them.
+- **Problem:** Missing `NEXT_PUBLIC_SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_ANON_KEY` prevents inserts; the app shows a neutral error to users.
+- **File(s):** Vercel project → Settings → Environment Variables; local `.env.local` (gitignored). See [`.env.example`](.env.example).
+- **Solution:** Set **`NEXT_PUBLIC_SUPABASE_URL`** and **`NEXT_PUBLIC_SUPABASE_ANON_KEY`** on Vercel (Production and Preview as needed).
 
 ### Vercel ↔ Supabase native integration
 
 - **Problem:** A linked Supabase integration can inject or conflict with manually set environment variables.
 - **File(s):** N/A (Vercel dashboard).
-- **Solution:** Under **Integrations**, disconnect the Supabase integration if present; set Supabase URL and keys manually from **Supabase → Project Settings → API**.
+- **Solution:** Under **Integrations**, align injected vars with the names above or set them manually from **Supabase → Project Settings → API**.
 
-### RLS on `Contact_form` (context)
+### RLS on `leads`
 
-- **Problem:** `Contact_form` had **RLS enabled** with **no policies** — that blocks **anonymous** direct inserts from the browser. The **`/api/leads`** route uses the **service role**, which **bypasses RLS**, so anon INSERT policy is **not required** for the current server-side flow unless you later submit from the client with the anon key.
+- **Requirement:** RLS enabled with an **`insert` policy for role `anon`** (see migration) so browser submissions with the anon key succeed.
 
 ---
 
@@ -64,12 +62,6 @@
 - **File(s):** New route (e.g. `app/privacy/page.tsx`); [`components/layout/Footer.tsx`](components/layout/Footer.tsx) or similar for the link.
 - **Solution:** Publish a privacy policy (what is collected, why, retention, contact) and link it in the footer before go-live.
 
-### README vs live schema
-
-- **Problem:** [`README.md`](README.md) documents `public.leads`; the dashboard had emphasized `Contact_form` — easy to confuse operators.
-- **File(s):** [`README.md`](README.md).
-- **Solution:** After the schema decision (A or B above), update the README so it matches production.
-
 ---
 
 ## NICE TO HAVE — Can Fix Post-Launch
@@ -86,25 +78,24 @@
 | --- | --- |
 | **Component File** | [`components/sections/ContactQuoteForm.tsx`](components/sections/ContactQuoteForm.tsx) (modal + inline); [`components/sections/Hero.tsx`](components/sections/Hero.tsx) (hero form); [`components/sections/ContactQuoteFormCard.tsx`](components/sections/ContactQuoteFormCard.tsx) |
 | **Fields Collected** | `fullName`, `email`, `phone`, `city`, `state`, `zip`, `message`, `howHeard`, `selectedOffer` (quote flows; Hero sends empty string), plus `submissionType`, `utm_source` / `utm_medium` / `utm_campaign`, `pagePath` |
-| **Submits Via** | [`lib/submitLead.ts`](lib/submitLead.ts) → **`POST /api/leads`** — not direct Supabase from the browser |
-| **Supabase Table** | Coded as **`public.leads`**; remote DB had only **`Contact_form`** until aligned — **must match after migration** |
-| **RLS INSERT Policy (anon on `Contact_form`)** | **No** (at audit); not required for service-role `/api/leads` inserts |
+| **Submits Via** | [`lib/submitLead.ts`](lib/submitLead.ts) → Supabase `.from("leads").insert(...)` |
+| **Supabase Table** | **`public.leads`** — must match migration |
+| **RLS** | Anon **insert** policy required for browser flow |
 | **User Success Message** | **Yes** |
-| **Email Notification** | **Yes** (Resend), when `RESEND_API_KEY` and `RESEND_FROM_EMAIL` are set |
+| **Email Notification** | **No** (removed; view leads in Supabase Table Editor) |
 
 ---
 
 ## Exact Implementation Order
 
-1. Disconnect Vercel–Supabase native integration (if installed); confirm env vars are manually controlled.
-2. **Fix database:** Apply [`supabase/migrations/20260412120000_create_leads.sql`](supabase/migrations/20260412120000_create_leads.sql) **or** extend `Contact_form` and update [`app/api/leads/route.ts`](app/api/leads/route.ts) `.from(...)` accordingly.
-3. Set **`SUPABASE_URL`** and **`SUPABASE_SERVICE_ROLE_KEY`** in Vercel (and locally for dev). Add **`NEXT_PUBLIC_SUPABASE_*`** only if adding a client-side Supabase integration later.
-4. Configure **Resend** env vars; run one end-to-end test (submit form → row in Supabase → email received).
+1. Disconnect or align Vercel–Supabase native integration (if installed); confirm env vars are correct.
+2. **Fix database:** Apply [`supabase/migrations/20260412120000_create_leads.sql`](supabase/migrations/20260412120000_create_leads.sql) or reconcile existing tables.
+3. Set **`NEXT_PUBLIC_SUPABASE_URL`** and **`NEXT_PUBLIC_SUPABASE_ANON_KEY`** in Vercel (and `.env.local` for local dev).
+4. Run one end-to-end test (submit form → row in Supabase).
 5. Add **privacy policy** page and footer link.
 6. Add **metadata**, **Open Graph**, and **og:image** in [`app/layout.tsx`](app/layout.tsx).
-7. (Optional) If `Contact_form` is obsolete after migration, document removal or archival; add anon RLS policy **only** if switching to browser-side inserts with the anon key.
-8. Final smoke test on the production URL.
+7. Final smoke test on the production URL.
 
 ---
 
-*Generated from pre-launch audit. Execution of these steps is separate — no application code was changed in the commit that adds this file.*
+*Updated after Supabase-only lead capture refactor.*
