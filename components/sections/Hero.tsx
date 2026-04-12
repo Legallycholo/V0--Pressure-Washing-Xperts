@@ -68,20 +68,20 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
     const utmCampaign = sp.get("utm_campaign") ?? undefined
 
     const result = await submitLeadRequest({
-      fullName: formData.fullName,
+      full_name: formData.fullName,
       email: formData.email,
       phone: formData.phone,
       city: formData.city,
       state: formData.state,
       zip: formData.zip,
       message: formData.message,
-      howHeard: formData.howHeard,
-      selectedOffer: "",
-      submissionType: modalCopyDefault.badge,
-      utmSource,
-      utmMedium,
-      utmCampaign,
-      pagePath: pathname ?? undefined,
+      how_heard: formData.howHeard,
+      selected_offer: "",
+      submission_type: modalCopyDefault.badge,
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      page_path: pathname ?? undefined,
     })
 
     setIsSubmitting(false)

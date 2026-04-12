@@ -100,20 +100,20 @@ export function ContactQuoteForm({
     const utmCampaign = sp.get("utm_campaign") ?? undefined
 
     const result = await submitLeadRequest({
-      fullName: formData.fullName,
+      full_name: formData.fullName,
       email: formData.email,
       phone: formData.phone,
       city: formData.city,
       state: formData.state,
       zip: formData.zip,
       message: formData.message,
-      howHeard: formData.howHeard,
-      selectedOffer: formData.selectedOffer,
-      submissionType: copy.badge,
-      utmSource,
-      utmMedium,
-      utmCampaign,
-      pagePath: pathname ?? undefined,
+      how_heard: formData.howHeard,
+      selected_offer: formData.selectedOffer,
+      submission_type: copy.badge,
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      page_path: pathname ?? undefined,
     })
 
     setIsSubmitting(false)

@@ -1,18 +1,18 @@
 export type LeadPayload = {
-  fullName: string
+  full_name: string
   email: string
   phone: string
-  city: string
-  state: string
-  zip: string
-  message: string
-  howHeard: string
-  selectedOffer: string
-  submissionType: string
-  utmSource?: string
-  utmMedium?: string
-  utmCampaign?: string
-  pagePath?: string
+  city?: string
+  state?: string
+  zip?: string
+  message?: string
+  how_heard?: string
+  selected_offer?: string
+  submission_type?: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  page_path?: string
 }
 
 export type SubmitLeadResult =

@@ -7,13 +7,22 @@ export const runtime = "nodejs"
 const DEFAULT_NOTIFY_EMAIL = "growth@tanymarketing.com"
 
 type LeadBody = {
-  fullName?: string
+  full_name?: string
   email?: string
   phone?: string
   city?: string
   state?: string
   zip?: string
   message?: string
+  how_heard?: string
+  selected_offer?: string
+  submission_type?: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  page_path?: string
+  // Backward-compatible aliases during rollout.
+  fullName?: string
   howHeard?: string
   selectedOffer?: string
   submissionType?: string
@@ -24,16 +33,7 @@ type LeadBody = {
 }
 
 function validate(body: LeadBody): string | null {
-  const required = [
-    body.fullName,
-    body.email,
-    body.phone,
-    body.city,
-    body.state,
-    body.zip,
-    body.message,
-    body.howHeard,
-  ]
+  const required = [body.full_name, body.email, body.phone]
   if (required.some((v) => typeof v !== "string" || !v.trim())) {
     return "Missing required fields."
   }
@@ -60,7 +60,7 @@ function buildLeadEmailHtml(body: LeadBody): string {
 <html>
 <body style="font-family:system-ui,sans-serif;line-height:1.5;color:#111">
   <p>New lead from <strong>Pressure Washing Xperts</strong> website.</p>
-  <table style="border-collapse:collapse;max-width:560px">${row("Name", body.fullName)}${row("Email", body.email)}${row("Phone", body.phone)}${row("City", body.city)}${row("State", body.state)}${row("ZIP", body.zip)}${row("How they heard", body.howHeard)}${row("Offer", body.selectedOffer)}${row("Form / type", body.submissionType)}${row("Page", body.pagePath)}${row("utm_source", body.utmSource)}${row("utm_medium", body.utmMedium)}${row("utm_campaign", body.utmCampaign)}</table>
+  <table style="border-collapse:collapse;max-width:560px">${row("Name", body.full_name)}${row("Email", body.email)}${row("Phone", body.phone)}${row("City", body.city)}${row("State", body.state)}${row("ZIP", body.zip)}${row("How they heard", body.how_heard)}${row("Offer", body.selected_offer)}${row("Form / type", body.submission_type)}${row("Page", body.page_path)}${row("utm_source", body.utm_source)}${row("utm_medium", body.utm_medium)}${row("utm_campaign", body.utm_campaign)}</table>
   <p style="margin-top:16px"><strong>Message</strong></p>
   <p style="white-space:pre-wrap;margin:0">${escapeHtml(body.message?.trim() || "")}</p>
 </body>
@@ -109,6 +109,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 })
   }
 
+  body = {
+    ...body,
+    full_name: body.full_name ?? body.fullName,
+    how_heard: body.how_heard ?? body.howHeard,
+    selected_offer: body.selected_offer ?? body.selectedOffer,
+    submission_type: body.submission_type ?? body.submissionType,
+    utm_source: body.utm_source ?? body.utmSource,
+    utm_medium: body.utm_medium ?? body.utmMedium,
+    utm_campaign: body.utm_campaign ?? body.utmCampaign,
+    page_path: body.page_path ?? body.pagePath,
+  }
+
   const err = validate(body)
   if (err) {
     return NextResponse.json({ error: err }, { status: 400 })
@@ -119,26 +131,27 @@ export async function POST(request: Request) {
   })
 
   const row = {
-    full_name: body.fullName!.trim(),
+    full_name: body.full_name!.trim(),
     email: body.email!.trim(),
     phone: body.phone!.trim(),
-    city: body.city!.trim(),
-    state: body.state!.trim(),
-    zip: body.zip!.trim(),
-    message: body.message!.trim(),
-    how_heard: body.howHeard!.trim(),
-    selected_offer: body.selectedOffer?.trim() || null,
-    submission_type: body.submissionType?.trim() || null,
-    utm_source: body.utmSource?.trim() || null,
-    utm_medium: body.utmMedium?.trim() || null,
-    utm_campaign: body.utmCampaign?.trim() || null,
-    page_path: body.pagePath?.trim() || null,
+    city: body.city?.trim() || null,
+    state: body.state?.trim() || null,
+    zip: body.zip?.trim() || null,
+    message: body.message?.trim() || null,
+    how_heard: body.how_heard?.trim() || null,
+    selected_offer: body.selected_offer?.trim() || null,
+    submission_type: body.submission_type?.trim() || null,
+    utm_source: body.utm_source?.trim() || null,
+    utm_medium: body.utm_medium?.trim() || null,
+    utm_campaign: body.utm_campaign?.trim() || null,
+    page_path: body.page_path?.trim() || null,
   }
 
+  console.log("[api/leads] payload being sent:", JSON.stringify(body))
   const { error: insertError } = await supabase.from("leads").insert(row)
 
   if (insertError) {
-    console.error("[api/leads] insert failed", insertError)
+    console.error("[api/leads] insert failed FULL ERROR:", JSON.stringify(insertError))
     return NextResponse.json(
       { error: "Could not save your request. Please call (800)-451-7213." },
       { status: 500 }
