@@ -40,7 +40,7 @@ export function Footer() {
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Professional pressure washing for homes and businesses across Metro Atlanta.
-              Licensed & Insured. Where Pressure Meets Xpertise.
+              Licensed & Insured. We don't do "good enough." We do Xpert
             </p>
           </div>
 
