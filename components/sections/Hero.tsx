@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
+import { usePathname, useSearchParams } from "next/navigation"
 import { Check, CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -18,14 +18,22 @@ import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
 import { modalCopyDefault } from "@/data/modalCopy"
+import {
+  offers,
+  OFFER_NONE,
+  isOfferId,
+  type OfferId,
+} from "@/data/offers"
 import { submitLeadRequest } from "@/lib/submitLead"
 import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
 
 interface HeroProps {
   onOpenQuoteForm: () => void
+  /** From `?offer=` when claiming an offer; keeps hero and contact form in sync. */
+  initialOfferId?: OfferId
 }
 
-export function Hero({ onOpenQuoteForm }: HeroProps) {
+export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
   const pathname = usePathname()
   const howHeardOptions = [
     { value: "search", label: "Search / Google" },
@@ -36,7 +44,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(() => ({
     fullName: "",
     email: "",
     phone: "",
@@ -45,7 +53,15 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
     zip: "",
     message: "",
     howHeard: "",
-  })
+    selectedOffer: initialOfferId ?? OFFER_NONE,
+  }))
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      selectedOffer: initialOfferId ?? OFFER_NONE,
+    }))
+  }, [initialOfferId])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -76,7 +92,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       zip: formData.zip,
       message: formData.message,
       how_heard: formData.howHeard,
-      selected_offer: "",
+      selected_offer: formData.selectedOffer,
       submission_type: modalCopyDefault.badge,
       utm_source: utmSource,
       utm_medium: utmMedium,
@@ -108,6 +124,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       zip: "",
       message: "",
       howHeard: "",
+      selectedOffer: initialOfferId ?? OFFER_NONE,
     })
   }
 
@@ -229,6 +246,42 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                   onSubmit={handleSubmit}
                   className="p-4 sm:p-5 space-y-3 lg:grid lg:grid-cols-2 lg:gap-x-4 lg:gap-y-3 lg:space-y-0"
                 >
+                  <div className="lg:col-span-2">
+                    <Label htmlFor="hero-selected-offer" className="text-foreground">
+                      Offer <span className="text-destructive">*</span>
+                    </Label>
+                    <Select
+                      value={formData.selectedOffer}
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          selectedOffer:
+                            value === OFFER_NONE || isOfferId(value)
+                              ? value
+                              : OFFER_NONE,
+                        }))
+                      }
+                      required
+                    >
+                      <SelectTrigger
+                        id="hero-selected-offer"
+                        className="mt-1 w-full"
+                      >
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent {...formSelectContentPlacementProps}>
+                        <SelectItem value={OFFER_NONE}>
+                          No offer: general quote only
+                        </SelectItem>
+                        {offers.map((o) => (
+                          <SelectItem key={o.id} value={o.id}>
+                            {o.title}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
                   <div className="space-y-3">
                     <div>
                       <Label htmlFor="fullName" className="text-foreground">
@@ -432,4 +485,14 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
       </div>
     </section>
   )
+}
+
+/** Reads `?offer=` for the homepage hero so lead rows store the same offer id as the contact form. */
+export function HeroWithOfferFromUrl(
+  props: Omit<HeroProps, "initialOfferId">
+) {
+  const searchParams = useSearchParams()
+  const raw = searchParams.get("offer")
+  const initialOfferId = isOfferId(raw) ? raw : undefined
+  return <Hero {...props} initialOfferId={initialOfferId} />
 }

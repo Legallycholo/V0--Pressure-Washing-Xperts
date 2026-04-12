@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X, Phone, ChevronDown } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
+import { Menu, X, Phone, ChevronDown, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -26,6 +26,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { OfferAnnouncementBar } from "@/components/layout/OfferAnnouncementBar"
 
 interface HeaderProps {
   onOpenQuoteForm: () => void
@@ -37,6 +38,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +58,23 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false)
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [isMenuOpen])
+
+  const exitPage = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back()
+    } else {
+      router.push("/")
+    }
+  }
 
   const handleNavClick = () => {
     setIsMenuOpen(false)
@@ -237,6 +256,18 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <button
+                    type="button"
+                    onClick={exitPage}
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none"
+                  >
+                    Exit
+                  </button>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -287,6 +318,21 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
         }`}
       >
         <nav className="bg-brand-blue-dark/95 backdrop-blur-md px-4 py-4 space-y-2">
+          <div className="flex items-center justify-between gap-3 pb-3 mb-1 border-b border-white/10">
+            <span className="text-xs font-semibold uppercase tracking-wider text-white/45">
+              Menu
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(false)}
+              className={`inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow ${ctaPress}`}
+              aria-label="Exit menu"
+            >
+              <LogOut className="size-4" aria-hidden />
+              Exit menu
+            </button>
+          </div>
+
           {/* Home */}
           <Link
             href="/"
@@ -397,6 +443,17 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           </div>
 
           <div className="pt-4 border-t border-white/10 space-y-4">
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(false)
+                exitPage()
+              }}
+              className={`flex w-full items-center justify-center gap-2 rounded-md border border-white/25 px-4 py-3 text-base font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow ${ctaPress}`}
+            >
+              <LogOut className="size-5" aria-hidden />
+              Exit page
+            </button>
             <a
               href="tel:800-451-7213"
               className={`flex items-center gap-2 text-base font-medium text-white transition-colors hover:text-brand-yellow ${ctaPress}`}
@@ -416,6 +473,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           </div>
         </nav>
       </div>
+      <OfferAnnouncementBar />
     </header>
   )
 }

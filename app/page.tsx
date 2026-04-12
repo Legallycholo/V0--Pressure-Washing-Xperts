@@ -1,7 +1,8 @@
 "use client"
 
+import { Suspense } from "react"
 import { Header } from "@/components/layout/Header"
-import { Hero } from "@/components/sections/Hero"
+import { Hero, HeroWithOfferFromUrl } from "@/components/sections/Hero"
 import { Services } from "@/components/sections/Services"
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs"
 import { Gallery } from "@/components/sections/Gallery"
@@ -31,7 +32,15 @@ export default function Home() {
       <Header onOpenQuoteForm={() => goQuote({ target: "contact" })} />
 
       <main>
-        <Hero onOpenQuoteForm={() => goQuote({ target: "contact" })} />
+        <Suspense
+          fallback={
+            <Hero onOpenQuoteForm={() => goQuote({ target: "contact" })} />
+          }
+        >
+          <HeroWithOfferFromUrl
+            onOpenQuoteForm={() => goQuote({ target: "contact" })}
+          />
+        </Suspense>
         <Services onOpenQuoteForm={openQuoteForm} />
         <BeforeAfter onOpenQuoteForm={openQuoteForm} />
         <WhyChooseUs onOpenQuoteForm={openQuoteForm} />

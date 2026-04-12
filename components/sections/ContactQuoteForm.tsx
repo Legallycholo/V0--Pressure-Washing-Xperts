@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useState } from "react"
+import { useId, useMemo, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -17,7 +17,23 @@ import {
 import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 import { cn } from "@/lib/utils"
 import type { OfferId } from "@/data/offers"
-import { offers, OFFER_NONE } from "@/data/offers"
+import {
+  getOfferById,
+  getPremiumOffer,
+  isOfferId,
+  offers,
+  OFFER_NONE,
+  PREMIUM_OFFER_UPSELL_BUTTON_SUBLINE,
+  PREMIUM_OFFER_UPSELL_EXPLANATION,
+} from "@/data/offers"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { modalCopyDefault } from "@/data/modalCopy"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
 import { submitLeadRequest } from "@/lib/submitLead"
@@ -72,6 +88,15 @@ export function ContactQuoteForm({
     ...emptyForm(),
     selectedOffer: initialOfferId ?? OFFER_NONE,
   }))
+  /** When set, the offer confirmation dialog is open and shows this id. */
+  const [offerDialogOfferId, setOfferDialogOfferId] = useState<OfferId | null>(
+    null
+  )
+
+  const revertOfferRef = useRef<typeof OFFER_NONE | OfferId>(OFFER_NONE)
+  const offerAcceptedRef = useRef(false)
+
+  const premiumOffer = useMemo(() => getPremiumOffer(), [])
 
   const openedWithOfferIntent = Boolean(initialOfferId)
 
@@ -85,6 +110,57 @@ export function ContactQuoteForm({
   const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
+
+  const handleOfferDialogOpenChange = (open: boolean) => {
+    if (!open) {
+      if (!offerAcceptedRef.current) {
+        setFormData((prev) => ({
+          ...prev,
+          selectedOffer: revertOfferRef.current,
+        }))
+      }
+      offerAcceptedRef.current = false
+      setOfferDialogOfferId(null)
+    }
+  }
+
+  const handleOfferSelectChange = (value: string) => {
+    if (value === OFFER_NONE) {
+      if (offerDialogOfferId !== null) {
+        offerAcceptedRef.current = true
+      }
+      setFormData((prev) => ({ ...prev, selectedOffer: OFFER_NONE }))
+      setOfferDialogOfferId(null)
+      return
+    }
+    if (isOfferId(value)) {
+      revertOfferRef.current = formData.selectedOffer
+      setFormData((prev) => ({ ...prev, selectedOffer: value }))
+      setOfferDialogOfferId(value)
+    }
+  }
+
+  const confirmSelectedOffer = () => {
+    offerAcceptedRef.current = true
+    setOfferDialogOfferId(null)
+  }
+
+  const switchToPremiumOffer = () => {
+    offerAcceptedRef.current = true
+    setFormData((prev) => ({ ...prev, selectedOffer: premiumOffer.id }))
+    setOfferDialogOfferId(null)
+  }
+
+  const selectedOfferDetails = offerDialogOfferId
+    ? getOfferById(offerDialogOfferId)
+    : undefined
+
+  const showPremiumUpsell =
+    selectedOfferDetails != null &&
+    selectedOfferDetails.id !== premiumOffer.id &&
+    selectedOfferDetails.id !== "seasonal"
+
+  const OfferIconForDialog = selectedOfferDetails?.icon
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -262,9 +338,7 @@ export function ContactQuoteForm({
             </Label>
             <Select
               value={formData.selectedOffer}
-              onValueChange={(value) =>
-                handleSelectChange("selectedOffer", value)
-              }
+              onValueChange={handleOfferSelectChange}
               required
             >
               <SelectTrigger
@@ -514,6 +588,96 @@ export function ContactQuoteForm({
           </p>
         </div>
       </form>
+
+      {selectedOfferDetails ? (
+        <Dialog
+          modal={false}
+          open={offerDialogOfferId !== null}
+          onOpenChange={handleOfferDialogOpenChange}
+        >
+          <DialogContent
+            nonBlocking
+            showCloseButton
+            className="flex max-h-[min(92vh,52rem)] w-[min(100%,calc(100vw-1.5rem))] max-w-[52rem] flex-col gap-0 overflow-hidden p-0 shadow-xl !top-1/2 !right-auto !left-3 !translate-x-0 !-translate-y-1/2 duration-300 ease-out sm:!left-5 md:!left-8 motion-reduce:!transition-none data-[state=closed]:zoom-out-100 data-[state=open]:zoom-in-100 data-[state=closed]:slide-out-to-left-4 data-[state=open]:slide-in-from-left-4 motion-reduce:data-[state=closed]:slide-out-to-left-0 motion-reduce:data-[state=open]:slide-in-from-left-0"
+          >
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-6 pr-12 sm:px-7 sm:py-7 sm:pr-14">
+              <DialogHeader className="text-left">
+                <div className="mb-4 flex items-start gap-4">
+                  <span className="bg-brand-blue/10 text-brand-blue flex size-14 shrink-0 items-center justify-center rounded-xl sm:size-16">
+                    {OfferIconForDialog ? (
+                      <OfferIconForDialog
+                        className="size-7 sm:size-8"
+                        aria-hidden
+                      />
+                    ) : null}
+                  </span>
+                  <div className="min-w-0 space-y-1.5">
+                    <p className="text-brand-blue text-sm font-semibold uppercase tracking-wide">
+                      {selectedOfferDetails.discount}
+                    </p>
+                    <DialogTitle className="text-2xl leading-snug sm:text-[1.65rem]">
+                      {selectedOfferDetails.title}
+                    </DialogTitle>
+                  </div>
+                </div>
+                <DialogDescription className="text-foreground text-base leading-relaxed sm:text-lg">
+                  {selectedOfferDetails.description}
+                </DialogDescription>
+                <p className="text-muted-foreground mt-5 text-xs leading-snug sm:text-[0.8125rem]">
+                  {selectedOfferDetails.terms}
+                </p>
+                {showPremiumUpsell ? (
+                  <div
+                    className="border-border bg-brand-blue/5 mt-6 rounded-xl border border-l-4 border-l-brand-blue p-4 sm:p-5"
+                    role="note"
+                  >
+                    <p className="text-brand-blue text-sm font-semibold sm:text-base">
+                      Why we suggest {premiumOffer.title}
+                    </p>
+                    <p className="text-foreground mt-2 text-xs leading-relaxed sm:text-sm">
+                      {PREMIUM_OFFER_UPSELL_EXPLANATION}
+                    </p>
+                  </div>
+                ) : null}
+              </DialogHeader>
+            </div>
+            <DialogFooter className="border-border bg-muted/30 !flex-col gap-3 border-t p-4 sm:p-5 sm:!flex-col">
+              <div className="flex w-full min-w-0 flex-col gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-11 w-full shrink-0"
+                  onClick={() => handleOfferDialogOpenChange(false)}
+                >
+                  Go back
+                </Button>
+                {showPremiumUpsell ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="h-auto min-h-[3.25rem] w-full flex-col items-stretch gap-1 whitespace-normal py-3 text-left leading-snug"
+                    onClick={switchToPremiumOffer}
+                  >
+                    <span className="font-semibold">
+                      Use {premiumOffer.title} instead
+                    </span>
+                    <span className="text-muted-foreground text-[0.6875rem] font-normal leading-snug sm:text-[0.75rem]">
+                      {PREMIUM_OFFER_UPSELL_BUTTON_SUBLINE}
+                    </span>
+                  </Button>
+                ) : null}
+                <Button
+                  type="button"
+                  className="bg-brand-yellow text-brand-blue-dark hover:bg-brand-yellow-dark h-auto min-h-12 w-full whitespace-normal py-3.5 font-bold leading-snug"
+                  onClick={confirmSelectedOffer}
+                >
+                  Continue with {selectedOfferDetails.title}
+                </Button>
+              </div>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      ) : null}
     </div>
   )
 }

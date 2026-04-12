@@ -42,8 +42,10 @@
   /* Glass Effects */
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
-  --header-offset-mobile: 5rem;
-  --header-offset-desktop: 6rem;
+  /* Thin rotating offer strip at top of header (see OfferAnnouncementBar) */
+  --announcement-bar-height: 2.25rem;
+  --header-offset-mobile: calc(5rem + var(--announcement-bar-height));
+  --header-offset-desktop: calc(6rem + var(--announcement-bar-height));
 }
 
 @theme inline {
