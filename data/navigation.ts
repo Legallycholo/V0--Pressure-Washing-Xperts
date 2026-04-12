@@ -16,6 +16,13 @@ export const residentialServices: NavLinkItem[] = [
   { href: "/services/residential/brick-stone-masonry", label: "Brick, Stone & Masonry" },
   { href: "/services/residential/gutters", label: "Gutters" },
   { href: "/services/residential/curbing", label: "Curbing" },
+  { href: "/services/residential/carpet-cleaning", label: "Carpet Cleaning" },
+  { href: "/services/residential/indoor-air", label: "Indoor Air Quality" },
+  { href: "/services/residential/odor-removal", label: "Odor Removal" },
+  { href: "/services/residential/residential-properties", label: "Residential Properties" },
+  { href: "/services/residential/stain-cleaning", label: "Stain Cleaning" },
+  { href: "/services/residential/tile-and-grout-cleaning", label: "Tile & Grout Cleaning" },
+  { href: "/services/residential/upholstery-cleaning", label: "Upholstery Cleaning" },
 ]
 
 export const commercialServices: NavLinkItem[] = [
@@ -25,6 +32,9 @@ export const commercialServices: NavLinkItem[] = [
   { href: "/services/commercial/graffiti-removal", label: "Graffiti Removal" },
   { href: "/services/commercial/dumpster-pads", label: "Dumpster Pads" },
   { href: "/services/commercial/fleet-washing", label: "Fleet Washing" },
+  { href: "/services/commercial/glass-mirror-cleaning", label: "Glass & Mirror Cleaning" },
+  { href: "/services/commercial/commercial-gutter-cleaning", label: "Commercial Gutter Cleaning" },
+  { href: "/services/commercial/rooftop-skylight-cleaning", label: "Rooftop & Skylight Cleaning" },
 ]
 
 export const aboutLinks: NavLinkItem[] = [
