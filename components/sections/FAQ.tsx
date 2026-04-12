@@ -42,7 +42,7 @@ const faqs = [
   {
     question: "Are your cleaning solutions environmentally friendly?",
     answer:
-      "Yes. We use biodegradable, plant-safe detergents wherever possible. Before we rinse, we wet down nearby landscaping to dilute any runoff. We follow PWNA best practices for chemical handling and disposal.",
+      "Yes. We use biodegradable, plant-safe detergents wherever possible. Before we rinse, we wet down nearby landscaping to dilute any runoff. Our team follows responsible chemical handling and disposal practices on every job.",
   },
   {
     question: "How do I prepare for my pressure washing appointment?",

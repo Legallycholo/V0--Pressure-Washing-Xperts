@@ -110,7 +110,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
 
             <p className="mt-6 max-w-2xl text-lg text-white/85 leading-relaxed sm:text-xl lg:mx-0 mx-auto">
               Restore your home or business with safe, effective exterior cleaning.
-              PWNA-approved methods to protect your property and boost curb appeal.
+              Industry-proven techniques that protect your property and boost curb appeal.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm sm:text-base text-white/85 lg:justify-start">
@@ -120,7 +120,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
               </span>
               <span className="inline-flex items-center gap-2">
                 <Check className="size-4 text-brand-blue-light" />
-                PWNA Safety Standards
+                14 Years of Experience
               </span>
               <span className="inline-flex items-center gap-2">
                 <Check className="size-4 text-brand-blue-light" />

@@ -1,0 +1,182 @@
+{
+  "source": "https://www.pressurewashingxpert.com/gallery",
+  "thunderboltUrl": "https://siteassets.parastorage.com/pages/pages/thunderbolt?appDefinitionIdToSiteRevision=%7B%2213d21c63-b5ec-5912-8397-c3a5ddb27a97%22%3A%22440%22%2C%2214271d6f-ba62-d045-549b-ab972ae1f70e%22%3A%2225%22%7D&beckyExperiments=.DatePickerPortal%2C.DisableDocumentScrollWhenLightBoxOpen%2C.EnableCustomCSSVarsForLoginSocialBar%2C.FreemiumBannerOdeditor%2C.LoginBarEnableLoggingInStateInSSR%2C.TextInputAutoFillFix%2C.UseLoginSocialBarCustomMenu%2C.UseNewLoginBarDropdownMenuAlignment%2C.UseNewLoginSocialBarCustomMenuPositioning%2C.UseNewLoginSocialBarElementStructure%2C.UseNewLoginSocialBarMemberInitialsAvatar%2C.WixFreeSiteBannerDesktop%2C.WixFreeSiteBannerMobile%2C.addIdAsClassName%2C.buttonUdp%2C.calculateCollapsibleTextLineHeightByFont%2C.disableBuilderWixComponents%2C.dom_store%2C.dontApplyDacOverridesOnBoBApps%2C.dynamicSlots%2C.fiveGridLineStudioSkins%2C.imageEncodingAVIF%2C.isClassNameToRootEnabled%2C.migrateRepeaterUiTypeMapper%2C.motionTimeAnimationsCSS%2C.overrideFloatInDistance%2C.shouldUseResponsiveImages%2C.svgResolver_2%2C.uiTypeNativeMappers%2C.updateRichTextSemanticClassNamesOnCorvid%2C.useClassnameInResponsiveAppWidget%2C.useImageAvifFormatInNativeProGallery%2C.useResponsiveImgClassicFixed%2C.useSvgLoaderFeature%2C.useSvgLoaderFeatureOnBuilderComps%2C.useWowImageInFastGallery&blocksBuilderManifestGeneratorVersion=1.129.0&commonConfig=%7B%22siteRevision%22%3A%224%22%2C%22branchId%22%3A%2212e939fa-f08f-44e8-b341-73388de1d204%22%7D&contentType=application%2Fjson&deviceType=Desktop&dfCk=6&dfVersion=1.5326.0&disableStaticPagesUrlHierarchy=false&editorName=Unknown&experiments=dm_bgScrubToMotionFixer%2Cdm_masterPageVariablesQueryFixer%2Cdm_migrateOldHoverBoxToNewFixer&externalBaseUrl=https%3A%2F%2Fwww.pressurewashingxpert.com&fileId=6ac295b9.bundle.min&formFactor=desktop&hasTPAWorkerOnSite=false&hasUserDomainMedia=false&isBuilderComponentModel=false&isHttps=true&isInSeo=false&isMultilingualEnabled=false&isPremiumDomain=true&isTrackClicksAnalyticsEnabled=false&isUrlMigrated=true&isWixCodeOnPage=false&isWixCodeOnSite=false&language=en&languageResolutionMethod=QueryParam&metaSiteId=4c9cf668-a492-4059-a1b1-030a10e28e2c&module=thunderbolt-features&originalLanguage=en&pageId=c275e1_e4d3c5bb8f9f81582957d571eab80795_2.json&pilerExperiments=specs.piler.useEditorReactComponents&quickActionsMenuEnabled=false&registryLibrariesTopology=%5B%7B%22artifactId%22%3A%22editor-elements%22%2C%22namespace%22%3A%22wixui%22%2C%22url%22%3A%22https%3A%2F%2Fstatic.parastorage.com%2Fservices%2Feditor-elements%2F1.15037.0%22%7D%2C%7B%22artifactId%22%3A%22editor-elements%22%2C%22namespace%22%3A%22dsgnsys%22%2C%22url%22%3A%22https%3A%2F%2Fstatic.parastorage.com%2Fservices%2Feditor-elements%2F1.15037.0%22%7D%5D&remoteWidgetStructureBuilderVersion=1.251.0&siteId=b6ad87da-53e3-4567-906c-73b5cda0c870&siteRevision=4&staticHTMLComponentUrl=https%3A%2F%2Fwww-pressurewashingxpert-com.filesusr.com%2F&useSandboxInHTMLComp=false&viewMode=desktop",
+  "beforeAlbumId": "SldShwGllry0-ded",
+  "afterAlbumId": "SldShwGllry2-sdh",
+  "pairs": [
+    {
+      "index": 1,
+      "beforeTitle": "IMG_0628",
+      "afterTitle": "IMG_9826",
+      "beforeUri": "c275e1_cbdb6850b3214042a07aa1305ea15546~mv2.jpg",
+      "afterUri": "c275e1_2e650b82b16248d293472bfcc7d9189d~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-01-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-01-after.jpg",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "index": 2,
+      "beforeTitle": "IMG_0629",
+      "afterTitle": "IMG_9825",
+      "beforeUri": "c275e1_486654ba09ad4b9a83576ffe4b36a27c~mv2.jpg",
+      "afterUri": "c275e1_2f2b975822664266a1c392ece321263c~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-02-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-02-after.jpg",
+      "tagPlaceholder": "Driveways & Patios"
+    },
+    {
+      "index": 3,
+      "beforeTitle": "IMG_0627",
+      "afterTitle": "IMG_9827",
+      "beforeUri": "c275e1_0970f52a8b09490ebee3a2a8a7c5923d~mv2.jpg",
+      "afterUri": "c275e1_305dc935e59c41a992c604e24c81c3c8~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-03-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-03-after.jpg",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "index": 4,
+      "beforeTitle": "IMG_0626",
+      "afterTitle": "IMG_9829",
+      "beforeUri": "c275e1_e9867eee0a254cb4829c6b68ebbd2665~mv2.jpg",
+      "afterUri": "c275e1_ace72517d4a741dda0766f600fbb22cb~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-04-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-04-after.jpg",
+      "tagPlaceholder": "Roof Cleaning"
+    },
+    {
+      "index": 5,
+      "beforeTitle": "IMG_9929",
+      "afterTitle": "IMG_9831",
+      "beforeUri": "c275e1_b18a2e4c263a4746ad29da8871bfbaf3~mv2.jpg",
+      "afterUri": "c275e1_a35e8155658445469252407f975e24bf~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-05-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-05-after.jpg",
+      "tagPlaceholder": "Driveways & Patios"
+    },
+    {
+      "index": 6,
+      "beforeTitle": "IMG_9931",
+      "afterTitle": "IMG_9832",
+      "beforeUri": "c275e1_62e7470f5d56463aa0d5fd6ff9eb9287~mv2.jpg",
+      "afterUri": "c275e1_7ee18ebe6f4f48f0a731d2ab86c16b85~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-06-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-06-after.jpg",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "index": 7,
+      "beforeTitle": "IMG_0060",
+      "afterTitle": "IMG_9834",
+      "beforeUri": "c275e1_27666f1cf49f44b4a231da2aeb13327a~mv2.jpg",
+      "afterUri": "c275e1_1c8db2130cd845ee81b63d4350d3494e~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-07-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-07-after.jpg",
+      "tagPlaceholder": "Commercial"
+    },
+    {
+      "index": 8,
+      "beforeTitle": "IMG_0061",
+      "afterTitle": "IMG_9833",
+      "beforeUri": "c275e1_841702590a074f559b0ad0c9c9e962f3~mv2.jpg",
+      "afterUri": "c275e1_e3e3d9b431264bd890bdadb1e261fd86~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-08-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-08-after.jpg",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "index": 11,
+      "beforeTitle": "IMG_0021",
+      "afterTitle": "IMG_9835",
+      "beforeUri": "c275e1_5abfe4329e374174b8d2aaba1471869c~mv2.jpg",
+      "afterUri": "c275e1_f677da2f58a34ef2a6f5052f9a54d941~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-11-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-11-after.jpg",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "index": 12,
+      "beforeTitle": "IMG_0020",
+      "afterTitle": "IMG_9836",
+      "beforeUri": "c275e1_f30517fd1ac642b5aec159b3843078b7~mv2.jpg",
+      "afterUri": "c275e1_e39551dceb4843f7936887e3481b4732~mv2.jpg",
+      "beforeSrc": "/gallery/wix-before-after/pair-12-before.jpg",
+      "afterSrc": "/gallery/wix-before-after/pair-12-after.jpg",
+      "tagPlaceholder": "HOA & Community"
+    }
+  ],
+  "overflowSingles": [
+    {
+      "title": "IMG_9823",
+      "uri": "c275e1_aae12ed6a74743f2985b5f8c33f71196~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/pair-09-after.jpg",
+      "category": "residential",
+      "tagPlaceholder": "Residential",
+      "note": "Same URI in both Wix albums; imported as single (not a comparison slider)."
+    },
+    {
+      "title": "IMG_9824",
+      "uri": "c275e1_027793cb0be145fdbc856ded4a8fd1e8~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/pair-10-after.jpg",
+      "category": "residential",
+      "tagPlaceholder": "Residential",
+      "note": "Same URI in both Wix albums; imported as single (not a comparison slider)."
+    },
+    {
+      "title": "IMG_9927",
+      "uri": "c275e1_ef642346b0894823b5a8e184ce3a9946~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-01.jpg",
+      "category": "residential",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "title": "IMG_9928",
+      "uri": "c275e1_82fe1e65559542ceacb7f8ef379caec0~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-02.jpg",
+      "category": "driveways",
+      "tagPlaceholder": "Driveways & Patios"
+    },
+    {
+      "title": "IMG_0022",
+      "uri": "c275e1_cd1372617f3b41bca60900d535a32778~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-03.jpg",
+      "category": "residential",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "title": "IMG_0023",
+      "uri": "c275e1_51314bac9aad44088e5cb4b6e8e8c336~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-04.jpg",
+      "category": "driveways",
+      "tagPlaceholder": "Driveways & Patios"
+    },
+    {
+      "title": "IMG_9819",
+      "uri": "c275e1_a49397923d8f4ba68e0098dfe4e2fd77~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-05.jpg",
+      "category": "residential",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "title": "IMG_9820",
+      "uri": "c275e1_403e0e9b1f6549528073c84ccc296ddf~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-06.jpg",
+      "category": "driveways",
+      "tagPlaceholder": "Driveways & Patios"
+    },
+    {
+      "title": "IMG_9821",
+      "uri": "c275e1_4dabe5411e56493eb70048422b7b5a22~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-07.jpg",
+      "category": "residential",
+      "tagPlaceholder": "Residential"
+    },
+    {
+      "title": "IMG_9822",
+      "uri": "c275e1_eee64b48ef094cf49694dc4fef11bf0f~mv2.jpg",
+      "imageSrc": "/gallery/wix-before-after/overflow-08.jpg",
+      "category": "driveways",
+      "tagPlaceholder": "Driveways & Patios"
+    }
+  ]
+}
