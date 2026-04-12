@@ -26,6 +26,8 @@ export default function StorefrontsPage() {
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        imageSrc="/commercial-services/commercial-building-parking-storefront.png"
+        imageAlt="Storefront entrance with dark blue awning and glass windows on a commercial building facade"
       />
       <Footer />
       <FloatingCallButton />

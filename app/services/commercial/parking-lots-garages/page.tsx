@@ -26,6 +26,8 @@ export default function ParkingLotsGaragesPage() {
           "Serving Metro Atlanta businesses"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        imageSrc="/commercial-services/commercial-building-parking-storefront.png"
+        imageAlt="Asphalt commercial parking lot with white markings and wet pavement next to a building"
       />
       <Footer />
       <FloatingCallButton />

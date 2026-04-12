@@ -26,6 +26,7 @@ export default function FleetWashingPage() {
           "Available nights & weekends"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        benefitsAside="contactForm"
       />
       <Footer />
       <FloatingCallButton />

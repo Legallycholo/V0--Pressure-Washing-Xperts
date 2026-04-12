@@ -26,6 +26,8 @@ export default function BuildingWashingPage() {
           "Flexible scheduling including nights & weekends"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        imageSrc="/commercial-services/commercial-building-parking-storefront.png"
+        imageAlt="Commercial building exterior with tan block walls, blue corrugated metal siding, and tall windows"
       />
       <Footer />
       <FloatingCallButton />

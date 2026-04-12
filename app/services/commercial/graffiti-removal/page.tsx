@@ -18,6 +18,7 @@ export default function GraffitiRemovalPage() {
         description="Expert graffiti removal and surface restoration"
         category="Commercial"
         onOpenQuoteForm={() => goQuote()}
+        benefitsAside="contactForm"
       />
       <Footer />
       <FloatingCallButton />

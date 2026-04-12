@@ -26,6 +26,7 @@ export default function DumpsterPadsPage() {
           "Fast, discreet service"
         ]}
         onOpenQuoteForm={() => goQuote()}
+        benefitsAside="contactForm"
       />
       <Footer />
       <FloatingCallButton />
