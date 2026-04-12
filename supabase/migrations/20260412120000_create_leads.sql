@@ -18,6 +18,14 @@ create table public.leads (
   page_path text
 );
 
-comment on table public.leads is 'Quote/contact form submissions; RLS on with no public policies — use service role from server.';
+comment on table public.leads is 'Quote/contact form submissions; RLS on — service role bypasses RLS; anon may insert via policy for PostgREST / misconfig recovery.';
 
 alter table public.leads enable row level security;
+
+-- Required when RLS is enabled: without a policy, PostgREST anon key cannot INSERT.
+-- /api/leads uses the service role (bypasses RLS); this policy still helps dashboards, tests, or a mis-set key.
+create policy "Allow anonymous inserts on leads"
+  on public.leads
+  for insert
+  to anon
+  with check (true);
