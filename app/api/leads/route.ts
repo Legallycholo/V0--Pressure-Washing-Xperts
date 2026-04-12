@@ -93,9 +93,17 @@ async function sendLeadNotificationEmail(body: LeadBody): Promise<void> {
 }
 
 export async function POST(request: Request) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || process.env.SUPABASE_URL?.trim()
+  const serviceKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || process.env.SUPABASE_SERVICE_KEY?.trim()
   if (!supabaseUrl?.trim() || !serviceKey?.trim()) {
+    console.error("[api/leads] Missing Supabase env vars", {
+      hasNextPublicSupabaseUrl: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()),
+      hasSupabaseUrl: Boolean(process.env.SUPABASE_URL?.trim()),
+      hasServiceRoleKey: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()),
+      hasServiceKeyAlias: Boolean(process.env.SUPABASE_SERVICE_KEY?.trim()),
+    })
     return NextResponse.json(
       { error: "Lead capture is not configured. Please call (800)-451-7213." },
       { status: 503 }
