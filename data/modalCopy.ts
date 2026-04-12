@@ -9,7 +9,7 @@ export const modalCopyDefault = {
 
 /** Opened from Special Offers — Claim Offer */
 export const modalCopyOfferIntent = {
-  headline: "Save your spot — claim this offer",
+  headline: "Save your spot and claim this offer",
   subline:
     "Send your details and we'll confirm your discount when we reach out.",
   badge: "Special offer",
