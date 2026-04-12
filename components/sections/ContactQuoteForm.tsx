@@ -157,8 +157,15 @@ export function ContactQuoteForm({
             isInline ? "text-white/70" : "text-muted-foreground"
           )}
         >
-          Your quote request has been submitted successfully. We will contact you
-          shortly.
+          {copy.successLead}
+        </p>
+        <p
+          className={cn(
+            "mb-4 text-sm",
+            isInline ? "text-white/65" : "text-muted-foreground"
+          )}
+        >
+          {copy.successFollowUp}
         </p>
         {openedWithOfferIntent && copy.successExtra ? (
           <p
@@ -210,7 +217,7 @@ export function ContactQuoteForm({
         {showOfferSelect ? (
           <div>
             <Label htmlFor={fieldId("selectedOffer")} className={labelClass}>
-              Special offer <span className="text-destructive">*</span>
+              Offer <span className="text-destructive">*</span>
             </Label>
             <Select
               value={formData.selectedOffer}
@@ -227,7 +234,7 @@ export function ContactQuoteForm({
               </SelectTrigger>
               <SelectContent {...formSelectContentPlacementProps}>
                 <SelectItem value={OFFER_NONE}>
-                  General quote — no specific offer
+                  No offer — general quote only
                 </SelectItem>
                 {offers.map((o) => (
                   <SelectItem key={o.id} value={o.id}>
@@ -250,7 +257,7 @@ export function ContactQuoteForm({
             required
             value={formData.fullName}
             onChange={handleInputChange}
-            placeholder="John Doe"
+            placeholder="Your full name"
             className={fieldClass}
             autoComplete="name"
           />
@@ -352,16 +359,25 @@ export function ContactQuoteForm({
 
         <div>
           <Label htmlFor={fieldId("message")} className={labelClass}>
-            How Can We Help? <span className="text-destructive">*</span>
+            Project details <span className="text-destructive">*</span>
           </Label>
+          <p
+            className={cn(
+              "mt-1 text-xs leading-snug",
+              isInline ? "text-white/55" : "text-muted-foreground"
+            )}
+          >
+            Surfaces (siding, driveway, deck, roof, etc.), rough size or photos
+            if you have them, and when you would like service.
+          </p>
           <Textarea
             id={fieldId("message")}
             name="message"
             required
             value={formData.message}
             onChange={handleInputChange}
-            placeholder="Tell us about your project..."
-            className={cn("mt-1 min-h-[100px]", isInline && fieldClass)}
+            placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
+            className={cn("mt-2 min-h-[100px]", isInline && fieldClass)}
           />
         </div>
 
@@ -399,7 +415,7 @@ export function ContactQuoteForm({
           {isSubmitting ? (
             <>
               <Loader2 className="size-5 animate-spin shrink-0" />
-              Submitting...
+              Sending...
             </>
           ) : (
             <>
@@ -408,6 +424,15 @@ export function ContactQuoteForm({
             </>
           )}
         </Button>
+
+        <p
+          className={cn(
+            "text-center text-xs leading-relaxed",
+            isInline ? "text-white/50" : "text-muted-foreground"
+          )}
+        >
+          {copy.trustNote}
+        </p>
 
         <p
           className={cn(

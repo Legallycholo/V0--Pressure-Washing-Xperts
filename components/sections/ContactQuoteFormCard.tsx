@@ -9,9 +9,6 @@ import { cn } from "@/lib/utils"
 
 const inlineQuoteCopy = {
   ...modalCopyDefault,
-  headline: "Request a Fast Quote",
-  subline: "",
-  submitLabel: "Submit Request",
 } satisfies QuoteFormCopy
 
 function ContactQuoteFormWithOfferFromUrl() {

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Check, Loader2 } from "lucide-react"
+import { Check, CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,6 +16,7 @@ import {
 import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
+import { modalCopyDefault } from "@/data/modalCopy"
 
 interface HeroProps {
   onOpenQuoteForm: () => void
@@ -51,6 +52,12 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    console.info("Hero quote form submitted", {
+      submissionType: modalCopyDefault.badge,
+      ...formData,
+    })
+
     await new Promise((resolve) => setTimeout(resolve, 1200))
     setIsSubmitting(false)
     setIsSubmitted(true)
@@ -135,7 +142,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                 size="lg"
                 className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-lg px-8 py-6 hover:bg-white/10 hover:border-white transition-all duration-300 ${ctaPress}`}
               >
-                Get a Free Quote
+                Get your free estimate
               </Button>
             </div>
           </div>
@@ -143,24 +150,40 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
           <div className="animate-fade-in-up lg:col-span-5">
             <div className="rounded-2xl bg-white/95 shadow-2xl border border-white/30 overflow-hidden backdrop-blur-sm">
               <div className="bg-brand-blue p-5 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-white">Request a Fast Quote</h2>
-                <p className="text-white/80 text-sm mt-1">
-                  Frontend-only form structure for the new hero layout.
+                <h2 className="text-xl sm:text-2xl font-bold text-white">
+                  {modalCopyDefault.headline}
+                </h2>
+                {modalCopyDefault.subline ? (
+                  <p className="text-white/80 text-sm mt-1">
+                    {modalCopyDefault.subline}
+                  </p>
+                ) : null}
+                <p className="mt-2 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">
+                  {modalCopyDefault.badge}
                 </p>
               </div>
 
               {isSubmitted ? (
-                <div className="p-6 sm:p-8">
-                  <p className="text-lg font-semibold text-brand-blue-dark">Thanks! We got your request.</p>
+                <div className="p-6 sm:p-8 text-center">
+                  <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-green-100">
+                    <CheckCircle className="size-8 text-green-600" aria-hidden />
+                  </div>
+                  <p className="text-xl font-bold text-brand-blue-dark">Thank you!</p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    This demo is frontend-only for layout testing, with no backend integration.
+                    {modalCopyDefault.successLead}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {modalCopyDefault.successFollowUp}
+                  </p>
+                  <p className="mt-3 text-xs font-medium text-brand-blue">
+                    Submission type: {modalCopyDefault.badge}
                   </p>
                   <Button
                     type="button"
                     onClick={() => setIsSubmitted(false)}
-                    className="mt-5 w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark"
+                    className="mt-6 w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark"
                   >
-                    Submit Another Request
+                    Send another request
                   </Button>
                 </div>
               ) : (
@@ -176,7 +199,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                       required
                       value={formData.fullName}
                       onChange={handleInputChange}
-                      placeholder="John Doe"
+                      placeholder="Your full name"
                       className="mt-1"
                     />
                   </div>
@@ -270,16 +293,20 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
 
                   <div>
                     <Label htmlFor="message" className="text-foreground">
-                      How Can We Help? <span className="text-destructive">*</span>
+                      Project details <span className="text-destructive">*</span>
                     </Label>
+                    <p className="mt-1 text-xs text-muted-foreground leading-snug">
+                      Surfaces (siding, driveway, deck, roof, etc.), rough size or
+                      photos if you have them, and when you would like service.
+                    </p>
                     <Textarea
                       id="message"
                       name="message"
                       required
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Tell us about your project..."
-                      className="mt-1 min-h-[100px]"
+                      placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
+                      className="mt-2 min-h-[100px]"
                     />
                   </div>
 
@@ -308,17 +335,24 @@ export function Hero({ onOpenQuoteForm }: HeroProps) {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg"
+                    className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-6 text-lg inline-flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="size-5 animate-spin mr-2" />
-                        Submitting...
+                        <Loader2 className="size-5 animate-spin shrink-0" />
+                        Sending...
                       </>
                     ) : (
-                      "Submit Quote Request"
+                      <>
+                        <Send className="size-5 shrink-0" aria-hidden />
+                        {modalCopyDefault.submitLabel}
+                      </>
                     )}
                   </Button>
+
+                  <p className="text-center text-xs text-muted-foreground leading-relaxed">
+                    {modalCopyDefault.trustNote}
+                  </p>
 
                   <p className="text-center text-sm text-muted-foreground">
                     Or call us directly at{" "}

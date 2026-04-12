@@ -21,11 +21,11 @@ export function ContactSection() {
               Contact Us
             </p>
             <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl text-balance mb-6">
-              Ready to Get Started?
+              Ready for a Free Estimate?
             </h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              {"Let's"} transform your property! Contact us today for a free quote or call us directly.
-              {"We're"} here to answer any questions you may have.
+              Tell us what you would like cleaned—we usually reply within one business day
+              with next steps. Prefer the phone? Call or text anytime during business hours.
             </p>
 
             {/* Contact Cards */}

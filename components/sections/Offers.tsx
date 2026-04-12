@@ -23,11 +23,11 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
             id="offers-heading"
             className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance"
           >
-            Exclusive Deals for You
+            Save on Bundles &amp; Seasonal Service
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
-            Take advantage of our special offers and save on professional
-            pressure washing services.
+            Pick the promo that fits your job—new customers, multi-service
+            visits, spring and fall scheduling, and neighbor referrals.
           </p>
         </div>
 
@@ -117,9 +117,10 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          Offers cannot be combined. $250 minimum spend required for discount
-          activation. Contact us for full terms and conditions.
+        <p className="mt-8 text-center text-sm text-muted-foreground max-w-3xl mx-auto">
+          Offers cannot be combined. A $250 minimum job total applies before any
+          discount. Referral credits are issued after the referred customer
+          completes a paid service. Contact us for full terms.
         </p>
       </div>
     </section>
