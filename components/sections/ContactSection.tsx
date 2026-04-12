@@ -3,7 +3,7 @@
 import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-import { ContactQuoteForm, type QuoteFormCopy } from "@/components/ContactQuoteForm"
+import { ContactQuoteForm, type QuoteFormCopy } from "@/components/sections/ContactQuoteForm"
 import {
   Tooltip,
   TooltipContent,

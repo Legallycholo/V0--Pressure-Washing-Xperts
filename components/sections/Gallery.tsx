@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { BeforeAfterSlider } from "@/components/BeforeAfterSlider"
+import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { cn } from "@/lib/utils"
 import { ctaPress } from "@/lib/ctaInteraction"
 import {

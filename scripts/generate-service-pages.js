@@ -34,10 +34,10 @@ const servicePages = [
 
 const template = (title, category, desc) => `"use client"
 
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 export default function ServicePage() {

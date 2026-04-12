@@ -1,10 +1,10 @@
 "use client"
 
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
-import { ServiceAreaPageTemplate } from "@/components/ServiceAreaPageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { ServiceAreaPageTemplate } from "@/components/templates/ServiceAreaPageTemplate"
 import type { ServiceAreaPageContent } from "@/data/service-areas"
 
 interface ServiceAreaCityPageClientProps {

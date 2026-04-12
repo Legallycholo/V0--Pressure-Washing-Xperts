@@ -28,11 +28,11 @@ The home “Industrial Services” card in this repo used a **placeholder** bloc
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
-import { ServiceCategoryHubTemplate } from "@/components/ServiceCategoryHubTemplate"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { ServiceCategoryHubTemplate } from "@/components/templates/ServiceCategoryHubTemplate"
 import { industrialServices } from "@/data/navigation"
 
 export default function IndustrialServicesHubPage() {
@@ -65,11 +65,11 @@ export default function IndustrialServicesHubPage() {
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function IndustrialEquipmentPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
@@ -108,11 +108,11 @@ export default function IndustrialEquipmentPage() {
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function WarehouseExteriorsPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
@@ -151,11 +151,11 @@ export default function WarehouseExteriorsPage() {
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function LoadingDocksPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
@@ -186,11 +186,11 @@ export default function LoadingDocksPage() {
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function DistributionCentersPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
@@ -221,11 +221,11 @@ export default function DistributionCentersPage() {
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function FleetWashPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)
@@ -256,11 +256,11 @@ export default function FleetWashPage() {
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { ContactFormModal } from "@/components/ContactFormModal"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function ManufacturingPlantsPage() {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false)

@@ -1,9 +1,9 @@
 "use client"
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { Button } from "@/components/ui/button"
 import { Phone, Droplets, Gauge } from "lucide-react"
 import { ctaPress } from "@/lib/ctaInteraction"

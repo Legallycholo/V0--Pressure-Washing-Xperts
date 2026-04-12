@@ -3,10 +3,10 @@
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Suspense } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { Gallery } from "@/components/Gallery"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { Gallery } from "@/components/sections/Gallery"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 function GalleryFallback() {
   return (

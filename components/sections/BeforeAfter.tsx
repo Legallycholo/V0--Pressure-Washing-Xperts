@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { BeforeAfterSlider } from "@/components/BeforeAfterSlider"
+import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { galleryItemIsComparison, galleryItems } from "@/data/gallery"
 
 type Comparison = {

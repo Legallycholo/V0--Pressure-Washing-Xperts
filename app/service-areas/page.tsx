@@ -3,9 +3,9 @@
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import Link from "next/link"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { MapPin } from "lucide-react"
 import { getServiceAreasForNavigation } from "@/data/service-areas"
 import { ctaPress } from "@/lib/ctaInteraction"

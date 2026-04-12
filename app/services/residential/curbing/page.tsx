@@ -2,10 +2,10 @@
 
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
-import { ServicePageTemplate } from "@/components/ServicePageTemplate"
-import { FloatingCallButton } from "@/components/FloatingCallButton"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
+import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function CurbingPage() {
   const goQuote = useGoToHomeQuoteSection()
