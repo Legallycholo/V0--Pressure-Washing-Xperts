@@ -20,7 +20,7 @@ interface ServicePageTemplateProps {
   imageClassName?: string
   imageObjectPosition?: string
   /** Two static images (grid on md+, stack on small screens) */
-  splitImages?: { src: string; alt: string }[]
+  splitImages?: ReadonlyArray<{ src: string; alt: string }>
   /** Before/after comparison slider */
   beforeSrc?: string
   afterSrc?: string

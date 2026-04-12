@@ -85,7 +85,7 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-4xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue-light">
-            Trust the pros
+            Trust the Xperts
           </p>
           <h2
             id="why-us-heading"

@@ -60,7 +60,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-brand-blue-dark mb-6">
-                Trust the Pros in {city.cityName}
+                Trust the Xperts in {city.cityName}
               </h2>
               <ul className="space-y-4">
                 {city.trustPoints.map((point) => (

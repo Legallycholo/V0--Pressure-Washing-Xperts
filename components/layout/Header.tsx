@@ -85,7 +85,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex min-h-10 items-center justify-between text-xs text-white/65">
             <div className="flex items-center gap-4">
-              <span>Pressure Washing Xperts</span>
+              <span>Pressure Washing Xperts LLC</span>
               <span className="text-white/30">|</span>
               <span>{navSlogan}</span>
             </div>
@@ -103,7 +103,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               <span className="text-white/30">|</span>
               <a
                 href="mailto:pressurewashingxperts@gmail.com"
-                className="hover:text-white transition-colors"
+                className="text-sm xl:text-base text-white/75 hover:text-white transition-colors"
               >
                 pressurewashingxperts@gmail.com
               </a>
@@ -112,7 +112,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <TooltipTrigger asChild>
                   <a
                     href="tel:800-451-7213"
-                    className={`font-semibold text-brand-blue-light hover:text-brand-yellow transition-colors ${ctaPress} inline-block rounded-sm`}
+                    className={`text-sm xl:text-base font-semibold text-brand-blue-light hover:text-brand-yellow transition-colors ${ctaPress} inline-block rounded-sm`}
                   >
                     (800)-451-7213
                   </a>

@@ -7,6 +7,7 @@ import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Phone } from "lucide-react"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { navSlogan } from "@/data/site"
 
 export default function WeDoXpertPage() {
   const goHomeQuote = useGoToHomeQuoteSection()
@@ -24,8 +25,8 @@ export default function WeDoXpertPage() {
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">
                 We Do <span className="text-brand-yellow">Xpert</span>
               </h1>
-              <p className="mx-auto max-w-3xl text-lg text-white/80 leading-relaxed">
-                Where Pressure Meets Xpertise - Your trusted partner for professional pressure washing services
+              <p className="mx-auto max-w-3xl text-lg sm:text-xl text-white/80 leading-relaxed">
+                {navSlogan}
               </p>
             </div>
           </div>
@@ -41,10 +42,10 @@ export default function WeDoXpertPage() {
                 </h2>
                 <div className="space-y-4 text-lg text-gray-700">
                   <p>
-                    Pressure Washing Xperts was founded with a simple mission: to provide exceptional pressure washing services that exceed customer expectations every time.
+                    Pressure Washing Xperts was founded with a simple mission: to provide exceptional pressure washing services that exceed customer expectations every time. Our owner brings 14 years of hands-on experience in pressure washing, setting the standard for how we approach every job.
                   </p>
                   <p>
-                    Our team of certified professionals brings years of experience and expertise to every project, from single-family homes to multi-site commercial work.
+                    Our team of certified professionals brings that expertise to every project, from single-family homes to multi-site commercial work.
                   </p>
                   <p>
                     We believe in using the right techniques and eco-friendly solutions to deliver outstanding results while protecting your property and the environment.

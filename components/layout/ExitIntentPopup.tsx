@@ -8,6 +8,12 @@ const SESSION_KEY = "exitPopupShown"
 const REOPEN_UI_KEY = "exitPopupReopenChip"
 const TARGET = new Date("2026-04-30T23:59:00")
 
+/** Scroll: open at 35% of scrollable height or at least 200px (short pages). */
+const SCROLL_DEPTH_RATIO = 0.35
+const SCROLL_MIN_PX = 200
+/** Delayed open: skipped when prefers-reduced-motion to avoid pushy timed overlays. */
+const AUTO_OPEN_DELAY_MS = 14_000
+
 const TOTAL_APRIL_SLOTS = 20
 const CLAIMED_SLOTS = 7
 
@@ -20,6 +26,14 @@ const FINE_PRINT = "rgba(255,255,255,0.72)"
 const DISMISS = "rgba(255,255,255,0.55)"
 const SHADOW = "0 25px 60px rgba(0,0,0,0.6)"
 
+function sessionHasShown(): boolean {
+  try {
+    return sessionStorage.getItem(SESSION_KEY) === "1"
+  } catch {
+    return false
+  }
+}
+
 export function ExitIntentPopup() {
   const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -31,8 +45,12 @@ export function ExitIntentPopup() {
   const modalRef = useRef<HTMLDivElement>(null)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
   const prevFocusRef = useRef<HTMLElement | null>(null)
-  const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const exitIntentTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isOpenRef = useRef(false)
+  const openingRef = useRef(false)
+  const hasBeenSeenRef = useRef(false)
+  const scrollRafRef = useRef<number | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -56,10 +74,25 @@ export function ExitIntentPopup() {
     return () => mq.removeEventListener("change", onChange)
   }, [])
 
+  useEffect(() => {
+    isOpenRef.current = isOpen
+    // Allow a new openPopup() after state has caught up (openingRef guards the sync gap only).
+    openingRef.current = false
+  }, [isOpen])
+
+  const openPopup = useCallback(() => {
+    if (isOpenRef.current || openingRef.current) return
+    if (sessionHasShown()) return
+    openingRef.current = true
+    prevFocusRef.current = document.activeElement as HTMLElement | null
+    setIsOpen(true)
+  }, [])
+
   const finishClose = useCallback(() => {
     document.body.style.overflow = ""
     setIsOpen(false)
     setEntered(false)
+    hasBeenSeenRef.current = false
     const el = prevFocusRef.current
     if (el && typeof el.focus === "function") {
       try {
@@ -72,6 +105,14 @@ export function ExitIntentPopup() {
   }, [])
 
   const close = useCallback(() => {
+    if (hasBeenSeenRef.current) {
+      try {
+        sessionStorage.setItem(REOPEN_UI_KEY, "1")
+      } catch {
+        /* ignore */
+      }
+      setShowReopenChip(true)
+    }
     setEntered(false)
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
     closeTimeoutRef.current = setTimeout(() => {
@@ -80,47 +121,80 @@ export function ExitIntentPopup() {
     }, 300)
   }, [finishClose])
 
-  const closeFromX = useCallback(() => {
-    try {
-      sessionStorage.setItem(REOPEN_UI_KEY, "1")
-    } catch {
-      /* ignore */
-    }
-    setShowReopenChip(true)
-    close()
-  }, [close])
-
   const openFromChip = useCallback(() => {
     prevFocusRef.current = document.activeElement as HTMLElement | null
     setIsOpen(true)
   }, [])
 
+  /** Session "consumed" only after the modal is visibly presented. */
+  useEffect(() => {
+    if (!isOpen || !entered) return
+    hasBeenSeenRef.current = true
+    try {
+      sessionStorage.setItem(SESSION_KEY, "1")
+    } catch {
+      /* ignore */
+    }
+  }, [isOpen, entered])
+
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY > 20) return
-      if (sessionStorage.getItem(SESSION_KEY)) return
-      if (openTimeoutRef.current) return
-      openTimeoutRef.current = setTimeout(() => {
-        openTimeoutRef.current = null
-        try {
-          sessionStorage.setItem(SESSION_KEY, "1")
-        } catch {
-          /* ignore */
-        }
-        prevFocusRef.current = document.activeElement as HTMLElement | null
-        setIsOpen(true)
+      if (sessionHasShown()) return
+      if (isOpenRef.current) return
+      if (exitIntentTimerRef.current) return
+      exitIntentTimerRef.current = setTimeout(() => {
+        exitIntentTimerRef.current = null
+        openPopup()
       }, 200)
     }
 
     document.addEventListener("mouseleave", handleMouseLeave)
     return () => {
       document.removeEventListener("mouseleave", handleMouseLeave)
-      if (openTimeoutRef.current) {
-        clearTimeout(openTimeoutRef.current)
-        openTimeoutRef.current = null
+      if (exitIntentTimerRef.current) {
+        clearTimeout(exitIntentTimerRef.current)
+        exitIntentTimerRef.current = null
       }
     }
-  }, [])
+  }, [openPopup])
+
+  useEffect(() => {
+    const evaluateScroll = () => {
+      if (sessionHasShown() || isOpenRef.current) return
+      const doc = document.documentElement
+      const scrollable = Math.max(1, doc.scrollHeight - window.innerHeight)
+      const y = window.scrollY
+      if (y / scrollable >= SCROLL_DEPTH_RATIO || y >= SCROLL_MIN_PX) {
+        openPopup()
+      }
+    }
+
+    const onScroll = () => {
+      if (scrollRafRef.current !== null) return
+      scrollRafRef.current = requestAnimationFrame(() => {
+        scrollRafRef.current = null
+        evaluateScroll()
+      })
+    }
+
+    evaluateScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      if (scrollRafRef.current !== null) {
+        cancelAnimationFrame(scrollRafRef.current)
+        scrollRafRef.current = null
+      }
+    }
+  }, [openPopup])
+
+  // Timed auto-open: omit when reduced motion — user still gets scroll + exit-intent.
+  useEffect(() => {
+    if (!mounted || reducedMotion) return
+    const id = window.setTimeout(() => openPopup(), AUTO_OPEN_DELAY_MS)
+    return () => clearTimeout(id)
+  }, [mounted, reducedMotion, openPopup])
 
   useEffect(() => {
     if (!isOpen) return
@@ -255,7 +329,7 @@ export function ExitIntentPopup() {
           <button
             ref={closeBtnRef}
             type="button"
-            onClick={closeFromX}
+            onClick={close}
             aria-label="Close offer"
             className="absolute right-3 top-3 z-[2] rounded-md px-3 py-2 text-base font-medium leading-none"
             style={{ color: DISMISS }}
