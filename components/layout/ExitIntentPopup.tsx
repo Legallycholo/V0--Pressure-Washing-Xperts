@@ -434,11 +434,11 @@ export function ExitIntentPopup() {
   const reopenChip =
     showReopenChip &&
     !isOpen && (
-      <div className="pointer-events-none fixed bottom-20 left-4 right-4 z-[105] flex justify-start pb-safe md:bottom-6 md:left-6 md:right-auto md:justify-start md:p-0">
+      <div className="pointer-events-none fixed right-0 top-1/2 z-[95] flex -translate-y-1/2 items-center justify-end pr-[max(0px,env(safe-area-inset-right))] md:top-auto md:bottom-6 md:right-6 md:translate-y-0">
         <button
           type="button"
           onClick={openFromChip}
-          className="pointer-events-auto max-w-[min(100%,20rem)] rounded-full border-2 px-4 py-3 text-center text-sm font-bold shadow-lg transition-transform hover:scale-[1.02] active:scale-[0.98] sm:text-base"
+          className="pointer-events-auto min-h-[132px] min-w-[46px] rounded-l-xl rounded-r-none border-2 border-r-0 px-2 py-3 text-center text-xs font-bold shadow-lg transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:scale-[1.02] active:scale-[0.98] [text-orientation:mixed] [writing-mode:vertical-rl] md:min-h-[44px] md:min-w-0 md:max-w-[15rem] md:rounded-full md:border-r-2 md:px-4 md:py-2.5 md:text-sm md:[writing-mode:horizontal-tb]"
           style={{
             backgroundColor: MODAL_BG,
             borderColor: GOLD,
@@ -447,7 +447,8 @@ export function ExitIntentPopup() {
           }}
           aria-label="Open April special offer again"
         >
-          View April special again
+          <span className="md:hidden">April offer</span>
+          <span className="hidden md:inline">View April special again</span>
         </button>
       </div>
     )
