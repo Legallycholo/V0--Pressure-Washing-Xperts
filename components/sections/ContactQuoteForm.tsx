@@ -64,8 +64,6 @@ export interface ContactQuoteFormProps {
   copy: QuoteFormCopy
   showOfferSelect?: boolean
   initialOfferId?: OfferId
-  /** Called after the success message is shown (e.g. modal close). */
-  onAfterSuccess?: () => void
   className?: string
 }
 
@@ -74,7 +72,6 @@ export function ContactQuoteForm({
   copy,
   showOfferSelect = true,
   initialOfferId,
-  onAfterSuccess,
   className,
 }: ContactQuoteFormProps) {
   const uid = useId()
@@ -207,17 +204,6 @@ export function ContactQuoteForm({
     })
 
     setIsSubmitted(true)
-
-    window.setTimeout(() => {
-      if (variant === "inline") {
-        setIsSubmitted(false)
-        setFormData({
-          ...emptyForm(),
-          selectedOffer: initialOfferId ?? OFFER_NONE,
-        })
-      }
-      onAfterSuccess?.()
-    }, 3000)
   }
 
   const isInline = variant === "inline"

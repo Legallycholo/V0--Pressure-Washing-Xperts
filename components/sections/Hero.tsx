@@ -233,13 +233,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                   <p className="mt-3 text-xs font-medium text-brand-blue">
                     Submission type: {modalCopyDefault.badge}
                   </p>
-                  <Button
-                    type="button"
-                    onClick={() => setIsSubmitted(false)}
-                    className="mt-4 w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark"
-                  >
-                    Send another request
-                  </Button>
                 </div>
               ) : (
                 <form
