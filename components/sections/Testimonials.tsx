@@ -126,8 +126,7 @@ export function Testimonials() {
           <p className="mt-3 text-white/70 max-w-2xl mx-auto text-base">
             {"Don't just take our word for it."} Rated{" "}
             <span className="text-brand-yellow font-semibold">5.0 ★</span> across{" "}
-            <span className="text-white font-semibold">32+ verified reviews</span>{" "}
-            on Google &amp; Groupon.
+            <span className="text-white font-semibold">32+ verified reviews</span>.
           </p>
           <div className="mt-4 flex justify-center">
             <Button

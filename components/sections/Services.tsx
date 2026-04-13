@@ -11,7 +11,7 @@ const primaryServices = [
     icon: Home,
     title: "Residential Services",
     description:
-      "House washing, driveway cleaning, deck restoration, roof soft washing, and patio cleaning.",
+      "House, driveway, deck, roof, and patio cleaning.",
     href: "/services/residential",
     imageSrc: "/services/home-residential.png",
     imageAlt:
@@ -23,7 +23,7 @@ const primaryServices = [
     icon: Building2,
     title: "Commercial Services",
     description:
-      "Storefronts, parking lots, building exteriors, sidewalks, and high-traffic common areas.",
+      "Storefront, lot, exterior, and sidewalk cleaning.",
     href: "/services/commercial",
     imageSrc: "/services/home-commercial.png",
     imageAlt:
@@ -39,7 +39,7 @@ const supportingServices = [
     title: "Pressure Washing",
     subtitle: "High-pressure surface cleaning",
     description:
-      "Removes deep grime and buildup from concrete, brick, and other durable surfaces.",
+      "Cleans heavy buildup from concrete, brick, and other hard surfaces.",
   },
   {
     id: "soft-washing",
@@ -47,7 +47,7 @@ const supportingServices = [
     title: "Soft Washing",
     subtitle: "Low-pressure chemical cleaning",
     description:
-      "A gentle approach for roofs, siding, stucco, and other delicate surfaces.",
+      "Low-pressure cleaning for roofs, siding, stucco, and other delicate surfaces.",
   },
 ]
 
@@ -68,7 +68,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             Our Professional Services
           </h2>
           <p className="mt-3 text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
-            Residential curb appeal and commercial first impressions—right pressure, right surface.
+            Residential and commercial cleaning with the right method for each surface.
           </p>
         </div>
 

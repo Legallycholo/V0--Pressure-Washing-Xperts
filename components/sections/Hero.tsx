@@ -381,9 +381,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                         Project details <span className="text-destructive">*</span>
                       </Label>
                       <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                        Surfaces (siding, driveway, deck, roof, etc.), rough size
-                        or photos if you have them, and when you would like
-                        service.
+                        List surfaces, rough size, and when you want service.
                       </p>
                       <Textarea
                         id="message"
@@ -391,7 +389,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                         required
                         value={formData.message}
                         onChange={handleInputChange}
-                        placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
+                        placeholder="Example: Two-story siding and front walk, medium lot, next week."
                         className="mt-2 min-h-[88px] lg:min-h-[120px] xl:min-h-[100px]"
                       />
                     </div>

@@ -12,42 +12,42 @@ const faqs = [
   {
     question: "What types of surfaces can you pressure wash?",
     answer:
-      "Concrete, brick, wood decks, vinyl siding, asphalt, stone, fences, and roof shingles. Each surface gets the right PSI and cleaning solution.",
+      "Concrete, brick, decks, siding, asphalt, stone, fences, and roof shingles. We match pressure and solution to each surface.",
   },
   {
     question: "How much does pressure washing cost?",
     answer:
-      "Driveways start around $100–$150; full house exteriors $200–$500 depending on size. We provide free, no-obligation quotes.",
+      "Driveways are often $100-$150, and full homes are usually $200-$500 based on size. Quotes are free.",
   },
   {
     question: "Is pressure washing safe for my property?",
     answer:
-      "Yes. We dial in the right PSI per surface, and switch to soft washing for roofs, siding, and stucco to prevent damage.",
+      "Yes. We use the right PSI for each surface and soft washing where needed to avoid damage.",
   },
   {
     question: "How often should I have my property pressure washed?",
     answer:
-      "Most homes benefit annually. High-humidity areas or commercial sites may need service every 6 months.",
+      "Most homes do best with yearly service. Humid areas and commercial sites may need it every 6 months.",
   },
   {
     question: "Do I need to be home during the service?",
     answer:
-      "Not required—just leave access to an outdoor spigot. A quick walkthrough beforehand is helpful but optional.",
+      "No. Just leave access to an outdoor spigot. A quick walkthrough helps, but it is optional.",
   },
   {
     question: "What is soft washing and when do you use it?",
     answer:
-      "Low-pressure cleaning (under 500 PSI) with biodegradable solution for roofs, stucco, cedar shake, and painted surfaces.",
+      "Soft washing is low-pressure cleaning with biodegradable solution for roofs, stucco, cedar shake, and painted surfaces.",
   },
   {
     question: "Are your cleaning solutions environmentally friendly?",
     answer:
-      "Yes. Biodegradable, plant-safe detergents with responsible chemical handling on every job.",
+      "Yes. We use biodegradable, plant-safe detergents and handle chemicals carefully.",
   },
   {
     question: "How do I prepare for my pressure washing appointment?",
     answer:
-      "Move furniture, pots, and vehicles from the work area. Close windows and doors. We handle the rest.",
+      "Move furniture, pots, and vehicles from the work area, and close windows and doors. We handle the rest.",
   },
 ]
 

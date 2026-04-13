@@ -471,8 +471,7 @@ export function ContactQuoteForm({
                 isInline ? "text-white/55" : "text-muted-foreground"
               )}
             >
-              Surfaces (siding, driveway, deck, roof, etc.), rough size or photos
-              if you have them, and when you would like service.
+              List surfaces, rough size, and when you want service.
             </p>
             <Textarea
               id={fieldId("message")}
@@ -480,7 +479,7 @@ export function ContactQuoteForm({
               required
               value={formData.message}
               onChange={handleInputChange}
-              placeholder="Example: Two-story vinyl siding + front concrete walk. Medium lot. Hoping for next week."
+              placeholder="Example: Two-story siding and front walk, medium lot, next week."
               className={cn(
                 "mt-2 min-h-[88px]",
                 isInline && fieldClass,

@@ -24,8 +24,8 @@ export function ContactSection() {
               Ready for a Free Estimate?
             </h2>
             <p className="text-white/70 text-base leading-relaxed mb-6">
-              Tell us what you would like cleaned. We usually reply within one business day
-              with next steps. Prefer the phone? Call or text anytime during business hours.
+              Tell us what you want cleaned. We usually reply within one business day.
+              Prefer phone? Call or text us during business hours.
             </p>
 
             {/* Contact Cards */}

@@ -40,9 +40,9 @@ export const offers: Offer[] = [
     title: "New Customer Welcome",
     discount: "15% OFF",
     description:
-      "First time hiring Pressure Washing Xperts? Save on your first residential or commercial exterior cleaning.",
+      "New customer? Save 15% on your first exterior cleaning.",
     terms:
-      "New customers only, first completed job. Example: 15% off a $230 house wash saves you $34.50. Cannot be combined with other offers. Minimum job total applies.",
+      "For first completed jobs only. Cannot combine with other offers; minimum job total applies.",
     highlight: false,
     premiumRank: 3,
   },
@@ -52,9 +52,9 @@ export const offers: Offer[] = [
     title: "Curb Appeal Bundle",
     discount: "20% OFF",
     description:
-      "Book house washing together with driveway, sidewalk, deck, or another qualifying service on the same visit.",
+      "Book house washing with another qualifying service in one visit and save 20%.",
     terms:
-      "At least two qualifying services on one scheduled visit. Example: house wash + driveway ($230 + $235 = $465) at 20% off saves you $93. Cannot be combined with other offers. Minimum job total applies.",
+      "Applies to two or more qualifying services in one scheduled visit. Cannot combine with other offers; minimum job total applies.",
     highlight: true,
     premiumRank: 4,
   },
@@ -64,9 +64,9 @@ export const offers: Offer[] = [
     title: "Spring & Fall (House Wash + Driveway Bundle)",
     discount: "10% OFF",
     description:
-      "Plan ahead for peak pollen and leaf season: book house washing and driveway cleaning together during our spring (Mar-May) and fall (Sep-Nov) windows.",
+      "Save 10% when you book house wash + driveway in spring or fall.",
     terms:
-      "Valid for jobs scheduled in March-May or September-November when house wash and driveway are booked as one combined job on the same visit. Example: 10% off a $465 house wash + driveway combo saves you $46.50. Cannot be combined with other offers. Minimum job total applies.",
+      "Valid for Mar-May or Sep-Nov combined jobs. Cannot combine with other offers; minimum job total applies.",
     highlight: false,
     premiumRank: 1,
   },
@@ -76,9 +76,9 @@ export const offers: Offer[] = [
     title: "Refer a Neighbor",
     discount: "$50 EACH",
     description:
-      "Share us with a friend. When they complete a paid service, you both receive $50 off a future booking.",
+      "Refer a neighbor and you both get $50 off a future booking.",
     terms:
-      "Referral must mention you and complete a paid service. $50 credit applies to your next qualifying job (e.g., toward a $230 house wash or $235 driveway clean). Cannot be combined with other offers. Minimum job total applies.",
+      "Your referral must complete a paid service and mention your name. Cannot combine with other offers; minimum job total applies.",
     highlight: false,
     premiumRank: 2,
   },
@@ -98,8 +98,8 @@ export function getPremiumOffer(): Offer {
  * Benefit-focused and accurate to the offer (combined services, one visit, published savings example).
  */
 export const PREMIUM_OFFER_UPSELL_EXPLANATION =
-  "We suggest the Curb Appeal Bundle when more than one exterior surface needs attention. You book house washing plus driveway, sidewalk, deck, or another qualifying service on the same visit. That means 20% off the combined total, one crew stop for the whole property, and our published example (house + driveway) typically shows the largest dollar savings of any single promotion."
+  "Choose the Curb Appeal Bundle when you need more than one surface cleaned. You get 20% off qualifying services in one visit, which is usually the biggest dollar savings."
 
 /** Short line for the bundle action button (under the title). */
 export const PREMIUM_OFFER_UPSELL_BUTTON_SUBLINE =
-  "20% off combined services in one scheduled visit. Whole-property value, less back-and-forth."
+  "20% off qualifying services in one visit."
