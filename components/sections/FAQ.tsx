@@ -12,42 +12,42 @@ const faqs = [
   {
     question: "What types of surfaces can you pressure wash?",
     answer:
-      "We clean concrete driveways, brick walkways, wooden decks, vinyl and hardboard siding, asphalt, stone patios, fences, and roof shingles. Every surface gets the right pressure setting and cleaning solution to avoid damage while delivering a deep clean.",
+      "Concrete, brick, wood decks, vinyl siding, asphalt, stone, fences, and roof shingles. Each surface gets the right PSI and cleaning solution.",
   },
   {
     question: "How much does pressure washing cost?",
     answer:
-      "Pricing depends on the surface type, square footage, and level of buildup. A driveway typically starts around $100 to $150; a full house exterior ranges from $200 to $500 depending on size. We provide free, no-obligation quotes so you know exactly what to expect before we begin.",
+      "Driveways start around $100–$150; full house exteriors $200–$500 depending on size. We provide free, no-obligation quotes.",
   },
   {
     question: "Is pressure washing safe for my property?",
     answer:
-      "Yes. Our technicians are trained to dial in the right PSI for each surface. For roofs, painted siding, and stucco we switch to soft washing: a low-pressure method using biodegradable solutions that kills mold and mildew at the root without blasting the surface.",
+      "Yes. We dial in the right PSI per surface, and switch to soft washing for roofs, siding, and stucco to prevent damage.",
   },
   {
     question: "How often should I have my property pressure washed?",
     answer:
-      "Most homes benefit from an annual cleaning. Properties near tree cover, in high-humidity areas, or with heavy foot traffic (like commercial storefronts and parking lots) may need service every 6 months. We can recommend a maintenance schedule during your free estimate.",
+      "Most homes benefit annually. High-humidity areas or commercial sites may need service every 6 months.",
   },
   {
     question: "Do I need to be home during the service?",
     answer:
-      "Not necessarily. We just need access to an outdoor water spigot and the areas being cleaned. That said, we always recommend a quick walkthrough before we start so we can note any specific concerns: cracked concrete, sensitive plants, parked vehicles, etc.",
+      "Not required—just leave access to an outdoor spigot. A quick walkthrough beforehand is helpful but optional.",
   },
   {
     question: "What is soft washing and when do you use it?",
     answer:
-      "Soft washing uses low pressure (under 500 PSI) combined with a biodegradable cleaning solution to remove algae, mold, lichen, and mildew. We use it on roofs, stucco, EIFS, cedar shake, and painted surfaces where high-pressure water could cause damage.",
+      "Low-pressure cleaning (under 500 PSI) with biodegradable solution for roofs, stucco, cedar shake, and painted surfaces.",
   },
   {
     question: "Are your cleaning solutions environmentally friendly?",
     answer:
-      "Yes. We use biodegradable, plant-safe detergents wherever possible. Before we rinse, we wet down nearby landscaping to dilute any runoff. Our team follows responsible chemical handling and disposal practices on every job.",
+      "Yes. Biodegradable, plant-safe detergents with responsible chemical handling on every job.",
   },
   {
     question: "How do I prepare for my pressure washing appointment?",
     answer:
-      "Move any patio furniture, potted plants, and vehicles away from the work area. Close all windows and doors. We'll handle the rest (setup, cleaning, rinse-down, and cleanup) and leave your property looking fresh.",
+      "Move furniture, pots, and vehicles from the work area. Close windows and doors. We handle the rest.",
   },
 ]
 
@@ -67,8 +67,8 @@ export function FAQ({ onOpenQuoteForm }: FAQProps) {
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl text-balance">
             Frequently Asked Questions
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-base">
-            Have questions? We have answers. If you {"don't"} see your question here, feel free to contact us.
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
+            Quick answers to common questions. Don&apos;t see yours? Contact us.
           </p>
         </div>
 

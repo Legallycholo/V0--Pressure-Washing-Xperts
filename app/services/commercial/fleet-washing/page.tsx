@@ -17,15 +17,12 @@ export default function FleetWashingPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Fleet Washing"
-        description="Clean vehicles reflect a company that takes its work seriously. We wash commercial fleets including box trucks, service vehicles, trailers, and vans on a schedule that keeps your brand looking sharp between routes."
+        description="Scheduled on-site washing for box trucks, vans, trailers, and service vehicles so your fleet stays clean between routes."
         category="Commercial"
         benefits={[
           "Handles box trucks, vans, trailers & service vehicles",
-          "Removes road grime, diesel exhaust & bug debris",
           "Scheduled fleet programs with consistent turnaround",
-          "On-site washing at your lot or facility",
-          "Safe for vehicle graphics, decals & painted surfaces",
-          "Licensed & insured professionals"
+          "On-site washing at your lot or facility"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

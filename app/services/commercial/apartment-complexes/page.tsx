@@ -17,15 +17,12 @@ export default function ApartmentComplexesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Apartment Complex Cleaning"
-        description="Apartment communities have high-visibility common areas that residents judge daily. We pressure wash breezeways, pool decks, dumpster enclosures, parking areas, and building exteriors for multi-family properties across Metro Atlanta."
+        description="Pressure washing for breezeways, pool decks, dumpster enclosures, parking, and building exteriors across Metro Atlanta multi-family properties."
         category="Commercial"
         benefits={[
           "Handles multi-building and campus-wide properties",
           "Cleans breezeways, pool decks & common areas",
-          "Dumpster pad and enclosure degreasing included",
-          "Removes mold, atmospheric staining & tire marks",
-          "Maintenance programs with recurring scheduling",
-          "Licensed, bonded & insured"
+          "Dumpster pad and enclosure degreasing included"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

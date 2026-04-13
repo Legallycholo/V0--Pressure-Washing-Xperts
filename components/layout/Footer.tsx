@@ -35,8 +35,7 @@ export function Footer() {
               Pressure Washing Xperts
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
-              Professional pressure washing for homes and businesses across Metro Atlanta.
-              Licensed & Insured. We don't do "good enough." We do Xpert
+              Licensed & insured pressure washing across Metro Atlanta.
             </p>
           </div>
 
@@ -116,18 +115,18 @@ export function Footer() {
               </a>
             </div>
 
-            {/* Social Media Placeholder */}
+            {/* Social media links — add real URLs when available */}
             <div className="mt-4">
               <p className="text-white/40 text-sm mb-2">Follow Us</p>
               <div className="flex gap-3">
-                {/* Placeholder social icons */}
                 {["FB", "IG", "YT", "TW"].map((social) => (
-                  <div
+                  <span
                     key={social}
-                    className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white/40 text-xs font-bold hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors cursor-pointer"
+                    className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white/30 text-xs font-bold"
+                    aria-hidden="true"
                   >
                     {social}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>

@@ -18,14 +18,11 @@ export default function BrickStoneMasonryPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Brick, Stone & Masonry"
-        description="Brick, natural stone, and masonry are porous surfaces that collect mold, efflorescence, and embedded grime over time. We clean and restore masonry without acid etching or high-pressure damage to mortar joints."
+        description="We clean brick, stone, and masonry without acid etching or high-pressure damage to mortar joints."
         category="Residential"
         benefits={[
           "Safe pressure for brick, stone & mortar joints",
           "Removes efflorescence, mold & green algae",
-          "No acid wash methods that damage surface",
-          "Restores natural stone color and texture",
-          "Covers patios, walkways & retaining walls",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

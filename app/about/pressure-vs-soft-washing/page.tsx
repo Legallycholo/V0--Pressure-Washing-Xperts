@@ -36,58 +36,52 @@ export default function PressureVsSoftWashingPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-5">
               {/* Pressure Washing */}
-              <div className="bg-white p-5 rounded-lg shadow-lg border-2 border-brand-blue">
-                <div className="flex items-center gap-3 mb-4">
-                  <Gauge className="size-10 text-brand-blue" />
-                  <h2 className="text-2xl font-bold text-brand-blue-dark">
+              <div className="bg-white p-4 sm:p-5 rounded-lg shadow-lg border-2 border-brand-blue">
+                <div className="flex items-center gap-3 mb-3">
+                  <Gauge className="size-8 sm:size-10 text-brand-blue" />
+                  <h2 className="text-xl sm:text-2xl font-bold text-brand-blue-dark">
                     Pressure Washing
                   </h2>
                 </div>
-                <p className="text-base text-gray-700 mb-4">
-                  High-pressure water cleaning for tough, durable surfaces that can withstand intense cleaning power.
+                <p className="text-sm text-gray-700 mb-3">
+                  High-pressure water for tough, durable surfaces.
                 </p>
-                <h3 className="font-semibold text-lg mb-2">Best For:</h3>
-                <ul className="space-y-2 text-gray-700 mb-4 text-sm">
-                  <li>• Concrete driveways and sidewalks</li>
-                  <li>• Parking lots and garages</li>
-                  <li>• Heavy-duty concrete and durable hardscapes</li>
-                  <li>• Brick and stone (when appropriate)</li>
-                  <li>• Remove tough stains and grime</li>
+                <h3 className="font-semibold text-base mb-2">Best For:</h3>
+                <ul className="space-y-1.5 text-gray-700 mb-3 text-sm">
+                  <li>• Concrete driveways & sidewalks</li>
+                  <li>• Parking lots & garages</li>
+                  <li>• Brick, stone & heavy-duty hardscapes</li>
                 </ul>
-                <h3 className="font-semibold text-lg mb-2">Features:</h3>
-                <ul className="space-y-2 text-gray-700 text-sm">
-                  <li>• High PSI (pounds per square inch)</li>
-                  <li>• Effective for stubborn stains</li>
-                  <li>• Fast cleaning results</li>
-                  <li>• Perfect for hard surfaces</li>
+                <h3 className="font-semibold text-base mb-2">Features:</h3>
+                <ul className="space-y-1.5 text-gray-700 text-sm">
+                  <li>• High PSI for stubborn stains</li>
+                  <li>• Fast results on hard surfaces</li>
+                  <li>• Removes deep grime and buildup</li>
                 </ul>
               </div>
 
               {/* Soft Washing */}
-              <div className="bg-white p-5 rounded-lg shadow-lg border-2 border-brand-yellow">
-                <div className="flex items-center gap-3 mb-4">
-                  <Droplets className="size-10 text-brand-yellow" />
-                  <h2 className="text-2xl font-bold text-brand-blue-dark">
+              <div className="bg-white p-4 sm:p-5 rounded-lg shadow-lg border-2 border-brand-yellow">
+                <div className="flex items-center gap-3 mb-3">
+                  <Droplets className="size-8 sm:size-10 text-brand-yellow" />
+                  <h2 className="text-xl sm:text-2xl font-bold text-brand-blue-dark">
                     Soft Washing
                   </h2>
                 </div>
-                <p className="text-base text-gray-700 mb-4">
-                  Low-pressure cleaning with specialized solutions for delicate surfaces that require gentle care.
+                <p className="text-sm text-gray-700 mb-3">
+                  Low-pressure cleaning with specialized solutions for delicate surfaces.
                 </p>
-                <h3 className="font-semibold text-lg mb-2">Best For:</h3>
-                <ul className="space-y-2 text-gray-700 mb-4 text-sm">
-                  <li>• House siding and exterior walls</li>
-                  <li>• Roofs and shingles</li>
-                  <li>• Windows and glass surfaces</li>
-                  <li>• Wood decks and fences</li>
-                  <li>• Painted or delicate surfaces</li>
+                <h3 className="font-semibold text-base mb-2">Best For:</h3>
+                <ul className="space-y-1.5 text-gray-700 mb-3 text-sm">
+                  <li>• House siding & exterior walls</li>
+                  <li>• Roofs & shingles</li>
+                  <li>• Wood decks, fences & painted surfaces</li>
                 </ul>
-                <h3 className="font-semibold text-lg mb-2">Features:</h3>
-                <ul className="space-y-2 text-gray-700 text-sm">
-                  <li>• Low PSI with cleaning solutions</li>
-                  <li>• Kills mold, mildew, and algae</li>
-                  <li>• Safe for all surfaces</li>
-                  <li>• Long-lasting results</li>
+                <h3 className="font-semibold text-base mb-2">Features:</h3>
+                <ul className="space-y-1.5 text-gray-700 text-sm">
+                  <li>• Low PSI with biodegradable solutions</li>
+                  <li>• Kills mold, mildew & algae at the root</li>
+                  <li>• Long-lasting, surface-safe results</li>
                 </ul>
               </div>
             </div>
@@ -100,10 +94,8 @@ export default function PressureVsSoftWashingPage() {
             <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
               Our Xpert Approach
             </h2>
-            <p className="text-base text-gray-700 mb-5">
-              At Pressure Washing Xperts, we don't believe in a one-size-fits-all approach. 
-              Our trained professionals assess each project individually and use the appropriate 
-              method (or combination of methods) to deliver the best results while protecting your property.
+            <p className="text-sm sm:text-base text-gray-700 mb-4">
+              We assess each project individually and choose the right method—or combination—to protect your property and deliver the best results.
             </p>
             <div className="bg-brand-yellow/10 p-4 rounded-lg">
               <p className="text-lg font-semibold text-brand-blue-dark">
@@ -119,8 +111,8 @@ export default function PressureVsSoftWashingPage() {
             <h2 className="text-2xl font-bold mb-3">
               Not Sure Which Method You Need?
             </h2>
-            <p className="text-base text-white/80 mb-6">
-              Contact our experts today for a free consultation and quote.
+            <p className="text-sm sm:text-base text-white/80 mb-5">
+              Free consultation—we&apos;ll recommend the best approach.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button

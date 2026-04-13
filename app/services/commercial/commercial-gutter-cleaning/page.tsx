@@ -17,15 +17,12 @@ export default function CommercialGutterCleaningPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Commercial Gutter Cleaning"
-        description="Commercial gutter systems carry far more volume than residential gutters. Blockages cause roof ponding, fascia damage, and interior leaks. We flush and clear commercial gutters and downspouts on a schedule that prevents those problems."
+        description="We flush and clear commercial gutters and downspouts to stop blockages that lead to roof ponding, fascia damage, and interior leaks."
         category="Commercial"
         benefits={[
           "Clears blockages from commercial gutter runs",
           "Flushes downspouts and confirms drainage flow",
-          "Prevents roof ponding and fascia deterioration",
-          "Available as standalone or with building wash",
-          "Documentation of service available on request",
-          "Licensed & insured professionals"
+          "Prevents roof ponding and fascia deterioration"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

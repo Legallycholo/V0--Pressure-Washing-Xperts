@@ -16,7 +16,7 @@ export default function ResidentialServicesHubPage() {
       <ServiceCategoryHubTemplate
         categoryLabel="Residential Services"
         title="Residential Pressure Washing Services"
-        description="Soft wash and pressure washing for siding, roofs, concrete, decks, and full-property exteriors. One team, clear scope, and results you notice from the street."
+        description="Soft wash and pressure washing for siding, roofs, concrete, decks, and full-property exteriors."
         services={residentialServices}
         onOpenQuoteForm={() => goQuote()}
         contentRevised="April 2026"

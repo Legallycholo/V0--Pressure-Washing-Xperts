@@ -17,15 +17,12 @@ export default function HoaServicesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="HOA Services"
-        description="HOA boards are responsible for the appearance standards their community expects. We clean entry monuments, sidewalks, pool decks, fences, and common area surfaces on a schedule that aligns with your HOA maintenance calendar."
+        description="Entry monuments, sidewalks, pool decks, fences, and common areas cleaned on a schedule that fits your HOA maintenance calendar."
         category="Commercial"
         benefits={[
           "Entry monument, signage & common area cleaning",
           "Pool deck, fence & sidewalk restoration",
-          "Recurring maintenance programs for HOA budgets",
-          "Safe for landscaping and residential surroundings",
-          "Flexible scheduling around community events",
-          "Licensed & insured with a consistent crew"
+          "Recurring maintenance programs for HOA budgets"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

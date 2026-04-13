@@ -300,3 +300,81 @@
     scroll-margin-top: calc(var(--header-offset-desktop) + 0.5rem);
   }
 }
+
+/* ─── Mobile-first utilities ─── */
+
+/* 44px minimum touch target — apply to interactive elements on mobile */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Safe-area padding for devices with notches / home indicators */
+.pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+/* Fixed-element stacking policy (bottom-up):
+   z-40 → FloatingCallButton
+   z-50 → Header
+   z-[105] → Reopen chip
+   z-[110] → ExitIntentPopup modal */
+
+/* Hero height on mobile: occupies the visible viewport minus the header */
+.hero-mobile-height {
+  min-height: calc(88vh - var(--header-offset-mobile));
+}
+
+@media (min-width: 1024px) {
+  .hero-mobile-height {
+    min-height: auto;
+  }
+}
+
+/* Process stepper connector line */
+.step-connector {
+  position: relative;
+}
+
+.step-connector::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: calc(50% + 32px);
+  width: calc(100% - 64px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-blue-light));
+  opacity: 0.35;
+}
+
+@media (max-width: 639px) {
+  .step-connector::after {
+    display: none;
+  }
+}
+
+/* Last step in a row should not have connector */
+.step-connector-last::after {
+  display: none;
+}
+
+/* Gentle reveal when scrolled into view */
+@keyframes step-reveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-step-reveal {
+  animation: step-reveal 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-step-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .step-connector::after {
+    opacity: 0.25;
+  }
+}

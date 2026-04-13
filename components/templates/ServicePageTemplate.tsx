@@ -109,17 +109,17 @@ export function ServicePageTemplate({
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
+      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-8 sm:py-12 pt-header-offset">
         <div className="absolute inset-0 bg-hero-pattern opacity-10" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="inline-block mb-3 px-3 py-1.5 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
+            <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm">
               {category} Services
             </span>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">
               {title}
             </h1>
-            <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-5">
+            <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">
               {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -232,7 +232,7 @@ export function ServicePageTemplate({
                   See it in person—start with a call
                 </h3>
                 <p className="text-gray-600 mb-4 max-w-sm text-pretty text-sm">
-                  No photo here yet? Talk to our team about your property and get a straightforward quote.
+                  Talk to our team and get a straightforward quote.
                 </p>
                 <Button
                   asChild
@@ -263,24 +263,28 @@ export function ServicePageTemplate({
       <section className="py-10 bg-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-7">
-            <h2 className="text-2xl font-bold text-brand-blue-dark mb-3">
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-2">
               Our Process
             </h2>
-            <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              Four steps from your first message to the final walkthrough.
+            <p className="text-sm text-gray-600 max-w-xl mx-auto">
+              Four steps from first message to final walkthrough.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {processItems.map((item) => (
-              <div key={`${item.step}-${item.title}`} className="text-center">
-                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3">
+            {processItems.map((item, idx) => (
+              <div
+                key={`${item.step}-${item.title}`}
+                className={`text-center animate-step-reveal ${idx < processItems.length - 1 ? "step-connector" : ""} ${idx === processItems.length - 1 ? "step-connector-last" : ""}`}
+                style={{ animationDelay: `${idx * 120}ms` }}
+              >
+                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3 shadow-md ring-4 ring-brand-yellow/20">
                   {item.step}
                 </div>
-                <h3 className="text-lg font-semibold text-brand-blue-dark mb-1.5">
+                <h3 className="text-base font-semibold text-brand-blue-dark mb-1">
                   {item.title}
                 </h3>
-                <p className="text-gray-600">{item.desc}</p>
+                <p className="text-sm text-gray-600">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -293,9 +297,8 @@ export function ServicePageTemplate({
           <h2 className="text-2xl font-bold mb-3">
             {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
           </h2>
-          <p className="text-base text-white/80 mb-6">
-            {ctaSubline ??
-              "Straightforward quotes so you know what to expect before we start."}
+          <p className="text-sm sm:text-base text-white/80 mb-5">
+            {ctaSubline ?? "Straightforward quotes—know what to expect before we start."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button

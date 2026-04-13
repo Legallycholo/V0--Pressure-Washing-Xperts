@@ -284,7 +284,7 @@ function GalleryGrid({
                 {item.id}
               </span>
               {showTagChips && item.tagPlaceholder ? (
-                <span className="line-clamp-2 rounded-full bg-brand-yellow/95 px-2.5 py-0.5 text-left text-[10px] font-semibold leading-tight text-brand-blue-dark sm:text-xs">
+                <span className="line-clamp-2 rounded-full bg-brand-yellow/95 px-2.5 py-0.5 text-left text-[11px] font-semibold leading-tight text-brand-blue-dark sm:text-xs">
                   {item.tagPlaceholder}
                 </span>
               ) : null}

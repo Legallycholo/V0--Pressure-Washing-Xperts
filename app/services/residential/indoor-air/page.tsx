@@ -17,14 +17,11 @@ export default function IndoorAirPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Indoor Air Quality"
-        description="Indoor air quality affects your family's health every day. We remove dust, allergens, and contaminants from air vents, ductwork, and surfaces so your HVAC circulates clean air instead of recycling buildup."
+        description="We clean vents and ductwork so your HVAC circulates less dust and fewer allergens."
         category="Residential"
         benefits={[
           "Cleans air vents, returns & ductwork surfaces",
           "Reduces airborne allergens and dust circulation",
-          "Improves HVAC efficiency after cleaning",
-          "Safe for residential HVAC systems",
-          "Helps households with allergies or respiratory conditions",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

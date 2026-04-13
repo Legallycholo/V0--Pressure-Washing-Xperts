@@ -29,8 +29,8 @@ export default function ServiceAreasPage() {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-light mb-4">
             Our Service Areas
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed mb-6">
-            Homes and businesses across Metro Atlanta and the nearby towns we list below. Pick your city or send a quote and we will confirm the route.
+          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto font-light leading-relaxed mb-5">
+            Metro Atlanta homes and businesses. Pick your city or request a quote.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button 
@@ -56,8 +56,8 @@ export default function ServiceAreasPage() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Communities We Serve
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-base">
-              We roll up with the right gear for your surfaces. Do not see your town? Call and we will tell you if the next route covers you.
+            <p className="text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
+              Don&apos;t see your town? Call and we&apos;ll check the next route.
             </p>
           </div>
 
@@ -89,8 +89,8 @@ export default function ServiceAreasPage() {
           <h2 className="text-2xl md:text-3xl font-extrabold mb-4">
             Want a number for your property?
           </h2>
-          <p className="text-lg mb-6 opacity-90 font-medium">
-            Free quote, clear scope, no pressure to book on the spot.
+          <p className="text-base sm:text-lg mb-5 opacity-90 font-medium">
+            Free quote, clear scope, no pressure.
           </p>
           <button 
             onClick={() => goQuote()}

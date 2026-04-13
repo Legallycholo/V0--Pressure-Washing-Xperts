@@ -18,14 +18,11 @@ export default function CurbingPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Curbing"
-        description="Street-facing curbs, gutters, and sidewalks are the first thing visitors see. We clean residential curbing and sidewalk panels to remove algae, dirt, and traffic staining quickly and without damage."
+        description="We clean residential curbs and sidewalks to remove algae, dirt, and traffic staining without damage."
         category="Residential"
         benefits={[
           "Restores concrete curb and sidewalk appearance",
           "Removes algae, dirt & road film from panels",
-          "Improves neighborhood curb appeal before selling",
-          "Safe for painted curbs and adjacent landscaping",
-          "Quick service, usually completed in under an hour",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

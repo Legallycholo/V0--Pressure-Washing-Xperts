@@ -17,14 +17,11 @@ export default function TileAndGroutCleaningPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Tile & Grout Cleaning"
-        description="Grout lines trap dirt and bacteria that mopping does not reach. We deep clean tile and grout with hot water extraction and grout-specific detergents to restore brightness and sanitation to kitchen, bathroom, and entryway floors."
+        description="Hot water extraction and grout-specific detergents deep-clean tile and grout where mopping cannot reach."
         category="Residential"
         benefits={[
           "Hot water extraction for deep grout cleaning",
           "Removes embedded soil, mold & discoloration",
-          "Safe for ceramic, porcelain & natural stone tile",
-          "Covers kitchen, bathroom, entryway & laundry areas",
-          "Optional grout sealing to protect results",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

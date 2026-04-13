@@ -17,14 +17,11 @@ export default function ResidentialPropertiesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Residential Properties"
-        description="Complete exterior cleaning for residential properties. We handle every surface from roof to driveway so you get one crew, one quote, and one visit instead of coordinating multiple contractors."
+        description="Full exterior cleaning from roof to driveway—one crew, one quote, and one coordinated visit."
         category="Residential"
         benefits={[
           "Roof soft washing, house washing & driveway cleaning",
           "Single visit for multiple exterior surfaces",
-          "Consistent technique across all property surfaces",
-          "Great for pre-listing prep or spring maintenance",
-          "Flexible scheduling for occupied homes",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

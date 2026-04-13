@@ -269,17 +269,17 @@ export function Testimonials() {
         </div>
 
         {/* Mobile Navigation Arrows */}
-        <div className="flex justify-center gap-3 mt-4 md:hidden">
+        <div className="flex justify-center gap-4 mt-4 md:hidden">
           <button
             onClick={goToPrevious}
-            className="p-3 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors"
+            className="p-3 min-h-[44px] min-w-[44px] rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors flex items-center justify-center"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="size-5" />
           </button>
           <button
             onClick={goToNext}
-            className="p-3 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors"
+            className="p-3 min-h-[44px] min-w-[44px] rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors flex items-center justify-center"
             aria-label="Next testimonial"
           >
             <ChevronRight className="size-5" />

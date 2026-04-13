@@ -17,15 +17,12 @@ export default function StorefrontsPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Storefront Washing"
-        description="Customers make a judgment about your business before they walk through the door. We clean storefront glass, metal, painted surfaces, and entry areas to keep your first impression sharp and consistent."
+        description="Storefront glass, metal, painted surfaces, and entries cleaned so your first impression stays sharp."
         category="Commercial"
         benefits={[
           "Removes grime, mold & atmospheric buildup",
           "Safe for glass, metal & painted surfaces",
-          "Soft wash method for delicate finishes",
-          "Quick turnaround to minimize business disruption",
-          "Enhances customer-facing appearance",
-          "Licensed & insured professionals"
+          "Soft wash method for delicate finishes"
         ]}
         onOpenQuoteForm={() => goQuote()}
         imageSrc="/commercial-services/commercial-building-parking-storefront.png"

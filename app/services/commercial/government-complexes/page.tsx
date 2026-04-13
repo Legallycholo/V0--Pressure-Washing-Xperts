@@ -17,15 +17,12 @@ export default function GovernmentComplexesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Government Complex Cleaning"
-        description="Government buildings and municipal facilities require thorough, dependable cleaning on a schedule. We service courthouses, civic centers, public parking areas, and government-owned buildings with consistent results and documentation available on request."
+        description="Scheduled washing for courthouses, civic centers, parking, and government-owned buildings—with service records and documentation on request."
         category="Commercial"
         benefits={[
           "Experience with municipal and civic property types",
           "Parking lots, walkways & building exteriors covered",
-          "Scheduled maintenance programs with service records",
-          "Fully licensed, bonded & insured",
-          "Reliable crew with consistent on-time scheduling",
-          "Documentation available for compliance review"
+          "Scheduled maintenance programs with service records"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

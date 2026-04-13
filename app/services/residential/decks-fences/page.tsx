@@ -18,14 +18,11 @@ export default function DecksFencesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Decks and Fences"
-        description="Decks and fences take the worst of Georgia's weather. Mold, mildew, and algae build up fast on wood, composite, and vinyl surfaces. We restore the look and extend the life of your outdoor structures without stripping the finish."
+        description="We remove mold, mildew, and algae from wood, composite, and vinyl decks and fences without stripping the finish."
         category="Residential"
         benefits={[
           "Safe for wood, composite & vinyl surfaces",
           "Removes mold, algae & weathered gray discoloration",
-          "Preserves finish before re-staining or sealing",
-          "Cleans fence boards, rails & post bases",
-          "Eco-friendly solutions safe for landscaping",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

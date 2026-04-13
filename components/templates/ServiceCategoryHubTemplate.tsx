@@ -25,14 +25,14 @@ export function ServiceCategoryHubTemplate({
 }: ServiceCategoryHubTemplateProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
+      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-8 sm:py-12 pt-header-offset">
         <div className="absolute inset-0 bg-hero-pattern opacity-10" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block mb-3 px-3 py-1.5 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm uppercase tracking-wide">
+          <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm uppercase tracking-wide">
             {categoryLabel}
           </span>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">{title}</h1>
-          <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-5">{description}</p>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">{title}</h1>
+          <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">{description}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={onOpenQuoteForm}
@@ -61,8 +61,8 @@ export function ServiceCategoryHubTemplate({
           <div className="text-center mb-7">
             <p className="text-brand-blue text-xs font-semibold uppercase tracking-[0.2em]">What We Clean</p>
             <h2 className="mt-2 text-2xl font-bold text-brand-blue-dark sm:text-3xl">Our {categoryLabel}</h2>
-            <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-3xl mx-auto">
-              Open any service for scope, benefits, how we work, and the fastest way to get a quote.
+            <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+              Scope, benefits, process, and the fastest way to quote.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export function ServiceCategoryHubTemplate({
 
           <div className="mt-7 rounded-xl border border-brand-blue/10 bg-white p-4 sm:p-5 text-center">
             <p className="text-gray-600 text-sm sm:text-base">
-              Need help choosing the right service? We can recommend the best process for your property type.
+              Not sure which service? We&apos;ll recommend the best approach for your property.
             </p>
             <Button
               onClick={onOpenQuoteForm}

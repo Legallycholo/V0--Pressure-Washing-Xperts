@@ -17,14 +17,11 @@ export default function StainCleaningPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Stain Cleaning"
-        description="Rust, oil, paint, and organic stains on driveways, patios, and walkways are stubborn. We use targeted stain treatment products and pressure washing together to remove the stain without damaging the underlying surface."
+        description="Targeted treatments plus pressure washing lift rust, oil, paint, and organic stains without damaging the surface."
         category="Residential"
         benefits={[
           "Treats rust, oil, paint & organic staining",
           "Surface-specific products to avoid substrate damage",
-          "Works on concrete, pavers, brick & stone",
-          "Better results than pressure washing alone",
-          "Stain pre-treatment before full surface wash",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

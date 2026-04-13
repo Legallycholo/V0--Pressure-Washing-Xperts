@@ -17,15 +17,12 @@ export default function GraffitiRemovalPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Graffiti Removal Services"
-        description="Graffiti left on your building invites more. We respond quickly to remove spray paint, marker, and tagging from brick, concrete, metal, and painted surfaces before the stain sets and becomes permanent."
+        description="Fast removal of spray paint, marker, and tagging from brick, concrete, metal, and painted surfaces before stains set."
         category="Commercial"
         benefits={[
           "Fast response to limit stain penetration time",
           "Works on brick, concrete, metal & painted surfaces",
-          "Graffiti-specific agents that protect the substrate",
-          "Surface restoration after removal where needed",
-          "Discreet service to minimize public attention",
-          "Licensed & insured professionals"
+          "Graffiti-specific agents that protect the substrate"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

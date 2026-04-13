@@ -18,14 +18,11 @@ export default function HouseWashingPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="House Washing Services"
-        description="Soft washing for vinyl, hardboard, brick, and painted siding. Safe pressure settings remove mold, mildew, and weathering without damaging your exterior."
+        description="Safe soft washing removes mold, mildew, and weathering from all siding types."
         category="Residential"
         benefits={[
-          "Soft washing for delicate surfaces",
+          "Soft washing safe for delicate surfaces",
           "Removes mold, mildew, and algae",
-          "Eco-friendly cleaning solutions",
-          "Protects your home's exterior",
-          "Increases curb appeal",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

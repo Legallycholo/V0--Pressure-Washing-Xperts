@@ -17,14 +17,11 @@ export default function RoofSoftWashingPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Roof Soft Washing"
-        description="Specialized soft washing for roofs to safely remove algae, moss, and black streaks. Our low-pressure method protects your shingles while delivering superior cleaning results."
+        description="Low-pressure soft washing removes algae, moss, and black streaks while protecting asphalt shingles."
         category="Residential"
         benefits={[
           "Low-pressure soft wash safe for asphalt shingles",
           "Kills algae and moss at the root, not just the surface",
-          "Removes black streak staining (Gloeocapsa magma)",
-          "Extends shingle life by eliminating damaging organisms",
-          "Manufacturer-compatible cleaning methods",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

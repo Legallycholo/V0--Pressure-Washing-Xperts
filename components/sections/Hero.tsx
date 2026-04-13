@@ -137,24 +137,18 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       id="hero"
       className="scroll-offset-header relative overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset"
     >
-      {/* Animated Background Pattern */}
+      {/* Background image overlay */}
       <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
-      
-      {/* Dynamic Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-dark/80 via-transparent to-brand-blue/60" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-dark/90 via-transparent to-transparent" />
       </div>
 
-      {/* Decorative Elements - Enhanced */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-yellow/20 rounded-full blur-3xl animate-pulse-slow" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-blue-light/15 rounded-full blur-3xl animate-pulse-slower" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-3xl" />
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-10 sm:pb-12 lg:pb-14">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
-          <div className="animate-fade-in-up lg:col-span-5 text-center lg:text-left">
-            <p className="mb-3 text-brand-yellow font-semibold text-sm sm:text-base tracking-[0.24em] uppercase">
+          <div className="animate-fade-in-up lg:col-span-5 text-center lg:text-left hero-mobile-height flex flex-col justify-center lg:min-h-0">
+            <p className="mb-3 text-brand-yellow font-semibold text-sm tracking-[0.24em] uppercase">
               Atlanta&apos;s top-rated service
             </p>
 
@@ -165,17 +159,16 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
 
             <p className="mt-4 max-w-2xl text-base text-white/85 leading-relaxed sm:text-lg lg:mx-0 mx-auto">
               Restore your home or business with safe, effective exterior cleaning.
-              Industry-proven techniques that protect your property and boost curb appeal.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-white/85 lg:justify-start">
+            <div className="mt-5 hidden sm:flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-white/85 lg:justify-start">
               <span className="inline-flex items-center gap-2">
                 <Check className="size-4 text-brand-blue-light" />
                 Licensed & Insured
               </span>
               <span className="inline-flex items-center gap-2">
                 <Check className="size-4 text-brand-blue-light" />
-                14 Years of Experience
+                14 Years Experience
               </span>
               <span className="inline-flex items-center gap-2">
                 <Check className="size-4 text-brand-blue-light" />
@@ -187,7 +180,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
               <Button
                 asChild
                 size="lg"
-                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg ${ctaPress}`}
+                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg min-h-[44px] ${ctaPress}`}
               >
                 <a href="tel:800-451-7213">Call now</a>
               </Button>
@@ -195,14 +188,14 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                 type="button"
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-base px-6 py-4 hover:bg-white/10 hover:border-white transition-all duration-300 ${ctaPress}`}
+                className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-base px-6 py-4 hover:bg-white/10 hover:border-white transition-all duration-300 min-h-[44px] ${ctaPress}`}
               >
                 Get your free estimate
               </Button>
             </div>
           </div>
 
-          <div className="animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-12">
+          <div className="hidden lg:block animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-12">
             <div className="rounded-2xl bg-white/95 shadow-2xl border border-white/30 overflow-hidden backdrop-blur-sm">
               <div className="bg-brand-blue p-4 sm:p-5">
                 <h2 className="text-lg sm:text-xl font-bold text-white">

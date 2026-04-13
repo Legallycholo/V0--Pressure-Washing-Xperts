@@ -75,8 +75,8 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
           <h2 className="text-balance text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
             Before & After Results
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
-            Slide to compare and see the transformations we achieve with professional pressure washing.
+          <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-muted-foreground">
+            Slide to compare real results from our crew.
           </p>
         </div>
 

@@ -151,7 +151,7 @@ export function BeforeAfterSlider({
       <div
         ref={trackRef}
         className={cn(
-          "relative touch-none select-none",
+          "relative select-none touch-pan-y",
           aspectClassName,
           !pairReady && "bg-neutral-900/90"
         )}

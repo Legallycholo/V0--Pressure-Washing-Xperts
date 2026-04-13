@@ -25,9 +25,8 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           >
             Save on Bundles &amp; Seasonal Service
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-base">
-            Pick the promo that fits your job: new customers, multi-service
-            visits, spring and fall scheduling, and neighbor referrals.
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
+            Promos for new customers, bundles, seasonal scheduling, and referrals.
           </p>
         </div>
 
@@ -117,10 +116,8 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Offers cannot be combined. Minimum job total applies before any
-          discount. Referral credits are issued after the referred customer
-          completes a paid service. Call{" "}
+        <p className="mt-6 text-center text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
+          Offers cannot be combined. Minimum job total applies. Call{" "}
           <a
             href="tel:18004517213"
             className="font-semibold text-brand-blue underline-offset-2 hover:underline"

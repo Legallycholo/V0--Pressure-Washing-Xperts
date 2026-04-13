@@ -18,14 +18,11 @@ export default function DrivewaySidewalkPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Driveways and Sidewalks"
-        description="Concrete driveways and sidewalks hold oil stains, tire marks, and green algae that make your property look neglected. We use commercial-grade surface cleaners to blast years of buildup off flat concrete in a single visit."
+        description="Commercial-grade surface cleaning removes oil, tire marks, and algae from driveways and sidewalks in one visit."
         category="Residential"
         benefits={[
           "Commercial surface cleaner for flat concrete",
           "Removes oil, rust, tire marks & algae",
-          "Covers driveways, walkways & steps",
-          "Improves traction and appearance",
-          "No streaking from inconsistent wand technique",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

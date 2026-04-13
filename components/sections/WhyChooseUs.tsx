@@ -6,12 +6,8 @@ import {
   Clock,
   FileText,
   FlaskConical,
-  GraduationCap,
   Leaf,
   Shield,
-  Star,
-  Users,
-  Wrench,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -19,52 +15,32 @@ const features: { icon: LucideIcon; title: string; description: string }[] = [
   {
     icon: CheckCircle,
     title: "Quality workmanship",
-    description: "Consistent results on every job, from small homes to large commercial sites.",
+    description: "Consistent results on every job.",
   },
   {
     icon: FlaskConical,
     title: "Safe cleaning methods",
-    description: "Soft wash and pressure washing chosen for your surfaces and environment.",
+    description: "Right pressure and solution for each surface.",
   },
   {
     icon: FileText,
     title: "Clear estimates",
-    description: "Straightforward quotes so you know what to expect before we start.",
-  },
-  {
-    icon: Wrench,
-    title: "Professional equipment",
-    description: "Commercial-grade tools maintained for reliable, effective cleaning.",
-  },
-  {
-    icon: Users,
-    title: "Experienced crew",
-    description: "A team that shows up on time and treats your property with respect.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Trained technicians",
-    description: "Technicians trained on proper techniques and safety best practices.",
+    description: "Know what to expect before we start.",
   },
   {
     icon: Shield,
     title: "Licensed & insured",
-    description: "Coverage that protects you and your property while we work.",
+    description: "Full coverage that protects your property.",
   },
   {
     icon: Leaf,
     title: "Eco-conscious options",
-    description: "Biodegradable solutions where appropriate for plants and pets.",
-  },
-  {
-    icon: Star,
-    title: "Customer satisfaction",
-    description: "We aim to earn your referral with every project we complete.",
+    description: "Biodegradable solutions safe for plants and pets.",
   },
   {
     icon: Clock,
     title: "Reliable scheduling",
-    description: "We work with your timeline and communicate if anything changes.",
+    description: "On time, every time.",
   },
 ]
 
@@ -73,8 +49,8 @@ interface WhyChooseUsProps {
 }
 
 export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
-  const firstColumn = features.slice(0, 5)
-  const secondColumn = features.slice(5, 10)
+  const firstColumn = features.slice(0, 3)
+  const secondColumn = features.slice(3, 6)
 
   return (
     <section

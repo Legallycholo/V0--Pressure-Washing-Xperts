@@ -42,13 +42,10 @@ export default function WeDoXpertPage() {
                 </h2>
                 <div className="space-y-3 text-base text-gray-700">
                   <p>
-                    Pressure Washing Xperts was founded with a simple mission: to provide exceptional pressure washing services that exceed customer expectations every time. Our owner brings 14 years of hands-on experience in pressure washing, setting the standard for how we approach every job.
+                    Founded on one goal: exceptional results, every time. Our owner brings 14 years of hands-on experience, setting the standard for how the crew approaches every project.
                   </p>
                   <p>
-                    Our team of certified professionals brings that expertise to every project, from single-family homes to multi-site commercial work.
-                  </p>
-                  <p>
-                    We believe in using the right techniques and eco-friendly solutions to deliver outstanding results while protecting your property and the environment.
+                    Right techniques, eco-friendly solutions, and outcomes you can see from the street.
                   </p>
                 </div>
               </div>
@@ -83,21 +80,21 @@ export default function WeDoXpertPage() {
             <h2 className="text-2xl font-bold text-brand-blue-dark mb-8 text-center">
               Why Choose Pressure Washing Xperts?
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
               {[
-                { title: "Licensed & Insured", desc: "Fully licensed and insured for your peace of mind" },
-                { title: "Expert Team", desc: "Certified professionals with years of experience" },
-                { title: "Eco-Friendly", desc: "Environmentally safe cleaning solutions" },
-                { title: "Quality Guaranteed", desc: "100% satisfaction guarantee on all services" },
-                { title: "Competitive Pricing", desc: "Fair, transparent pricing with no hidden fees" },
-                { title: "Customer First", desc: "Dedicated to exceptional customer service" },
+                { title: "Licensed & Insured", desc: "Full coverage for your peace of mind" },
+                { title: "Expert Team", desc: "Certified professionals, 14+ years" },
+                { title: "Eco-Friendly", desc: "Safe, biodegradable solutions" },
+                { title: "Quality Guaranteed", desc: "Satisfaction guarantee on all services" },
+                { title: "Competitive Pricing", desc: "Fair pricing, no hidden fees" },
+                { title: "Customer First", desc: "Dedicated to exceptional service" },
               ].map((item, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-                  <CheckCircle2 className="size-8 text-brand-yellow mb-3" />
-                  <h3 className="text-lg font-semibold text-brand-blue-dark mb-2">
+                <div key={index} className="bg-white p-3 sm:p-4 rounded-lg shadow-md">
+                  <CheckCircle2 className="size-6 sm:size-8 text-brand-yellow mb-2" />
+                  <h3 className="text-sm sm:text-lg font-semibold text-brand-blue-dark mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -110,8 +107,8 @@ export default function WeDoXpertPage() {
             <h2 className="text-2xl font-bold mb-3">
               Ready to Experience the Xpert Difference?
             </h2>
-            <p className="text-base text-white/80 mb-6">
-              Contact us today for a free quote and see why we're the trusted choice for pressure washing.
+            <p className="text-sm sm:text-base text-white/80 mb-5">
+              Free quote—see why we&apos;re the trusted choice.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button

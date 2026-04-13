@@ -17,15 +17,12 @@ export default function AwningCleaningPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Awning Cleaning Services"
-        description="Fabric, vinyl, and metal awnings collect mold, bird droppings, and environmental film quickly. We clean commercial awnings with low-pressure methods that remove buildup without damaging the material or pulling stitching."
+        description="Low-pressure commercial awning cleaning that removes mold, droppings, and film without damaging fabric, vinyl, or metal."
         category="Commercial"
         benefits={[
           "Safe for fabric, vinyl & metal awning types",
           "Removes mold, mildew & bird droppings",
-          "Restores color without fading from high pressure",
-          "Extends awning lifespan with proper cleaning",
-          "Quick service to minimize business disruption",
-          "Licensed & insured professionals"
+          "Extends awning lifespan with proper cleaning"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

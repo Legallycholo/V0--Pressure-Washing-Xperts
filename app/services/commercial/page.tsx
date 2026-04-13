@@ -16,7 +16,7 @@ export default function CommercialServicesHubPage() {
       <ServiceCategoryHubTemplate
         categoryLabel="Commercial Services"
         title="Commercial Pressure Washing Services"
-        description="Storefronts, building facades, parking areas, fleets, and high-traffic sites kept presentable for customers, tenants, and inspections."
+        description="Storefronts, facades, parking areas, fleets, and high-traffic sites kept presentable."
         services={commercialServices}
         onOpenQuoteForm={() => goQuote()}
         contentRevised="April 2026"

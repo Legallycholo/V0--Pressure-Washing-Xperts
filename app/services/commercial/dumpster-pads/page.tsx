@@ -17,15 +17,12 @@ export default function DumpsterPadsPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Dumpster Pad Cleaning"
-        description="Dumpster enclosures and concrete pads accumulate grease, food waste, and biological growth that create odors and health violations. We pressure wash dumpster pads with commercial-grade degreasers so the area stays compliant and sanitary."
+        description="Pressure washing with commercial degreasers removes grease, food waste, and biological growth so dumpster pads stay sanitary and compliant."
         category="Commercial"
         benefits={[
           "Removes grease, food waste & biological buildup",
           "Commercial degreaser application before wash",
-          "Eliminates odors at the source, not just the surface",
-          "Helps maintain health and municipal compliance",
-          "Recurring service programs available",
-          "Licensed & insured professionals"
+          "Helps maintain health and municipal compliance"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

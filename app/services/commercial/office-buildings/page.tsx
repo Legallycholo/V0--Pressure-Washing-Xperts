@@ -17,15 +17,12 @@ export default function OfficeBuildingsPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Office Building Pressure Washing"
-        description="Your building exterior communicates as much about your business as your lobby does. We pressure wash office building facades, parking structures, entryways, and dumpster areas so your property reflects the quality of the tenants inside."
+        description="Facades, parking structures, entryways, and dumpster areas pressure washed so your property matches tenant and visitor expectations."
         category="Commercial"
         benefits={[
           "Removes environmental staining from building facades",
           "Parking garage and structure surface cleaning",
-          "Entryway, plaza & lobby exterior restoration",
-          "Safe for glass, brick, metal & stucco cladding",
-          "Night and weekend scheduling available",
-          "Licensed & insured for commercial properties"
+          "Night and weekend scheduling available"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

@@ -67,8 +67,8 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance">
             Our Professional Services
           </h2>
-          <p className="mt-3 text-white/70 max-w-2xl mx-auto text-base">
-            We focus on two core lines (residential curb appeal and commercial first impressions) with the right mix of pressure and soft washing for each surface.
+          <p className="mt-3 text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
+            Residential curb appeal and commercial first impressions—right pressure, right surface.
           </p>
         </div>
 
@@ -157,7 +157,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
         {/* Section CTA */}
         <div className="mt-10 text-center">
           <p className="text-white/70 mb-4 text-sm sm:text-base">
-            {"Not sure which service you need? Let us help you find the right solution."}
+            Not sure which service you need?
           </p>
           <Button
             onClick={onOpenQuoteForm}

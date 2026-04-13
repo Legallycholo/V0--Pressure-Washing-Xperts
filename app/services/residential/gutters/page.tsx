@@ -18,14 +18,11 @@ export default function GuttersPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Gutters"
-        description="Clogged gutters cause water backup, fascia damage, and foundation erosion. We flush gutters and downspouts, remove debris, and leave your drainage running the way it should."
+        description="We clear debris, flush gutters and downspouts, and restore drainage to help prevent fascia and foundation damage."
         category="Residential"
         benefits={[
           "Removes leaves, debris & shingle granule buildup",
           "Flushes downspouts to confirm full drainage",
-          "Prevents fascia rot and foundation water damage",
-          "Available as standalone or combined with house wash",
-          "Safe ladder handling and gutter-safe cleaning method",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

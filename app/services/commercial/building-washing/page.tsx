@@ -17,15 +17,12 @@ export default function BuildingWashingPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Commercial Building Washing"
-        description="Mold, atmospheric staining, and pollution leave commercial facades looking run down fast. We pressure wash or soft wash office buildings, retail centers, and commercial properties across Metro Atlanta using the method that suits the surface."
+        description="Pressure or soft wash for Metro Atlanta office, retail, and commercial facades—matched to brick, stucco, EIFS, and metal."
         category="Commercial"
         benefits={[
           "Removes mold, mildew & environmental staining",
           "Safe for brick, stucco, EIFS & metal panels",
-          "Soft wash or pressure wash by surface type",
-          "Enhances tenant satisfaction & curb appeal",
-          "Licensed, bonded & insured",
-          "Flexible scheduling including nights & weekends"
+          "Soft wash or pressure wash by surface type"
         ]}
         onOpenQuoteForm={() => goQuote()}
         imageSrc="/commercial-services/commercial-building-parking-storefront.png"

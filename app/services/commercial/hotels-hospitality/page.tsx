@@ -17,15 +17,12 @@ export default function HotelsHospitalityPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Hotels & Hospitality Cleaning"
-        description="Hotel guests form an impression of your property before they reach the front desk. We clean building exteriors, entry drives, pool decks, porte-cocheres, and loading areas so every arrival looks like a property that cares."
+        description="Exteriors, entry drives, pool decks, porte-cocheres, and loading areas washed so arrivals match your hospitality standards."
         category="Commercial"
         benefits={[
           "Building facade and exterior surface washing",
           "Pool deck, patio & terrace restoration",
-          "Entry drive and parking area cleaning",
-          "Removes staining from high-traffic entry surfaces",
-          "Early morning scheduling to avoid guest impact",
-          "Licensed & insured for hospitality properties"
+          "Early morning scheduling to avoid guest impact"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

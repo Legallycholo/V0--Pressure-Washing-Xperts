@@ -17,14 +17,11 @@ export default function OdorRemovalPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Odor Removal"
-        description="Some odors do not go away with surface cleaning. Pet accidents, smoke, mildew, and organic waste embed into flooring, fabric, and walls. We treat and eliminate odors at the source rather than masking them."
+        description="We eliminate pet, smoke, mildew, and organic odors at the source in flooring, fabric, and walls—not just masking them."
         category="Residential"
         benefits={[
           "Targets pet, smoke, mildew & organic odors",
           "Treats source material, not just the surface",
-          "Safe for carpets, upholstery & hard surfaces",
-          "No heavy perfume masking agents",
-          "Residential and commercial applications",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

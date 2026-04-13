@@ -24,7 +24,7 @@ export function FloatingCallButton() {
   }, [])
 
   const barClass =
-    "fixed bottom-6 left-4 right-4 z-40 flex gap-3 md:hidden transition-all duration-300 motion-reduce:transition-opacity"
+    "fixed bottom-0 left-0 right-0 z-40 flex gap-3 px-4 pb-safe pt-2 md:hidden transition-all duration-300 motion-reduce:transition-opacity bg-gradient-to-t from-brand-blue-dark/90 to-transparent"
 
   return (
     <div

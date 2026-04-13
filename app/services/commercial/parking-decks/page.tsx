@@ -17,15 +17,12 @@ export default function ParkingDecksPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Parking Deck Cleaning"
-        description="Parking structures collect oil, tire rubber, bird droppings, and concrete dust faster than any flat lot. We pressure wash decks, ramps, stairwells, and drive surfaces to improve safety and appearance without shutting down access."
+        description="Decks, ramps, stairwells, and drives pressure washed to cut oil, rubber, and buildup while keeping access open with off-peak scheduling."
         category="Commercial"
         benefits={[
           "Removes oil, grease & tire marks from deck surfaces",
-          "Cleans ramps, stairwells & structural columns",
-          "Improves lane marking visibility after cleaning",
           "Reduces slip hazard from organic growth",
-          "Night and off-peak scheduling to maintain access",
-          "Commercial-grade surface washing equipment"
+          "Night and off-peak scheduling to maintain access"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

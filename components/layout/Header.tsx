@@ -316,7 +316,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <Link
             href="/"
             onClick={scrollToHero}
-            className="block text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-2"
+            className="block text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px] flex items-center"
           >
             Home
           </Link>
@@ -325,19 +325,19 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div>
             <button
               onClick={() => toggleMobileDropdown('residential')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-2"
+              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
             >
               Residential
-              <ChevronDown className={`size-4 transition-transform ${openMobileDropdown === 'residential' ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'residential' ? 'rotate-180' : ''}`} />
             </button>
             {openMobileDropdown === 'residential' && (
-              <div className="pl-4 space-y-2 mt-2">
+              <div className="pl-4 space-y-1 mt-1">
                 {residentialServices.map((service) => (
                   <Link
                     key={service.href}
                     href={service.href}
                     onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-1"
+                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
                   >
                     {service.label}
                   </Link>
@@ -350,19 +350,19 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div>
             <button
               onClick={() => toggleMobileDropdown('commercial')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-2"
+              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
             >
               Commercial
-              <ChevronDown className={`size-4 transition-transform ${openMobileDropdown === 'commercial' ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'commercial' ? 'rotate-180' : ''}`} />
             </button>
             {openMobileDropdown === 'commercial' && (
-              <div className="pl-4 space-y-2 mt-2">
+              <div className="pl-4 space-y-1 mt-1">
                 {commercialServices.map((service) => (
                   <Link
                     key={service.href}
                     href={service.href}
                     onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-1"
+                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
                   >
                     {service.label}
                   </Link>
@@ -375,19 +375,19 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div>
             <button
               onClick={() => toggleMobileDropdown('areas')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-2"
+              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
             >
               Service Areas
-              <ChevronDown className={`size-4 transition-transform ${openMobileDropdown === 'areas' ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'areas' ? 'rotate-180' : ''}`} />
             </button>
             {openMobileDropdown === 'areas' && (
-              <div className="pl-4 space-y-2 mt-2 max-h-48 overflow-y-auto">
+              <div className="pl-4 space-y-1 mt-1 max-h-48 overflow-y-auto">
                 {headerServiceAreaLinks.map((area) => (
                   <Link
                     key={area.href}
                     href={area.href}
                     onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-1"
+                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
                   >
                     {area.label}
                   </Link>
@@ -400,19 +400,19 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div>
             <button
               onClick={() => toggleMobileDropdown('about')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-2"
+              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
             >
               About
-              <ChevronDown className={`size-4 transition-transform ${openMobileDropdown === 'about' ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'about' ? 'rotate-180' : ''}`} />
             </button>
             {openMobileDropdown === 'about' && (
-              <div className="pl-4 space-y-2 mt-2">
+              <div className="pl-4 space-y-1 mt-1">
                 {aboutLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-1"
+                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </Link>
@@ -424,7 +424,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <div className="pt-4 border-t border-white/10 space-y-4">
             <a
               href="tel:800-451-7213"
-              className={`flex items-center gap-2 text-base font-medium text-white transition-colors hover:text-brand-yellow ${ctaPress}`}
+              className={`flex items-center gap-2 text-base font-medium text-white transition-colors hover:text-brand-yellow min-h-[44px] ${ctaPress}`}
             >
               <Phone className="size-5" />
               <span>Call/Text: (800)-451-7213</span>
@@ -434,7 +434,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 onOpenQuoteForm()
                 setIsMenuOpen(false)
               }}
-              className="w-full bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+              className="w-full bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark min-h-[44px]"
             >
               Get a Free Quote
             </Button>

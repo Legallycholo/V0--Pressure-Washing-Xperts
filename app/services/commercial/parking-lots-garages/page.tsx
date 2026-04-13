@@ -17,15 +17,12 @@ export default function ParkingLotsGaragesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Parking Lot & Garage Cleaning"
-        description="Oil stains, tire marks, and organic buildup on parking surfaces create both appearance and liability problems. We deep clean asphalt and concrete parking lots and garages using commercial surface cleaning equipment with night or weekend scheduling."
+        description="Deep cleaning for asphalt and concrete lots and garages removes oil, tire marks, and organic buildup—with night or weekend scheduling."
         category="Commercial"
         benefits={[
           "Removes oil, grease & tire marks",
           "Deep cleans concrete & asphalt surfaces",
-          "Improves safety and curb appeal",
-          "Night or weekend scheduling available",
-          "Commercial-grade surface cleaning equipment",
-          "Serving Metro Atlanta businesses"
+          "Improves safety and curb appeal"
         ]}
         onOpenQuoteForm={() => goQuote()}
         imageSrc="/commercial-services/commercial-building-parking-storefront.png"

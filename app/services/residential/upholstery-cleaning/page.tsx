@@ -17,14 +17,11 @@ export default function UpholsteryCleaningPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Upholstery Cleaning"
-        description="Sofas, chairs, and fabric headboards collect body oils, pet dander, and odors that vacuuming cannot remove. We clean upholstered furniture using methods that match the fabric type and leave it dry faster."
+        description="Fabric-matched upholstery cleaning removes oils, dander, and odors vacuuming cannot reach, with faster dry times."
         category="Residential"
         benefits={[
           "Safe for most residential upholstery fabrics",
           "Removes body oils, pet dander & embedded soil",
-          "Faster drying than steam-only methods",
-          "Treats visible stains before full upholstery clean",
-          "Works on sofas, chairs, cushions & fabric headboards",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

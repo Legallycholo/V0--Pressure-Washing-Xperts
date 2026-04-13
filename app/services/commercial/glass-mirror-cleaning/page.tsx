@@ -17,15 +17,12 @@ export default function GlassMirrorCleaningPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Glass & Mirror Cleaning"
-        description="Glass building facades, lobby mirrors, and storefront windows require streak-free cleaning with the right squeegee technique and products. We handle commercial glass and mirror cleaning from ground level to multi-story applications."
+        description="Streak-free commercial glass and mirror cleaning from ground level to multi-story facades, lobbies, and storefronts."
         category="Commercial"
         benefits={[
           "Streak-free results on commercial glass",
           "Handles single-story to multi-story applications",
-          "Safe for tempered, laminated & treated glass",
-          "Removes mineral deposits, bird droppings & film buildup",
-          "Lobby mirrors and interior glass included",
-          "Licensed & insured professionals"
+          "Removes mineral deposits, bird droppings & film buildup"
         ]}
         onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"

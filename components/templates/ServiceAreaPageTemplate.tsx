@@ -20,7 +20,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset overflow-hidden">
+      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-8 sm:py-12 pt-header-offset overflow-hidden">
         {city.heroImageSrc ? (
           <Image
             src={city.heroImageSrc}
@@ -35,24 +35,23 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
         <div className="absolute inset-0 bg-hero-pattern opacity-10" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="inline-block mb-3 px-3 py-1.5 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-sm">
+            <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm">
               Service Area
             </span>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">
               {city.hero.headline}
             </h1>
-            <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-2">
+            <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-2">
               {city.hero.subheadline}
             </p>
-            <p className="mx-auto max-w-3xl text-sm text-white/70 mb-4">
-              Serving {city.cityName}, {city.stateCode} in {city.county}
+            <p className="mx-auto max-w-2xl text-xs sm:text-sm text-white/70 mb-4">
+              Serving {city.cityName}, {city.stateCode} in {city.county} · {city.serviceAvailability}
             </p>
-            <p className="mx-auto max-w-2xl text-sm text-white/75 mb-5">{city.serviceAvailability}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark min-h-[44px]"
               >
                 {city.cta.primary}
               </Button>
@@ -60,7 +59,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
+                className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark min-h-[44px]"
               >
                 <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
                   <Phone className="size-5" />
@@ -150,17 +149,17 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
             <h2 className="text-2xl font-bold text-brand-blue-dark mb-3">
               Popular work in {city.cityName}
             </h2>
-            <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              Open any link for photos, benefits, and how we run the job. Same crew habits wherever we go in the metro.
+            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+              Photos, benefits, and how we run each job. Same crew standards across the metro.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {city.localizedServiceCards.map((service) => (
               <div
                 key={service.title}
                 className={cn(hubCardLight, "flex h-full flex-col rounded-xl")}
               >
-                <h3 className="text-lg font-semibold text-brand-blue-dark mb-2">{service.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-1.5">{service.title}</h3>
                 <p className="text-gray-600 mb-3 flex-1 text-sm">{service.description}</p>
                 <Link
                   href={service.href}
@@ -182,7 +181,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               Before and after from our crew
             </h2>
             <p className="text-gray-600 text-center mb-6 max-w-2xl mx-auto text-sm">
-              Real jobs from the gallery. Ask if you want photos from a neighborhood like yours in {city.cityName}.
+              Real jobs from the gallery—ask about photos from your neighborhood.
             </p>
             <div className="grid md:grid-cols-2 gap-5">
               {galleryPairs.map((item) => (
@@ -207,16 +206,20 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
       <section className="py-10 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-7">
-            <h2 className="text-2xl font-bold text-brand-blue-dark mb-3">Our Process</h2>
+            <h2 className="text-2xl font-bold text-brand-blue-dark mb-2">Our Process</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {city.processSteps.map((step, index) => (
-              <div key={step.title} className="text-center">
-                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3">
+              <div
+                key={step.title}
+                className={`text-center animate-step-reveal ${index < city.processSteps.length - 1 ? "step-connector" : ""} ${index === city.processSteps.length - 1 ? "step-connector-last" : ""}`}
+                style={{ animationDelay: `${index * 120}ms` }}
+              >
+                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3 shadow-md ring-4 ring-brand-yellow/20">
                   {index + 1}
                 </div>
-                <h3 className="text-lg font-semibold text-brand-blue-dark mb-1.5">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <h3 className="text-base font-semibold text-brand-blue-dark mb-1">{step.title}</h3>
+                <p className="text-sm text-gray-600">{step.description}</p>
               </div>
             ))}
           </div>

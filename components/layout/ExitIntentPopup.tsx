@@ -318,7 +318,7 @@ export function ExitIntentPopup() {
             backgroundColor: MODAL_BG,
             boxShadow: SHADOW,
             color: TEXT,
-            maxHeight: "min(90dvh, 720px)",
+            maxHeight: "min(85dvh, 640px)",
             opacity: modalOpacity,
             transform: modalTransform,
             transition: transitionModal,
@@ -331,18 +331,29 @@ export function ExitIntentPopup() {
             type="button"
             onClick={close}
             aria-label="Close offer"
-            className="absolute right-3 top-3 z-[2] rounded-md px-3 py-2 text-base font-medium leading-none"
-            style={{ color: DISMISS }}
+            className="absolute right-2 top-2 z-[2] flex items-center justify-center rounded-full min-h-[44px] min-w-[44px] text-base font-bold leading-none transition-colors hover:bg-white/10"
+            style={{ color: TEXT }}
           >
             ✕
           </button>
 
-          <div className="px-4 pb-6 pt-10 sm:px-6 sm:pb-8 sm:pt-12">
-            <p
-              className="text-center text-base font-semibold leading-snug sm:text-lg"
-              style={{ color: TEXT }}
+          <div className="px-4 pb-5 pt-8 sm:px-6 sm:pb-7 sm:pt-10">
+            <h2
+              id="exit-intent-heading"
+              className="text-center font-bold leading-tight"
+              style={{
+                color: TEXT,
+                fontSize: "clamp(1.25rem, 4vw, 1.625rem)",
+              }}
             >
-              🔴 April Slots Filling Fast: Only 13 Spots Left This Month!
+              April Special: Save $85 on House + Driveway
+            </h2>
+            <p
+              id="exit-intent-desc"
+              className="mx-auto mt-2 max-w-sm text-center text-sm leading-relaxed sm:text-base"
+              style={{ color: FINE_PRINT }}
+            >
+              Lock in spring pricing before May rates kick in.
             </p>
 
             <div
@@ -353,7 +364,7 @@ export function ExitIntentPopup() {
               {Array.from({ length: TOTAL_APRIL_SLOTS }, (_, i) => (
                 <span
                   key={i}
-                  className="h-3 min-w-0 flex-1 rounded-sm sm:h-3.5"
+                  className="h-2.5 min-w-0 flex-1 rounded-sm sm:h-3"
                   style={{
                     backgroundColor:
                       i < CLAIMED_SLOTS ? SLOT_FILLED : SLOT_OPEN,
@@ -362,78 +373,58 @@ export function ExitIntentPopup() {
               ))}
             </div>
             <p
-              className="mt-2 text-center text-sm font-medium sm:text-base"
+              className="mt-1.5 text-center text-xs font-medium sm:text-sm"
               style={{ color: FINE_PRINT }}
             >
               {slotsLabel}
             </p>
 
-            <h2
-              id="exit-intent-heading"
-              className="mt-8 text-center font-bold leading-tight sm:mt-10"
-              style={{
-                color: TEXT,
-                fontSize: "clamp(1.375rem, 4vw, 1.75rem)",
-              }}
-            >
-              Wait: Don&apos;t Miss This April Special!
-            </h2>
-            <p
-              id="exit-intent-desc"
-              className="mx-auto mt-3 max-w-md text-center text-base leading-relaxed sm:text-lg"
-              style={{ color: FINE_PRINT }}
-            >
-              Spring is peak season. Lock in your rate before May pricing kicks
-              in.
-            </p>
-
             <div
-              className="mt-6 rounded-lg px-4 py-4 text-base leading-relaxed sm:text-lg sm:leading-relaxed"
+              className="mt-4 rounded-lg px-4 py-3 text-sm leading-relaxed sm:text-base"
               style={{
                 backgroundColor: "rgba(255,255,255,0.06)",
                 color: GOLD,
               }}
             >
-              <p className="font-semibold">🏠 House Wash + Driveway Bundle</p>
-              <p className="mt-2">Regular: $230 + $235 = $465</p>
-              <p className="mt-1 font-semibold">
-                April Exclusive: $380 (you save $85)
+              <p className="font-semibold">House Wash + Driveway Bundle</p>
+              <p className="mt-1">
+                <span className="line-through opacity-70">$465</span>{" "}
+                <span className="font-bold">→ $380</span>
               </p>
             </div>
 
             <p
-              className="mt-5 text-center text-lg font-semibold sm:text-xl"
+              className="mt-3 text-center text-sm font-semibold sm:text-base"
               style={{ color: TEXT }}
             >
-              ⏳ Expires in: {timeLeft || "…"}
+              ⏳ Expires: {timeLeft || "…"}
             </p>
 
             <a
               href="tel:18004517213"
-              className="mt-6 flex w-full items-center justify-center rounded-lg px-4 py-4 text-center text-lg font-bold leading-snug text-[#1a2744] no-underline sm:text-xl sm:py-5"
+              className="mt-4 flex w-full items-center justify-center rounded-lg px-4 py-4 text-center text-lg font-bold leading-snug text-[#1a2744] no-underline min-h-[52px] sm:text-xl"
               style={{
                 backgroundColor: GOLD,
                 animation: pulseAnimation,
               }}
             >
-              📞 Claim Your Spot: Call 1-800-451-7213
+              Call Now: 1-800-451-7213
             </a>
 
             <p
-              className="mt-4 text-center text-sm leading-relaxed sm:text-base"
+              className="mt-3 text-center text-xs leading-relaxed"
               style={{ color: FINE_PRINT }}
             >
-              Cannot be combined with other offers. Minimum job total applies.
-              Call to confirm availability.
+              Cannot be combined with other offers. Call to confirm availability.
             </p>
 
             <button
               type="button"
               onClick={close}
-              className="mt-4 w-full text-center text-sm font-medium underline decoration-white/30 underline-offset-2 sm:text-base"
+              className="mt-3 w-full text-center text-sm font-medium underline decoration-white/30 underline-offset-2 min-h-[44px]"
               style={{ color: DISMISS }}
             >
-              No thanks, I&apos;ll take my chances in May →
+              No thanks →
             </button>
           </div>
         </div>
@@ -443,7 +434,7 @@ export function ExitIntentPopup() {
   const reopenChip =
     showReopenChip &&
     !isOpen && (
-      <div className="pointer-events-none fixed bottom-24 left-4 right-4 z-[105] flex justify-start p-0 pb-[max(0px,env(safe-area-inset-bottom))] md:bottom-6 md:left-6 md:right-auto md:justify-start md:p-0">
+      <div className="pointer-events-none fixed bottom-20 left-4 right-4 z-[105] flex justify-start pb-safe md:bottom-6 md:left-6 md:right-auto md:justify-start md:p-0">
         <button
           type="button"
           onClick={openFromChip}
