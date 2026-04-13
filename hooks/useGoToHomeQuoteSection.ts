@@ -4,9 +4,9 @@ import { useCallback } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import type { OfferId } from "@/data/offers"
 
-export type HomeQuoteTarget = "hero" | "contact"
+export type HomeQuoteTarget = "hero" | "contact" | "contact-form"
 
-function scrollToHomeSection(sectionId: "hero" | "contact") {
+function scrollToHomeSection(sectionId: "hero" | "contact" | "contact-form") {
   if (typeof document === "undefined") return
   setTimeout(() => {
     document.getElementById(sectionId)?.scrollIntoView({
@@ -31,7 +31,12 @@ export function useGoToHomeQuoteSection() {
       utm?: { source: string; medium: string; campaign: string }
     }) => {
       const target = opts?.target ?? "contact"
-      const sectionId = target === "hero" ? "hero" : "contact"
+      const sectionId =
+        target === "hero"
+          ? "hero"
+          : target === "contact-form"
+            ? "contact-form"
+            : "contact"
       const offer = opts?.offerId
       const utm = opts?.utm
 

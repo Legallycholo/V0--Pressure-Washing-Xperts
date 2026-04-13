@@ -34,11 +34,11 @@ export default function Home() {
       <main>
         <Suspense
           fallback={
-            <Hero onOpenQuoteForm={() => goQuote({ target: "contact" })} />
+            <Hero onOpenQuoteForm={() => goQuote({ target: "contact-form" })} />
           }
         >
           <HeroWithOfferFromUrl
-            onOpenQuoteForm={() => goQuote({ target: "contact" })}
+            onOpenQuoteForm={() => goQuote({ target: "contact-form" })}
           />
         </Suspense>
         <Services onOpenQuoteForm={openQuoteForm} />

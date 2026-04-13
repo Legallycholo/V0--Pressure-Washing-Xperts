@@ -3,14 +3,14 @@
 import { useEffect } from "react"
 
 /**
- * Ensures /#hero and /#contact scroll into view after client-side navigation to `/`
+ * Ensures /#hero, /#contact, and /#contact-form scroll into view after client-side navigation to `/`
  * (fixed header + SPA transitions do not always match native hash scrolling).
  */
 export function HomeQuoteScrollHandler() {
   useEffect(() => {
     const scrollToHash = () => {
       const id = window.location.hash.replace(/^#/, "")
-      if (id === "hero" || id === "contact") {
+      if (id === "hero" || id === "contact" || id === "contact-form") {
         setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({
             behavior: "smooth",
