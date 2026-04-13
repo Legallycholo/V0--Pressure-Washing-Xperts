@@ -166,6 +166,7 @@ export const quickLinks: NavLinkItem[] = [
   { href: "/service-areas", label: "Service Areas" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy Policy" },
 ]
 
 export const headerServiceAreaLinks: NavLinkItem[] = getServiceAreasForNavigation().map((area) => ({

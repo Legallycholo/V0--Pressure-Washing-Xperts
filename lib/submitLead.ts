@@ -26,7 +26,7 @@ function validate(payload: LeadPayload): string | null {
   if (required.some((v) => typeof v !== "string" || !v.trim())) {
     return "Missing required fields."
   }
-  if (!payload.email?.includes("@")) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email ?? "")) {
     return "Invalid email."
   }
   return null

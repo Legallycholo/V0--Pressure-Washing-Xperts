@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    turbo: {
-      root: "./",
-    },
+  turbopack: {
+    root: "./",
   },
   typescript: {
     ignoreBuildErrors: true,

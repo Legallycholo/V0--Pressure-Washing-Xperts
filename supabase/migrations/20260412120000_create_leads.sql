@@ -1,6 +1,6 @@
 -- Lead capture from site forms (browser inserts via anon key + RLS insert policy).
 create table public.leads (
-  id uuid primary key default gen_random_uuid(),
+  id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   full_name text not null,
   email text not null,
