@@ -3,7 +3,6 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { AppProviders } from '@/components/providers/AppProviders'
-import { VoiceflowChat } from '@/components/voiceflow-chat'
 
 export const metadata: Metadata = {
   title: 'Professional Pressure Washing Services | Pressure Washing Xperts',
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased">
         <AppProviders>{children}</AppProviders>
-        <VoiceflowChat />
         <Analytics />
         <SpeedInsights />
       </body>
