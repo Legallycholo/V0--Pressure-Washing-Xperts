@@ -2,16 +2,37 @@
 
 import { useEffect } from 'react'
 
+const MOBILE_BREAKPOINT = 768
+const DESKTOP_CHAT_MAX_HEIGHT = 700
+const DESKTOP_CHAT_MIN_HEIGHT = 460
+const DESKTOP_CHAT_VIEWPORT_MARGIN = 40
+const LAUNCHER_SELECTOR = '.vfrc-launcher'
+const ATTENTION_CLASS = 'vf-attention-active'
+const NUDGE_CLASS = 'vf-launcher-nudge'
+const ATTENTION_STOP_KEY = 'vfLauncherAttentionStopped'
+const INITIAL_NUDGE_DELAY_MS = 12_000
+const NUDGE_COOLDOWN_MS = 28_000
+const NUDGE_DURATION_MS = 750
+
+type VoiceflowLoadConfig = {
+  verify: { projectID: string }
+  url: string
+  versionID: string
+  voice: { url: string }
+  assistant?: {
+    side?: 'left' | 'right'
+    spacing?: {
+      side?: string
+      bottom?: string
+    }
+  }
+}
+
 declare global {
   interface Window {
     voiceflow?: {
       chat?: {
-        load: (config: {
-          verify: { projectID: string }
-          url: string
-          versionID: string
-          voice: { url: string }
-        }) => void
+        load: (config: VoiceflowLoadConfig) => void
       }
     }
     __voiceflowChatLoaded?: boolean
@@ -21,6 +42,128 @@ declare global {
 const SCRIPT_ID = 'voiceflow-widget-script'
 
 export function VoiceflowChat() {
+  useEffect(() => {
+    const syncDesktopMaxHeight = () => {
+      const boundedHeight = Math.max(
+        DESKTOP_CHAT_MIN_HEIGHT,
+        Math.min(
+          DESKTOP_CHAT_MAX_HEIGHT,
+          window.innerHeight - DESKTOP_CHAT_VIEWPORT_MARGIN
+        )
+      )
+      document.documentElement.style.setProperty(
+        '--vf-chat-max-height',
+        `${boundedHeight}px`
+      )
+    }
+
+    syncDesktopMaxHeight()
+    window.addEventListener('resize', syncDesktopMaxHeight)
+    return () => {
+      window.removeEventListener('resize', syncDesktopMaxHeight)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
+    try {
+      if (sessionStorage.getItem(ATTENTION_STOP_KEY) === '1') {
+        return
+      }
+    } catch {
+      // Ignore session storage errors in locked-down browser modes.
+    }
+
+    let launcher: HTMLElement | null = null
+    let observer: MutationObserver | null = null
+    let initialNudgeTimeout: ReturnType<typeof setTimeout> | null = null
+    let nudgeInterval: ReturnType<typeof setInterval> | null = null
+    let nudgeCleanupTimeout: ReturnType<typeof setTimeout> | null = null
+
+    const clearTimers = () => {
+      if (initialNudgeTimeout) clearTimeout(initialNudgeTimeout)
+      if (nudgeInterval) clearInterval(nudgeInterval)
+      if (nudgeCleanupTimeout) clearTimeout(nudgeCleanupTimeout)
+      initialNudgeTimeout = null
+      nudgeInterval = null
+      nudgeCleanupTimeout = null
+    }
+
+    const runNudge = () => {
+      if (!launcher) return
+      launcher.classList.remove(NUDGE_CLASS)
+      launcher.classList.add(NUDGE_CLASS)
+      if (nudgeCleanupTimeout) clearTimeout(nudgeCleanupTimeout)
+      nudgeCleanupTimeout = setTimeout(() => {
+        launcher?.classList.remove(NUDGE_CLASS)
+      }, NUDGE_DURATION_MS)
+    }
+
+    const stopAttention = () => {
+      clearTimers()
+      if (launcher) {
+        launcher.classList.remove(ATTENTION_CLASS, NUDGE_CLASS)
+        launcher.removeEventListener('click', stopAttention)
+      }
+      window.removeEventListener('message', onWidgetEvent)
+      try {
+        sessionStorage.setItem(ATTENTION_STOP_KEY, '1')
+      } catch {
+        // Ignore session storage errors in locked-down browser modes.
+      }
+    }
+
+    const onWidgetEvent = (event: MessageEvent) => {
+      if (typeof event.data !== 'string') return
+      if (event.data.includes('"type":"voiceflow:open"')) {
+        stopAttention()
+      }
+    }
+
+    const attachLauncher = (element: HTMLElement) => {
+      if (launcher === element) return
+      if (launcher) {
+        launcher.removeEventListener('click', stopAttention)
+      }
+
+      launcher = element
+      launcher.classList.add(ATTENTION_CLASS)
+      launcher.addEventListener('click', stopAttention)
+
+      if (!initialNudgeTimeout && !nudgeInterval) {
+        initialNudgeTimeout = setTimeout(() => {
+          runNudge()
+          nudgeInterval = setInterval(runNudge, NUDGE_COOLDOWN_MS)
+        }, INITIAL_NUDGE_DELAY_MS)
+      }
+    }
+
+    const detectLauncher = () => {
+      const element = document.querySelector(LAUNCHER_SELECTOR)
+      if (element instanceof HTMLElement) {
+        attachLauncher(element)
+      }
+    }
+
+    detectLauncher()
+    observer = new MutationObserver(detectLauncher)
+    observer.observe(document.body, { childList: true, subtree: true })
+    window.addEventListener('message', onWidgetEvent)
+
+    return () => {
+      clearTimers()
+      if (observer) observer.disconnect()
+      window.removeEventListener('message', onWidgetEvent)
+      if (launcher) {
+        launcher.classList.remove(NUDGE_CLASS)
+        launcher.removeEventListener('click', stopAttention)
+      }
+    }
+  }, [])
+
   useEffect(() => {
     if (window.__voiceflowChatLoaded) {
       return
@@ -37,6 +180,13 @@ export function VoiceflowChat() {
         versionID: 'production',
         voice: {
           url: 'https://runtime-api.voiceflow.com',
+        },
+        assistant: {
+          side: 'right',
+          spacing: {
+            side: '16',
+            bottom: window.innerWidth < MOBILE_BREAKPOINT ? '88' : '24',
+          },
         },
       })
 
