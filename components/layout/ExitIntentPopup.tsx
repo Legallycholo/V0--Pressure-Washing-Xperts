@@ -434,11 +434,11 @@ export function ExitIntentPopup() {
   const reopenChip =
     showReopenChip &&
     !isOpen && (
-      <div className="pointer-events-none fixed right-0 top-1/2 z-[95] flex -translate-y-1/2 items-center justify-end pr-[max(0px,env(safe-area-inset-right))] md:top-auto md:bottom-6 md:right-6 md:translate-y-0">
+      <div className="pointer-events-none fixed left-0 top-1/2 z-[95] flex -translate-y-1/2 items-center justify-start pl-[max(0px,env(safe-area-inset-left))] md:top-auto md:bottom-6 md:left-6 md:translate-y-0">
         <button
           type="button"
           onClick={openFromChip}
-          className="pointer-events-auto min-h-[132px] min-w-[46px] rounded-l-xl rounded-r-none border-2 border-r-0 px-2 py-3 text-center text-xs font-bold shadow-lg transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:scale-[1.02] active:scale-[0.98] [text-orientation:mixed] [writing-mode:vertical-rl] md:min-h-[44px] md:min-w-0 md:max-w-[15rem] md:rounded-full md:border-r-2 md:px-4 md:py-2.5 md:text-sm md:[writing-mode:horizontal-tb]"
+          className="pointer-events-auto min-h-[132px] min-w-[46px] rounded-r-xl rounded-l-none border-2 border-l-0 px-2 py-3 text-center text-xs font-bold shadow-lg transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:scale-[1.02] active:scale-[0.98] [text-orientation:mixed] [writing-mode:vertical-lr] md:min-h-[44px] md:min-w-0 md:max-w-[15rem] md:rounded-full md:border-l-2 md:px-4 md:py-2.5 md:text-sm md:[writing-mode:horizontal-tb]"
           style={{
             backgroundColor: MODAL_BG,
             borderColor: GOLD,
