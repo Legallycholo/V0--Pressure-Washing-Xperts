@@ -8,21 +8,9 @@ import { VoiceflowChat } from '@/components/voiceflow-chat'
 export const metadata: Metadata = {
   title: 'Professional Pressure Washing Services | Pressure Washing Xperts',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/site-tab-icon.png', type: 'image/png' }],
+    shortcut: ['/site-tab-icon.png'],
+    apple: '/site-tab-icon.png',
   },
 }
 

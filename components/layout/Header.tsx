@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X, Phone, ChevronDown, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -135,10 +136,42 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
         <div className="relative flex min-h-[48px] items-center">
-          <div className="hidden min-w-0 lg:flex lg:flex-1" aria-hidden />
+          <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center">
+            <Link
+              href="/"
+              onClick={scrollToHero}
+              className="inline-flex items-center shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
+              aria-label="Pressure Washing Xperts home"
+            >
+              <Image
+                src="/navbar-logo.png"
+                alt="Pressure Washing Xperts logo"
+                width={320}
+                height={160}
+                priority
+                className="h-10 xl:h-11 w-auto object-contain"
+              />
+            </Link>
+          </div>
+
+          <Link
+            href="/"
+            onClick={scrollToHero}
+            className="lg:hidden inline-flex items-center mr-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
+            aria-label="Pressure Washing Xperts home"
+          >
+            <Image
+              src="/navbar-logo.png"
+              alt="Pressure Washing Xperts logo"
+              width={200}
+              height={100}
+              priority
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
           {/* Desktop Navigation */}
           <NavigationMenu
-            className="relative z-20 hidden min-w-0 flex-none lg:flex"
+            className="relative z-20 hidden min-w-0 shrink-0 lg:flex"
             viewport={false}
             onValueChange={(value) => setIsDropdownOpen(value !== "")}
           >
