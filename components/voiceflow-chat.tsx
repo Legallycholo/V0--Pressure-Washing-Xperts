@@ -21,6 +21,7 @@ type VoiceflowLoadConfig = {
   voice: { url: string }
   assistant?: {
     side?: 'left' | 'right'
+    persistence?: 'localStorage' | 'sessionStorage' | 'memory'
     spacing?: {
       side?: string
       bottom?: string
@@ -41,7 +42,48 @@ declare global {
 
 const SCRIPT_ID = 'voiceflow-widget-script'
 
+function isVoiceflowStaleSessionError(reason: unknown): boolean {
+  if (typeof reason === 'string') {
+    return reason.includes('Session is stale')
+  }
+
+  if (reason && typeof reason === 'object') {
+    const maybeMessage =
+      'message' in reason && typeof reason.message === 'string'
+        ? reason.message
+        : undefined
+    const maybeStack =
+      'stack' in reason && typeof reason.stack === 'string'
+        ? reason.stack
+        : undefined
+
+    if (maybeMessage?.includes('Session is stale')) {
+      if (!maybeStack) return true
+      return maybeStack.includes('cdn.voiceflow.com/widget-next/bundle.mjs')
+    }
+  }
+
+  if (!(reason instanceof Error)) return false
+
+  const hasMessage = reason.message.includes('Session is stale')
+  const hasVoiceflowStack = reason.stack?.includes('cdn.voiceflow.com/widget-next/bundle.mjs')
+  return Boolean(hasMessage && hasVoiceflowStack)
+}
+
 export function VoiceflowChat() {
+  useEffect(() => {
+    const onUnhandledRejection = (event: PromiseRejectionEvent) => {
+      if (!isVoiceflowStaleSessionError(event.reason)) return
+      // Prevent third-party rejection from tripping the Next.js runtime overlay.
+      event.preventDefault()
+    }
+
+    window.addEventListener('unhandledrejection', onUnhandledRejection)
+    return () => {
+      window.removeEventListener('unhandledrejection', onUnhandledRejection)
+    }
+  }, [])
+
   useEffect(() => {
     const syncDesktopMaxHeight = () => {
       const boundedHeight = Math.max(
@@ -183,6 +225,7 @@ export function VoiceflowChat() {
         },
         assistant: {
           side: 'right',
+          persistence: 'memory',
           spacing: {
             side: '16',
             bottom: window.innerWidth < MOBILE_BREAKPOINT ? '88' : '24',
