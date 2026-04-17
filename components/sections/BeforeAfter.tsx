@@ -21,17 +21,14 @@ type Comparison = {
   afterObjectPosition?: string
 }
 
-const HOMEPAGE_BLURB =
-  "Slide the handle to compare the same property before and after our wash."
-
 function buildComparisons(): Comparison[] {
   return galleryItems
     .filter((item) => item.category === "before-after" && galleryItemIsComparison(item))
     .sort((a, b) => a.id - b.id)
     .map((item) => ({
       id: item.id,
-      title: item.title,
-      description: HOMEPAGE_BLURB,
+      title: item.title.replace(/:\s*.+$/, ""),
+      description: "",
       location: "Metro Atlanta area",
       beforeSrc: item.beforeSrc!,
       afterSrc: item.afterSrc!,
@@ -96,51 +93,48 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
             />
           </div>
 
-          <div className="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="text-center md:text-left">
-              <h3 className="mb-1 text-lg font-bold text-foreground">{current.title}</h3>
-              <p className="mb-1 text-muted-foreground">{current.description}</p>
-              <p className="text-sm font-medium text-brand-blue">{current.location}</p>
-            </div>
-
-            {showCarousel ? (
-              <div className="flex items-center justify-center gap-3">
-                <button
-                  type="button"
-                  onClick={goToPrevious}
-                  className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
-                  aria-label="Previous comparison"
-                >
-                  <ChevronLeft className="size-5" />
-                </button>
-                <div className="flex max-w-[min(100%,280px)] flex-wrap justify-center gap-2">
-                  {comparisons.map((c, index) => (
-                    <button
-                      key={c.id}
-                      type="button"
-                      onClick={() => {
-                        setCurrentIndex(index)
-                      }}
-                      className={`h-2 rounded-full transition-all ${
-                        index === currentIndex
-                          ? "w-6 bg-brand-blue"
-                          : "w-2 bg-gray-300 hover:bg-gray-400"
-                      }`}
-                      aria-label={`Go to comparison ${index + 1}`}
-                    />
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  onClick={goToNext}
-                  className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
-                  aria-label="Next comparison"
-                >
-                  <ChevronRight className="size-5" />
-                </button>
-              </div>
-            ) : null}
+          <div className="mt-4 text-center">
+            <h3 className="mb-0.5 text-lg font-bold text-foreground">{current.title}</h3>
+            <p className="text-sm font-medium text-brand-blue">{current.location}</p>
           </div>
+
+          {showCarousel ? (
+            <div className="mt-4 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={goToPrevious}
+                className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
+                aria-label="Previous comparison"
+              >
+                <ChevronLeft className="size-5" />
+              </button>
+              <div className="flex max-w-[min(100%,280px)] flex-wrap justify-center gap-2">
+                {comparisons.map((c, index) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => {
+                      setCurrentIndex(index)
+                    }}
+                    className={`h-2 rounded-full transition-all ${
+                      index === currentIndex
+                        ? "w-6 bg-brand-blue"
+                        : "w-2 bg-gray-300 hover:bg-gray-400"
+                    }`}
+                    aria-label={`Go to comparison ${index + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={goToNext}
+                className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
+                aria-label="Next comparison"
+              >
+                <ChevronRight className="size-5" />
+              </button>
+            </div>
+          ) : null}
 
           <div className="mt-7 text-center">
             <p className="mb-3 text-muted-foreground text-sm sm:text-base">Want results like these for your property?</p>

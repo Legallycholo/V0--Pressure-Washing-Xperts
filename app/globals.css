@@ -42,8 +42,8 @@
   /* Glass Effects */
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
-  /* Thin rotating offer strip at top of header (see OfferAnnouncementBar) */
-  --announcement-bar-height: 2.25rem;
+  /* Reserved for optional thin header strip (currently unused) */
+  --announcement-bar-height: 0rem;
   --header-offset-mobile: calc(5rem + var(--announcement-bar-height));
   --header-offset-desktop: calc(6rem + var(--announcement-bar-height));
 }
@@ -316,9 +316,7 @@
 
 /* Fixed-element stacking policy (bottom-up):
    z-40 → FloatingCallButton
-   z-50 → Header
-   z-[105] → Reopen chip
-   z-[110] → ExitIntentPopup modal */
+   z-50 → Header */
 
 /* Hero height on mobile: occupies the visible viewport minus the header */
 .hero-mobile-height {

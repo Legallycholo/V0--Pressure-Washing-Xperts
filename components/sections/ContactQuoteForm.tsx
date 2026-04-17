@@ -81,6 +81,8 @@ export function ContactQuoteForm({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [formStep, setFormStep] = useState<1 | 2 | 3>(1)
+  const [stepError, setStepError] = useState<string | null>(null)
   const [formData, setFormData] = useState(() => ({
     ...emptyForm(),
     selectedOffer: initialOfferId ?? OFFER_NONE,
@@ -159,8 +161,31 @@ export function ContactQuoteForm({
 
   const OfferIconForDialog = selectedOfferDetails?.icon
 
+  const handleNextStep = () => {
+    setStepError(null)
+    if (formStep === 1) {
+      setFormStep(2)
+      return
+    }
+    if (formStep === 2) {
+      const { fullName, email, phone, howHeard } = formData
+      if (!fullName.trim() || !email.trim() || !phone.trim() || !howHeard.trim()) {
+        setStepError("Please fill in all fields before continuing.")
+        return
+      }
+      setFormStep(3)
+    }
+  }
+
+  const handleBackStep = () => {
+    setStepError(null)
+    setFormStep((s) => (s <= 1 ? 1 : ((s - 1) as 1 | 2 | 3)))
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (formStep !== 3) return
+
     setIsSubmitting(true)
     setSubmitError(null)
 
@@ -204,6 +229,12 @@ export function ContactQuoteForm({
     })
 
     setIsSubmitted(true)
+    setFormStep(1)
+    setStepError(null)
+    setFormData({
+      ...emptyForm(),
+      selectedOffer: initialOfferId ?? OFFER_NONE,
+    })
   }
 
   const isInline = variant === "inline"
@@ -310,26 +341,57 @@ export function ContactQuoteForm({
 
       <form
         onSubmit={handleSubmit}
-        className={cn(
-          "space-y-3",
-          !isInline && "p-4",
-          isInline &&
-            "lg:grid lg:grid-cols-2 lg:gap-x-4 lg:gap-y-3 lg:space-y-0"
-        )}
+        className={cn("space-y-4", !isInline && "p-4")}
+        noValidate
       >
-        {showOfferSelect ? (
-          <div className={cn(isInline && "lg:col-span-2")}>
+        {/* Progress indicator */}
+        <div className="space-y-2">
+          <p className={cn("text-center text-sm font-semibold", isInline ? "text-white/80" : "text-foreground")}>
+            Step {formStep} of 3
+          </p>
+          <div
+            className="flex gap-1.5"
+            role="progressbar"
+            aria-valuenow={formStep}
+            aria-valuemin={1}
+            aria-valuemax={3}
+            aria-label={`Form progress: step ${formStep} of 3`}
+          >
+            {[1, 2, 3].map((s) => (
+              <div
+                key={s}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  s <= formStep ? "bg-brand-yellow" : isInline ? "bg-white/20" : "bg-border"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {stepError ? (
+          <p
+            className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900"
+            role="status"
+          >
+            {stepError}
+          </p>
+        ) : null}
+
+        {/* Step 1: Service selection */}
+        {formStep === 1 ? (
+          <div>
             <Label htmlFor={fieldId("selectedOffer")} className={labelClass}>
-              Offer <span className="text-destructive">*</span>
+              What type of service do you need?{" "}
+              <span className="text-destructive">*</span>
             </Label>
             <Select
               value={formData.selectedOffer}
-              onValueChange={handleOfferSelectChange}
+              onValueChange={showOfferSelect ? handleOfferSelectChange : (value) => handleSelectChange("selectedOffer", value)}
               required
             >
               <SelectTrigger
                 id={fieldId("selectedOffer")}
-                className={cn(!isInline && "mt-1 w-full", isInline && selectTriggerClass)}
+                className={cn("mt-1 w-full", isInline && selectTriggerClass.replace("mt-1 w-full ", ""))}
               >
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
@@ -347,231 +409,257 @@ export function ContactQuoteForm({
           </div>
         ) : null}
 
-        <div className="space-y-3">
-          <div>
-            <Label htmlFor={fieldId("fullName")} className={labelClass}>
-              Full Name <span className="text-destructive">*</span>
-            </Label>
-            <Input
-              id={fieldId("fullName")}
-              name="fullName"
-              type="text"
-              required
-              value={formData.fullName}
-              onChange={handleInputChange}
-              placeholder="Your full name"
-              className={fieldClass}
-              autoComplete="name"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {/* Step 2: Contact info */}
+        {formStep === 2 ? (
+          <div className="space-y-3">
             <div>
-              <Label htmlFor={fieldId("email")} className={labelClass}>
-                Email <span className="text-destructive">*</span>
+              <Label htmlFor={fieldId("fullName")} className={labelClass}>
+                Full Name <span className="text-destructive">*</span>
               </Label>
               <Input
-                id={fieldId("email")}
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="john@example.com"
-                className={fieldClass}
-                autoComplete="email"
-              />
-            </div>
-            <div>
-              <Label htmlFor={fieldId("phone")} className={labelClass}>
-                Phone <span className="text-destructive">*</span>
-              </Label>
-              <Input
-                id={fieldId("phone")}
-                name="phone"
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="(555) 123-4567"
-                className={fieldClass}
-                autoComplete="tel"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <div className="col-span-2 sm:col-span-1">
-              <Label htmlFor={fieldId("city")} className={labelClass}>
-                City <span className="text-destructive">*</span>
-              </Label>
-              <Input
-                id={fieldId("city")}
-                name="city"
+                id={fieldId("fullName")}
+                name="fullName"
                 type="text"
                 required
-                value={formData.city}
+                value={formData.fullName}
                 onChange={handleInputChange}
-                placeholder="City"
+                placeholder="Your full name"
                 className={fieldClass}
-                autoComplete="address-level2"
+                autoComplete="name"
               />
             </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <Label htmlFor={fieldId("email")} className={labelClass}>
+                  Email <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id={fieldId("email")}
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="john@example.com"
+                  className={fieldClass}
+                  autoComplete="email"
+                />
+              </div>
+              <div>
+                <Label htmlFor={fieldId("phone")} className={labelClass}>
+                  Phone <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id={fieldId("phone")}
+                  name="phone"
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="(555) 123-4567"
+                  className={fieldClass}
+                  autoComplete="tel"
+                />
+              </div>
+            </div>
             <div>
-              <Label htmlFor={fieldId("state")} className={labelClass}>
-                State <span className="text-destructive">*</span>
+              <Label htmlFor={fieldId("howHeard")} className={labelClass}>
+                How did you hear about us?{" "}
+                <span className="text-destructive">*</span>
               </Label>
               <Select
-                value={formData.state}
-                onValueChange={(value) => handleSelectChange("state", value)}
+                value={formData.howHeard}
+                onValueChange={(value) => handleSelectChange("howHeard", value)}
                 required
               >
                 <SelectTrigger
-                  id={fieldId("state")}
-                  className={cn(!isInline && "mt-1 w-full", isInline && selectTriggerClass)}
+                  id={fieldId("howHeard")}
+                  className={selectTriggerClass}
                 >
-                  <SelectValue placeholder="State" />
+                  <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent {...formSelectContentPlacementProps}>
-                  {CONTACT_FORM_STATES.map((state) => (
-                    <SelectItem key={state} value={state}>
-                      {state}
+                  {howHeardOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
+          </div>
+        ) : null}
+
+        {/* Step 3: Location & project details */}
+        {formStep === 3 ? (
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="col-span-2 sm:col-span-1">
+                <Label htmlFor={fieldId("city")} className={labelClass}>
+                  City <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id={fieldId("city")}
+                  name="city"
+                  type="text"
+                  required
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  placeholder="City"
+                  className={fieldClass}
+                  autoComplete="address-level2"
+                />
+              </div>
+              <div>
+                <Label htmlFor={fieldId("state")} className={labelClass}>
+                  State <span className="text-destructive">*</span>
+                </Label>
+                <Select
+                  value={formData.state}
+                  onValueChange={(value) => handleSelectChange("state", value)}
+                  required
+                >
+                  <SelectTrigger
+                    id={fieldId("state")}
+                    className={selectTriggerClass}
+                  >
+                    <SelectValue placeholder="State" />
+                  </SelectTrigger>
+                  <SelectContent {...formSelectContentPlacementProps}>
+                    {CONTACT_FORM_STATES.map((state) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor={fieldId("zip")} className={labelClass}>
+                  ZIP <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id={fieldId("zip")}
+                  name="zip"
+                  type="text"
+                  required
+                  value={formData.zip}
+                  onChange={handleInputChange}
+                  placeholder="12345"
+                  className={fieldClass}
+                  autoComplete="postal-code"
+                />
+              </div>
+            </div>
             <div>
-              <Label htmlFor={fieldId("zip")} className={labelClass}>
-                ZIP <span className="text-destructive">*</span>
+              <Label htmlFor={fieldId("message")} className={labelClass}>
+                Project details <span className="text-destructive">*</span>
               </Label>
-              <Input
-                id={fieldId("zip")}
-                name="zip"
-                type="text"
+              <p
+                className={cn(
+                  "mt-1 text-xs leading-snug",
+                  isInline ? "text-white/55" : "text-muted-foreground"
+                )}
+              >
+                List surfaces, rough size, and when you want service.
+              </p>
+              <Textarea
+                id={fieldId("message")}
+                name="message"
                 required
-                value={formData.zip}
+                value={formData.message}
                 onChange={handleInputChange}
-                placeholder="12345"
-                className={fieldClass}
-                autoComplete="postal-code"
+                placeholder="Example: Two-story siding and front walk, medium lot, next week."
+                className={cn("mt-2 min-h-[100px]", isInline && fieldClass)}
               />
             </div>
           </div>
+        ) : null}
+
+        {/* Navigation */}
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleBackStep}
+            disabled={formStep <= 1}
+            className={cn(
+              "min-w-[5.5rem] disabled:pointer-events-none disabled:opacity-40",
+              isInline && "border-white/30 text-white hover:bg-white/10"
+            )}
+          >
+            Back
+          </Button>
+          {formStep < 3 ? (
+            <Button
+              type="button"
+              onClick={handleNextStep}
+              className="min-w-[5.5rem] bg-brand-blue text-white hover:bg-brand-blue-light"
+            >
+              Next
+            </Button>
+          ) : null}
         </div>
 
-        <div className={cn(isInline && "space-y-3 lg:flex lg:flex-col")}>
-          <div className={cn(isInline && "lg:flex-1")}>
-            <Label htmlFor={fieldId("message")} className={labelClass}>
-              Project details <span className="text-destructive">*</span>
-            </Label>
+        {formStep === 3 ? (
+          <div className="space-y-2 border-t border-border pt-4">
+            {submitError ? (
+              <p
+                className={cn(
+                  "rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm",
+                  isInline ? "text-red-100" : "text-red-800"
+                )}
+                role="alert"
+              >
+                {submitError}
+              </p>
+            ) : null}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-4 text-base inline-flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="size-5 animate-spin shrink-0" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="size-5 shrink-0" aria-hidden />
+                  {copy.submitLabel}
+                </>
+              )}
+            </Button>
+
             <p
               className={cn(
-                "mt-1 text-xs leading-snug",
+                "text-center text-xs leading-relaxed",
+                isInline ? "text-white/50" : "text-muted-foreground"
+              )}
+            >
+              {copy.trustNote}
+            </p>
+
+            <p
+              className={cn(
+                "text-center text-sm",
                 isInline ? "text-white/55" : "text-muted-foreground"
               )}
             >
-              List surfaces, rough size, and when you want service.
-            </p>
-            <Textarea
-              id={fieldId("message")}
-              name="message"
-              required
-              value={formData.message}
-              onChange={handleInputChange}
-              placeholder="Example: Two-story siding and front walk, medium lot, next week."
-              className={cn(
-                "mt-2 min-h-[88px]",
-                isInline && fieldClass,
-                isInline && "lg:min-h-[120px] xl:min-h-[100px]"
-              )}
-            />
-          </div>
-
-          <div>
-            <Label htmlFor={fieldId("howHeard")} className={labelClass}>
-              How Did You Hear About Us?{" "}
-              <span className="text-destructive">*</span>
-            </Label>
-            <Select
-              value={formData.howHeard}
-              onValueChange={(value) => handleSelectChange("howHeard", value)}
-              required
-            >
-              <SelectTrigger
-                id={fieldId("howHeard")}
-                className={cn(!isInline && "mt-1 w-full", isInline && selectTriggerClass)}
+              Or call us directly at{" "}
+              <a
+                href="tel:800-451-7213"
+                className={cn(
+                  "font-medium hover:underline",
+                  isInline ? "text-brand-yellow" : "text-brand-blue"
+                )}
               >
-                <SelectValue placeholder="Select an option" />
-              </SelectTrigger>
-              <SelectContent {...formSelectContentPlacementProps}>
-                {howHeardOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        <div className={cn("space-y-2", isInline && "lg:col-span-2")}>
-          {submitError ? (
-            <p
-              className={cn(
-                "rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm",
-                isInline ? "text-red-100" : "text-red-800"
-              )}
-              role="alert"
-            >
-              {submitError}
+                (800)-451-7213
+              </a>
             </p>
-          ) : null}
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-4 text-base inline-flex items-center justify-center gap-2"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="size-5 animate-spin shrink-0" />
-                Sending...
-              </>
-            ) : (
-              <>
-                <Send className="size-5 shrink-0" aria-hidden />
-                {copy.submitLabel}
-              </>
-            )}
-          </Button>
-
-          <p
-            className={cn(
-              "text-center text-xs leading-relaxed",
-              isInline ? "text-white/50" : "text-muted-foreground"
-            )}
-          >
-            {copy.trustNote}
-          </p>
-
-          <p
-            className={cn(
-              "text-center text-sm",
-              isInline ? "text-white/55" : "text-muted-foreground"
-            )}
-          >
-            Or call us directly at{" "}
-            <a
-              href="tel:800-451-7213"
-              className={cn(
-                "font-medium hover:underline",
-                isInline ? "text-brand-yellow" : "text-brand-blue"
-              )}
-            >
-              (800)-451-7213
-            </a>
-          </p>
-        </div>
+          </div>
+        ) : null}
       </form>
 
       {selectedOfferDetails ? (

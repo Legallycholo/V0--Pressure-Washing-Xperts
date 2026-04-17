@@ -2,13 +2,12 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Home, Building2, Droplets, Sparkles, ChevronRight } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const primaryServices = [
   {
     id: "residential",
-    icon: Home,
     title: "Residential Services",
     description:
       "House, driveway, deck, roof, and patio cleaning.",
@@ -16,11 +15,9 @@ const primaryServices = [
     imageSrc: "/services/home-residential.png",
     imageAlt:
       "Residential backyard concrete patio with outdoor seating, grill, and brick home exterior.",
-    imageLabel: "Residential service image",
   },
   {
     id: "commercial",
-    icon: Building2,
     title: "Commercial Services",
     description:
       "Storefront, lot, exterior, and sidewalk cleaning.",
@@ -28,14 +25,12 @@ const primaryServices = [
     imageSrc: "/services/home-commercial.png",
     imageAlt:
       "Commercial building with block and metal facade, storefront windows, and parking lot.",
-    imageLabel: "Commercial service image",
   },
 ]
 
 const supportingServices = [
   {
     id: "pressure-washing",
-    icon: Sparkles,
     title: "Pressure Washing",
     subtitle: "High-pressure surface cleaning",
     description:
@@ -43,7 +38,6 @@ const supportingServices = [
   },
   {
     id: "soft-washing",
-    icon: Droplets,
     title: "Soft Washing",
     subtitle: "Low-pressure chemical cleaning",
     description:
@@ -78,57 +72,31 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             <Link
               key={service.id}
               href={service.href}
-              className={`group relative block overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.99] motion-reduce:hover:translate-y-0 animate-fade-in-up stagger-${index + 1}`}
+              className={`group relative block overflow-hidden rounded-xl animate-fade-in-up stagger-${index + 1}`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm" />
               <div className="absolute inset-0 rounded-xl border border-white/10" />
 
-              <div
-                className="absolute inset-0 bg-brand-yellow/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                aria-hidden
-              />
-
               <div className="relative p-5 sm:p-6">
-                <div className="relative mx-auto mb-3 max-w-lg h-32 overflow-hidden rounded-lg border border-white/10 bg-white/5 sm:h-36">
-                  {"imageSrc" in service && service.imageSrc ? (
-                    <Image
-                      src={service.imageSrc}
-                      alt={service.imageAlt ?? service.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-center text-sm text-white/30">
-                      <div>
-                        <service.icon className="mx-auto mb-2 size-12 opacity-50" />
-                        <span>{service.imageLabel}</span>
-                      </div>
-                    </div>
-                  )}
+                <div className="relative mx-auto mb-3 max-w-lg h-48 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                  <Image
+                    src={service.imageSrc}
+                    alt={service.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
 
-                <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-md bg-brand-blue-light/20 text-brand-blue-light transition-transform duration-300 group-hover:scale-110">
-                  <service.icon className="size-5" />
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-yellow transition-colors">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {service.title}
                 </h3>
                 <p className="text-white/75 text-sm leading-relaxed mb-3">
                   {service.description}
                 </p>
 
-                <span className="inline-flex items-center gap-1 text-brand-yellow font-semibold text-sm group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-brand-yellow font-semibold text-sm">
                   Learn more
                   <ChevronRight className="size-4" />
-                </span>
-              </div>
-
-              {/* Hover "peek": quote CTA */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-full items-end justify-center bg-gradient-to-t from-brand-blue-dark via-brand-blue-dark/95 to-transparent pb-4 pt-12 transition-transform duration-300 ease-out group-hover:translate-y-0 motion-reduce:translate-y-full">
-                <span className="text-center text-xs font-bold uppercase tracking-wide text-brand-yellow">
-                  Get a free quote for {service.title.replace(" Services", "")}
                 </span>
               </div>
             </Link>
@@ -140,11 +108,8 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           {supportingServices.map((service) => (
             <div
               key={service.id}
-              className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5 transition-all duration-300 hover:border-brand-yellow/25 hover:bg-white/[0.07]"
+              className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5"
             >
-              <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-md bg-brand-blue-light/15 text-brand-blue-light">
-                <service.icon className="size-4" />
-              </div>
               <h3 className="text-lg font-bold text-white">{service.title}</h3>
               <p className="mt-1 text-brand-blue-light text-xs uppercase tracking-wide font-semibold">
                 {service.subtitle}

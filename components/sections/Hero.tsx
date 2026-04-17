@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
-import { Check, CheckCircle, Loader2, Send } from "lucide-react"
+import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -44,6 +44,8 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [formStep, setFormStep] = useState<1 | 2 | 3>(1)
+  const [stepError, setStepError] = useState<string | null>(null)
   const [formData, setFormData] = useState(() => ({
     fullName: "",
     email: "",
@@ -72,8 +74,28 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
     setSubmitError(null)
+
+    if (formStep !== 3) {
+      return
+    }
+
+    const incomplete =
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.howHeard.trim() ||
+      !formData.city.trim() ||
+      !formData.state ||
+      !formData.zip.trim() ||
+      !formData.message.trim()
+
+    if (incomplete) {
+      setSubmitError("Please complete every required field before submitting.")
+      return
+    }
+
+    setIsSubmitting(true)
 
     const sp =
       typeof window !== "undefined"
@@ -115,6 +137,8 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
     })
 
     setIsSubmitted(true)
+    setFormStep(1)
+    setStepError(null)
     setFormData({
       fullName: "",
       email: "",
@@ -130,6 +154,32 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
 
   const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleNextStep = () => {
+    setStepError(null)
+    if (formStep === 1) {
+      setFormStep(2)
+      return
+    }
+    if (formStep === 2) {
+      const { fullName, email, phone, howHeard } = formData
+      if (
+        !fullName.trim() ||
+        !email.trim() ||
+        !phone.trim() ||
+        !howHeard.trim()
+      ) {
+        setStepError("Please fill in all fields before continuing.")
+        return
+      }
+      setFormStep(3)
+    }
+  }
+
+  const handleBackStep = () => {
+    setStepError(null)
+    setFormStep((s) => (s <= 1 ? 1 : ((s - 1) as 1 | 2 | 3)))
   }
 
   return (
@@ -161,20 +211,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
               Restore your home or business with safe, effective exterior cleaning.
             </p>
 
-            <div className="mt-5 hidden sm:flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-white/85 lg:justify-start">
-              <span className="inline-flex items-center gap-2">
-                <Check className="size-4 text-brand-blue-light" />
-                Licensed & Insured
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Check className="size-4 text-brand-blue-light" />
-                14 Years Experience
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Check className="size-4 text-brand-blue-light" />
-                Residential & Commercial
-              </span>
-            </div>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Button
@@ -230,237 +266,295 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="p-4 sm:p-5 space-y-3 lg:grid lg:grid-cols-2 lg:gap-x-4 lg:gap-y-3 lg:space-y-0"
+                  className="space-y-4 p-4 sm:p-5"
+                  noValidate
                 >
-                  <div className="lg:col-span-2">
-                    <Label htmlFor="hero-selected-offer" className="text-foreground">
-                      Offer <span className="text-destructive">*</span>
-                    </Label>
-                    <Select
-                      value={formData.selectedOffer}
-                      onValueChange={(value) =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          selectedOffer:
-                            value === OFFER_NONE || isOfferId(value)
-                              ? value
-                              : OFFER_NONE,
-                        }))
-                      }
-                      required
+                  <div className="space-y-2">
+                    <p className="text-center text-sm font-semibold text-foreground">
+                      Step {formStep} of 3
+                    </p>
+                    <div
+                      className="flex gap-1.5"
+                      role="progressbar"
+                      aria-valuenow={formStep}
+                      aria-valuemin={1}
+                      aria-valuemax={3}
+                      aria-label={`Form progress: step ${formStep} of 3`}
                     >
-                      <SelectTrigger
-                        id="hero-selected-offer"
-                        className="mt-1 w-full"
-                      >
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent {...formSelectContentPlacementProps}>
-                        <SelectItem value={OFFER_NONE}>
-                          No offer: general quote only
-                        </SelectItem>
-                        {offers.map((o) => (
-                          <SelectItem key={o.id} value={o.id}>
-                            {o.title}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div>
-                      <Label htmlFor="fullName" className="text-foreground">
-                        Full Name <span className="text-destructive">*</span>
-                      </Label>
-                      <Input
-                        id="fullName"
-                        name="fullName"
-                        type="text"
-                        required
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        placeholder="Your full name"
-                        className="mt-1"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <Label htmlFor="email" className="text-foreground">
-                          Email <span className="text-destructive">*</span>
-                        </Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="john@example.com"
-                          className="mt-1"
+                      {[1, 2, 3].map((s) => (
+                        <div
+                          key={s}
+                          className={`h-1.5 flex-1 rounded-full transition-colors ${
+                            s <= formStep ? "bg-brand-yellow" : "bg-border"
+                          }`}
                         />
-                      </div>
-                      <div>
-                        <Label htmlFor="phone" className="text-foreground">
-                          Phone <span className="text-destructive">*</span>
-                        </Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          required
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          placeholder="(555) 123-4567"
-                          className="mt-1"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      <div className="col-span-2 sm:col-span-1">
-                        <Label htmlFor="city" className="text-foreground">
-                          City <span className="text-destructive">*</span>
-                        </Label>
-                        <Input
-                          id="city"
-                          name="city"
-                          type="text"
-                          required
-                          value={formData.city}
-                          onChange={handleInputChange}
-                          placeholder="City"
-                          className="mt-1"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="state" className="text-foreground">
-                          State <span className="text-destructive">*</span>
-                        </Label>
-                        <Select
-                          value={formData.state}
-                          onValueChange={(value) =>
-                            handleSelectChange("state", value)
-                          }
-                          required
-                        >
-                          <SelectTrigger className="mt-1 w-full">
-                            <SelectValue placeholder="State" />
-                          </SelectTrigger>
-                          <SelectContent {...formSelectContentPlacementProps}>
-                            {CONTACT_FORM_STATES.map((state) => (
-                              <SelectItem key={state} value={state}>
-                                {state}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label htmlFor="zip" className="text-foreground">
-                          ZIP <span className="text-destructive">*</span>
-                        </Label>
-                        <Input
-                          id="zip"
-                          name="zip"
-                          type="text"
-                          required
-                          value={formData.zip}
-                          onChange={handleInputChange}
-                          placeholder="12345"
-                          className="mt-1"
-                        />
-                      </div>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <div>
-                      <Label htmlFor="message" className="text-foreground">
-                        Project details <span className="text-destructive">*</span>
-                      </Label>
-                      <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                        List surfaces, rough size, and when you want service.
-                      </p>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        required
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        placeholder="Example: Two-story siding and front walk, medium lot, next week."
-                        className="mt-2 min-h-[88px] lg:min-h-[120px] xl:min-h-[100px]"
-                      />
-                    </div>
+                  {stepError ? (
+                    <p
+                      className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900"
+                      role="status"
+                    >
+                      {stepError}
+                    </p>
+                  ) : null}
 
+                  {formStep === 1 ? (
                     <div>
-                      <Label htmlFor="howHeard" className="text-foreground">
-                        How Did You Hear About Us?{" "}
+                      <Label htmlFor="hero-selected-offer" className="text-foreground">
+                        What type of service do you need?{" "}
                         <span className="text-destructive">*</span>
                       </Label>
                       <Select
-                        value={formData.howHeard}
+                        value={formData.selectedOffer}
                         onValueChange={(value) =>
-                          handleSelectChange("howHeard", value)
+                          setFormData((prev) => ({
+                            ...prev,
+                            selectedOffer:
+                              value === OFFER_NONE || isOfferId(value)
+                                ? value
+                                : OFFER_NONE,
+                          }))
                         }
                         required
                       >
-                        <SelectTrigger className="mt-1 w-full">
+                        <SelectTrigger
+                          id="hero-selected-offer"
+                          className="mt-1 w-full"
+                        >
                           <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
                         <SelectContent {...formSelectContentPlacementProps}>
-                          {howHeardOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
+                          <SelectItem value={OFFER_NONE}>
+                            No offer: general quote only
+                          </SelectItem>
+                          {offers.map((o) => (
+                            <SelectItem key={o.id} value={o.id}>
+                              {o.title}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
-                  </div>
+                  ) : null}
 
-                  <div className="space-y-2 lg:col-span-2">
-                    {submitError ? (
-                      <p
-                        className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
-                        role="alert"
-                      >
-                        {submitError}
-                      </p>
-                    ) : null}
+                  {formStep === 2 ? (
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="fullName" className="text-foreground">
+                          Full Name <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="fullName"
+                          name="fullName"
+                          type="text"
+                          required
+                          value={formData.fullName}
+                          onChange={handleInputChange}
+                          placeholder="Your full name"
+                          className="mt-1"
+                        />
+                      </div>
+                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div>
+                          <Label htmlFor="email" className="text-foreground">
+                            Email <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="john@example.com"
+                            className="mt-1"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="phone" className="text-foreground">
+                            Phone <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            required
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            placeholder="(555) 123-4567"
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="howHeard" className="text-foreground">
+                          How did you hear about us?{" "}
+                          <span className="text-destructive">*</span>
+                        </Label>
+                        <Select
+                          value={formData.howHeard}
+                          onValueChange={(value) =>
+                            handleSelectChange("howHeard", value)
+                          }
+                          required
+                        >
+                          <SelectTrigger className="mt-1 w-full">
+                            <SelectValue placeholder="Select an option" />
+                          </SelectTrigger>
+                          <SelectContent {...formSelectContentPlacementProps}>
+                            {howHeardOptions.map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {formStep === 3 ? (
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                        <div className="col-span-2 sm:col-span-1">
+                          <Label htmlFor="city" className="text-foreground">
+                            City <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            id="city"
+                            name="city"
+                            type="text"
+                            required
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            placeholder="City"
+                            className="mt-1"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="state" className="text-foreground">
+                            State <span className="text-destructive">*</span>
+                          </Label>
+                          <Select
+                            value={formData.state}
+                            onValueChange={(value) =>
+                              handleSelectChange("state", value)
+                            }
+                            required
+                          >
+                            <SelectTrigger className="mt-1 w-full">
+                              <SelectValue placeholder="State" />
+                            </SelectTrigger>
+                            <SelectContent {...formSelectContentPlacementProps}>
+                              {CONTACT_FORM_STATES.map((state) => (
+                                <SelectItem key={state} value={state}>
+                                  {state}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="zip" className="text-foreground">
+                            ZIP <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            id="zip"
+                            name="zip"
+                            type="text"
+                            required
+                            value={formData.zip}
+                            onChange={handleInputChange}
+                            placeholder="12345"
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="message" className="text-foreground">
+                          Project details <span className="text-destructive">*</span>
+                        </Label>
+                        <p className="mt-1 text-xs text-muted-foreground leading-snug">
+                          List surfaces, rough size, and when you want service.
+                        </p>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          required
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          placeholder="Example: Two-story siding and front walk, medium lot, next week."
+                          className="mt-2 min-h-[100px]"
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark py-4 text-base inline-flex items-center justify-center gap-2"
+                      type="button"
+                      variant="outline"
+                      onClick={handleBackStep}
+                      disabled={formStep <= 1}
+                      className="min-w-[5.5rem] disabled:pointer-events-none disabled:opacity-40"
                     >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="size-5 animate-spin shrink-0" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="size-5 shrink-0" aria-hidden />
-                          {modalCopyDefault.submitLabel}
-                        </>
-                      )}
+                      Back
                     </Button>
-
-                    <p className="text-center text-xs text-muted-foreground leading-relaxed">
-                      {modalCopyDefault.trustNote}
-                    </p>
-
-                    <p className="text-center text-sm text-muted-foreground">
-                      Or call us directly at{" "}
-                      <a
-                        href="tel:800-451-7213"
-                        className="text-brand-blue font-medium hover:underline"
+                    {formStep < 3 ? (
+                      <Button
+                        type="button"
+                        onClick={handleNextStep}
+                        className="min-w-[5.5rem] bg-brand-blue text-white hover:bg-brand-blue-light"
                       >
-                        (800)-451-7213
-                      </a>
-                    </p>
+                        Next
+                      </Button>
+                    ) : null}
                   </div>
+
+                  {formStep === 3 ? (
+                    <div className="space-y-2 border-t border-border pt-4">
+                      {submitError ? (
+                        <p
+                          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+                          role="alert"
+                        >
+                          {submitError}
+                        </p>
+                      ) : null}
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="inline-flex w-full items-center justify-center gap-2 bg-brand-yellow py-4 text-base font-bold text-brand-blue-dark hover:bg-brand-yellow-dark"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="size-5 shrink-0 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="size-5 shrink-0" aria-hidden />
+                            {modalCopyDefault.submitLabel}
+                          </>
+                        )}
+                      </Button>
+                      <p className="text-center text-xs leading-relaxed text-muted-foreground">
+                        {modalCopyDefault.trustNote}
+                      </p>
+                      <p className="text-center text-sm text-muted-foreground">
+                        Or call us directly at{" "}
+                        <a
+                          href="tel:800-451-7213"
+                          className="font-medium text-brand-blue hover:underline"
+                        >
+                          (800)-451-7213
+                        </a>
+                      </p>
+                    </div>
+                  ) : null}
                 </form>
               )}
             </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { offers } from "@/data/offers"
+import { getOfferById, offers } from "@/data/offers"
 import type { OfferId } from "@/data/offers"
 import { Button } from "@/components/ui/button"
 
@@ -9,6 +9,9 @@ interface OffersProps {
 }
 
 export function Offers({ onOpenQuoteForm }: OffersProps) {
+  const newCustomerOffer = getOfferById("first-time")
+  const gridOffers = offers.filter((o) => o.id !== "first-time")
+
   return (
     <section
       className="py-12 bg-section-light"
@@ -30,14 +33,44 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {offers.map((offer, index) => (
+        {newCustomerOffer ? (
+          <div className="mb-8 flex justify-center px-1">
+            <div
+              className="flex w-full max-w-3xl flex-col gap-4 rounded-2xl border border-brand-yellow/50 bg-brand-yellow/15 px-4 py-4 text-brand-blue-dark shadow-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-4"
+              role="note"
+            >
+              <div className="min-w-0 flex-1 text-center sm:text-left">
+                <p className="text-sm font-bold text-brand-blue sm:text-base">
+                  <span>{newCustomerOffer.discount}</span>
+                  <span className="mx-1.5 font-normal text-brand-blue/50">—</span>
+                  <span>{newCustomerOffer.title}</span>
+                </p>
+                <p className="mt-1 text-sm text-balance text-brand-blue/90 sm:text-base">
+                  {newCustomerOffer.description}
+                </p>
+              </div>
+              <div className="flex shrink-0 justify-center sm:justify-end">
+                <Button
+                  type="button"
+                  onClick={() => onOpenQuoteForm(newCustomerOffer.id)}
+                  className="min-w-[10rem] bg-brand-yellow font-semibold text-brand-blue-dark hover:bg-brand-yellow-dark"
+                  aria-label={`Claim Offer: ${newCustomerOffer.title}`}
+                >
+                  Claim Offer
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {gridOffers.map((offer, index) => (
             <article
               key={offer.id}
-              className={`relative flex h-full flex-col rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-xl active:scale-[0.99] motion-reduce:hover:scale-100 animate-fade-in-up stagger-${index + 1} ${
+              className={`relative flex h-full flex-col rounded-xl overflow-hidden animate-fade-in-up stagger-${index + 1} bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white ${
                 offer.highlight
-                  ? "order-first lg:order-none bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white ring-2 ring-brand-yellow"
-                  : "bg-white text-foreground shadow-lg"
+                  ? "order-first lg:order-none border-2 border-brand-yellow"
+                  : "border border-white/10"
               }`}
             >
               {offer.highlight && (
@@ -46,54 +79,18 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                 </div>
               )}
 
-              {offer.highlight && (
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                  <div className="absolute top-0 left-0 w-1/3 h-1/2 bg-blue-900" />
-                  {[...Array(7)].map((_, i) => (
-                    <div
-                      key={i}
-                      className={`absolute left-0 right-0 h-[7%] ${i % 2 === 0 ? "bg-red-600" : "bg-transparent"}`}
-                      style={{ top: `${50 + i * 7}%` }}
-                    />
-                  ))}
-                </div>
-              )}
-
               <div className="relative p-4 sm:p-5 flex flex-col flex-1 min-h-0">
-                <div
-                  className={`mb-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
-                    offer.highlight ? "bg-white/20" : "bg-brand-blue/10"
-                  }`}
-                >
-                  <offer.icon
-                    className={`size-5 ${offer.highlight ? "text-white" : "text-brand-blue"}`}
-                    aria-hidden
-                  />
-                </div>
-
-                <div
-                  className={`text-2xl font-bold mb-2 ${
-                    offer.highlight ? "text-brand-yellow" : "text-brand-blue"
-                  }`}
-                >
+                <div className="text-2xl font-bold mb-2 text-brand-yellow">
                   {offer.discount}
                 </div>
 
-                <h3 className="text-base font-bold mb-1.5">{offer.title}</h3>
+                <h3 className="text-base font-bold mb-1.5 text-white">{offer.title}</h3>
 
-                <p
-                  className={`text-sm leading-relaxed mb-3 ${
-                    offer.highlight ? "text-white/80" : "text-muted-foreground"
-                  }`}
-                >
+                <p className="text-sm leading-relaxed mb-3 text-white/75">
                   {offer.description}
                 </p>
 
-                <small
-                  className={`text-sm leading-relaxed block mb-4 ${
-                    offer.highlight ? "text-white/80" : "text-muted-foreground"
-                  }`}
-                >
+                <small className="text-sm leading-relaxed block mb-4 text-white/60">
                   {offer.terms}
                 </small>
 
@@ -104,7 +101,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                     className={`w-full ${
                       offer.highlight
                         ? "bg-brand-yellow text-brand-blue-dark hover:bg-brand-yellow-dark"
-                        : "bg-brand-blue text-white hover:bg-brand-blue-light"
+                        : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
                     }`}
                     aria-label={`Claim Offer: ${offer.title}`}
                   >

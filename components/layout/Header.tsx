@@ -27,7 +27,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { ctaPress } from "@/lib/ctaInteraction"
-import { OfferAnnouncementBar } from "@/components/layout/OfferAnnouncementBar"
 
 interface HeaderProps {
   onOpenQuoteForm: () => void
@@ -35,29 +34,8 @@ interface HeaderProps {
 
 export function Header({ onOpenQuoteForm }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [navBg, setNavBg] = useState('rgba(13, 27, 42, 1)')
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
   const pathname = usePathname()
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const maxScroll = 300
-      
-      if (scrollY <= maxScroll) {
-        const opacity = 1 - (scrollY / maxScroll) * 0.4
-        setNavBg(`rgba(13, 27, 42, ${opacity.toFixed(3)})`)
-      } else {
-        setNavBg('rgba(13, 27, 42, 0.6)')
-      }
-    }
-    
-    handleScroll() // Initial check
-    
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   useEffect(() => {
     if (!isMenuOpen) return
@@ -89,8 +67,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-[background-color] duration-300 backdrop-blur-sm shadow-sm"
-      style={{ backgroundColor: isDropdownOpen ? 'rgba(13, 27, 42, 1)' : navBg }}
+      className="fixed top-0 left-0 right-0 z-50 bg-[#0d1b2a] shadow-sm"
     >
       <div className="hidden lg:block border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -140,7 +117,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             <Link
               href="/"
               onClick={scrollToHero}
-              className="inline-flex items-center shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
+              className="inline-flex shrink-0 items-center rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
               aria-label="Pressure Washing Xperts home"
             >
               <Image
@@ -149,7 +126,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 width={320}
                 height={160}
                 priority
-                className="h-10 xl:h-11 w-auto object-contain"
+                className="h-10 xl:h-11 w-auto bg-transparent object-contain"
               />
             </Link>
           </div>
@@ -157,7 +134,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           <Link
             href="/"
             onClick={scrollToHero}
-            className="lg:hidden inline-flex items-center mr-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
+            className="mr-2 inline-flex items-center rounded-md bg-transparent lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
             aria-label="Pressure Washing Xperts home"
           >
             <Image
@@ -166,14 +143,14 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               width={200}
               height={100}
               priority
-              className="h-8 w-auto object-contain"
+              className="h-8 w-auto bg-transparent object-contain"
             />
           </Link>
           {/* Desktop Navigation */}
           <NavigationMenu
             className="relative z-20 hidden min-w-0 shrink-0 lg:flex"
             viewport={false}
-            onValueChange={(value) => setIsDropdownOpen(value !== "")}
+            onValueChange={() => {}}
           >
             <NavigationMenuList>
               {/* Home */}
@@ -289,11 +266,9 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               <TooltipTrigger asChild>
                 <a
                   href="tel:800-451-7213"
-                  className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans ${ctaPress}`}
+                  className={`inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white font-sans ${ctaPress}`}
                 >
-                  <span className="inline-flex size-8 items-center justify-center rounded-md bg-white/10 animate-pulse-glow motion-reduce:animate-none">
-                    <Phone className="size-4" />
-                  </span>
+                  <Phone className="size-4 shrink-0" aria-hidden />
                   <span>Call Now</span>
                 </a>
               </TooltipTrigger>
@@ -474,7 +449,6 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
           </div>
         </nav>
       </div>
-      <OfferAnnouncementBar />
     </header>
   )
 }

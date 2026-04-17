@@ -132,8 +132,7 @@ export function Testimonials() {
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="border-brand-yellow/80 text-brand-yellow hover:bg-brand-yellow hover:text-brand-blue-dark gap-2"
+              className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark gap-2"
             >
               <a
                 href={GOOGLE_BUSINESS_REVIEW_URL}
