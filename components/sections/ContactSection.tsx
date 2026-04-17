@@ -8,7 +8,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { contactIconDark, contactRowDark, ctaPress } from "@/lib/ctaInteraction"
-import { businessAddress, businessMapsUrl } from "@/data/site"
+import {
+  businessAddress,
+  businessHoursSummary,
+  businessMapsUrl,
+} from "@/data/site"
 
 export function ContactSection() {
   return (
@@ -25,7 +29,7 @@ export function ContactSection() {
             </h2>
             <p className="text-white/70 text-base leading-relaxed mb-6">
               Tell us what you want cleaned. We usually reply within one business day.
-              Prefer phone? Call or text us during business hours.
+              Prefer phone? Call or text anytime—we answer 24/7.
             </p>
 
             {/* Contact Cards */}
@@ -71,9 +75,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-white/60 text-sm">Business Hours</p>
-                  <p className="text-white font-semibold">
-                    Mon - Sat: 7:00 AM - 7:00 PM
-                  </p>
+                  <p className="text-white font-semibold">{businessHoursSummary}</p>
                 </div>
               </div>
 

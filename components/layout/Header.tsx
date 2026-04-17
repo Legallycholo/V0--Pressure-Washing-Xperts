@@ -389,7 +389,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'areas' ? 'rotate-180' : ''}`} />
             </button>
             {openMobileDropdown === 'areas' && (
-              <div className="pl-4 space-y-1 mt-1 max-h-48 overflow-y-auto">
+              <div className="pl-4 space-y-1 mt-1">
                 {headerServiceAreaLinks.map((area) => (
                   <Link
                     key={area.href}

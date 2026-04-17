@@ -59,6 +59,22 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
           "@type": "AdministrativeArea",
           name: businessAreaServedDescription,
         },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "https://schema.org/Monday",
+              "https://schema.org/Tuesday",
+              "https://schema.org/Wednesday",
+              "https://schema.org/Thursday",
+              "https://schema.org/Friday",
+              "https://schema.org/Saturday",
+              "https://schema.org/Sunday",
+            ],
+            opens: "00:00",
+            closes: "24:00",
+          },
+        ],
       },
       {
         "@type": "WebSite",
