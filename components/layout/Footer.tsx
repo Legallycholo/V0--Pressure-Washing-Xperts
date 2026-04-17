@@ -8,7 +8,9 @@ import {
   quickLinks,
   residentialServices,
 } from "@/data/navigation"
-import { businessAddress, businessMapsUrl } from "@/data/site"
+import { SITE_CONTENT_LAST_UPDATED_ISO } from "@/data/site-content-version"
+import { businessAddress, businessMapsUrl, businessPhoneDisplay, businessPhoneTel } from "@/data/site"
+import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
 import { ctaPress } from "@/lib/ctaInteraction"
 
 const services = [
@@ -91,11 +93,11 @@ export function Footer() {
             <h3 className="text-white font-bold text-base mb-4">Contact Us</h3>
             <div className="space-y-3">
               <a
-                href="tel:800-451-7213"
+                href={`tel:+1${businessPhoneTel}`}
                 className={`flex items-center gap-3 rounded-md text-white/60 transition-colors hover:text-brand-yellow hover:bg-white/5 ${ctaPress}`}
               >
                 <Phone className="size-5 text-brand-yellow" />
-                <span className="text-sm">(800)-451-7213</span>
+                <span className="text-sm">{businessPhoneDisplay}</span>
               </a>
               <a
                 href="mailto:pressurewashingxperts@gmail.com"
@@ -138,9 +140,15 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <p className="text-white/40 text-sm text-center md:text-left">
-              &copy; {new Date().getFullYear()} Pressure Washing Xperts. All rights reserved.
-            </p>
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-white/40 text-sm">
+                &copy; {new Date().getFullYear()} Pressure Washing Xperts. All rights reserved.
+              </p>
+              <p className="text-white/35 text-xs">
+                Site content last updated:{" "}
+                {formatSiteContentLastUpdatedLabel(SITE_CONTENT_LAST_UPDATED_ISO)}
+              </p>
+            </div>
             <div className="flex items-center justify-center md:justify-end gap-6">
               <span className="text-white/40 text-sm">Licensed & Insured</span>
               <button

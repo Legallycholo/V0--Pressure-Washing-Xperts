@@ -7,49 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-
-const faqs = [
-  {
-    question: "What types of surfaces can you pressure wash?",
-    answer:
-      "Concrete, brick, decks, siding, asphalt, stone, fences, and roof shingles. We match pressure and solution to each surface.",
-  },
-  {
-    question: "How much does pressure washing cost?",
-    answer:
-      "Driveways are often $100-$150, and full homes are usually $200-$500 based on size. Quotes are free.",
-  },
-  {
-    question: "Is pressure washing safe for my property?",
-    answer:
-      "Yes. We use the right PSI for each surface and soft washing where needed to avoid damage.",
-  },
-  {
-    question: "How often should I have my property pressure washed?",
-    answer:
-      "Most homes do best with yearly service. Humid areas and commercial sites may need it every 6 months.",
-  },
-  {
-    question: "Do I need to be home during the service?",
-    answer:
-      "No. Just leave access to an outdoor spigot. A quick walkthrough helps, but it is optional.",
-  },
-  {
-    question: "What is soft washing and when do you use it?",
-    answer:
-      "Soft washing is low-pressure cleaning with biodegradable solution for roofs, stucco, cedar shake, and painted surfaces.",
-  },
-  {
-    question: "Are your cleaning solutions environmentally friendly?",
-    answer:
-      "Yes. We use biodegradable, plant-safe detergents and handle chemicals carefully.",
-  },
-  {
-    question: "How do I prepare for my pressure washing appointment?",
-    answer:
-      "Move furniture, pots, and vehicles from the work area, and close windows and doors. We handle the rest.",
-  },
-]
+import { homeFaqItems } from "@/data/home-faq"
 
 interface FAQProps {
   onOpenQuoteForm: () => void
@@ -75,7 +33,7 @@ export function FAQ({ onOpenQuoteForm }: FAQProps) {
         {/* FAQ Accordion */}
         <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
           <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
+            {homeFaqItems.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-border">
                 <AccordionTrigger className="text-left text-foreground hover:text-brand-blue hover:no-underline text-sm md:text-base">
                   {faq.question}
@@ -107,7 +65,7 @@ export function FAQ({ onOpenQuoteForm }: FAQProps) {
               variant="outline"
               className="border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white"
             >
-              <a href="tel:800-451-7213">
+              <a href="tel:+18004517213">
                 Call Us: (800)-451-7213
               </a>
             </Button>

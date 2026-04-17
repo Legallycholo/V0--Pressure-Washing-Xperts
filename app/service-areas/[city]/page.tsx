@@ -1,11 +1,15 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { JsonLd } from "@/components/seo/JsonLd"
 import {
   getServiceAreaBySlug,
   normalizeServiceAreaSlug,
   serviceAreaContent,
 } from "@/data/service-areas"
 import { ServiceAreaCityPageClient } from "@/app/service-areas/[city]/service-area-city-page-client"
+import { buildBreadcrumbListJsonLd } from "@/lib/seo/json-ld-builders"
+import { buildPublicMetadata } from "@/lib/seo/build-page-metadata"
+import { getSiteUrl } from "@/lib/site-url"
 
 interface ServiceAreaPageProps {
   params: Promise<{ city: string }>
@@ -26,10 +30,12 @@ export async function generateMetadata({
     return { title: "Service Area" }
   }
 
-  return {
+  const pathname = `/service-areas/${city.slug}`
+  return buildPublicMetadata({
     title: city.seo.title,
     description: city.seo.description,
-  }
+    pathname,
+  })
 }
 
 export default async function ServiceAreaPage({ params }: ServiceAreaPageProps) {
@@ -41,5 +47,18 @@ export default async function ServiceAreaPage({ params }: ServiceAreaPageProps) 
     notFound()
   }
 
-  return <ServiceAreaCityPageClient city={city} />
+  const base = getSiteUrl()
+  const pathname = `/service-areas/${city.slug}`
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Service Areas", path: "/service-areas" },
+    { name: `${city.cityName}, ${city.stateCode}`, path: pathname },
+  ]
+
+  return (
+    <>
+      <JsonLd data={buildBreadcrumbListJsonLd(base, breadcrumbItems)} />
+      <ServiceAreaCityPageClient city={city} />
+    </>
+  )
 }

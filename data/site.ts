@@ -1,5 +1,17 @@
 /** Single source for business location and top-bar slogan (navbar, footer, contact). */
 
+export const businessLegalName = "Pressure Washing Xperts" as const
+
+export const businessPhoneDisplay = "(800)-451-7213" as const
+
+export const businessPhoneTel = "8004517213" as const
+
+export const businessEmail = "pressurewashingxperts@gmail.com" as const
+
+/** Metro Atlanta and surrounding counties — used in schema `areaServed` copy. */
+export const businessAreaServedDescription =
+  "Metro Atlanta, Georgia and surrounding communities" as const
+
 export const navSlogan =
   'We don\'t do "good enough." We do Xpert.' as const
 
