@@ -148,6 +148,17 @@ export function Footer() {
                 Site content last updated:{" "}
                 {formatSiteContentLastUpdatedLabel(SITE_CONTENT_LAST_UPDATED_ISO)}
               </p>
+              <p className="text-white/35 text-xs">
+                SEO+ Website by{" "}
+                <a
+                  href="https://www.tanyresults.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/50 hover:text-brand-yellow transition-colors underline-offset-2 hover:underline"
+                >
+                  Tanyresults
+                </a>
+              </p>
             </div>
             <div className="flex items-center justify-center md:justify-end gap-6">
               <span className="text-white/40 text-sm">Licensed & Insured</span>
