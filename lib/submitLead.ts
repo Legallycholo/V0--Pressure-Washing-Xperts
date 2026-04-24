@@ -78,15 +78,6 @@ export function buildLeadInsertRow(
 export async function submitLeadRequest(
   payload: LeadPayload
 ): Promise<SubmitLeadResult> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
-  if (!url || !key) {
-    return {
-      ok: false,
-      error: "Submission is temporarily unavailable. Please try again later.",
-    }
-  }
-
   const built = buildLeadInsertRow(payload)
   if ("error" in built) {
     return { ok: false, error: built.error }
