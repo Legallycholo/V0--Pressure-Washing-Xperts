@@ -23,6 +23,7 @@ import {
   isOfferId,
   offers,
   OFFER_NONE,
+  OFFER_PRICING_SQFT_DISCLAIMER,
   PREMIUM_OFFER_UPSELL_BUTTON_SUBLINE,
   PREMIUM_OFFER_UPSELL_EXPLANATION,
 } from "@/data/offers"
@@ -36,6 +37,10 @@ import {
 } from "@/components/ui/dialog"
 import { modalCopyDefault } from "@/data/modalCopy"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
+import {
+  isValidApproxSqftEstimateForStorage,
+  SQFT_RANGE_OPTIONS,
+} from "@/data/sqftEstimateOptions"
 import { submitLeadRequest } from "@/lib/submitLead"
 import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
 
@@ -56,6 +61,7 @@ const emptyForm = () => ({
   zip: "",
   message: "",
   howHeard: "",
+  approxSqftEstimate: "",
   selectedOffer: OFFER_NONE as typeof OFFER_NONE | OfferId,
 })
 
@@ -186,6 +192,11 @@ export function ContactQuoteForm({
     e.preventDefault()
     if (formStep !== 3) return
 
+    if (!isValidApproxSqftEstimateForStorage(formData.approxSqftEstimate)) {
+      setSubmitError("Please select approximate square footage.")
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitError(null)
 
@@ -207,6 +218,7 @@ export function ContactQuoteForm({
       message: formData.message,
       how_heard: formData.howHeard,
       selected_offer: formData.selectedOffer,
+      approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: copy.badge,
       utm_source: utmSource,
       utm_medium: utmMedium,
@@ -406,6 +418,14 @@ export function ContactQuoteForm({
                 ))}
               </SelectContent>
             </Select>
+            <p
+              className={cn(
+                "mt-2 text-xs leading-snug",
+                isInline ? "text-white/55" : "text-muted-foreground"
+              )}
+            >
+              {OFFER_PRICING_SQFT_DISCLAIMER}
+            </p>
           </div>
         ) : null}
 
@@ -550,6 +570,41 @@ export function ContactQuoteForm({
                   autoComplete="postal-code"
                 />
               </div>
+            </div>
+            <div>
+              <Label htmlFor={fieldId("approxSqftEstimate")} className={labelClass}>
+                Approximate total square footage{" "}
+                <span className="text-destructive">*</span>
+              </Label>
+              <p
+                className={cn(
+                  "mt-1 text-xs leading-snug",
+                  isInline ? "text-white/55" : "text-muted-foreground"
+                )}
+              >
+                Rough total area helps us prepare your estimate.
+              </p>
+              <Select
+                value={formData.approxSqftEstimate || undefined}
+                onValueChange={(value) =>
+                  handleSelectChange("approxSqftEstimate", value)
+                }
+                required
+              >
+                <SelectTrigger
+                  id={fieldId("approxSqftEstimate")}
+                  className={selectTriggerClass}
+                >
+                  <SelectValue placeholder="Select a range" />
+                </SelectTrigger>
+                <SelectContent {...formSelectContentPlacementProps}>
+                  {SQFT_RANGE_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <Label htmlFor={fieldId("message")} className={labelClass}>
@@ -697,7 +752,7 @@ export function ContactQuoteForm({
                   {selectedOfferDetails.description}
                 </DialogDescription>
                 <p className="text-muted-foreground mt-5 text-xs leading-snug sm:text-[0.8125rem]">
-                  {selectedOfferDetails.terms}
+                  {selectedOfferDetails.terms} {OFFER_PRICING_SQFT_DISCLAIMER}
                 </p>
                 {showPremiumUpsell ? (
                   <div

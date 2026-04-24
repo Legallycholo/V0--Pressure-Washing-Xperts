@@ -21,6 +21,10 @@ export function isOfferId(value: unknown): value is OfferId {
 /** Select value when the user is not claiming a specific offer */
 export const OFFER_NONE = "none" as const
 
+/** Shown with every offer: final pricing depends on scope and square footage. */
+export const OFFER_PRICING_SQFT_DISCLAIMER =
+  "Pricing starts at a $250 minimum. Square footage and scope can increase the estimate. Offers are applied after the estimate, and final pricing will not go below $250."
+
 export interface Offer {
   id: OfferId
   icon: LucideIcon
@@ -42,7 +46,7 @@ export const offers: Offer[] = [
     description:
       "New customer? Save 15% on your first exterior cleaning.",
     terms:
-      "For first completed jobs only. Cannot combine with other offers; minimum job total applies.",
+      "For first completed jobs only. 15% discount is applied after your square-footage estimate. Cannot combine with other offers.",
     highlight: false,
     premiumRank: 3,
   },
@@ -54,7 +58,7 @@ export const offers: Offer[] = [
     description:
       "Book house washing with another qualifying service in one visit and save 20%.",
     terms:
-      "Applies to two or more qualifying services in one scheduled visit. Cannot combine with other offers; minimum job total applies.",
+      "Applies to two or more qualifying services in one scheduled visit. 20% discount is applied after your square-footage estimate. Cannot combine with other offers.",
     highlight: true,
     premiumRank: 4,
   },
@@ -66,7 +70,7 @@ export const offers: Offer[] = [
     description:
       "Save 10% when you book house wash + driveway in spring or fall.",
     terms:
-      "Valid for Mar-May or Sep-Nov combined jobs. Cannot combine with other offers; minimum job total applies.",
+      "Valid for Mar-May or Sep-Nov combined jobs. 10% discount is applied after your square-footage estimate. Cannot combine with other offers.",
     highlight: false,
     premiumRank: 1,
   },
@@ -78,7 +82,7 @@ export const offers: Offer[] = [
     description:
       "Refer a neighbor and you both get $50 off a future booking.",
     terms:
-      "Your referral must complete a paid service and mention your name. Cannot combine with other offers; minimum job total applies.",
+      "Your referral must complete a paid service and mention your name. $50 referral credit applies after your estimate on qualifying jobs. Cannot combine with other offers.",
     highlight: false,
     premiumRank: 2,
   },

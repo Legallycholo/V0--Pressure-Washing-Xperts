@@ -17,10 +17,15 @@ import {
 import { formSelectContentPlacementProps } from "@/lib/formSelectContentProps"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { CONTACT_FORM_STATES } from "@/data/contactFormStates"
+import {
+  isValidApproxSqftEstimateForStorage,
+  SQFT_RANGE_OPTIONS,
+} from "@/data/sqftEstimateOptions"
 import { modalCopyDefault } from "@/data/modalCopy"
 import {
   offers,
   OFFER_NONE,
+  OFFER_PRICING_SQFT_DISCLAIMER,
   isOfferId,
   type OfferId,
 } from "@/data/offers"
@@ -55,6 +60,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
     zip: "",
     message: "",
     howHeard: "",
+    approxSqftEstimate: "",
     selectedOffer: initialOfferId ?? OFFER_NONE,
   }))
 
@@ -88,7 +94,8 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       !formData.city.trim() ||
       !formData.state ||
       !formData.zip.trim() ||
-      !formData.message.trim()
+      !formData.message.trim() ||
+      !isValidApproxSqftEstimateForStorage(formData.approxSqftEstimate)
 
     if (incomplete) {
       setSubmitError("Please complete every required field before submitting.")
@@ -115,6 +122,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       message: formData.message,
       how_heard: formData.howHeard,
       selected_offer: formData.selectedOffer,
+      approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: modalCopyDefault.badge,
       utm_source: utmSource,
       utm_medium: utmMedium,
@@ -148,6 +156,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       zip: "",
       message: "",
       howHeard: "",
+      approxSqftEstimate: "",
       selectedOffer: initialOfferId ?? OFFER_NONE,
     })
   }
@@ -337,6 +346,9 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                           ))}
                         </SelectContent>
                       </Select>
+                      <p className="mt-2 text-xs text-muted-foreground leading-snug">
+                        {OFFER_PRICING_SQFT_DISCLAIMER}
+                      </p>
                     </div>
                   ) : null}
 
@@ -472,6 +484,39 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                             className="mt-1"
                           />
                         </div>
+                      </div>
+                      <div>
+                        <Label
+                          htmlFor="approxSqftEstimate"
+                          className="text-foreground"
+                        >
+                          Approximate total square footage{" "}
+                          <span className="text-destructive">*</span>
+                        </Label>
+                        <p className="mt-1 text-xs text-muted-foreground leading-snug">
+                          Rough total area helps us prepare your estimate.
+                        </p>
+                        <Select
+                          value={formData.approxSqftEstimate || undefined}
+                          onValueChange={(value) =>
+                            handleSelectChange("approxSqftEstimate", value)
+                          }
+                          required
+                        >
+                          <SelectTrigger
+                            id="approxSqftEstimate"
+                            className="mt-1 w-full"
+                          >
+                            <SelectValue placeholder="Select a range" />
+                          </SelectTrigger>
+                          <SelectContent {...formSelectContentPlacementProps}>
+                            {SQFT_RANGE_OPTIONS.map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
                         <Label htmlFor="message" className="text-foreground">

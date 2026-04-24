@@ -1,6 +1,10 @@
 "use client"
 
-import { getOfferById, offers } from "@/data/offers"
+import {
+  getOfferById,
+  offers,
+  OFFER_PRICING_SQFT_DISCLAIMER,
+} from "@/data/offers"
 import type { OfferId } from "@/data/offers"
 import { Button } from "@/components/ui/button"
 
@@ -42,12 +46,15 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
               <div className="min-w-0 flex-1 text-center sm:text-left">
                 <p className="text-sm font-bold text-brand-blue sm:text-base">
                   <span>{newCustomerOffer.discount}</span>
-                  <span className="mx-1.5 font-normal text-brand-blue/50">—</span>
+                  <span className="mx-1.5 font-normal text-brand-blue/50">-</span>
                   <span>{newCustomerOffer.title}</span>
                 </p>
                 <p className="mt-1 text-sm text-balance text-brand-blue/90 sm:text-base">
                   {newCustomerOffer.description}
                 </p>
+                <small className="mt-2 block text-center text-xs leading-relaxed text-brand-blue/75 sm:text-left">
+                  {newCustomerOffer.terms} {OFFER_PRICING_SQFT_DISCLAIMER}
+                </small>
               </div>
               <div className="flex shrink-0 justify-center sm:justify-end">
                 <Button
@@ -91,7 +98,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                 </p>
 
                 <small className="text-sm leading-relaxed block mb-4 text-white/60">
-                  {offer.terms}
+                  {offer.terms} {OFFER_PRICING_SQFT_DISCLAIMER}
                 </small>
 
                 <div className="mt-auto pt-0">
@@ -114,7 +121,9 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
         </div>
 
         <p className="mt-6 text-center text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
-          Offers cannot be combined. Minimum job total applies. Call{" "}
+          Pricing starts at a $250 minimum and estimates reflect square footage and
+          scope. Offers are applied after the estimate, and final pricing will not go
+          below $250. Offers cannot be combined. Call{" "}
           <a
             href="tel:18004517213"
             className="font-semibold text-brand-blue underline-offset-2 hover:underline"

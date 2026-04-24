@@ -1,8 +1,36 @@
 import { NextResponse } from "next/server"
-import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
+import {
+  buildLeadInsertRow,
+  type LeadInsertRow,
+  type LeadPayload,
+} from "@/lib/submitLead"
 import { createServiceRoleClient } from "@/utils/supabase/admin"
 import { createClient } from "@/utils/supabase/server"
 import { getSupabasePublishableKey, getSupabaseUrl } from "@/utils/supabase/env"
+
+function isMissingLeadColumnError(error: {
+  code?: string | null
+  message?: string | null
+} | null): boolean {
+  if (!error) return false
+  if (error.code !== "PGRST204") return false
+  const message = error.message ?? ""
+  return (
+    message.includes("approx_sqft_estimate") ||
+    message.includes("rough_price_estimate") ||
+    message.includes("rough_price_version")
+  )
+}
+
+function legacyLeadRow(row: LeadInsertRow) {
+  const {
+    approx_sqft_estimate: _approxSqftEstimate,
+    rough_price_estimate: _roughPriceEstimate,
+    rough_price_version: _roughPriceVersion,
+    ...legacy
+  } = row
+  return legacy
+}
 
 function isLeadPayload(body: unknown): body is LeadPayload {
   if (!body || typeof body !== "object") return false
@@ -46,6 +74,12 @@ export async function POST(request: Request) {
   if (service) {
     const { error } = await service.from("leads").insert(row)
     if (error) {
+      if (isMissingLeadColumnError(error)) {
+        const retry = await service.from("leads").insert(legacyLeadRow(row))
+        if (!retry.error) {
+          return NextResponse.json({ ok: true })
+        }
+      }
       console.error("[api/leads] Supabase insert failed (service role)", error)
       return NextResponse.json(
         { error: "We couldn't save your request. Please try again in a moment." },
@@ -68,6 +102,12 @@ export async function POST(request: Request) {
     const supabase = await createClient()
     const { error } = await supabase.from("leads").insert(row)
     if (error) {
+      if (isMissingLeadColumnError(error)) {
+        const retry = await supabase.from("leads").insert(legacyLeadRow(row))
+        if (!retry.error) {
+          return NextResponse.json({ ok: true })
+        }
+      }
       console.error("[api/leads] Supabase insert failed (anon)", error)
       return NextResponse.json(
         { error: "We couldn't save your request. Please try again in a moment." },

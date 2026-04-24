@@ -62,8 +62,14 @@ export default function PrivacyPolicyPage() {
                   <li>Phone number</li>
                   <li>City, state, and ZIP code (when you provide them)</li>
                   <li>Your message or project details</li>
-                  <li>Optional fields such as how you heard about us, selected offers, or campaign
-                    tags that help us understand what brought you to our site</li>
+                  <li>
+                    Approximate total square footage (range) when you request a quote, to help
+                    prepare your estimate
+                  </li>
+                  <li>
+                    Optional fields such as how you heard about us, selected offers, or campaign
+                    tags that help us understand what brought you to our site
+                  </li>
                 </ul>
               </div>
 

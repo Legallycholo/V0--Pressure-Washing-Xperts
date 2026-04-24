@@ -1,3 +1,15 @@
+import { isValidApproxSqftEstimateForStorage } from "@/data/sqftEstimateOptions"
+
+const PRICE_FLOOR = 250
+const ROUGH_PRICE_VERSION = "v1_2026_04_floor250"
+const SQFT_ADDERS: Record<string, number> = {
+  under_1500: 0,
+  "1500_2500": 75,
+  "2501_3500": 150,
+  "3501_4500": 250,
+  over_4500: 400,
+}
+
 export type LeadPayload = {
   full_name: string
   email: string
@@ -8,6 +20,7 @@ export type LeadPayload = {
   message?: string
   how_heard?: string
   selected_offer?: string
+  approx_sqft_estimate?: string
   submission_type?: string
   utm_source?: string
   utm_medium?: string
@@ -15,7 +28,7 @@ export type LeadPayload = {
   page_path?: string
 }
 
-/** Row shape for `public.leads` (matches `supabase/migrations/*_create_leads.sql`). */
+/** Row shape for `public.leads` (matches `supabase/migrations/*_create_leads.sql` and later migrations). */
 export type LeadInsertRow = {
   full_name: string
   email: string
@@ -26,6 +39,9 @@ export type LeadInsertRow = {
   message: string | null
   how_heard: string | null
   selected_offer: string | null
+  approx_sqft_estimate: string | null
+  rough_price_estimate: number | null
+  rough_price_version: string | null
   submission_type: string | null
   utm_source: string | null
   utm_medium: string | null
@@ -48,6 +64,66 @@ function validate(payload: LeadPayload): string | null {
   return null
 }
 
+function normalizeApproxSqftEstimate(
+  raw: unknown
+): { value: string } | { error: string } {
+  if (raw === undefined || raw === null) {
+    return { error: "Please select approximate square footage." }
+  }
+  if (typeof raw !== "string") {
+    return { error: "Please select approximate square footage." }
+  }
+  const t = raw.trim()
+  if (!t || !isValidApproxSqftEstimateForStorage(t)) {
+    return { error: "Please select approximate square footage." }
+  }
+  return { value: t }
+}
+
+function normalizeSelectedOffer(raw: unknown): string | null {
+  if (typeof raw !== "string") return null
+  const t = raw.trim()
+  if (!t || t === "none") return null
+  return t
+}
+
+function computeRoughPriceEstimate(input: {
+  approxSqftEstimate: string
+  selectedOffer: string | null
+}): { roughPriceEstimate: number; roughPriceVersion: string } {
+  const sqftAdder = SQFT_ADDERS[input.approxSqftEstimate] ?? 0
+  const preOffer = Math.max(PRICE_FLOOR, PRICE_FLOOR + sqftAdder)
+
+  let offerDiscount = 0
+  switch (input.selectedOffer) {
+    case "first-time":
+      offerDiscount = preOffer * 0.15
+      break
+    case "bundle":
+      offerDiscount = preOffer * 0.2
+      break
+    case "seasonal":
+      offerDiscount = preOffer * 0.1
+      break
+    case "referral":
+      offerDiscount = 50
+      break
+    default:
+      offerDiscount = 0
+  }
+
+  const postOffer = preOffer - offerDiscount
+  const roughPriceEstimate = Math.max(
+    PRICE_FLOOR,
+    Math.round(postOffer * 100) / 100
+  )
+
+  return {
+    roughPriceEstimate,
+    roughPriceVersion: ROUGH_PRICE_VERSION,
+  }
+}
+
 export function buildLeadInsertRow(
   payload: LeadPayload
 ): { row: LeadInsertRow } | { error: string } {
@@ -55,6 +131,17 @@ export function buildLeadInsertRow(
   if (validationError) {
     return { error: validationError }
   }
+
+  const sqft = normalizeApproxSqftEstimate(payload.approx_sqft_estimate)
+  if ("error" in sqft) {
+    return { error: sqft.error }
+  }
+  const selectedOffer = normalizeSelectedOffer(payload.selected_offer)
+  const pricing = computeRoughPriceEstimate({
+    approxSqftEstimate: sqft.value,
+    selectedOffer,
+  })
+
   return {
     row: {
       full_name: payload.full_name.trim(),
@@ -65,7 +152,10 @@ export function buildLeadInsertRow(
       zip: payload.zip?.trim() || null,
       message: payload.message?.trim() || null,
       how_heard: payload.how_heard?.trim() || null,
-      selected_offer: payload.selected_offer?.trim() || null,
+      selected_offer: selectedOffer,
+      approx_sqft_estimate: sqft.value,
+      rough_price_estimate: pricing.roughPriceEstimate,
+      rough_price_version: pricing.roughPriceVersion,
       submission_type: payload.submission_type?.trim() || null,
       utm_source: payload.utm_source?.trim() || null,
       utm_medium: payload.utm_medium?.trim() || null,
