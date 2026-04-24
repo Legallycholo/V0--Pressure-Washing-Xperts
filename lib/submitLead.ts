@@ -1,4 +1,7 @@
-import { isValidApproxSqftEstimateForStorage } from "@/data/sqftEstimateOptions"
+import {
+  isValidApproxSqftEstimateForStorage,
+  SQFT_RANGE_OPTIONS,
+} from "@/data/sqftEstimateOptions"
 
 const PRICE_FLOOR = 250
 const ROUGH_PRICE_VERSION = "v1_2026_04_floor250"
@@ -42,6 +45,8 @@ export type LeadInsertRow = {
   approx_sqft_estimate: string | null
   rough_price_estimate: number | null
   rough_price_version: string | null
+  /** Same choice as `approx_sqft_estimate`, human-readable for Supabase / exports. */
+  approx_sq_footage: string | null
   submission_type: string | null
   utm_source: string | null
   utm_medium: string | null
@@ -78,6 +83,11 @@ function normalizeApproxSqftEstimate(
     return { error: "Please select approximate square footage." }
   }
   return { value: t }
+}
+
+function approxSqFootageLabel(slug: string): string {
+  const match = SQFT_RANGE_OPTIONS.find((o) => o.value === slug)
+  return match?.label ?? slug
 }
 
 function normalizeSelectedOffer(raw: unknown): string | null {
@@ -154,6 +164,7 @@ export function buildLeadInsertRow(
       how_heard: payload.how_heard?.trim() || null,
       selected_offer: selectedOffer,
       approx_sqft_estimate: sqft.value,
+      approx_sq_footage: approxSqFootageLabel(sqft.value),
       rough_price_estimate: pricing.roughPriceEstimate,
       rough_price_version: pricing.roughPriceVersion,
       submission_type: payload.submission_type?.trim() || null,
