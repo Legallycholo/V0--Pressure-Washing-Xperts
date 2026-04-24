@@ -124,9 +124,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       selected_offer: formData.selectedOffer,
       approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: modalCopyDefault.badge,
-      utm_source: utmSource,
-      utm_medium: utmMedium,
-      utm_campaign: utmCampaign,
       page_path: pathname ?? undefined,
     })
 

@@ -25,9 +25,6 @@ export type LeadPayload = {
   selected_offer?: string
   approx_sqft_estimate?: string
   submission_type?: string
-  utm_source?: string
-  utm_medium?: string
-  utm_campaign?: string
   page_path?: string
 }
 
@@ -48,9 +45,6 @@ export type LeadInsertRow = {
   /** Same choice as `approx_sqft_estimate`, human-readable for Supabase / exports. */
   approx_sq_footage: string | null
   submission_type: string | null
-  utm_source: string | null
-  utm_medium: string | null
-  utm_campaign: string | null
   page_path: string | null
 }
 
@@ -168,9 +162,6 @@ export function buildLeadInsertRow(
       rough_price_estimate: pricing.roughPriceEstimate,
       rough_price_version: pricing.roughPriceVersion,
       submission_type: payload.submission_type?.trim() || null,
-      utm_source: payload.utm_source?.trim() || null,
-      utm_medium: payload.utm_medium?.trim() || null,
-      utm_campaign: payload.utm_campaign?.trim() || null,
       page_path: payload.page_path?.trim() || null,
     },
   }

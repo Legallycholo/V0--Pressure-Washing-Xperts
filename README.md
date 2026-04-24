@@ -73,7 +73,7 @@ Copy [`.env.example`](.env.example) to `.env.local` and set:
 
 The API route expects the following columns on `public.leads` (see [`supabase/migrations/`](supabase/migrations/)):
 
-`id, created_at, full_name, email, phone, city, state, zip, message, how_heard, selected_offer, submission_type, utm_source, utm_medium, utm_campaign, page_path, approx_sqft_estimate, approx_sq_footage, rough_price_estimate, rough_price_version`.
+`id, created_at, full_name, email, phone, city, state, zip, message, how_heard, selected_offer, submission_type, page_path, approx_sqft_estimate, approx_sq_footage, rough_price_estimate, rough_price_version`.
 
 Apply the migrations to your Supabase project (SQL Editor, Supabase CLI `db push`, or the Supabase MCP `apply_migration` tool) before the first lead submission — the route no longer carries a legacy-schema fallback.
 

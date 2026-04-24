@@ -27,7 +27,7 @@ Captured during planning so nothing drifts during implementation.
 ### Remote `public.leads` columns (live)
 
 Present in Supabase right now:
-`id, created_at, full_name, email, phone, city, state, zip, message, how_heard, selected_offer, submission_type, utm_source, utm_medium, utm_campaign, page_path`.
+`id, created_at, full_name, email, phone, city, state, zip, message, how_heard, selected_offer, submission_type, page_path`.
 
 ### Remote `public.leads` columns (missing but expected by code)
 

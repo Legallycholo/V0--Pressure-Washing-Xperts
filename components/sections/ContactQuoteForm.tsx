@@ -220,9 +220,6 @@ export function ContactQuoteForm({
       selected_offer: formData.selectedOffer,
       approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: copy.badge,
-      utm_source: utmSource,
-      utm_medium: utmMedium,
-      utm_campaign: utmCampaign,
       page_path: pathname ?? undefined,
     })
 

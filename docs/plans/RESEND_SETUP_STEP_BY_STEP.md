@@ -134,7 +134,7 @@ public.leads INSERT
   curl -i https://uljtanpaligqwqtojhdt.supabase.co/functions/v1/notify-new-lead \
     -H "content-type: application/json" \
     -H "x-webhook-secret: $LEAD_WEBHOOK_SECRET" \
-    -d '{"type":"INSERT","table":"leads","schema":"public","record":{"id":-1,"full_name":"Smoke Test","email":"smoke@example.com","phone":"555-0100","city":"Atlanta","state":"GA","zip":"30301","message":"smoke","how_heard":"search","selected_offer":"none","submission_type":"smoke","approx_sqft_estimate":"1500_2500","approx_sq_footage":"1,500–2,500 sq ft","rough_price_estimate":325,"rough_price_version":"v1_2026_04_floor250","utm_source":null,"utm_medium":null,"utm_campaign":null,"page_path":null,"created_at":"2026-04-24T00:00:00Z"},"old_record":null}'
+    -d '{"type":"INSERT","table":"leads","schema":"public","record":{"id":-1,"full_name":"Smoke Test","email":"smoke@example.com","phone":"555-0100","city":"Atlanta","state":"GA","zip":"30301","message":"smoke","how_heard":"search","selected_offer":"none","submission_type":"smoke","approx_sqft_estimate":"1500_2500","approx_sq_footage":"1,500–2,500 sq ft","rough_price_estimate":325,"rough_price_version":"v1_2026_04_floor250","page_path":null,"created_at":"2026-04-24T00:00:00Z"},"old_record":null}'
   ```
 - [ ] Expected: `200`, and `dariel@tanygrowth.com` receives an email titled `new lead submission` with the smoke-test attachment.
 
