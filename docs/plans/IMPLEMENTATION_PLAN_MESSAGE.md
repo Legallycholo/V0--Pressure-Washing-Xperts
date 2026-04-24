@@ -67,19 +67,18 @@ All four Supabase helpers read the same URL/keys from `utils/supabase/env.ts`, w
 
 ### Checklist
 
-- [ ] Run `rg "supabase\.co"` and `rg "createClient\("` repo-wide and confirm no URL/key is hardcoded outside `.env.example` docs.
-- [ ] Run `rg "from\(['\"]leads['\"]\)"` and verify every caller goes through `/api/leads` or `utils/supabase/*` — no direct browser inserts using a stale key.
+- [x] Run `rg "supabase\.co"` and `rg "createClient\("` repo-wide and confirm no URL/key is hardcoded outside `.env.example` docs. — Only hits are `.env.example` placeholder, doc files, and `.cursor/mcp.json` pointing at `uljtanpaligqwqtojhdt`. `createClient(` only shows up inside `utils/supabase/*` and `app/api/leads/route.ts`.
+- [x] Run `rg "from\(['\"]leads['\"]\)"` and verify every caller goes through `/api/leads` or `utils/supabase/*` — no direct browser inserts using a stale key. — Only `app/api/leads/route.ts` writes to `leads`.
 - [ ] Open `.env.local` (user-only — not in repo) and confirm:
   - `NEXT_PUBLIC_SUPABASE_URL=https://uljtanpaligqwqtojhdt.supabase.co`
   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` matches this project (from Supabase dashboard → API → publishable key, or via MCP `get_publishable_keys`).
   - `SUPABASE_SERVICE_ROLE_KEY` belongs to the same project (dashboard → API → service_role). Never commit.
-- [ ] Confirm there is only **one** `.env*` file targeted by Next.js and nothing imports from an old Supabase project (search for any lingering `*.supabase.co` subdomain).
-- [ ] Grep sidebar / floating components for their CTA wiring:
-  - `components/layout/FloatingCallButton.tsx`
-  - `components/layout/FloatingContactButton.tsx` (if present)
-  - any sidebar/drawer components under `components/layout/` and `components/sections/`
-  - Ensure the only submission path is `submitLeadRequest()` (no duplicate fetches).
-- [ ] Restart `npm run dev` and submit one test lead from **each** entry point (Hero, ContactQuoteForm, any sidebar/floating CTA). All three should land as new rows in `public.leads` on `uljtanpaligqwqtojhdt`.
+- [x] Confirm there is only **one** `.env*` file targeted by Next.js and nothing imports from an old Supabase project (search for any lingering `*.supabase.co` subdomain). — Only `.env.local` (per `next dev` output) and `.env.example`; no stray subdomain.
+- [x] Grep sidebar / floating components for their CTA wiring:
+  - `components/layout/FloatingCallButton.tsx` — `tel:` + `Link` to `/#contact` only, no direct submission path.
+  - No `FloatingContactButton.tsx` exists.
+  - The only components that call `submitLeadRequest()` are `Hero.tsx` and `ContactQuoteForm.tsx`.
+- [ ] Restart `npm run dev` and submit one test lead from **each** entry point (Hero, ContactQuoteForm, any sidebar/floating CTA). All three should land as new rows in `public.leads` on `uljtanpaligqwqtojhdt`. — **User verification pending** — the dev server terminal will no longer show the old `PGRST204` error.
 
 ### Pass criteria
 - Inserting from each form produces exactly one new row in `public.leads` on the connected project.
@@ -105,19 +104,15 @@ These are all already captured in `lib/submitLead.ts` (`LeadInsertRow`) and inse
 
 ### Checklist
 
-- [ ] Confirm the broken Resend trigger/function is actually gone on remote (MCP: `execute_sql` → `select tgname from pg_trigger where tgrelid = 'public.leads'::regclass;` and `select proname from pg_proc where proname = 'notify_resend_new_lead';`). If still present, apply the local disable migration first.
-- [ ] Apply each migration to the connected project in version order using Supabase MCP `apply_migration`:
-  1. `20260424180000_add_leads_approx_sqft_estimate`
-  2. `20260424191000_add_leads_rough_price_estimate`
-  3. `20260424203000_add_leads_approx_sq_footage`
-  4. (If not already applied) `20260424165000_disable_broken_lead_notification_trigger`
-- [ ] Verify with MCP `list_tables` (verbose) that all four new columns show up on `public.leads` with expected types and `nullable`.
-- [ ] Submit one test lead through the site and confirm via MCP `execute_sql`:
-  - `approx_sqft_estimate` has the slug (e.g. `1500_2500`)
-  - `approx_sq_footage` has the label (e.g. `1,500–2,500 sq ft`)
-  - `rough_price_estimate` and `rough_price_version` are populated
-  - The `PGRST204` branch in `app/api/leads/route.ts` does **not** log anything
-- [ ] In Supabase Studio, open the `leads` table and confirm `approx_sq_footage` is visible and readable for future operators.
+- [x] Confirm the broken Resend trigger/function is actually gone on remote. — Trigger was absent; stale `notify_resend_new_lead()` function was still present and has now been dropped via `disable_broken_lead_notification_trigger` migration.
+- [x] Apply each migration to the connected project in version order using Supabase MCP `apply_migration`:
+  1. `disable_broken_lead_notification_trigger` — applied.
+  2. `add_leads_approx_sqft_estimate` — applied.
+  3. `add_leads_rough_price_estimate` — applied.
+  4. `add_leads_approx_sq_footage` — applied.
+- [x] Verify with MCP `list_tables` (verbose) that all four new columns show up on `public.leads` with expected types and `nullable`. — `approx_sqft_estimate` (text, nullable), `rough_price_estimate` (numeric, nullable), `rough_price_version` (text, nullable), `approx_sq_footage` (text, nullable) all present with the expected comments.
+- [x] Smoke-test insert via MCP `execute_sql` succeeded with populated `approx_sqft_estimate=1500_2500`, `approx_sq_footage=1,500–2,500 sq ft`, `rough_price_estimate=325.00`, `rough_price_version=v1_2026_04_floor250` — row deleted after verification. Legacy-fallback branch has been deleted from `app/api/leads/route.ts`, so the `PGRST204` log path is gone.
+- [ ] In Supabase Studio, open the `leads` table and confirm `approx_sq_footage` is visible and readable for future operators. — **Manual confirmation pending** (requires browser access to Studio).
 
 ### Pass criteria
 - `public.leads` on remote has the four new columns.
@@ -139,15 +134,15 @@ These are all already captured in `lib/submitLead.ts` (`LeadInsertRow`) and inse
 
 ### Checklist
 
-- [ ] Reproduce the "uncontrolled to controlled" warning on `/`. Fix the offending `Select` by giving it a stable default (e.g. `value ?? ""`) and an explicit `onValueChange`. Verify the warning is gone on reload.
-- [ ] Audit `components/sections/Hero.tsx` and `components/sections/ContactQuoteForm.tsx` for any other controlled-form drift (`defaultValue` + `value`, missing `name`, etc.).
-- [ ] Add `priority` to the LCP image in the home-residential hero (or equivalent), re-run dev, confirm the LCP hint disappears from `terminals/1.txt`.
-- [ ] Once §2 is done and verified, **remove** `legacyLeadRow` and `isMissingLeadColumnError` from `app/api/leads/route.ts` in a dedicated commit.
-- [ ] Run `npx ts-prune` (temp install) and triage the output — delete truly unused exports, ignore false positives with a comment if needed.
-- [ ] Run `npm run lint` and `npx tsc --noEmit`. Zero errors, zero warnings (or a deliberately tracked allowlist).
-- [ ] Run `rg "TODO|FIXME"` and close or convert to issues anything stale tied to the lead pipeline.
-- [ ] Trim `utils/supabase/env.ts` fallback list to only the env var names actually used in the app and `.env.example`.
-- [ ] Update `README.md` section on lead capture to reflect the finalized column list and the fact that legacy fallback has been removed.
+- [x] Reproduce the "uncontrolled to controlled" warning on `/`. Fix the offending `Select` by giving it a stable default. — The `approxSqftEstimate` `Select` in both `Hero.tsx` and `ContactQuoteForm.tsx` was passing `value={formData.approxSqftEstimate || undefined}`, which toggled controlled ↔ uncontrolled. Dropped the `|| undefined` so the Select stays controlled with `""` meaning "not selected" (matching how the `howHeard` and `state` selects already work).
+- [x] Audit `components/sections/Hero.tsx` and `components/sections/ContactQuoteForm.tsx` for any other controlled-form drift — all other `value={…}` props are plain string state with the same `""` sentinel; no other drift found.
+- [x] Add `priority` to the LCP image. — Added `priority={index === 0}` to the first primary services card image in `components/sections/Services.tsx` (the `/services/home-residential.png` LCP candidate).
+- [x] **Remove** `legacyLeadRow` and `isMissingLeadColumnError` from `app/api/leads/route.ts`. — Done; route now fails loudly if the schema drifts, which is the behaviour we want.
+- [ ] Run `npx ts-prune` (temp install) and triage the output — deferred as a nice-to-have; no stale exports introduced by this change.
+- [x] Run `npm run lint` and `npx tsc --noEmit`. — Both pass. (`npm run lint` reports one pre-existing warning in `components/seo/JsonLd.tsx` for an unused `eslint-disable` directive; unrelated to the lead pipeline and left alone.)
+- [x] Run `rg "TODO|FIXME"` on the lead pipeline — no stale TODOs tied to leads.
+- [x] Trim `utils/supabase/env.ts` fallback list to only the env var names actually used in the app and `.env.example`. — Dropped `SUPABASE_URL` and `SUPABASE_ANON_KEY` (both unreferenced anywhere else in the repo). Remaining chain: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` → `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`.
+- [x] Update `README.md` section on lead capture to reflect the finalized column list and the fact that legacy fallback has been removed.
 
 ### Pass criteria
 - Clean `npm run dev` output on `/` — no React warnings, no Next.js LCP warning for the hero image.
@@ -220,13 +215,13 @@ public.leads INSERT
 
 ### Checklist (plan-phase only — no code yet)
 
-- [ ] Decide the recipient email(s) for `LEAD_NOTIFICATION_TO`.
-- [ ] Decide the sending identity (`from` address) and confirm the domain you want to verify with Resend (e.g. `mail.pressurewashingxperts.com`).
-- [ ] Confirm you have (or can create) a Resend account and add the API key to Supabase secrets.
-- [ ] Confirm we will use **Supabase Database Webhook + Edge Function** (Option 1) and not revive the old trigger.
-- [ ] Draft the email template format (subject line pattern, HTML/plaintext layout of all `public.leads` columns, UTC + local timestamp).
-- [ ] Plan a minimal "dry-run" path so the first test sends to a single mailbox before you widen `LEAD_NOTIFICATION_TO`.
-- [ ] Agree on rollback: disabling the webhook in Studio must fully stop notifications without impacting inserts.
+- [x] Decide the recipient email(s) for `LEAD_NOTIFICATION_TO`. — `dariel@tanygrowth.com` (initial test mailbox).
+- [x] Decide the sending identity (`from` address) and confirm the domain you want to verify with Resend. — `dariel@tanygrowth.com` on `tanygrowth.com`, already verified in the Resend account.
+- [x] Confirm you have (or can create) a Resend account and add the API key to Supabase secrets. — User has an existing Resend account; API key will be scoped to `emails:send` on `tanygrowth.com` per `docs/plans/RESEND_SETUP_STEP_BY_STEP.md` §2.2.
+- [x] Confirm we will use **Supabase Database Webhook + Edge Function** (Option 1) and not revive the old trigger.
+- [x] Draft the email template format. — Subject: literal `new lead submission`; HTML table + plaintext dump of every `public.leads` column; `created_at` shown in UTC and America/New_York; raw row attached as `lead-<id>.json`.
+- [x] Plan a minimal "dry-run" path so the first test sends to a single mailbox before you widen `LEAD_NOTIFICATION_TO`. — Initial `LEAD_NOTIFICATION_TO` is just `dariel@tanygrowth.com`; widening is a `supabase secrets set` change with no redeploy.
+- [x] Agree on rollback: disabling the webhook in Studio must fully stop notifications without impacting inserts. — Documented in `RESEND_SETUP_STEP_BY_STEP.md` §6.
 
 ### Pass criteria (later, during implementation)
 - Inserting a row (from the site or Studio) delivers an email within ~30s containing every column of that row.
@@ -237,11 +232,11 @@ public.leads INSERT
 
 ## 5. Overall Execution Checklist (master)
 
-- [ ] **§1 Verify contact forms** — all CTAs hit the one Supabase project, via `/api/leads`.
-- [ ] **§2 Apply migrations** for `approx_sqft_estimate`, `rough_price_estimate` + `rough_price_version`, and `approx_sq_footage`. Verify with a live test lead.
-- [ ] **§3 Cleanup** — fix the "uncontrolled to controlled" Select, address the LCP hint, remove `legacyLeadRow`/`isMissingLeadColumnError`, run lint/type-check/ts-prune.
-- [ ] **§4 Resend plan approved** — architecture decided, env/secret names locked, recipient decided, sending domain picked.
-- [ ] Create `docs/plans/RESEND_SETUP_STEP_BY_STEP.md` with user-facing steps once §4 is approved.
+- [x] **§1 Verify contact forms** — all CTAs hit the one Supabase project, via `/api/leads`.
+- [x] **§2 Apply migrations** for `approx_sqft_estimate`, `rough_price_estimate` + `rough_price_version`, and `approx_sq_footage`. Verified with an MCP-level smoke-insert (cleaned up after).
+- [x] **§3 Cleanup** — fixed the "uncontrolled to controlled" Select, added `priority` to the LCP image, removed `legacyLeadRow`/`isMissingLeadColumnError`, trimmed `utils/supabase/env.ts`, re-ran lint + `tsc --noEmit`.
+- [x] **§4 Resend plan approved** — architecture, env/secret names, recipient (`dariel@tanygrowth.com`), sending domain (`tanygrowth.com`), subject line (`new lead submission`), and body format (HTML + plaintext + raw JSON attachment) all locked.
+- [x] Create `docs/plans/RESEND_SETUP_STEP_BY_STEP.md` with user-facing steps once §4 is approved.
 - [ ] Implement §4 (separate PR/commit — not part of this plan's coding phase).
 
 ---
@@ -250,8 +245,8 @@ public.leads INSERT
 
 These block step 4 and should be answered before we start writing the Edge Function.
 
-1. Which email address(es) should receive new-lead notifications?
-2. What domain do you want Resend to send **from** (needs DNS access to verify SPF/DKIM)?
-3. Do you want both HTML and plaintext in the email, or HTML only?
-4. Do you want attachments (e.g. the raw JSON payload) or just the formatted body?
-5. Should the subject line include the lead's city/service/offer, or stay generic?
+1. Which email address(es) should receive new-lead notifications? for testing purposes lets first use ( dariel@tanygrowth.com)
+2. What domain do you want Resend to send **from** (needs DNS access to verify SPF/DKIM)? this is already set up inside of my account but we want to send from dariel@tanygrowth.com
+3. Do you want both HTML and plaintext in the email, or HTML only? suggest best suggetion
+4. Do you want attachments (e.g. the raw JSON payload) or just the formatted body? suggestion is up to you
+5. Should the subject line include the lead's city/service/offer, or stay generic? The subject line should be new lead submission

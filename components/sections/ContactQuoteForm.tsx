@@ -585,7 +585,7 @@ export function ContactQuoteForm({
                 Rough total area helps us prepare your estimate.
               </p>
               <Select
-                value={formData.approxSqftEstimate || undefined}
+                value={formData.approxSqftEstimate}
                 onValueChange={(value) =>
                   handleSelectChange("approxSqftEstimate", value)
                 }

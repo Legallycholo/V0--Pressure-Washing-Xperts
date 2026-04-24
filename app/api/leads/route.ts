@@ -1,53 +1,8 @@
 import { NextResponse } from "next/server"
-import {
-  buildLeadInsertRow,
-  type LeadInsertRow,
-  type LeadPayload,
-} from "@/lib/submitLead"
+import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { createServiceRoleClient } from "@/utils/supabase/admin"
 import { createClient } from "@/utils/supabase/server"
 import { getSupabasePublishableKey, getSupabaseUrl } from "@/utils/supabase/env"
-
-/** PostgREST: column missing from API schema (migrations not applied or schema cache stale). */
-function isMissingLeadColumnError(error: {
-  code?: string | null
-  message?: string | null
-} | null): boolean {
-  if (!error) return false
-  if (error.code !== "PGRST204") return false
-  const message = error.message ?? ""
-  return (
-    message.includes("approx_sqft_estimate") ||
-    message.includes("approx_sq_footage") ||
-    message.includes("rough_price_estimate") ||
-    message.includes("rough_price_version")
-  )
-}
-
-/**
- * Insert shape for older `leads` tables / stale PostgREST cache (no sqft or price columns).
- * Preserves sqft and rough price inside `message` so nothing is lost in Supabase.
- */
-function legacyLeadRow(row: LeadInsertRow) {
-  const {
-    approx_sqft_estimate: approxSqft,
-    approx_sq_footage: approxSqFootage,
-    rough_price_estimate: roughPrice,
-    rough_price_version: roughVersion,
-    message: originalMessage,
-    ...rest
-  } = row
-
-  const footer =
-    "\n\n---\n" +
-    `Approx sq ft (site): ${approxSqFootage ?? approxSqft}\n` +
-    `Approx sq ft key: ${approxSqft}\n` +
-    `Rough price estimate (site): $${roughPrice} (${roughVersion})`
-  const base = originalMessage?.trim() ?? ""
-  const message = (base + footer).trim()
-
-  return { ...rest, message }
-}
 
 function isLeadPayload(body: unknown): body is LeadPayload {
   if (!body || typeof body !== "object") return false
@@ -91,15 +46,6 @@ export async function POST(request: Request) {
   if (service) {
     const { error } = await service.from("leads").insert(row)
     if (error) {
-      if (isMissingLeadColumnError(error)) {
-        console.warn(
-          "[api/leads] leads table missing sqft/price columns in PostgREST schema; retrying with legacy row (details appended to message)."
-        )
-        const retry = await service.from("leads").insert(legacyLeadRow(row))
-        if (!retry.error) {
-          return NextResponse.json({ ok: true })
-        }
-      }
       console.error("[api/leads] Supabase insert failed (service role)", error)
       return NextResponse.json(
         { error: "We couldn't save your request. Please try again in a moment." },

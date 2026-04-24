@@ -84,6 +84,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={index === 0}
                   />
                 </div>
 

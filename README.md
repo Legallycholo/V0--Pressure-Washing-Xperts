@@ -12,7 +12,7 @@ The UI was originally bootstrapped with [v0](https://v0.app); this repo is the N
 | UI | [React](https://react.dev) 19, TypeScript |
 | Styling | [Tailwind CSS](https://tailwindcss.com) 4, PostCSS |
 | Components | [Radix UI](https://www.radix-ui.com) primitives, [class-variance-authority](https://cva.style), [Lucide](https://lucide.dev) icons |
-| Database (leads) | [Supabase](https://supabase.com) Postgres (`public.leads`; inserts via API route with service-role fallback) |
+| Database (leads) | [Supabase](https://supabase.com) Postgres (`public.leads`; inserts via `/api/leads` using service role when set, falling back to SSR anon + RLS) |
 | Hosting / observability | [Vercel](https://vercel.com) — [Analytics](https://vercel.com/analytics), [Speed Insights](https://vercel.com/docs/speed-insights) |
 
 Package manager: **pnpm** (see `packageManager` in `package.json`).
@@ -57,17 +57,25 @@ pnpm import:wix-gallery
 
 ## Environment & lead capture
 
-Quote and contact forms save submissions to Supabase (`public.leads`) via `POST /api/leads`. Copy [`.env.example`](.env.example) to `.env.local` and set:
+Quote and contact forms (`components/sections/Hero.tsx`, `components/sections/ContactQuoteForm.tsx`) call `submitLeadRequest()` in [`lib/submitLead.ts`](lib/submitLead.ts), which `POST`s to [`/api/leads`](app/api/leads/route.ts). The API route validates the payload, computes a rough price estimate, and inserts a row into `public.leads` using the Supabase **service role** when available, otherwise falling back to the SSR **anon** client + the `Allow anonymous inserts on leads` RLS policy.
+
+Copy [`.env.example`](.env.example) to `.env.local` and set:
 
 | Variable | Required | Description |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | Yes | Supabase project URL (Settings → API). |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes* | Public Supabase key (publishable preferred; anon key supported for legacy projects). |
-| `SUPABASE_SERVICE_ROLE_KEY` | Optional | Server-only bypass for lead inserts when RLS/policies are not yet configured. Never expose to the browser. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Optional | Server-only bypass for lead inserts. When set, the API route writes with the service role and skips the anon/RLS path. Never expose to the browser. |
 
 \* Required unless you exclusively rely on `SUPABASE_SERVICE_ROLE_KEY` for writes.
 
-Apply the migration in [`supabase/migrations/`](supabase/migrations/) to your Supabase project (SQL Editor, Supabase CLI `db push`, or linked workflow).
+### `public.leads` columns
+
+The API route expects the following columns on `public.leads` (see [`supabase/migrations/`](supabase/migrations/)):
+
+`id, created_at, full_name, email, phone, city, state, zip, message, how_heard, selected_offer, submission_type, utm_source, utm_medium, utm_campaign, page_path, approx_sqft_estimate, approx_sq_footage, rough_price_estimate, rough_price_version`.
+
+Apply the migrations to your Supabase project (SQL Editor, Supabase CLI `db push`, or the Supabase MCP `apply_migration` tool) before the first lead submission — the route no longer carries a legacy-schema fallback.
 
 ## Deployment
 
