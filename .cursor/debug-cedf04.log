@@ -1,2 +1,0 @@
-{"sessionId":"cedf04","location":"BeforeAfterSlider.tsx:afterImage","message":"after Image onLoad","data":{"src":"/gallery/before-after/01-after.png"},"timestamp":1775941013814,"hypothesisId":"H2","runId":"post-fix"}
-{"sessionId":"cedf04","location":"BeforeAfterSlider.tsx:beforeImage","message":"before Image onLoad","data":{"src":"/gallery/before-after/01-before.png"},"timestamp":1775941013815,"hypothesisId":"H2","runId":"post-fix"}
