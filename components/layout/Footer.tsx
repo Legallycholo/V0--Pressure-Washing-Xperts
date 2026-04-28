@@ -4,7 +4,6 @@ import Link from "next/link"
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react"
 import {
   commercialServices,
-  footerTopServiceAreaLinks,
   quickLinks,
   residentialServices,
 } from "@/data/navigation"
@@ -18,6 +17,14 @@ const services = [
   ...commercialServices.slice(0, 3),
 ]
 
+const seoServiceAreas = [
+  { label: "Ellenwood, GA", href: "/service-areas/ellenwood" },
+  { label: "Decatur, GA", href: "/service-areas/decatur" },
+  { label: "Stockbridge, GA", href: "/service-areas/stockbridge" },
+  { label: "Conyers, GA", href: "/service-areas/conyers" },
+  { label: "Atlanta, GA", href: "/service-areas/atlanta" },
+]
+
 export function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -27,7 +34,7 @@ export function Footer() {
     <footer className="bg-section-dark-alt border-t border-white/10">
       {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link
@@ -56,15 +63,19 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="text-white font-semibold text-sm mt-4 mb-2">Top Service Areas</h4>
-            <ul className="space-y-2">
-              {footerTopServiceAreaLinks.map((area) => (
-                <li key={area.href}>
+          </div>
+
+          {/* Service Areas Column */}
+          <div>
+            <h3 className="text-white font-bold text-base mb-4">Service Areas</h3>
+            <ul className="space-y-3">
+              {seoServiceAreas.map((city) => (
+                <li key={city.href}>
                   <Link
-                    href={area.href}
+                    href={city.href}
                     className="text-white/60 text-sm hover:text-brand-yellow transition-colors"
                   >
-                    {area.label}
+                    {city.label}
                   </Link>
                 </li>
               ))}
@@ -91,6 +102,18 @@ export function Footer() {
           {/* Contact Column */}
           <div>
             <h3 className="text-white font-bold text-base mb-4">Contact Us</h3>
+            <address className="not-italic text-sm text-white/70 leading-relaxed mb-4">
+              <p className="font-semibold text-white">Pressure Washing Xperts</p>
+              <p>{businessAddress}</p>
+              <p>
+                <a
+                  href={`tel:+1${businessPhoneTel}`}
+                  className="text-white/80 hover:text-brand-yellow transition-colors"
+                >
+                  {businessPhoneDisplay}
+                </a>
+              </p>
+            </address>
             <div className="space-y-3">
               <a
                 href={`tel:+1${businessPhoneTel}`}

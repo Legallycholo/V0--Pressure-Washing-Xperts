@@ -7,6 +7,8 @@ import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
+import residentialHeroImage from "@/public/services/home-residential.png"
+import commercialHeroImage from "@/public/services/home-commercial.png"
 
 export type ServiceProcessStep = { title: string; description: string }
 
@@ -76,6 +78,11 @@ export function ServicePageTemplate({
   ctaSubline,
   contentRevised,
 }: ServicePageTemplateProps) {
+  const heroImage = category === "Commercial" ? commercialHeroImage : residentialHeroImage
+  const heroImageAlt =
+    category === "Commercial"
+      ? "Commercial exterior cleaning and pressure washing project in Metro Atlanta"
+      : "Residential exterior pressure washing service in Ellenwood, GA"
   const showContactFormAside = benefitsAside === "contactForm"
   const showBeforeAfter =
     !showContactFormAside &&
@@ -110,7 +117,18 @@ export function ServicePageTemplate({
     <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-8 sm:py-12 pt-header-offset">
-        <div className="absolute inset-0 bg-hero-pattern opacity-10" />
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={heroImage}
+            alt={heroImageAlt}
+            fill
+            priority
+            sizes="100vw"
+            placeholder="blur"
+            className="object-cover opacity-20"
+          />
+        </div>
+        <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm">

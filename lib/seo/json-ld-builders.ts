@@ -142,5 +142,5 @@ export function buildServiceJsonLd(
 }
 
 export function defaultLogoAbsoluteUrl(baseUrl: string) {
-  return absoluteUrl("/icon.svg")
+  return absoluteUrl("/site-tab-icon.png")
 }

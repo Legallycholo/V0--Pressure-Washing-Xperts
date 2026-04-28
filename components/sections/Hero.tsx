@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import { usePathname, useSearchParams } from "next/navigation"
 import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -31,6 +32,7 @@ import {
 } from "@/data/offers"
 import { submitLeadRequest } from "@/lib/submitLead"
 import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
+import residentialHeroImage from "@/public/services/home-residential.png"
 
 interface HeroProps {
   onOpenQuoteForm: () => void
@@ -193,7 +195,18 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       id="hero"
       className="scroll-offset-header relative overflow-hidden bg-gradient-to-br from-brand-blue-dark via-[#1a2942] to-brand-blue pt-header-offset"
     >
-      {/* Background image overlay */}
+      {/* LCP-optimized hero background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={residentialHeroImage}
+          alt="Professional pressure washing service on a residential exterior in Ellenwood, GA"
+          fill
+          priority
+          sizes="100vw"
+          placeholder="blur"
+          className="object-cover opacity-25"
+        />
+      </div>
       <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-dark/80 via-transparent to-brand-blue/60" />

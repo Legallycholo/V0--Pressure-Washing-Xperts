@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { businessLegalName } from "@/data/site"
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
 
-const defaultOgPath = "/icon.svg"
+const defaultOgPath = "/site-tab-icon.png"
 
 export function buildPublicMetadata(input: {
   title: string

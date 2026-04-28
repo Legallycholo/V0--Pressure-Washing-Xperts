@@ -21,8 +21,11 @@ export const metadata: Metadata = {
   description:
     "Professional pressure washing, roof cleaning, and gutter services in Ellenwood, GA. 15+ years experience. Licensed & Insured. Get a free estimate today!",
   icons: {
-    icon: [{ url: "/site-tab-icon.png", type: "image/png" }],
-    shortcut: ["/site-tab-icon.png"],
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/site-tab-icon.png?v=2", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
     apple: "/site-tab-icon.png",
   },
   openGraph: {
