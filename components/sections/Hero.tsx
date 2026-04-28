@@ -209,12 +209,11 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
             </p>
 
             <h1 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
-              Professional Pressure Washing &{" "}
-              <span className="block text-brand-blue-light mt-1">Soft Wash Cleaning</span>
+              BEST Pressure Washing in Ellenwood, GA
             </h1>
 
             <p className="mt-4 max-w-2xl text-base text-white/85 leading-relaxed sm:text-lg lg:mx-0 mx-auto">
-              Restore your home or business with safe, effective exterior cleaning.
+              Restore your home or business with safe, effective exterior cleaning trusted across Ellenwood and Metro Atlanta.
             </p>
 
 

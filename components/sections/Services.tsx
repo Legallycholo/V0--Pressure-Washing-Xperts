@@ -59,7 +59,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             What We Offer
           </p>
           <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance">
-            Our Professional Services
+            Power Washing, Roof Cleaning, Gutter Cleaning & Soft Washing
           </h2>
           <p className="mt-3 text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
             Residential and commercial cleaning with the right method for each surface.

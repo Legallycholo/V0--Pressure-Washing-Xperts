@@ -163,6 +163,23 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
   ),
 }
 
+const manualResidential: Record<string, MarketingRouteDefinition> = {
+  "/services/residential/roof-soft-washing": def(
+    "Professional Roof Cleaning in Ellenwood, GA | Soft Wash",
+    "Professional roof soft washing in Ellenwood, GA for algae, moss, and black streak removal with low-pressure methods that help protect asphalt shingles across Metro Atlanta homes.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Roof Soft Washing", path: "/services/residential/roof-soft-washing" },
+    ],
+    {
+      name: "Roof soft washing in Ellenwood, GA",
+      description:
+        "Low-pressure roof cleaning service in Ellenwood that removes algae and moss while helping protect shingle life for homes throughout Metro Atlanta.",
+    }
+  ),
+}
+
 export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   "/privacy": def(
     "Privacy Policy | Pressure Washing Xperts",
@@ -221,6 +238,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
     ]
   ),
   ...buildFromNav(residentialServices, "Residential Services", RES_HUB),
+  ...manualResidential,
   ...buildFromNav(commercialServices, "Commercial Services", COM_HUB),
   ...manualCommercial,
 }

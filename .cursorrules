@@ -1,0 +1,39 @@
+You are assisting on the "Pressure Washing Xperts" Next.js App Router project.
+
+Project priorities:
+- Local SEO for pressure washing services in Ellenwood, GA.
+- Primary geo keywords: "Ellenwood, GA" and "Metro Atlanta".
+- Mobile-first UX and strong Core Web Vitals.
+
+Rules:
+
+1) Metadata must be server-side with Next.js Metadata API
+- Always implement SEO metadata in `layout.tsx` and `page.tsx` using exported `metadata` or `generateMetadata`.
+- Do not rely on client-side head mutations for critical SEO tags.
+- Include local intent in titles/descriptions where natural:
+  - "Ellenwood, GA"
+  - "Metro Atlanta"
+
+2) Images must use `next/image`
+- Use `next/image` for all content and service imagery.
+- Every image must have meaningful, non-empty `alt` text.
+- Alt text should describe the service context and location when appropriate for SEO.
+
+3) Service pages require LocalBusiness JSON-LD
+- Every service page must include valid `LocalBusiness` JSON-LD schema.
+- Ensure schema is rendered in page output and reflects local business context for Ellenwood, GA / Metro Atlanta coverage.
+
+4) Keyword focus and copy consistency
+- Keep on-page headings, meta copy, and body copy aligned to:
+  - "Ellenwood, GA"
+  - "Metro Atlanta"
+- Avoid keyword stuffing; keep language natural and user-focused.
+
+5) Mobile-first and Core Web Vitals discipline
+- Build styles mobile-first, then enhance for larger breakpoints.
+- Favor performant patterns: optimized images, minimal layout shift, lean client JS, and fast loading above-the-fold content.
+- Treat CWV readiness (LCP/CLS/INP) as a release requirement.
+
+6) Before & After photo accessibility + SEO reminder
+- For all project gallery or portfolio photos, include detailed "Before" and "After" alt descriptions.
+- Alt text should clearly differentiate state changes and, when accurate, include local context.

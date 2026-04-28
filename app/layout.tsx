@@ -17,9 +17,9 @@ const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${businessLegalName} | Metro Atlanta`,
+  title: "Pressure Washing Xperts | #1 Pressure Washing in Ellenwood & Metro Atlanta",
   description:
-    "Professional pressure washing and soft washing for Metro Atlanta homes and businesses—exteriors, concrete, roofs, and commercial properties.",
+    "Professional pressure washing, roof cleaning, and gutter services in Ellenwood, GA. 15+ years experience. Licensed & Insured. Get a free estimate today!",
   icons: {
     icon: [{ url: "/site-tab-icon.png", type: "image/png" }],
     shortcut: ["/site-tab-icon.png"],
@@ -42,8 +42,37 @@ export default function RootLayout({
 }>) {
   const base = getSiteUrl()
   const logoUrl = defaultLogoAbsoluteUrl(base)
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Pressure Washing Xperts",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "2193 Gateway Trl",
+      addressLocality: "Ellenwood",
+      addressRegion: "GA",
+      postalCode: "30294",
+      addressCountry: "US",
+    },
+    telephone: "(800) 451-7213",
+    url: "https://pressurewashingxpert.com",
+    areaServed: ["Ellenwood, GA", "Metro Atlanta"],
+    serviceType: [
+      "Pressure Washing",
+      "Roof Cleaning",
+      "Gutter Cleaning",
+      "Soft Washing",
+    ],
+  }
   return (
     <html lang="en">
+      <head>
+        <Script
+          id="localbusiness-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <Script id="visitor-tracker" strategy="afterInteractive">{`
   (function() {
