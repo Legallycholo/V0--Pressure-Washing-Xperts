@@ -7,6 +7,7 @@ import {
   quickLinks,
   residentialServices,
 } from "@/data/navigation"
+import { cityNameToSlug, primaryServiceAreaCities } from "@/data/service-areas"
 import { SITE_CONTENT_LAST_UPDATED_ISO } from "@/data/site-content-version"
 import { businessAddress, businessMapsUrl, businessPhoneDisplay, businessPhoneTel } from "@/data/site"
 import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
@@ -15,14 +16,6 @@ import { ctaPress } from "@/lib/ctaInteraction"
 const services = [
   ...residentialServices.slice(0, 4),
   ...commercialServices.slice(0, 3),
-]
-
-const seoServiceAreas = [
-  { label: "Ellenwood, GA", href: "/service-areas/ellenwood" },
-  { label: "Decatur, GA", href: "/service-areas/decatur" },
-  { label: "Stockbridge, GA", href: "/service-areas/stockbridge" },
-  { label: "Conyers, GA", href: "/service-areas/conyers" },
-  { label: "Atlanta, GA", href: "/service-areas/atlanta" },
 ]
 
 export function Footer() {
@@ -65,20 +58,25 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Service Areas Column */}
+          {/* Areas We Serve Column */}
           <div>
-            <h3 className="text-white font-bold text-base mb-4">Service Areas</h3>
+            <h3 className="text-white font-bold text-base mb-4">Areas We Serve</h3>
             <ul className="space-y-3">
-              {seoServiceAreas.map((city) => (
-                <li key={city.href}>
-                  <Link
-                    href={city.href}
-                    className="text-white/60 text-sm hover:text-brand-yellow transition-colors"
-                  >
-                    {city.label}
-                  </Link>
-                </li>
-              ))}
+              {primaryServiceAreaCities.map((city) => {
+                const citySlug = cityNameToSlug(city)
+                const cityHref = `/service-areas/${citySlug}`
+
+                return (
+                  <li key={cityHref}>
+                    <Link
+                      href={cityHref}
+                      className="text-white/60 text-sm hover:text-brand-yellow transition-colors"
+                    >
+                      {city}, GA
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

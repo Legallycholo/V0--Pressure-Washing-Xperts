@@ -6,6 +6,14 @@ import {
 
 export type { CityTestimonial }
 
+export const primaryServiceAreaCities = [
+  "Ellenwood",
+  "Stockbridge",
+  "Decatur",
+  "Rex",
+  "Conyers",
+] as const
+
 export interface ServiceAreaPageContent {
   slug: string
   cityName: string
@@ -65,6 +73,30 @@ export interface ServiceAreaPageContent {
  * dunwoody after · brookhaven after · tucker after — all verified clean exterior finals.
  */
 const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
+  ellenwood: {
+    src: "/gallery/gallery-01.png",
+    alt: "Clean home exterior and concrete after pressure washing in Ellenwood, Georgia",
+  },
+  stockbridge: {
+    src: "/gallery/gallery-05.png",
+    alt: "Freshly cleaned residential driveway and frontage in Stockbridge, Georgia",
+  },
+  rex: {
+    src: "/gallery/before-after/03-after.png",
+    alt: "Bright concrete driveway after washing service in Rex, Georgia",
+  },
+  morrow: {
+    src: "/gallery/gallery-02.png",
+    alt: "Washed commercial exterior and parking area in Morrow, Georgia",
+  },
+  mcdonough: {
+    src: "/gallery/gallery-08.png",
+    alt: "Two-story home exterior after soft washing in McDonough, Georgia",
+  },
+  conyers: {
+    src: "/gallery/before-after/04-after.png",
+    alt: "Clean residential driveway and garage approach in Conyers, Georgia",
+  },
   atlanta: {
     src: "/gallery/gallery-01.png",
     alt: "Back of a home with white siding, windows, door, and concrete patio after exterior cleaning",
@@ -132,6 +164,12 @@ const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
 }
 
 const NEIGHBOR_SLUGS: Record<string, string[]> = {
+  ellenwood: ["stockbridge", "rex", "decatur"],
+  stockbridge: ["ellenwood", "rex", "mcdonough"],
+  rex: ["ellenwood", "stockbridge", "morrow"],
+  morrow: ["ellenwood", "rex", "stockbridge"],
+  mcdonough: ["stockbridge", "conyers", "rex"],
+  conyers: ["mcdonough", "stockbridge", "decatur"],
   atlanta: ["brookhaven", "decatur", "sandy-springs"],
   alpharetta: ["roswell", "johns-creek", "cumming"],
   marietta: ["smyrna", "sandy-springs", "atlanta"],
@@ -143,7 +181,7 @@ const NEIGHBOR_SLUGS: Record<string, string[]> = {
   "peachtree-corners": ["norcross", "duluth", "dunwoody"],
   suwanee: ["duluth", "cumming", "johns-creek"],
   cumming: ["alpharetta", "suwanee", "johns-creek"],
-  decatur: ["atlanta", "tucker", "brookhaven"],
+  decatur: ["ellenwood", "tucker", "brookhaven"],
   smyrna: ["marietta", "atlanta", "sandy-springs"],
   dunwoody: ["sandy-springs", "brookhaven", "peachtree-corners"],
   brookhaven: ["atlanta", "decatur", "dunwoody"],
@@ -215,26 +253,44 @@ function faqForCity(cityName: string) {
 }
 
 const CITY_DEFINITIONS = [
-  { cityName: "Atlanta", county: "Fulton County", priority: 1 },
-  { cityName: "Alpharetta", county: "Fulton County", priority: 2 },
-  { cityName: "Marietta", county: "Cobb County", priority: 3 },
-  { cityName: "Roswell", county: "Fulton County", priority: 4 },
-  { cityName: "Sandy Springs", county: "Fulton County", priority: 5 },
-  { cityName: "Johns Creek", county: "Fulton County", priority: 6 },
-  { cityName: "Duluth", county: "Gwinnett County", priority: 7 },
-  { cityName: "Norcross", county: "Gwinnett County", priority: 8 },
-  { cityName: "Peachtree Corners", county: "Gwinnett County", priority: 9 },
-  { cityName: "Suwanee", county: "Gwinnett County", priority: 10 },
-  { cityName: "Cumming", county: "Forsyth County", priority: 11 },
-  { cityName: "Decatur", county: "DeKalb County", priority: 12 },
-  { cityName: "Smyrna", county: "Cobb County", priority: 13 },
-  { cityName: "Dunwoody", county: "DeKalb County", priority: 14 },
-  { cityName: "Brookhaven", county: "DeKalb County", priority: 15 },
-  { cityName: "Tucker", county: "DeKalb County", priority: 16 },
+  { cityName: "Ellenwood", county: "Clayton/DeKalb County", priority: 1 },
+  { cityName: "Stockbridge", county: "Henry County", priority: 2 },
+  { cityName: "Rex", county: "Clayton County", priority: 3 },
+  { cityName: "Morrow", county: "Clayton County", priority: 4 },
+  { cityName: "McDonough", county: "Henry County", priority: 5 },
+  { cityName: "Conyers", county: "Rockdale County", priority: 6 },
+  { cityName: "Atlanta", county: "Fulton County", priority: 7 },
+  { cityName: "Alpharetta", county: "Fulton County", priority: 8 },
+  { cityName: "Marietta", county: "Cobb County", priority: 9 },
+  { cityName: "Roswell", county: "Fulton County", priority: 10 },
+  { cityName: "Sandy Springs", county: "Fulton County", priority: 11 },
+  { cityName: "Johns Creek", county: "Fulton County", priority: 12 },
+  { cityName: "Duluth", county: "Gwinnett County", priority: 13 },
+  { cityName: "Norcross", county: "Gwinnett County", priority: 14 },
+  { cityName: "Peachtree Corners", county: "Gwinnett County", priority: 15 },
+  { cityName: "Suwanee", county: "Gwinnett County", priority: 16 },
+  { cityName: "Cumming", county: "Forsyth County", priority: 17 },
+  { cityName: "Decatur", county: "DeKalb County", priority: 18 },
+  { cityName: "Smyrna", county: "Cobb County", priority: 19 },
+  { cityName: "Dunwoody", county: "DeKalb County", priority: 20 },
+  { cityName: "Brookhaven", county: "DeKalb County", priority: 21 },
+  { cityName: "Tucker", county: "DeKalb County", priority: 22 },
 ] as const
 
 /** Scheduling and response copy per city (owner-style detail for planning). */
 const SERVICE_AVAILABILITY_BY_SLUG: Record<string, string> = {
+  ellenwood:
+    "Ellenwood routes run Monday through Saturday and stay closest to our core service hub. Most quote requests receive same-day responses when details are submitted before 4 p.m.",
+  stockbridge:
+    "Stockbridge appointments are available throughout the week with priority same-week scheduling. We typically return quotes within one business day.",
+  rex:
+    "Rex service windows are open Monday through Friday with Saturday overflow. We usually respond to new quote requests within four business hours on weekdays.",
+  morrow:
+    "Morrow jobs are grouped on weekday routes for efficient turnaround. Expect a call or text back within one business day for scheduling.",
+  mcdonough:
+    "McDonough routes run several days each week, with faster booking when grouped near Stockbridge. Most estimate requests are answered the same day or next business morning.",
+  conyers:
+    "Conyers service is available on rotating weekday and Saturday routes. Quote response time is typically within one business day, weather permitting.",
   atlanta:
     "We run Atlanta routes Monday through Saturday. Most quotes return same day if you submit before 3 p.m. Same-week appointments open in many neighborhoods.",
   alpharetta:
@@ -291,6 +347,36 @@ function defaultTrust(cityName: string, county: string): string[] {
 }
 
 const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
+  ellenwood: [
+    "Ellenwood is our immediate core area, so crews are in this zone weekly for homes, driveways, and storefront exteriors.",
+    "We match soft wash and pressure by surface type to clean siding, concrete, and roofs without unnecessary wear.",
+    "Clear scopes and realistic arrival windows make it easier to plan around family or business hours.",
+  ],
+  stockbridge: [
+    "Stockbridge routes are frequent, which helps us keep scheduling flexible and response times fast.",
+    "We handle algae-prone siding and high-traffic concrete with methods tailored to each material.",
+    "Quotes break out options clearly so you can choose the right level of service for your property.",
+  ],
+  rex: [
+    "Rex properties are part of our regular South Metro route planning, not occasional overflow stops.",
+    "From home exteriors to concrete cleanup, we use the right pressure and chemistry for durable results.",
+    "Our team stays focused on safe, consistent technique and a final walkthrough before sign-off.",
+  ],
+  morrow: [
+    "Morrow homes and commercial sites are serviced on repeat routes for reliable turnaround.",
+    "We protect landscaping, trim, and surrounding surfaces while removing algae, dirt, and traffic buildup.",
+    "Service plans are straightforward, with clear communication from quote through completion.",
+  ],
+  mcdonough: [
+    "McDonough scheduling is coordinated with nearby Henry County work to reduce wait time and travel delays.",
+    "We clean concrete, siding, and exterior touchpoints with methods selected for each surface condition.",
+    "You get transparent pricing and scope details before work starts, with touch-ups handled on walkthrough.",
+  ],
+  conyers: [
+    "Conyers routes are part of our active South Metro coverage for residential and commercial exteriors.",
+    "We use low-pressure soft wash where needed and controlled pressure on hardscape for a clean, even finish.",
+    "Our crew provides practical timelines and clear communication so your job stays predictable.",
+  ],
   alpharetta: [
     "Windward, Avalon, and Crabapple jobs are a regular part of our week, so we know the HOA expectations and tight lot lines.",
     "Algae on north faces and shaded walks is common here. We soft wash siding and surface clean flatwork without blasting finish or mortar.",
