@@ -102,15 +102,6 @@ export function Footer() {
             <h3 className="text-white font-bold text-base mb-4">Contact Us</h3>
             <address className="not-italic text-sm text-white/70 leading-relaxed mb-4">
               <p className="font-semibold text-white">Pressure Washing Xperts</p>
-              <p>{businessAddress}</p>
-              <p>
-                <a
-                  href={`tel:+1${businessPhoneTel}`}
-                  className="text-white/80 hover:text-brand-yellow transition-colors"
-                >
-                  {businessPhoneDisplay}
-                </a>
-              </p>
             </address>
             <div className="space-y-3">
               <a
