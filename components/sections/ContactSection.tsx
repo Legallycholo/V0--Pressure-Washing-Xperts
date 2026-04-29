@@ -1,5 +1,6 @@
 "use client"
 
+import { Fragment } from "react"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard"
 import {
@@ -10,7 +11,7 @@ import {
 import { contactIconDark, contactRowDark, ctaPress } from "@/lib/ctaInteraction"
 import {
   businessAddress,
-  businessHoursSummary,
+  businessHoursRows,
   businessMapsUrl,
 } from "@/data/site"
 
@@ -69,13 +70,30 @@ export function ContactSection() {
               </a>
 
               {/* Hours */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500 text-white">
+              <div className="flex gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-green-500 text-white">
                   <Clock className="size-5" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-white/60 text-sm">Business Hours</p>
-                  <p className="text-white font-semibold">{businessHoursSummary}</p>
+                  <details className="mt-1 rounded-lg border border-white/10 bg-black/20 px-3 py-2 [&_summary::-webkit-details-marker]:hidden">
+                    <summary className="cursor-pointer text-sm font-medium text-brand-yellow hover:text-brand-yellow/90 list-none">
+                      See business hours
+                    </summary>
+                    <div className="mt-2 border-t border-white/10 pt-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45 mb-2">
+                        Hours
+                      </p>
+                      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs text-white/75">
+                        {businessHoursRows.map(({ day, hours }) => (
+                          <Fragment key={day}>
+                            <dt className="text-white/55 whitespace-nowrap">{day}</dt>
+                            <dd className="text-white/90 tabular-nums">{hours}</dd>
+                          </Fragment>
+                        ))}
+                      </dl>
+                    </div>
+                  </details>
                 </div>
               </div>
 

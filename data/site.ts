@@ -26,5 +26,13 @@ export const businessAddress =
 export const businessMapsUrl =
   "https://www.google.com/maps/place/Pressure+Washing+Xperts/@33.6542916,-84.4339176,12z/data=!4m10!1m2!2m1!1sPressure+Washing+Xperts+LLC+dekalb!3m6!1s0x88f4ff586effbf87:0xdce4ba9e7e2c13d9!8m2!3d33.6542916!4d-84.2938419!15sCiJQcmVzc3VyZSBXYXNoaW5nIFhwZXJ0cyBMTEMgZGVrYWxiWiQiInByZXNzdXJlIHdhc2hpbmcgeHBlcnRzIGxsYyBkZWthbGKSARhwcmVzc3VyZV93YXNoaW5nX3NlcnZpY2WaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjV3UzJScVdYUk5WM2hoVVZkS1JGUnNSbmxWU0ZJelRsUkdhRTFJWXhBQuABAPoBBAgAED4!16s%2Fg%2F11vpwbzydj?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" as const
 
-/** Main hours — matches Google Business Profile (contact section + JSON-LD). */
-export const businessHoursSummary = "Open 24 hours, 7 days a week" as const
+/** Weekly rows for footer + contact disclosure (keep aligned with GBP). */
+export const businessHoursRows = [
+  { day: "Wednesday", hours: "7 AM–9 PM" },
+  { day: "Thursday", hours: "7 AM–9 PM" },
+  { day: "Friday", hours: "7 AM–9 PM" },
+  { day: "Saturday", hours: "8 AM–9 PM" },
+  { day: "Sunday", hours: "9 AM–9 PM" },
+  { day: "Monday", hours: "7 AM–9 AM" },
+  { day: "Tuesday", hours: "12 AM–9 PM" },
+] as const

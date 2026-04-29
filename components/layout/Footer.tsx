@@ -1,5 +1,6 @@
 "use client"
 
+import { Fragment } from "react"
 import Link from "next/link"
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react"
 import {
@@ -9,7 +10,13 @@ import {
 } from "@/data/navigation"
 import { cityNameToSlug, primaryServiceAreaCities } from "@/data/service-areas"
 import { SITE_CONTENT_LAST_UPDATED_ISO } from "@/data/site-content-version"
-import { businessAddress, businessMapsUrl, businessPhoneDisplay, businessPhoneTel } from "@/data/site"
+import {
+  businessAddress,
+  businessHoursRows,
+  businessMapsUrl,
+  businessPhoneDisplay,
+  businessPhoneTel,
+} from "@/data/site"
 import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
 import { ctaPress } from "@/lib/ctaInteraction"
 
@@ -127,6 +134,24 @@ export function Footer() {
                 <MapPin className="size-5 text-brand-yellow mt-0.5 shrink-0" />
                 <span className="text-sm">{businessAddress}</span>
               </a>
+              <details className="group rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="cursor-pointer text-sm font-medium text-brand-yellow hover:text-brand-yellow/90 list-none">
+                  See business hours
+                </summary>
+                <div className="mt-3 border-t border-white/10 pt-3">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-white/50 mb-2">
+                    Hours
+                  </p>
+                  <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-xs text-white/75">
+                    {businessHoursRows.map(({ day, hours }) => (
+                      <Fragment key={day}>
+                        <dt className="text-white/55 whitespace-nowrap">{day}</dt>
+                        <dd className="text-white/90 tabular-nums">{hours}</dd>
+                      </Fragment>
+                    ))}
+                  </dl>
+                </div>
+              </details>
             </div>
 
             {/* Social media links — add real URLs when available */}
