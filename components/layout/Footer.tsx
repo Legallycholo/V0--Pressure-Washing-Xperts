@@ -163,12 +163,12 @@ export function Footer() {
               <p className="text-white/35 text-xs">
                 SEO+ Website by{" "}
                 <a
-                  href="https://www.tanyresults.com/"
+                  href="https://www.tanygrowth.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/50 hover:text-brand-yellow transition-colors underline-offset-2 hover:underline"
                 >
-                  Tanyresults
+                  tanygrow
                 </a>
               </p>
             </div>
