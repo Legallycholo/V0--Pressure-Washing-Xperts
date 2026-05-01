@@ -15,6 +15,8 @@ import { getSiteUrl } from "@/lib/site-url"
 
 const siteUrl = getSiteUrl()
 
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Pressure Washing Xperts | #1 Pressure Washing in Ellenwood & Metro Atlanta",
@@ -70,6 +72,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {gaMeasurementId ? (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(gaMeasurementId)});`,
+              }}
+            />
+          </>
+        ) : null}
         <Script
           id="localbusiness-jsonld"
           type="application/ld+json"
