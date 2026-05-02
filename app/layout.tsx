@@ -90,40 +90,33 @@ export default function RootLayout({
   });
 `}</Script>
         <Script id="active-lead-activity" strategy="afterInteractive">{`
-(function() {
-  var hasFired = false;
+if (typeof window !== 'undefined') {
+  const startTime = Date.now();
+  let hasFired = false;
 
-  function triggerActivityEmail(reason) {
+  const triggerActivityEmail = (reason) => {
     if (hasFired) return;
     hasFired = true;
 
-    function send(gaId) {
+    const timeSpentSeconds = Math.round((Date.now() - startTime) / 1000);
+
+    gtag('get', 'G-EK4M4BMN05', 'client_id', (ga_id) => {
       fetch('/api/active-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ga_id: gaId != null ? String(gaId) : '',
+          ga_id,
           url: window.location.href,
           trigger_reason: reason,
+          time_spent: \`\${timeSpentSeconds} seconds\`,
           referrer: document.referrer
-        })
-      }).catch(function() {});
-    }
-
-    if (typeof gtag !== 'function') {
-      send('');
-      return;
-    }
-
-    gtag('get', 'G-EK4M4BMN05', 'client_id', function(ga_id) {
-      send(ga_id);
+        }),
+      });
     });
-  }
+  };
 
-  setTimeout(function() {
-    triggerActivityEmail('Time on site > 60s');
-  }, 60000);
-})();
+  setTimeout(() => triggerActivityEmail('High Engagement Timer'), 60000);
+}
 `}</Script>
         <Script id="visitor-tracker" strategy="afterInteractive">{`
   (function() {

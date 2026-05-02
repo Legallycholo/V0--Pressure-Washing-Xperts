@@ -6,6 +6,7 @@ type LeadBody = {
   url?: unknown
   trigger_reason?: unknown
   referrer?: unknown
+  time_spent?: unknown
 }
 
 function clip(v: unknown, max: number): string {
@@ -45,27 +46,49 @@ export async function POST(req: Request) {
   }
 
   const body = raw as LeadBody
-  const ga_id = clip(body.ga_id, 128)
-  const url = clip(body.url, 2000)
-  const trigger_reason = clip(body.trigger_reason, 500)
-  const referrerRaw = clip(body.referrer, 2000)
+  const { ga_id, url, trigger_reason, referrer, time_spent } = body
+  const safeGaId = clip(ga_id, 128)
+  const safeUrl = clip(url, 2000)
+  const safeTriggerReason = clip(trigger_reason, 500)
+  const safeReferrer = clip(referrer, 2000)
+  const safeTimeSpent = clip(time_spent, 80)
+  const pagePath = new URL(safeUrl).pathname
 
   try {
     const { data, error } = await resend.emails.send({
       from: "Dariel <dariel@tanygrowth.com>",
       to: "legallycholo3@gmail.com",
-      subject: `⚡ Activity Detected: ${trigger_reason || "user_active"}`,
+      subject: `⚡ Lead Active on ${pagePath}`,
       html: `
-        <h2>Lead is Active on Site</h2>
+        <h2 style="color: #007bff;">Lead is Active on Site</h2>
         <p>A user is currently engaging with the project.</p>
         <hr />
-        <ul>
-          <li><strong>Trigger:</strong> ${escapeHtml(trigger_reason) || "—"}</li>
-          <li><strong>Current Page:</strong> ${escapeHtml(url) || "—"}</li>
-          <li><strong>Google Analytics ID:</strong> ${escapeHtml(ga_id) || "—"}</li>
-          <li><strong>Referrer:</strong> ${referrerRaw ? escapeHtml(referrerRaw) : "Direct"}</li>
-        </ul>
-        <p><em>This lead has not filled out a form yet, but is showing high intent.</em></p>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Trigger:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTriggerReason) || "—"}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Current Page:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><a href="${escapeHtml(safeUrl)}">${escapeHtml(pagePath)}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Total Session Time:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTimeSpent) || "—"}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Google Analytics ID:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeGaId) || "—"}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Referrer:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${safeReferrer ? escapeHtml(safeReferrer) : "Direct"}</td>
+          </tr>
+        </table>
+        <br />
+        <p style="background: #f8f9fa; padding: 10px; border-left: 4px solid #007bff;">
+          <strong>Note:</strong> This lead has not filled out a form yet, but is showing high intent.
+        </p>
       `,
     })
 
