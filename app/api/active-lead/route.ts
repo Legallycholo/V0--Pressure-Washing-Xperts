@@ -46,11 +46,9 @@ export async function POST(req: Request) {
   }
 
   const body = raw as LeadBody
-  const { ga_id, url, trigger_reason, referrer, time_spent } = body
-  const safeGaId = clip(ga_id, 128)
+  const { url, trigger_reason, time_spent } = body
   const safeUrl = clip(url, 2000)
   const safeTriggerReason = clip(trigger_reason, 500)
-  const safeReferrer = clip(referrer, 2000)
   const safeTimeSpent = clip(time_spent, 80)
   const pagePath = new URL(safeUrl).pathname
 
@@ -75,14 +73,6 @@ export async function POST(req: Request) {
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Total Session Time:</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTimeSpent) || "—"}</td>
-          </tr>
-          <tr>
-            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Google Analytics ID:</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeGaId) || "—"}</td>
-          </tr>
-          <tr>
-            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Referrer:</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${safeReferrer ? escapeHtml(safeReferrer) : "Direct"}</td>
           </tr>
         </table>
         <br />
