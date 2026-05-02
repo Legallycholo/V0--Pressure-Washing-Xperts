@@ -15,8 +15,6 @@ import { getSiteUrl } from "@/lib/site-url"
 
 const siteUrl = getSiteUrl()
 
-const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Pressure Washing Xperts | #1 Pressure Washing in Ellenwood & Metro Atlanta",
@@ -72,19 +70,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {gaMeasurementId ? (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(gaMeasurementId)});`,
-              }}
-            />
-          </>
-        ) : null}
         <Script
           id="localbusiness-jsonld"
           type="application/ld+json"
@@ -92,6 +77,54 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-EK4M4BMN05"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-gtag" strategy="afterInteractive">{`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EK4M4BMN05', {
+    send_page_view: true
+  });
+`}</Script>
+        <Script id="active-lead-activity" strategy="afterInteractive">{`
+(function() {
+  var hasFired = false;
+
+  function triggerActivityEmail(reason) {
+    if (hasFired) return;
+    hasFired = true;
+
+    function send(gaId) {
+      fetch('/api/active-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ga_id: gaId != null ? String(gaId) : '',
+          url: window.location.href,
+          trigger_reason: reason,
+          referrer: document.referrer
+        })
+      }).catch(function() {});
+    }
+
+    if (typeof gtag !== 'function') {
+      send('');
+      return;
+    }
+
+    gtag('get', 'G-EK4M4BMN05', 'client_id', function(ga_id) {
+      send(ga_id);
+    });
+  }
+
+  setTimeout(function() {
+    triggerActivityEmail('Time on site > 60s');
+  }, 60000);
+})();
+`}</Script>
         <Script id="visitor-tracker" strategy="afterInteractive">{`
   (function() {
     var webhookUrl = 'https://n8n-saj4epyyuy1nu2l56qftkiqw.35.231.35.143.sslip.io/webhook/Pressureactivelead';
