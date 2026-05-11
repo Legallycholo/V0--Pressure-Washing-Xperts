@@ -189,6 +189,14 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
       { name: "Privacy Policy", path: "/privacy" },
     ]
   ),
+  "/thank-you": def(
+    "Thank You | Quote Request Received | Pressure Washing Xperts",
+    "Your free estimate request was received. Pressure Washing Xperts serves Ellenwood, GA and Metro Atlanta—we will follow up shortly.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Thank You", path: "/thank-you" },
+    ]
+  ),
   "/service-areas": def(
     "Service Areas | Metro Atlanta Pressure Washing | Pressure Washing Xperts",
     "Cities and neighborhoods we serve across Metro Atlanta—from intown to northern suburbs—with localized pages for exterior and flatwork cleaning.",

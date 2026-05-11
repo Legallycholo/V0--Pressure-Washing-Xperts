@@ -1,7 +1,7 @@
 "use client"
 
 import { useId, useMemo, useRef, useState } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -71,6 +71,8 @@ export interface ContactQuoteFormProps {
   showOfferSelect?: boolean
   initialOfferId?: OfferId
   className?: string
+  /** When set, successful submit navigates here (e.g. homepage /#contact form → /thank-you). */
+  successRedirectHref?: string
 }
 
 export function ContactQuoteForm({
@@ -79,10 +81,12 @@ export function ContactQuoteForm({
   showOfferSelect = true,
   initialOfferId,
   className,
+  successRedirectHref,
 }: ContactQuoteFormProps) {
   const uid = useId()
   const fieldId = (name: string) => `${uid}-${name}`
   const pathname = usePathname()
+  const router = useRouter()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -236,6 +240,13 @@ export function ContactQuoteForm({
       utmCampaign,
       pagePath: pathname ?? undefined,
     })
+
+    if (successRedirectHref) {
+      const qs =
+        typeof window !== "undefined" ? window.location.search ?? "" : ""
+      router.push(`${successRedirectHref}${qs}`)
+      return
+    }
 
     setIsSubmitted(true)
     setFormStep(1)

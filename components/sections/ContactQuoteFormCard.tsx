@@ -11,7 +11,11 @@ const inlineQuoteCopy = {
   ...modalCopyDefault,
 } satisfies QuoteFormCopy
 
-function ContactQuoteFormWithOfferFromUrl() {
+function ContactQuoteFormWithOfferFromUrl({
+  successRedirectHref,
+}: {
+  successRedirectHref?: string
+}) {
   const searchParams = useSearchParams()
   const offerRaw = searchParams.get("offer")
   const initialOfferId = isOfferId(offerRaw) ? offerRaw : undefined
@@ -27,12 +31,19 @@ function ContactQuoteFormWithOfferFromUrl() {
       showOfferSelect
       initialOfferId={initialOfferId}
       className="pt-2"
+      successRedirectHref={successRedirectHref}
     />
   )
 }
 
 /** Same quote form card as the homepage contact section (right column). */
-export function ContactQuoteFormCard({ className }: { className?: string }) {
+export function ContactQuoteFormCard({
+  className,
+  successRedirectHref,
+}: {
+  className?: string
+  successRedirectHref?: string
+}) {
   return (
     <div className={cn("relative w-full min-w-0", className)}>
       <div className="absolute inset-0 bg-gradient-to-br from-brand-yellow/20 to-brand-blue-light/20 rounded-3xl rotate-3" />
@@ -48,10 +59,11 @@ export function ContactQuoteFormCard({ className }: { className?: string }) {
               copy={inlineQuoteCopy}
               showOfferSelect
               className="pt-2"
+              successRedirectHref={successRedirectHref}
             />
           }
         >
-          <ContactQuoteFormWithOfferFromUrl />
+          <ContactQuoteFormWithOfferFromUrl successRedirectHref={successRedirectHref} />
         </Suspense>
       </div>
     </div>

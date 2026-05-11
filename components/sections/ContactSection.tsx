@@ -127,7 +127,7 @@ export function ContactSection() {
 
           {/* Right Column - Quote form (width matches hero quote card) */}
           <div className="lg:col-span-7 lg:pl-5 xl:pl-8 2xl:pl-10">
-            <ContactQuoteFormCard />
+            <ContactQuoteFormCard successRedirectHref="/thank-you" />
           </div>
         </div>
       </div>
