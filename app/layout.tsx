@@ -88,6 +88,7 @@ export default function RootLayout({
   gtag('config', 'G-EK4M4BMN05', {
     send_page_view: true
   });
+  gtag('config', 'AW-18151841356');
 `}</Script>
         <Script id="active-lead-activity" strategy="afterInteractive">{`
 if (typeof window !== 'undefined') {
