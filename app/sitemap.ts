@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   for (const path of Object.keys(MARKETING_ROUTE_SEO)) {
+    if (path === "/thank-you") continue
     entries.push({
       url: absoluteUrl(path),
       lastModified: staticLastModIso,

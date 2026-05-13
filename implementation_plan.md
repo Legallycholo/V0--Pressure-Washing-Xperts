@@ -3,6 +3,8 @@
 **Scope:** Google Ads fixes + Website tracking + SEO keyword injection + Conversion pipeline  
 **Rule:** DO NOT change any existing URL paths. All edits are additive only — no redirects, no slug changes.
 
+> **SUPERSEDED on 2026-05-13:** Cursor Prompts 1, 2, 3, 4, 5, 6, and 7 in Part 2 below have been completed and superseded by the consolidated Phase 2 + Phase 3 implementation (see commit history / `lib/analytics.ts`, `components/UTMCapture.tsx`, `supabase/migrations/20260513000001_restore_utm_and_add_tracking.sql`, `lib/leadAnalytics.ts`, `lib/submitLead.ts`, `components/sections/ContactQuoteForm.tsx`, `components/sections/Hero.tsx`, `components/sections/Services.tsx`, `app/thank-you/layout.tsx`, `app/sitemap.ts`, `app/contact/page.tsx`, `app/(home)/layout.tsx`, `data/marketing-route-seo.ts`). Do NOT re-run those prompts. The original prompt text below is kept for audit only. Part 1 (Google Ads dashboard fixes) and Part 3 (GA4 configuration) remain outside-of-code tasks for the operator.
+
 ---
 
 ## AUDIT SUMMARY — What's Wrong Right Now

@@ -1,9 +1,19 @@
+import type { Metadata } from "next"
 import Script from "next/script"
 import { marketingRouteExports } from "@/lib/seo/create-marketing-route-layout"
 
-const { metadata, Layout: MarketingLayout } = marketingRouteExports("/thank-you")
+const { metadata: baseMetadata, Layout: MarketingLayout } =
+  marketingRouteExports("/thank-you")
 
-export { metadata }
+/**
+ * Conversion confirmation should never compete with the homepage for ranking
+ * and must stay out of Google's index. `follow` is kept so internal link equity
+ * (back-to-home link) still flows.
+ */
+export const metadata: Metadata = {
+  ...baseMetadata,
+  robots: { index: false, follow: true },
+}
 
 /**
  * Google Ads lead-form conversion fires only on this route.

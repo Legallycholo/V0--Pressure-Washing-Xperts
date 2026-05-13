@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useMemo, useRef, useState } from "react"
+import { useEffect, useId, useMemo, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { CheckCircle, Loader2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -43,12 +43,16 @@ import {
 } from "@/data/sqftEstimateOptions"
 import { submitLeadRequest } from "@/lib/submitLead"
 import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
+import { getDeviceTag, getUTMParams } from "@/lib/analytics"
 
 export type QuoteFormCopy = typeof modalCopyDefault
 
 const howHeardOptions = [
-  { value: "search", label: "Search / Google" },
+  { value: "google-ad", label: "Google Ad" },
+  { value: "search", label: "Google Search (organic)" },
   { value: "referral", label: "Referral / Friends & Family" },
+  { value: "nextdoor", label: "Nextdoor" },
+  { value: "social", label: "Social Media (Facebook/Instagram)" },
   { value: "ai", label: "AI (ChatGPT, etc.)" },
 ]
 
@@ -108,6 +112,14 @@ export function ContactQuoteForm({
   const premiumOffer = useMemo(() => getPremiumOffer(), [])
 
   const openedWithOfferIntent = Boolean(initialOfferId)
+
+  useEffect(() => {
+    if (getUTMParams().utm_medium === "cpc") {
+      setFormData((prev) =>
+        prev.howHeard ? prev : { ...prev, howHeard: "google-ad" }
+      )
+    }
+  }, [])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -204,13 +216,8 @@ export function ContactQuoteForm({
     setIsSubmitting(true)
     setSubmitError(null)
 
-    const sp =
-      typeof window !== "undefined"
-        ? new URLSearchParams(window.location.search)
-        : new URLSearchParams()
-    const utmSource = sp.get("utm_source") ?? undefined
-    const utmMedium = sp.get("utm_medium") ?? undefined
-    const utmCampaign = sp.get("utm_campaign") ?? undefined
+    const utms = getUTMParams()
+    const device = getDeviceTag()
 
     const result = await submitLeadRequest({
       full_name: formData.fullName,
@@ -225,6 +232,13 @@ export function ContactQuoteForm({
       approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: copy.badge,
       page_path: pathname ?? undefined,
+      utm_source: utms.utm_source,
+      utm_medium: utms.utm_medium,
+      utm_campaign: utms.utm_campaign,
+      utm_term: utms.utm_term,
+      utm_content: utms.utm_content,
+      gclid: utms.gclid,
+      device,
     })
 
     setIsSubmitting(false)
@@ -235,9 +249,13 @@ export function ContactQuoteForm({
     }
 
     trackLeadFormSubmit({
-      utmSource,
-      utmMedium,
-      utmCampaign,
+      utmSource: utms.utm_source,
+      utmMedium: utms.utm_medium,
+      utmCampaign: utms.utm_campaign,
+      utmTerm: utms.utm_term,
+      utmContent: utms.utm_content,
+      gclid: utms.gclid,
+      device,
       pagePath: pathname ?? undefined,
     })
 

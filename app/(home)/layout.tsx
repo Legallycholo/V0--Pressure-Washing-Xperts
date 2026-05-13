@@ -5,9 +5,10 @@ import { buildFaqPageJsonLd } from "@/lib/seo/json-ld-builders"
 import { buildPublicMetadata } from "@/lib/seo/build-page-metadata"
 
 export const metadata: Metadata = buildPublicMetadata({
-  title: "Pressure Washing Xperts | Metro Atlanta Pressure & Soft Washing",
+  title:
+    "Pressure Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
   description:
-    "Licensed, insured pressure washing and soft washing for homes and businesses across Metro Atlanta—driveways, siding, roofs, storefronts, and fleet-ready plans.",
+    "Professional pressure washing in Ellenwood, GA and Metro Atlanta. House washing, driveway cleaning, roof soft wash, decks, and commercial. Licensed & insured. Free estimates — call (800) 451-7213.",
   pathname: "/",
 })
 

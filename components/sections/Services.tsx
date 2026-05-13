@@ -2,8 +2,63 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronRight } from "lucide-react"
+import {
+  Building2,
+  ChevronRight,
+  Cloud,
+  Fence,
+  Home as HomeIcon,
+  Square,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+/**
+ * Top 5 services that match the Google Ads keyword set + landing intent.
+ * Each card links to the existing residential/commercial leaf page and offers
+ * a secondary "Get a Quote" action that opens the homepage quote form.
+ */
+const topFiveServices = [
+  {
+    id: "house-washing",
+    title: "House Washing",
+    description:
+      "Remove dirt, mold, and mildew from your home's exterior safely with soft wash for siding and trim.",
+    href: "/services/residential/house-washing",
+    Icon: HomeIcon,
+  },
+  {
+    id: "driveway-concrete",
+    title: "Driveway & Concrete Cleaning",
+    description:
+      "Restore your driveway, walkways, and concrete surfaces with surface-cleaner pressure washing.",
+    href: "/services/residential/driveways-sidewalks",
+    Icon: Square,
+  },
+  {
+    id: "roof-soft-wash",
+    title: "Roof Soft Wash",
+    description:
+      "Safe low-pressure roof cleaning that won't damage shingles — lifts black streaks, algae, and moss.",
+    href: "/services/residential/roof-soft-washing",
+    Icon: Cloud,
+  },
+  {
+    id: "deck-fence",
+    title: "Deck & Fence Cleaning",
+    description:
+      "Prepare your wood or vinyl deck, railings, and fence for staining or sealing.",
+    href: "/services/residential/decks-fences",
+    Icon: Fence,
+  },
+  {
+    id: "commercial",
+    title: "Commercial Pressure Washing",
+    description:
+      "Building exteriors, parking lots, and storefronts cleaned around your schedule and customers.",
+    href: "/services/commercial/building-washing",
+    Icon: Building2,
+  },
+] as const
 
 const primaryServices = [
   {
@@ -64,6 +119,38 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           <p className="mt-3 text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
             Residential and commercial cleaning with the right method for each surface.
           </p>
+        </div>
+
+        {/* Top 5 services (Google Ads + SEO alignment) */}
+        <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {topFiveServices.map(({ id, title, description, href, Icon }) => (
+            <article
+              key={id}
+              className="group flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-brand-yellow/50 hover:bg-white/[0.07]"
+            >
+              <Link
+                href={href}
+                aria-label={`${title} pressure washing in Ellenwood, GA and Metro Atlanta`}
+                className="flex flex-1 flex-col"
+              >
+                <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand-yellow/15 text-brand-yellow">
+                  <Icon className="size-5" aria-hidden />
+                </div>
+                <h3 className="text-base font-bold text-white">{title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/70">
+                  {description}
+                </p>
+              </Link>
+              <button
+                type="button"
+                onClick={onOpenQuoteForm}
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-yellow hover:underline"
+              >
+                Get a Quote
+                <ChevronRight className="size-4" aria-hidden />
+              </button>
+            </article>
+          ))}
         </div>
 
         {/* Primary Services */}

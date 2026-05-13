@@ -32,6 +32,7 @@ import {
 } from "@/data/offers"
 import { submitLeadRequest } from "@/lib/submitLead"
 import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
+import { getDeviceTag, getUTMParams } from "@/lib/analytics"
 import residentialHeroImage from "@/public/services/home-residential.png"
 
 interface HeroProps {
@@ -43,8 +44,11 @@ interface HeroProps {
 export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
   const pathname = usePathname()
   const howHeardOptions = [
-    { value: "search", label: "Search / Google" },
+    { value: "google-ad", label: "Google Ad" },
+    { value: "search", label: "Google Search (organic)" },
     { value: "referral", label: "Referral / Friends & Family" },
+    { value: "nextdoor", label: "Nextdoor" },
+    { value: "social", label: "Social Media (Facebook/Instagram)" },
     { value: "ai", label: "AI (ChatGPT, etc.)" },
   ]
 
@@ -72,6 +76,14 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       selectedOffer: initialOfferId ?? OFFER_NONE,
     }))
   }, [initialOfferId])
+
+  useEffect(() => {
+    if (getUTMParams().utm_medium === "cpc") {
+      setFormData((prev) =>
+        prev.howHeard ? prev : { ...prev, howHeard: "google-ad" }
+      )
+    }
+  }, [])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -106,13 +118,8 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
 
     setIsSubmitting(true)
 
-    const sp =
-      typeof window !== "undefined"
-        ? new URLSearchParams(window.location.search)
-        : new URLSearchParams()
-    const utmSource = sp.get("utm_source") ?? undefined
-    const utmMedium = sp.get("utm_medium") ?? undefined
-    const utmCampaign = sp.get("utm_campaign") ?? undefined
+    const utms = getUTMParams()
+    const device = getDeviceTag()
 
     const result = await submitLeadRequest({
       full_name: formData.fullName,
@@ -127,6 +134,13 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: modalCopyDefault.badge,
       page_path: pathname ?? undefined,
+      utm_source: utms.utm_source,
+      utm_medium: utms.utm_medium,
+      utm_campaign: utms.utm_campaign,
+      utm_term: utms.utm_term,
+      utm_content: utms.utm_content,
+      gclid: utms.gclid,
+      device,
     })
 
     setIsSubmitting(false)
@@ -137,9 +151,13 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
     }
 
     trackLeadFormSubmit({
-      utmSource,
-      utmMedium,
-      utmCampaign,
+      utmSource: utms.utm_source,
+      utmMedium: utms.utm_medium,
+      utmCampaign: utms.utm_campaign,
+      utmTerm: utms.utm_term,
+      utmContent: utms.utm_content,
+      gclid: utms.gclid,
+      device,
       pagePath: pathname ?? undefined,
     })
 
@@ -222,29 +240,33 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
             </p>
 
             <h1 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
-              BEST Pressure Washing in Ellenwood, GA
+              Professional Pressure Washing in Ellenwood, GA &amp; Metro Atlanta
             </h1>
 
+            <p className="mt-3 text-brand-yellow font-semibold text-sm sm:text-base">
+              Licensed &amp; Insured · Free Estimates · Residential &amp; Commercial
+            </p>
+
             <p className="mt-4 max-w-2xl text-base text-white/85 leading-relaxed sm:text-lg lg:mx-0 mx-auto">
-              Restore your home or business with safe, effective exterior cleaning trusted across Ellenwood and Metro Atlanta.
+              From house washing and driveway cleaning to roof soft wash, we serve Ellenwood, GA and the greater Metro Atlanta area. Get a free quote today.
             </p>
 
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Button
-                asChild
-                size="lg"
-                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg min-h-[44px] ${ctaPress}`}
-              >
-                <a href="tel:800-451-7213">Call now</a>
-              </Button>
-              <Button
                 type="button"
                 onClick={onOpenQuoteForm}
                 size="lg"
+                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg min-h-[44px] ${ctaPress}`}
+              >
+                Get My Free Estimate
+              </Button>
+              <Button
+                asChild
+                size="lg"
                 className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-base px-6 py-4 hover:bg-white/10 hover:border-white transition-all duration-300 min-h-[44px] ${ctaPress}`}
               >
-                Get your free estimate
+                <a href="tel:800-451-7213">Call Now: (800) 451-7213</a>
               </Button>
             </div>
           </div>

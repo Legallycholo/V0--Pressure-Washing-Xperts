@@ -5,6 +5,7 @@ import Script from "next/script"
 import "./globals.css"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { AppProviders } from "@/components/providers/AppProviders"
+import { UTMCapture } from "@/components/UTMCapture"
 import { VoiceflowChat } from "@/components/VoiceflowChat"
 import { businessLegalName } from "@/data/site"
 import {
@@ -144,7 +145,10 @@ if (typeof window !== 'undefined') {
   })();
 `}</Script>
         <JsonLd data={buildGlobalJsonLdGraph(base, logoUrl)} />
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <UTMCapture />
+          {children}
+        </AppProviders>
         <Analytics />
         <SpeedInsights />
         <VoiceflowChat />

@@ -161,12 +161,54 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
         "HOA-focused exterior washing: model homes, amenity buildings, mail kiosks, and common walks on routes designed for minimal resident inconvenience.",
     }
   ),
+  "/services/commercial/building-washing": def(
+    "Commercial Pressure Washing | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
+    "Commercial building washing and exterior cleaning in Ellenwood, GA and Metro Atlanta. Storefronts, office buildings, and apartment complexes. Licensed & insured.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Commercial Services", path: COM_HUB },
+      { name: "Commercial Building Washing", path: "/services/commercial/building-washing" },
+    ],
+    {
+      name: "Commercial building washing in Metro Atlanta",
+      description:
+        "Facades, entries, and signage washed with soft wash or pressure chosen for your cladding and traffic, for businesses across Ellenwood, GA and Metro Atlanta.",
+    }
+  ),
 }
 
 const manualResidential: Record<string, MarketingRouteDefinition> = {
+  "/services/residential/house-washing": def(
+    "House Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
+    "Professional house washing near you in Ellenwood, GA and Metro Atlanta. Soft wash removes mold, mildew, and stains from siding, brick, and trim. Licensed & insured. Free estimate.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "House Washing", path: "/services/residential/house-washing" },
+    ],
+    {
+      name: "House washing in Ellenwood, GA",
+      description:
+        "Exterior house washing and soft wash for vinyl, brick, and painted siding so mold and algae lift off without forcing water behind boards across Metro Atlanta homes.",
+    }
+  ),
+  "/services/residential/driveways-sidewalks": def(
+    "Driveway Pressure Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
+    "Driveway and sidewalk pressure washing in Ellenwood, GA and Metro Atlanta. Remove oil stains, algae, and dirt with surface-cleaner pressure washing. Free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Driveways & Sidewalks", path: "/services/residential/driveways-sidewalks" },
+    ],
+    {
+      name: "Driveway and sidewalk pressure washing in Ellenwood, GA",
+      description:
+        "Flat concrete washed with surface cleaners so oil, algae, and tire marks come up evenly across driveways and walks throughout Metro Atlanta.",
+    }
+  ),
   "/services/residential/roof-soft-washing": def(
-    "Professional Roof Cleaning in Ellenwood, GA | Soft Wash",
-    "Professional roof soft washing in Ellenwood, GA for algae, moss, and black streak removal with low-pressure methods that help protect asphalt shingles across Metro Atlanta homes.",
+    "Roof Soft Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
+    "Safe roof soft washing in Ellenwood, GA and Metro Atlanta. Removes black streaks, algae, and moss without damaging shingles. Licensed & insured. Free estimate.",
     [
       { name: "Home", path: "/" },
       { name: "Residential Services", path: RES_HUB },
@@ -176,6 +218,20 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
       name: "Roof soft washing in Ellenwood, GA",
       description:
         "Low-pressure roof cleaning service in Ellenwood that removes algae and moss while helping protect shingle life for homes throughout Metro Atlanta.",
+    }
+  ),
+  "/services/residential/decks-fences": def(
+    "Deck & Fence Cleaning | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
+    "Deck and fence cleaning in Ellenwood, GA and Metro Atlanta. Prep wood, composite, and vinyl rails and boards for staining or sealing. Licensed & insured.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Decks & Fences", path: "/services/residential/decks-fences" },
+    ],
+    {
+      name: "Deck and fence cleaning in Ellenwood, GA",
+      description:
+        "Wood, composite, and vinyl deck and fence cleaning so outdoor spaces look maintained and hold finish longer across Metro Atlanta.",
     }
   ),
 }
