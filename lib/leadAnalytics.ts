@@ -1,7 +1,8 @@
 import { track } from "@vercel/analytics"
 
 /**
- * Fires Vercel Analytics custom event for lead form submissions.
+ * Fires Vercel Analytics custom event for lead form submissions and GA4
+ * `generate_lead` via gtag when the tag is loaded.
  * Property values must be primitives for Vercel Analytics.
  */
 export function trackLeadFormSubmit(context: {
@@ -19,4 +20,12 @@ export function trackLeadFormSubmit(context: {
   if (context.pagePath) data.page_path = context.pagePath
 
   track("lead_form_submit", data)
+
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "generate_lead", {
+      event_callback: function () {
+        console.log("Google Ads: Lead tracked successfully")
+      },
+    })
+  }
 }
