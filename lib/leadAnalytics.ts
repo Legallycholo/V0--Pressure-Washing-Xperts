@@ -26,26 +26,36 @@ export type LeadAnalyticsContext = {
 export function trackLeadFormSubmit(context: LeadAnalyticsContext) {
   if (typeof window === "undefined") return
 
-  const data: Record<string, string> = {}
-  if (context.utmSource) data.utm_source = context.utmSource
-  if (context.utmMedium) data.utm_medium = context.utmMedium
-  if (context.utmCampaign) data.utm_campaign = context.utmCampaign
-  if (context.utmTerm) data.utm_term = context.utmTerm
-  if (context.utmContent) data.utm_content = context.utmContent
-  if (context.gclid) data.gclid = context.gclid
-  if (context.device) data.device = context.device
-  if (context.pagePath) data.page_path = context.pagePath
+  /**
+   * Event parameters passed to BOTH Vercel Analytics (`track`) and GA4 (`gtag`).
+   * Parameter names match the GA4 event-scoped custom dimensions registered in
+   * Admin → Custom definitions (utm_source, utm_medium, utm_campaign, utm_term,
+   * utm_content, gclid, device, page_path).
+   */
+  const params: Record<string, string> = {}
+  if (context.utmSource) params.utm_source = context.utmSource
+  if (context.utmMedium) params.utm_medium = context.utmMedium
+  if (context.utmCampaign) params.utm_campaign = context.utmCampaign
+  if (context.utmTerm) params.utm_term = context.utmTerm
+  if (context.utmContent) params.utm_content = context.utmContent
+  if (context.gclid) params.gclid = context.gclid
+  if (context.device) params.device = context.device
+  if (context.pagePath) params.page_path = context.pagePath
 
-  track("lead_form_submit", data)
+  track("lead_form_submit", params)
 
   if (typeof window.gtag === "function") {
     window.gtag("event", "generate_lead", {
+      ...params,
+      currency: "USD",
+      value: 1.0,
       event_callback: function () {
         console.log("Google Ads: Lead tracked successfully")
       },
     })
 
     window.gtag("event", "conversion", {
+      ...params,
       send_to: GOOGLE_ADS_CONVERSION_SEND_TO,
       value: 1.0,
       currency: "USD",

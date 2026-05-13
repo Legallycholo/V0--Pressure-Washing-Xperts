@@ -26,11 +26,29 @@ export default function ThankYouLayout({
   return (
     <>
       <Script id="google-ads-lead-form-conversion" strategy="afterInteractive">{`
-gtag('event', 'conversion', {
-  'send_to': 'AW-18151841356/dGq1CMSB5KocEMy8vM9D',
-  'value': 1.0,
-  'currency': 'USD'
-});
+(function(){
+  var params = {};
+  try {
+    var stored = sessionStorage.getItem('utm_params');
+    if (stored) {
+      var u = JSON.parse(stored);
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].forEach(function(k){
+        if (u && typeof u[k] === 'string' && u[k]) params[k] = u[k];
+      });
+    }
+  } catch(e) {}
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', Object.assign({}, params, {
+      currency: 'USD',
+      value: 1.0
+    }));
+    gtag('event', 'conversion', Object.assign({}, params, {
+      send_to: 'AW-18151841356/dGq1CMSB5KocEMy8vM9D',
+      value: 1.0,
+      currency: 'USD'
+    }));
+  }
+})();
 `}</Script>
       <MarketingLayout>{children}</MarketingLayout>
     </>
