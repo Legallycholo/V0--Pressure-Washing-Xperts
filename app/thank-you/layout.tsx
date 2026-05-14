@@ -27,6 +27,7 @@ export default function ThankYouLayout({
     <>
       <Script id="google-ads-lead-form-conversion" strategy="afterInteractive">{`
 (function(){
+  /* sessionStorage key must stay in sync with lib/analytics.ts (STORAGE_KEY = "utm_params") */
   var params = {};
   try {
     var stored = sessionStorage.getItem('utm_params');

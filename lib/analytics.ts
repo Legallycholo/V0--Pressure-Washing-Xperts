@@ -8,9 +8,10 @@
  *   that strips query params from erasing the original ad source.
  */
 
-export const UTM_STORAGE_KEY = "utm_params"
+/** Persisted in `sessionStorage`; inline scripts (e.g. thank-you) must use this exact key. */
+const STORAGE_KEY = "utm_params"
 
-export const UTM_KEYS = [
+const UTM_KEYS = [
   "utm_source",
   "utm_medium",
   "utm_campaign",
@@ -18,7 +19,7 @@ export const UTM_KEYS = [
   "utm_content",
 ] as const
 
-export const CLICK_KEYS = ["gclid"] as const
+const CLICK_KEYS = ["gclid"] as const
 
 type UTMKey = (typeof UTM_KEYS)[number]
 type ClickKey = (typeof CLICK_KEYS)[number]
@@ -40,7 +41,7 @@ function readStored(): UTMParams {
   const ss = safeSessionStorage()
   if (!ss) return {}
   try {
-    const raw = ss.getItem(UTM_STORAGE_KEY)
+    const raw = ss.getItem(STORAGE_KEY)
     if (!raw) return {}
     const parsed: unknown = JSON.parse(raw)
     if (!parsed || typeof parsed !== "object") return {}
@@ -89,7 +90,7 @@ export function captureUTMs(): void {
   if (Object.keys(incoming).length === 0) return
 
   try {
-    ss.setItem(UTM_STORAGE_KEY, JSON.stringify(incoming))
+    ss.setItem(STORAGE_KEY, JSON.stringify(incoming))
   } catch {
     // Quota or private-mode failure: ignore — attribution is best-effort.
   }

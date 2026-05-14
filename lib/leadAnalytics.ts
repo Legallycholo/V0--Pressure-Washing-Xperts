@@ -49,9 +49,6 @@ export function trackLeadFormSubmit(context: LeadAnalyticsContext) {
       ...params,
       currency: "USD",
       value: 1.0,
-      event_callback: function () {
-        console.log("Google Ads: Lead tracked successfully")
-      },
     })
 
     window.gtag("event", "conversion", {
