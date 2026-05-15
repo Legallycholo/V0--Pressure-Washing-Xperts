@@ -118,18 +118,23 @@ if (typeof window !== 'undefined') {
 
     const timeSpentSeconds = Math.round((Date.now() - startTime) / 1000);
 
-    gtag('get', 'G-EK4M4BMN05', 'client_id', (ga_id) => {
-      fetch('/api/active-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ga_id,
-          url: window.location.href,
-          trigger_reason: reason,
-          time_spent: \`\${timeSpentSeconds} seconds\`,
-          referrer: document.referrer
-        }),
-      });
+    let ga_id = null;
+    try {
+      if (typeof gtag === 'function') {
+        gtag('get', 'G-EK4M4BMN05', 'client_id', (id) => { ga_id = id; });
+      }
+    } catch (_) {}
+
+    fetch('/api/active-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ga_id,
+        url: window.location.href,
+        trigger_reason: reason,
+        time_spent: \`\${timeSpentSeconds} seconds\`,
+        referrer: document.referrer
+      }),
     });
   };
 

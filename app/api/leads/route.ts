@@ -1,8 +1,48 @@
 import { NextResponse } from "next/server"
+import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { createServiceRoleClient } from "@/utils/supabase/admin"
 import { createClient } from "@/utils/supabase/server"
 import { getSupabasePublishableKey, getSupabaseUrl } from "@/utils/supabase/env"
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+}
+
+async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) return
+  const resend = new Resend(apiKey)
+  const pagePath = payload.page_path ? escapeHtml(payload.page_path) : "—"
+  const utm = [payload.utm_source, payload.utm_medium, payload.utm_campaign]
+    .filter(Boolean)
+    .join(" / ")
+  await resend.emails.send({
+    from: "Dariel <dariel@tanygrowth.com>",
+    to: "pressurewashingxpert@gmail.com",
+    subject: `🔔 New Lead — ${payload.full_name} (${payload.phone})`,
+    html: `
+      <h2 style="color:#007bff;">New Quote Request</h2>
+      <table style="width:100%;border-collapse:collapse;">
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Name</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.full_name)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Phone</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.phone)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Email</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.email)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>City / State</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml([payload.city, payload.state].filter(Boolean).join(", ") || "—")}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Message</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.message || "—")}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Sqft Range</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.approx_sqft_estimate || "—")}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Rough Estimate</strong></td><td style="padding:8px;border:1px solid #ddd;">$${roughPrice}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Page</strong></td><td style="padding:8px;border:1px solid #ddd;">${pagePath}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>How Heard</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.how_heard || "—")}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>UTM</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(utm || "—")}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Device</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.device || "—")}</td></tr>
+      </table>
+    `,
+  }).catch((e) => console.error("[api/leads] Resend notification failed", e))
+}
 
 function isLeadPayload(body: unknown): body is LeadPayload {
   if (!body || typeof body !== "object") return false
@@ -52,6 +92,7 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
+    void sendLeadNotification(body, row.rough_price_estimate ?? 0)
     return NextResponse.json({ ok: true })
   }
 
@@ -74,6 +115,7 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
+    void sendLeadNotification(body, row.rough_price_estimate ?? 0)
     return NextResponse.json({ ok: true })
   } catch (e) {
     console.error("[api/leads] unexpected error", e)
