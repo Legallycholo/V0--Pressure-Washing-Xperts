@@ -11,6 +11,24 @@ export interface NavLinkItem {
 
 export const residentialServices: NavLinkItem[] = [
   {
+    href: "/roof-cleaning",
+    label: "Roof Cleaning",
+    summary:
+      "Safe soft wash roof cleaning that removes black streaks, algae, and moss without stripping granules from asphalt shingles.",
+  },
+  {
+    href: "/power-washing",
+    label: "Power Washing",
+    summary:
+      "High-pressure cleaning for driveways, walkways, patios, and other hard surfaces across Ellenwood and Metro Atlanta.",
+  },
+  {
+    href: "/soft-washing",
+    label: "Soft Washing",
+    summary:
+      "Low-pressure chemical cleaning for siding, stucco, and roofs where high pressure would cause damage.",
+  },
+  {
     href: "/services/residential/house-washing",
     label: "House Washing Services",
     summary:

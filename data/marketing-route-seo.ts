@@ -237,6 +237,45 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
 }
 
 export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
+  "/roof-cleaning": def(
+    "Roof Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional roof cleaning service near you in Ellenwood, GA and Metro Atlanta. Soft wash roof cleaning removes black streaks, algae, and moss without damaging shingles. Licensed & insured. Free estimate.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Roof Cleaning", path: "/roof-cleaning" },
+    ],
+    {
+      name: "Roof Cleaning in Ellenwood, GA",
+      description:
+        "Professional soft wash roof cleaning service in Ellenwood, GA and Metro Atlanta. Safe low-pressure treatment removes black streaks, algae, and moss without damaging asphalt shingles.",
+    }
+  ),
+  "/power-washing": def(
+    "Power Washing Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional power washing service near you in Ellenwood, GA and Metro Atlanta. Power washing service for driveways, concrete, decks, and building exteriors. Licensed & insured. Free estimate.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Power Washing", path: "/power-washing" },
+    ],
+    {
+      name: "Power Washing in Ellenwood, GA",
+      description:
+        "Professional power washing service in Ellenwood, GA and Metro Atlanta. High-pressure cleaning for driveways, sidewalks, patios, and commercial surfaces that need heavy buildup removed.",
+    }
+  ),
+  "/soft-washing": def(
+    "Soft Washing Services in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional soft washing service in Ellenwood, GA and Metro Atlanta. Soft wash near you for roofs, siding, and delicate surfaces. Low-pressure treatment kills algae and mold at the root. Free estimate.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Soft Washing", path: "/soft-washing" },
+    ],
+    {
+      name: "Soft Washing in Ellenwood, GA",
+      description:
+        "Low-pressure soft washing service in Ellenwood, GA and Metro Atlanta. Safe chemical treatment for roofs, siding, stucco, and other surfaces that can't handle high-pressure washing.",
+    }
+  ),
   "/privacy": def(
     "Privacy Policy | Pressure Washing Xperts",
     "How Pressure Washing Xperts collects, uses, and protects information when you browse our site or submit a quote request in Metro Atlanta.",

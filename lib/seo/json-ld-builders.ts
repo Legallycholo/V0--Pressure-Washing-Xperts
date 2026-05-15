@@ -75,6 +75,76 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
             closes: "22:00",
           },
         ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Exterior Cleaning Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Roof Cleaning",
+                url: absoluteUrl("/roof-cleaning"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Power Washing",
+                url: absoluteUrl("/power-washing"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Soft Washing",
+                url: absoluteUrl("/soft-washing"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "House Washing",
+                url: absoluteUrl("/services/residential/house-washing"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Driveway & Concrete Cleaning",
+                url: absoluteUrl("/services/residential/driveways-sidewalks"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Deck & Fence Cleaning",
+                url: absoluteUrl("/services/residential/decks-fences"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Gutter Cleaning",
+                url: absoluteUrl("/services/residential/gutters"),
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Commercial Building Washing",
+                url: absoluteUrl("/services/commercial/building-washing"),
+              },
+            },
+          ],
+        },
       },
       {
         "@type": "WebSite",

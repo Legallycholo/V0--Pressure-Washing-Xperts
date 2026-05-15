@@ -85,11 +85,12 @@ const primaryServices = [
 
 const supportingServices = [
   {
-    id: "pressure-washing",
-    title: "Pressure Washing",
+    id: "power-washing",
+    title: "Power Washing",
     subtitle: "High-pressure surface cleaning",
     description:
       "Cleans heavy buildup from concrete, brick, and other hard surfaces.",
+    href: "/power-washing",
   },
   {
     id: "soft-washing",
@@ -97,6 +98,15 @@ const supportingServices = [
     subtitle: "Low-pressure chemical cleaning",
     description:
       "Low-pressure cleaning for roofs, siding, stucco, and other delicate surfaces.",
+    href: "/soft-washing",
+  },
+  {
+    id: "roof-cleaning",
+    title: "Roof Cleaning",
+    subtitle: "Soft wash for asphalt shingles",
+    description:
+      "Safe low-pressure treatment that removes black streaks, algae, and moss without damaging your roof.",
+    href: "/roof-cleaning",
   },
 ]
 
@@ -192,18 +202,19 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
         </div>
 
         {/* Supporting Services */}
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           {supportingServices.map((service) => (
-            <div
+            <Link
               key={service.id}
-              className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5"
+              href={service.href}
+              className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5 block hover:border-brand-yellow/50 transition-colors"
             >
               <h3 className="text-lg font-bold text-white">{service.title}</h3>
               <p className="mt-1 text-brand-blue-light text-xs uppercase tracking-wide font-semibold">
                 {service.subtitle}
               </p>
               <p className="mt-2 text-sm text-white/70 leading-relaxed">{service.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
 
