@@ -179,8 +179,8 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
 
 const manualResidential: Record<string, MarketingRouteDefinition> = {
   "/services/residential/house-washing": def(
-    "House Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
-    "Professional house washing near you in Ellenwood, GA and Metro Atlanta. Soft wash removes mold, mildew, and stains from siding, brick, and trim. Licensed & insured. Free estimate.",
+    "House Washing Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional house washing near you in Ellenwood, GA and Metro Atlanta. We soft wash and pressure wash vinyl siding, brick, stucco, and painted surfaces. Call (800) 451-7213 for a free quote.",
     [
       { name: "Home", path: "/" },
       { name: "Residential Services", path: RES_HUB },
@@ -189,35 +189,49 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
     {
       name: "House washing in Ellenwood, GA",
       description:
-        "Exterior house washing and soft wash for vinyl, brick, and painted siding so mold and algae lift off without forcing water behind boards across Metro Atlanta homes.",
+        "Exterior house washing and soft wash for vinyl siding, brick, stucco, and painted surfaces — removing mold, mildew, and algae across Ellenwood, GA and Metro Atlanta.",
     }
   ),
   "/services/residential/driveways-sidewalks": def(
-    "Driveway Pressure Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
-    "Driveway and sidewalk pressure washing in Ellenwood, GA and Metro Atlanta. Remove oil stains, algae, and dirt with surface-cleaner pressure washing. Free quote.",
+    "Driveway Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional driveway cleaning and power washing near you in Ellenwood, GA and Metro Atlanta. We remove oil stains, dirt, mold, and mildew from driveways, sidewalks, and walkways. Call (800) 451-7213 for a free quote.",
     [
       { name: "Home", path: "/" },
       { name: "Residential Services", path: RES_HUB },
       { name: "Driveways & Sidewalks", path: "/services/residential/driveways-sidewalks" },
     ],
     {
-      name: "Driveway and sidewalk pressure washing in Ellenwood, GA",
+      name: "Driveway cleaning and power washing in Ellenwood, GA",
       description:
-        "Flat concrete washed with surface cleaners so oil, algae, and tire marks come up evenly across driveways and walks throughout Metro Atlanta.",
+        "Professional driveway cleaning and sidewalk pressure washing in Ellenwood, GA and Metro Atlanta — removing oil stains, dirt, mold, and mildew from concrete surfaces.",
     }
   ),
   "/services/residential/roof-soft-washing": def(
-    "Roof Soft Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
-    "Safe roof soft washing in Ellenwood, GA and Metro Atlanta. Removes black streaks, algae, and moss without damaging shingles. Licensed & insured. Free estimate.",
+    "Roof Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional roof cleaning near you in Ellenwood, GA and Metro Atlanta. Safe low-pressure soft wash roof cleaning removes algae, moss, lichen, and black streaks without damaging shingles. Serving Atlanta, Alpharetta, McDonough, and surrounding areas. Call (800) 451-7213 for a free quote.",
     [
       { name: "Home", path: "/" },
       { name: "Residential Services", path: RES_HUB },
       { name: "Roof Soft Washing", path: "/services/residential/roof-soft-washing" },
     ],
     {
-      name: "Roof soft washing in Ellenwood, GA",
+      name: "Roof cleaning in Ellenwood, GA",
       description:
-        "Low-pressure roof cleaning service in Ellenwood that removes algae and moss while helping protect shingle life for homes throughout Metro Atlanta.",
+        "Safe low-pressure soft wash roof cleaning in Ellenwood, GA and Metro Atlanta — removes algae, moss, lichen, and black streaks without damaging asphalt shingles.",
+    }
+  ),
+  "/services/residential/residential-properties": def(
+    "Residential Pressure Washing Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Expert residential pressure washing services near you in Ellenwood, GA and Metro Atlanta. Full exterior cleaning including house washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing. Call (800) 451-7213.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Residential Properties", path: "/services/residential/residential-properties" },
+    ],
+    {
+      name: "Residential pressure washing in Ellenwood, GA",
+      description:
+        "Full exterior residential pressure washing in Ellenwood, GA and Metro Atlanta — house washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing in one plan.",
     }
   ),
   "/services/residential/decks-fences": def(

@@ -16,12 +16,12 @@ export default function ResidentialPropertiesPage() {
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
-        title="Residential Properties"
-        description="Full exterior cleaning from roof to driveway—one crew, one quote, and one coordinated visit."
+        title="Residential Pressure Washing Services Near Me — Ellenwood & Atlanta, GA"
+        description="Full-service residential pressure washing near you in Ellenwood GA and Metro Atlanta. One crew handles house washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing — all in a single coordinated visit. Home pressure washing done right."
         category="Residential"
         benefits={[
-          "Roof soft washing, house washing & driveway cleaning",
-          "Single visit for multiple exterior surfaces",
+          "Roof soft washing, house washing & driveway cleaning in one visit",
+          "Residential power washing for all exterior surfaces",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

@@ -17,12 +17,12 @@ export default function HouseWashingPage() {
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
-        title="House Washing Services"
-        description="Safe soft washing removes mold, mildew, and weathering from all siding types."
+        title="House Washing Near Me — Ellenwood & Atlanta, GA"
+        description="Professional exterior house washing in Ellenwood GA and Metro Atlanta. We use soft wash house washing techniques to safely clean vinyl siding, brick, stucco, and painted surfaces — removing mold, mildew, and algae without forcing water behind boards. Residential pressure washing you can trust."
         category="Residential"
         benefits={[
-          "Soft washing safe for delicate surfaces",
-          "Removes mold, mildew, and algae",
+          "Soft wash house washing safe for vinyl, brick & stucco",
+          "Removes mold, mildew, algae & weathering stains",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

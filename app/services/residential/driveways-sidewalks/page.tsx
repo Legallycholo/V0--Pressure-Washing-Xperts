@@ -48,12 +48,12 @@ export default function DrivewaySidewalkPage() {
       />
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
-        title="Driveway & Sidewalk Pressure Washing in Ellenwood, GA"
-        description="Expert driveway and sidewalk pressure washing in Ellenwood and Metro Atlanta that removes algae, tire marks, and deep surface buildup in a single visit."
+        title="Driveway Cleaning Near Me — Ellenwood & Atlanta, GA"
+        description="Professional driveway cleaning and power washing in Ellenwood GA and Metro Atlanta. We remove oil stains, dirt, mold, and mildew from driveways, sidewalks, and walkways using commercial surface-cleaner pressure washing for an even, streak-free result."
         category="Residential"
         benefits={[
-          "Commercial surface cleaner for flat concrete",
-          "Removes oil, rust, tire marks & algae",
+          "Commercial surface cleaner for driveway power washing",
+          "Removes oil, rust, tire marks & mildew from driveways & sidewalks",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

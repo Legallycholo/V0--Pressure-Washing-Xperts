@@ -18,9 +18,21 @@ const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Pressure Washing Xperts | #1 Pressure Washing in Ellenwood & Metro Atlanta",
+  title: "Pressure Washing Services in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
   description:
-    "Professional pressure washing, roof cleaning, and gutter services in Ellenwood, GA. 15+ years experience. Licensed & Insured. Get a free estimate today!",
+    "Pressure Washing Xperts offers professional pressure washing, soft washing, house washing, driveway cleaning, and roof cleaning in Ellenwood, GA and Metro Atlanta. Over 15 years of experience. Call (800) 451-7213.",
+  keywords: [
+    "pressure washing near me",
+    "pressure washing services",
+    "house washing near me",
+    "soft washing",
+    "pressure washing Ellenwood GA",
+    "pressure washing Atlanta",
+    "driveway cleaning near me",
+    "roof cleaning near me",
+    "residential pressure washing",
+    "power washing near me",
+  ],
   icons: {
     icon: [
       { url: "/site-tab-icon.png?v=3", type: "image/png", sizes: "512x512" },
@@ -62,9 +74,14 @@ export default function RootLayout({
     areaServed: ["Ellenwood, GA", "Metro Atlanta"],
     serviceType: [
       "Pressure Washing",
+      "Soft Washing",
+      "House Washing",
+      "Driveway Cleaning",
       "Roof Cleaning",
       "Gutter Cleaning",
-      "Soft Washing",
+      "Power Washing",
+      "Residential Pressure Washing",
+      "Exterior Cleaning",
     ],
   }
   return (

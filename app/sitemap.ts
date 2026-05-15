@@ -20,10 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const path of Object.keys(MARKETING_ROUTE_SEO)) {
     if (path === "/thank-you") continue
+    const isResidentialService = path.startsWith("/services/residential/")
     entries.push({
       url: absoluteUrl(path),
       lastModified: staticLastModIso,
-      changeFrequency: "monthly",
+      changeFrequency: isResidentialService ? "weekly" : "monthly",
       priority: path.startsWith("/services") ? 0.8 : 0.65,
     })
   }
