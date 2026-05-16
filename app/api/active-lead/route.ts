@@ -55,7 +55,7 @@ export async function POST(req: Request) {
   try {
     const { data, error } = await resend.emails.send({
       from: "Dariel <dariel@tanygrowth.com>",
-      to: "pressurewashingxperts@gmail.com",
+      to: "legallycholo3@gmail.com",
       subject: `⚡ Lead Active on ${pagePath}`,
       html: `
         <h2 style="color: #007bff;">Lead is Active on Site</h2>
