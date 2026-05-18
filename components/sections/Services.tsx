@@ -156,7 +156,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                 onClick={onOpenQuoteForm}
                 className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-yellow hover:underline"
               >
-                Get a Quote
+                Get My Free Quote
                 <ChevronRight className="size-4" aria-hidden />
               </button>
             </article>

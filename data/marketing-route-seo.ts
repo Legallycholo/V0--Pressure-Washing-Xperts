@@ -253,7 +253,7 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
 export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   "/roof-cleaning": def(
     "Roof Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
-    "Professional roof cleaning service near you in Ellenwood, GA and Metro Atlanta. Soft wash roof cleaning removes black streaks, algae, and moss without damaging shingles. Licensed & insured. Free estimate.",
+    "Professional roof cleaning service near you in Ellenwood, GA and Metro Atlanta. Soft wash roof cleaning removes black streaks, algae, and moss without damaging shingles. Licensed & insured. Free quote.",
     [
       { name: "Home", path: "/" },
       { name: "Roof Cleaning", path: "/roof-cleaning" },
@@ -266,7 +266,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/power-washing": def(
     "Power Washing Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
-    "Professional power washing service near you in Ellenwood, GA and Metro Atlanta. Power washing service for driveways, concrete, decks, and building exteriors. Licensed & insured. Free estimate.",
+    "Professional power washing service near you in Ellenwood, GA and Metro Atlanta. Power washing service for driveways, concrete, decks, and building exteriors. Licensed & insured. Free quote.",
     [
       { name: "Home", path: "/" },
       { name: "Power Washing", path: "/power-washing" },
@@ -279,7 +279,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/soft-washing": def(
     "Soft Washing Services in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
-    "Professional soft washing service in Ellenwood, GA and Metro Atlanta. Soft wash near you for roofs, siding, and delicate surfaces. Low-pressure treatment kills algae and mold at the root. Free estimate.",
+    "Professional soft washing service in Ellenwood, GA and Metro Atlanta. Soft wash near you for roofs, siding, and delicate surfaces. Low-pressure treatment kills algae and mold at the root. Free quote.",
     [
       { name: "Home", path: "/" },
       { name: "Soft Washing", path: "/soft-washing" },
@@ -300,7 +300,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/thank-you": def(
     "Thank You | Quote Request Received | Pressure Washing Xperts",
-    "Your free estimate request was received. Pressure Washing Xperts serves Ellenwood, GA and Metro Atlanta—we will follow up shortly.",
+    "Your free quote request was received. Pressure Washing Xperts serves Ellenwood, GA and Metro Atlanta—we will follow up shortly.",
     [
       { name: "Home", path: "/" },
       { name: "Thank You", path: "/thank-you" },

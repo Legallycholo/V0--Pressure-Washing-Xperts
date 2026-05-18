@@ -244,7 +244,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
             </h1>
 
             <p className="mt-3 text-brand-yellow font-semibold text-sm sm:text-base">
-              Licensed &amp; Insured · Free Estimates · Residential &amp; Commercial
+              Licensed &amp; Insured · Free Quotes · Residential &amp; Commercial
             </p>
 
             <p className="mt-4 max-w-2xl text-base text-white/85 leading-relaxed sm:text-lg lg:mx-0 mx-auto">
@@ -259,7 +259,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                 size="lg"
                 className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg min-h-[44px] ${ctaPress}`}
               >
-                Get My Free Estimate
+                Get My Free Quote
               </Button>
               <Button
                 asChild

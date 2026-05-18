@@ -174,7 +174,7 @@ export default function SoftWashingPage() {
               Schedule Your Soft Washing Service
             </h2>
             <p className="text-white/75 mb-8 text-sm sm:text-base">
-              Serving Ellenwood, Stockbridge, Decatur, McDonough, Conyers, and all of Metro Atlanta. Licensed &amp; insured. Free estimates.
+              Serving Ellenwood, Stockbridge, Decatur, McDonough, Conyers, and all of Metro Atlanta. Licensed &amp; insured. Free quotes.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
@@ -182,7 +182,7 @@ export default function SoftWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-                Get a Free Estimate
+                Get a Free Quote
               </Button>
               <a
                 href="tel:800-451-7213"

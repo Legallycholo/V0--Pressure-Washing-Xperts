@@ -26,11 +26,10 @@ export function ContactSection() {
               Contact Us
             </p>
             <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance mb-4">
-              Ready for a Free Estimate?
+              Ready for a Free Quote?
             </h2>
             <p className="text-white/70 text-base leading-relaxed mb-6">
-              Tell us what you want cleaned. We usually reply within one business day.
-              Prefer phone? Call or text anytime—we answer 24/7.
+              Fill out the form and we&apos;ll schedule a free on-site visit — we come to your property, assess the job, and give you a straight price. No guessing, no obligation.
             </p>
 
             {/* Contact Cards */}

@@ -54,7 +54,7 @@ export function ServicePageTemplate({
     "Eco-Friendly Cleaning Solutions",
     "Licensed & Insured",
     "Satisfaction Guaranteed",
-    "Free Estimates",
+    "Free Quotes",
     "Competitive Pricing"
   ],
   onOpenQuoteForm,

@@ -94,7 +94,7 @@ export function ServiceCategoryHubTemplate({
               onClick={onOpenQuoteForm}
               className="mt-4 bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
             >
-              Request a Free Estimate
+              Get a Free Quote
             </Button>
           </div>
         </div>

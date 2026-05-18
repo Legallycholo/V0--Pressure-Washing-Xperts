@@ -128,7 +128,7 @@ export default function PowerWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-                Get a Free Estimate
+                Get a Free Quote
               </Button>
               <a
                 href="tel:800-451-7213"

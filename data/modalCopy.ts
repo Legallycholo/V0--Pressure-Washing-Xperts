@@ -1,16 +1,16 @@
 /** Default quote modal (header, services, FAQ, etc.) */
 export const modalCopyDefault = {
-  headline: "Get your free estimate",
+  headline: "Book your free on-site quote",
   subline:
-    "Tell us what you need. We usually reply within one business day.",
-  badge: "Free estimate",
-  submitLabel: "Send my quote request",
+    "We come to your property, look at the job, and give you a straight price — no guessing, no obligation.",
+  badge: "Free on-site quote",
+  submitLabel: "Request my free on-site quote",
   successExtra: null as string | null,
-  successLead: "Your quote request was sent successfully.",
+  successLead: "We'll reach out to schedule your free on-site visit.",
   successFollowUp:
-    "We usually respond within one business day. You may get a call or text from (800) 451-7213.",
+    "We usually call or text within one business day to book your on-site quote. You may hear from us at (800) 451-7213.",
   trustNote:
-    "Licensed and insured. Free estimate. We only use your contact info to follow up.",
+    "No commitment required. We come to you, assess the job, and give you an exact price.",
 }
 
 /** Opened from Special Offers: Claim Offer */

@@ -230,7 +230,7 @@ export function ContactQuoteForm({
       how_heard: formData.howHeard,
       selected_offer: formData.selectedOffer,
       approx_sqft_estimate: formData.approxSqftEstimate,
-      submission_type: "Get my free estimate",
+      submission_type: "Free on-site quote",
       page_path: pathname ?? undefined,
       utm_source: utms.utm_source,
       utm_medium: utms.utm_medium,
