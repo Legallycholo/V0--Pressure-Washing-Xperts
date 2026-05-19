@@ -95,16 +95,13 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-EK4M4BMN05"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18151841356"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics-gtag" strategy="afterInteractive">{`
+        <Script id="google-ads-gtag" strategy="afterInteractive">{`
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-EK4M4BMN05', {
-    send_page_view: true
-  });
   gtag('config', 'AW-18151841356');
 `}</Script>
         <Script id="active-lead-activity" strategy="afterInteractive">{`
@@ -118,18 +115,10 @@ if (typeof window !== 'undefined') {
 
     const timeSpentSeconds = Math.round((Date.now() - startTime) / 1000);
 
-    let ga_id = null;
-    try {
-      if (typeof gtag === 'function') {
-        gtag('get', 'G-EK4M4BMN05', 'client_id', (id) => { ga_id = id; });
-      }
-    } catch (_) {}
-
     fetch('/api/active-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        ga_id,
         url: window.location.href,
         trigger_reason: reason,
         time_spent: \`\${timeSpentSeconds} seconds\`,
