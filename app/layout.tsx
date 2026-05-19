@@ -6,7 +6,7 @@ import "./globals.css"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { AppProviders } from "@/components/providers/AppProviders"
 import { UTMCapture } from "@/components/UTMCapture"
-import { VoiceflowChat } from "@/components/VoiceflowChat"
+import { ChrisChatWidget } from "@/components/ChrisChatWidget"
 import { businessLegalName } from "@/data/site"
 import {
   buildGlobalJsonLdGraph,
@@ -170,9 +170,9 @@ if (typeof window !== 'undefined') {
           <UTMCapture />
           {children}
         </AppProviders>
+        <ChrisChatWidget />
         <Analytics />
         <SpeedInsights />
-        <VoiceflowChat />
       </body>
     </html>
   )
