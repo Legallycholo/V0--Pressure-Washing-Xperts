@@ -42,8 +42,6 @@ import {
   SQFT_RANGE_OPTIONS,
 } from "@/data/sqftEstimateOptions"
 import { submitLeadRequest } from "@/lib/submitLead"
-import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
-import { getDeviceTag, getUTMParams } from "@/lib/analytics"
 
 export type QuoteFormCopy = typeof modalCopyDefault
 
@@ -112,14 +110,6 @@ export function ContactQuoteForm({
   const premiumOffer = useMemo(() => getPremiumOffer(), [])
 
   const openedWithOfferIntent = Boolean(initialOfferId)
-
-  useEffect(() => {
-    if (getUTMParams().utm_medium === "cpc") {
-      setFormData((prev) =>
-        prev.howHeard ? prev : { ...prev, howHeard: "google-ad" }
-      )
-    }
-  }, [])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -216,9 +206,6 @@ export function ContactQuoteForm({
     setIsSubmitting(true)
     setSubmitError(null)
 
-    const utms = getUTMParams()
-    const device = getDeviceTag()
-
     const result = await submitLeadRequest({
       full_name: formData.fullName,
       email: formData.email,
@@ -232,13 +219,6 @@ export function ContactQuoteForm({
       approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: "Free on-site quote",
       page_path: pathname ?? undefined,
-      utm_source: utms.utm_source,
-      utm_medium: utms.utm_medium,
-      utm_campaign: utms.utm_campaign,
-      utm_term: utms.utm_term,
-      utm_content: utms.utm_content,
-      gclid: utms.gclid,
-      device,
     })
 
     setIsSubmitting(false)
@@ -247,17 +227,6 @@ export function ContactQuoteForm({
       setSubmitError(result.error)
       return
     }
-
-    trackLeadFormSubmit({
-      utmSource: utms.utm_source,
-      utmMedium: utms.utm_medium,
-      utmCampaign: utms.utm_campaign,
-      utmTerm: utms.utm_term,
-      utmContent: utms.utm_content,
-      gclid: utms.gclid,
-      device,
-      pagePath: pathname ?? undefined,
-    })
 
     if (successRedirectHref) {
       const qs =

@@ -28,7 +28,6 @@ export function useGoToHomeQuoteSection() {
     (opts?: {
       target?: HomeQuoteTarget
       offerId?: OfferId
-      utm?: { source: string; medium: string; campaign: string }
     }) => {
       const target = opts?.target ?? "contact"
       const sectionId =
@@ -38,15 +37,9 @@ export function useGoToHomeQuoteSection() {
             ? "contact-form"
             : "contact"
       const offer = opts?.offerId
-      const utm = opts?.utm
 
       const params = new URLSearchParams()
       if (offer) params.set("offer", offer)
-      if (utm) {
-        params.set("utm_source", utm.source)
-        params.set("utm_medium", utm.medium)
-        params.set("utm_campaign", utm.campaign)
-      }
       const qs = params.toString()
       const path = qs ? `/?${qs}#${sectionId}` : `/#${sectionId}`
 

@@ -18,9 +18,6 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
   if (!apiKey) return
   const resend = new Resend(apiKey)
   const pagePath = payload.page_path ? escapeHtml(payload.page_path) : "—"
-  const utm = [payload.utm_source, payload.utm_medium, payload.utm_campaign]
-    .filter(Boolean)
-    .join(" / ")
   await resend.emails.send({
     from: "Dariel <dariel@tanygrowth.com>",
     to: "pressurewashingxpert@gmail.com",
@@ -37,8 +34,6 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
         <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Rough Estimate</strong></td><td style="padding:8px;border:1px solid #ddd;">$${roughPrice}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Page</strong></td><td style="padding:8px;border:1px solid #ddd;">${pagePath}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;"><strong>How Heard</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.how_heard || "—")}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>UTM</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(utm || "—")}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Device</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.device || "—")}</td></tr>
       </table>
     `,
   }).catch((e) => console.error("[api/leads] Resend notification failed", e))

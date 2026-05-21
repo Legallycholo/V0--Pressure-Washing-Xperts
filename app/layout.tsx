@@ -5,7 +5,6 @@ import Script from "next/script"
 import "./globals.css"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { AppProviders } from "@/components/providers/AppProviders"
-import { UTMCapture } from "@/components/UTMCapture"
 import { ChrisChatWidget } from "@/components/ChrisChatWidget"
 import { businessLegalName } from "@/data/site"
 import {
@@ -94,16 +93,6 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18151841356"
-          strategy="afterInteractive"
-        />
-        <Script id="google-ads-gtag" strategy="afterInteractive">{`
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18151841356');
-`}</Script>
         <Script id="active-lead-activity" strategy="afterInteractive">{`
 if (typeof window !== 'undefined') {
   const startTime = Date.now();
@@ -156,7 +145,6 @@ if (typeof window !== 'undefined') {
 `}</Script>
         <JsonLd data={buildGlobalJsonLdGraph(base, logoUrl)} />
         <AppProviders>
-          <UTMCapture />
           {children}
         </AppProviders>
         <ChrisChatWidget />

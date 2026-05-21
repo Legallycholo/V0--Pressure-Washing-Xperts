@@ -31,8 +31,6 @@ import {
   type OfferId,
 } from "@/data/offers"
 import { submitLeadRequest } from "@/lib/submitLead"
-import { trackLeadFormSubmit } from "@/lib/leadAnalytics"
-import { getDeviceTag, getUTMParams } from "@/lib/analytics"
 import residentialHeroImage from "@/public/services/home-residential.png"
 
 interface HeroProps {
@@ -77,14 +75,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
     }))
   }, [initialOfferId])
 
-  useEffect(() => {
-    if (getUTMParams().utm_medium === "cpc") {
-      setFormData((prev) =>
-        prev.howHeard ? prev : { ...prev, howHeard: "google-ad" }
-      )
-    }
-  }, [])
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -118,9 +108,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
 
     setIsSubmitting(true)
 
-    const utms = getUTMParams()
-    const device = getDeviceTag()
-
     const result = await submitLeadRequest({
       full_name: formData.fullName,
       email: formData.email,
@@ -134,13 +121,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       approx_sqft_estimate: formData.approxSqftEstimate,
       submission_type: modalCopyDefault.badge,
       page_path: pathname ?? undefined,
-      utm_source: utms.utm_source,
-      utm_medium: utms.utm_medium,
-      utm_campaign: utms.utm_campaign,
-      utm_term: utms.utm_term,
-      utm_content: utms.utm_content,
-      gclid: utms.gclid,
-      device,
     })
 
     setIsSubmitting(false)
@@ -149,17 +129,6 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       setSubmitError(result.error)
       return
     }
-
-    trackLeadFormSubmit({
-      utmSource: utms.utm_source,
-      utmMedium: utms.utm_medium,
-      utmCampaign: utms.utm_campaign,
-      utmTerm: utms.utm_term,
-      utmContent: utms.utm_content,
-      gclid: utms.gclid,
-      device,
-      pagePath: pathname ?? undefined,
-    })
 
     setIsSubmitted(true)
     setFormStep(1)

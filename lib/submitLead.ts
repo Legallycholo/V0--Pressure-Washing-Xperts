@@ -26,13 +26,6 @@ export type LeadPayload = {
   approx_sqft_estimate?: string
   submission_type?: string
   page_path?: string
-  utm_source?: string
-  utm_medium?: string
-  utm_campaign?: string
-  utm_term?: string
-  utm_content?: string
-  gclid?: string
-  device?: string
 }
 
 /** Row shape for `public.leads` (matches `supabase/migrations/*_create_leads.sql` and later migrations). */
@@ -53,13 +46,6 @@ export type LeadInsertRow = {
   approx_sq_footage: string | null
   submission_type: string | null
   page_path: string | null
-  utm_source: string | null
-  utm_medium: string | null
-  utm_campaign: string | null
-  utm_term: string | null
-  utm_content: string | null
-  gclid: string | null
-  device: string | null
 }
 
 export type SubmitLeadResult =
@@ -177,13 +163,6 @@ export function buildLeadInsertRow(
       rough_price_version: pricing.roughPriceVersion,
       submission_type: payload.submission_type?.trim() || null,
       page_path: payload.page_path?.trim() || null,
-      utm_source: payload.utm_source?.trim() || null,
-      utm_medium: payload.utm_medium?.trim() || null,
-      utm_campaign: payload.utm_campaign?.trim() || null,
-      utm_term: payload.utm_term?.trim() || null,
-      utm_content: payload.utm_content?.trim() || null,
-      gclid: payload.gclid?.trim() || null,
-      device: payload.device?.trim() || null,
     },
   }
 }
