@@ -2,6 +2,7 @@ import {
   isValidApproxSqftEstimateForStorage,
   SQFT_RANGE_OPTIONS,
 } from "@/data/sqftEstimateOptions"
+import { getUTMParams, getDeviceTag } from "@/lib/analytics"
 
 const PRICE_FLOOR = 250
 const ROUGH_PRICE_VERSION = "v1_2026_04_floor250"
@@ -26,6 +27,13 @@ export type LeadPayload = {
   approx_sqft_estimate?: string
   submission_type?: string
   page_path?: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_term?: string
+  utm_content?: string
+  gclid?: string
+  device?: string
 }
 
 /** Row shape for `public.leads` (matches `supabase/migrations/*_create_leads.sql` and later migrations). */
@@ -46,6 +54,13 @@ export type LeadInsertRow = {
   approx_sq_footage: string | null
   submission_type: string | null
   page_path: string | null
+  utm_source: string | null
+  utm_medium: string | null
+  utm_campaign: string | null
+  utm_term: string | null
+  utm_content: string | null
+  gclid: string | null
+  device: string | null
 }
 
 export type SubmitLeadResult =
@@ -163,6 +178,13 @@ export function buildLeadInsertRow(
       rough_price_version: pricing.roughPriceVersion,
       submission_type: payload.submission_type?.trim() || null,
       page_path: payload.page_path?.trim() || null,
+      utm_source: payload.utm_source ?? null,
+      utm_medium: payload.utm_medium ?? null,
+      utm_campaign: payload.utm_campaign ?? null,
+      utm_term: payload.utm_term ?? null,
+      utm_content: payload.utm_content ?? null,
+      gclid: payload.gclid ?? null,
+      device: payload.device ?? null,
     },
   }
 }
@@ -170,7 +192,19 @@ export function buildLeadInsertRow(
 export async function submitLeadRequest(
   payload: LeadPayload
 ): Promise<SubmitLeadResult> {
-  const built = buildLeadInsertRow(payload)
+  const utms = getUTMParams()
+  const enrichedPayload: LeadPayload = {
+    ...payload,
+    utm_source: utms.utm_source ?? undefined,
+    utm_medium: utms.utm_medium ?? undefined,
+    utm_campaign: utms.utm_campaign ?? undefined,
+    utm_term: utms.utm_term ?? undefined,
+    utm_content: utms.utm_content ?? undefined,
+    gclid: utms.gclid ?? undefined,
+    device: utms.device ?? getDeviceTag(),
+  }
+
+  const built = buildLeadInsertRow(enrichedPayload)
   if ("error" in built) {
     return { ok: false, error: built.error }
   }
@@ -179,7 +213,7 @@ export async function submitLeadRequest(
     const res = await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(enrichedPayload),
     })
 
     const data: unknown = await res.json().catch(() => ({}))

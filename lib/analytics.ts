@@ -1,114 +1,46 @@
-/**
- * UTM + click-id capture for ad attribution.
- *
- * - Persists Google Ads / paid-traffic params to sessionStorage so attribution
- *   survives internal navigation (user lands on /, browses, then submits a form).
- * - First-touch wins: once a session has values stored, later page loads with
- *   missing/empty UTMs do not overwrite them. This prevents an internal click
- *   that strips query params from erasing the original ad source.
- */
-
-/** Persisted in `sessionStorage`; inline scripts (e.g. thank-you) must use this exact key. */
-const STORAGE_KEY = "utm_params"
-
-const UTM_KEYS = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_term",
-  "utm_content",
-] as const
-
-const CLICK_KEYS = ["gclid"] as const
-
-type UTMKey = (typeof UTM_KEYS)[number]
-type ClickKey = (typeof CLICK_KEYS)[number]
-
-export type UTMParams = Partial<Record<UTMKey | ClickKey, string>>
-
-const ALL_KEYS: ReadonlyArray<UTMKey | ClickKey> = [...UTM_KEYS, ...CLICK_KEYS]
-
-function safeSessionStorage(): Storage | null {
-  try {
-    if (typeof window === "undefined") return null
-    return window.sessionStorage
-  } catch {
-    return null
-  }
+export interface UTMParams {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_term?: string
+  utm_content?: string
+  gclid?: string
+  device?: string
 }
 
-function readStored(): UTMParams {
-  const ss = safeSessionStorage()
-  if (!ss) return {}
-  try {
-    const raw = ss.getItem(STORAGE_KEY)
-    if (!raw) return {}
-    const parsed: unknown = JSON.parse(raw)
-    if (!parsed || typeof parsed !== "object") return {}
-    const out: UTMParams = {}
-    for (const k of ALL_KEYS) {
-      const v = (parsed as Record<string, unknown>)[k]
-      if (typeof v === "string" && v.trim()) out[k] = v.trim()
-    }
-    return out
-  } catch {
-    return {}
-  }
-}
+const SESSION_KEY = 'pwx_utms'
 
-function readFromUrl(): UTMParams {
-  if (typeof window === "undefined") return {}
-  try {
-    const sp = new URLSearchParams(window.location.search)
-    const out: UTMParams = {}
-    for (const k of ALL_KEYS) {
-      const v = sp.get(k)
-      if (v && v.trim()) out[k] = v.trim()
-    }
-    return out
-  } catch {
-    return {}
-  }
-}
-
-/**
- * Reads UTM + gclid from the current URL and persists to sessionStorage.
- * First-touch wins: if any value is already stored for this session, the
- * existing record is preserved (we don't overwrite source/medium/campaign).
- *
- * Safe to call on every client mount. No-op on the server.
- */
 export function captureUTMs(): void {
-  const ss = safeSessionStorage()
-  if (!ss) return
+  if (typeof window === 'undefined') return
+  if (sessionStorage.getItem(SESSION_KEY)) return // first-touch only, never overwrite
+  const params = new URLSearchParams(window.location.search)
+  const utms: UTMParams = {
+    utm_source: params.get('utm_source') ?? undefined,
+    utm_medium: params.get('utm_medium') ?? undefined,
+    utm_campaign: params.get('utm_campaign') ?? undefined,
+    utm_term: params.get('utm_term') ?? undefined,
+    utm_content: params.get('utm_content') ?? undefined,
+    gclid: params.get('gclid') ?? undefined,
+    device: getDeviceTag(),
+  }
+  const hasData = Object.values(utms).some(Boolean)
+  if (hasData) sessionStorage.setItem(SESSION_KEY, JSON.stringify(utms))
+}
 
-  const existing = readStored()
-  const hasExisting = Object.keys(existing).length > 0
-  if (hasExisting) return
-
-  const incoming = readFromUrl()
-  if (Object.keys(incoming).length === 0) return
-
+export function getUTMParams(): UTMParams {
+  if (typeof window === 'undefined') return {}
   try {
-    ss.setItem(STORAGE_KEY, JSON.stringify(incoming))
+    const raw = sessionStorage.getItem(SESSION_KEY)
+    return raw ? (JSON.parse(raw) as UTMParams) : {}
   } catch {
-    // Quota or private-mode failure: ignore — attribution is best-effort.
+    return {}
   }
 }
 
-/** Returns the stored UTM + click params for form payloads / analytics events. */
-export function getUTMParams(): UTMParams {
-  return readStored()
-}
-
-/**
- * Coarse device classification for the `leads.device` column.
- * Mirrors the visitor-tracker logic in app/layout.tsx so reporting is consistent.
- */
-export function getDeviceTag(): "Mobile" | "Tablet" | "Desktop" {
-  if (typeof navigator === "undefined") return "Desktop"
-  const ua = navigator.userAgent || ""
-  if (/iPad|Tablet|PlayBook|Silk/i.test(ua)) return "Tablet"
-  if (/Mobi|Android|iPhone|iPod/i.test(ua)) return "Mobile"
-  return "Desktop"
+export function getDeviceTag(): string {
+  if (typeof window === 'undefined') return 'Desktop'
+  const ua = navigator.userAgent
+  if (/Mobi|Android/i.test(ua)) return 'Mobile'
+  if (/Tablet|iPad/i.test(ua)) return 'Tablet'
+  return 'Desktop'
 }

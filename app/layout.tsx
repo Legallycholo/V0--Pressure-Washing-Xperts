@@ -12,6 +12,7 @@ import {
   defaultLogoAbsoluteUrl,
 } from "@/lib/seo/json-ld-builders"
 import { getSiteUrl } from "@/lib/site-url"
+import { UTMCapture } from "@/components/UTMCapture"
 
 const siteUrl = getSiteUrl()
 
@@ -144,6 +145,7 @@ if (typeof window !== 'undefined') {
   })();
 `}</Script>
         <JsonLd data={buildGlobalJsonLdGraph(base, logoUrl)} />
+        <UTMCapture />
         <AppProviders>
           {children}
         </AppProviders>
