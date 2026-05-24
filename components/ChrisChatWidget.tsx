@@ -67,6 +67,7 @@ export function ChrisChatWidget() {
   ])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [sessionId, setSessionId] = useState<string | null>(null)
 
   /* Attention state */
   const [showBubble, setShowBubble] = useState(false)
@@ -107,7 +108,6 @@ export function ChrisChatWidget() {
     return () => clearTimeout(timer)
   }, [isOpen])
 
-  /* TODO: wire up to your chat backend here */
   const sendMessage = useCallback(async () => {
     const text = input.trim()
     if (!text || isLoading) return
@@ -117,18 +117,54 @@ export function ChrisChatWidget() {
     setInput('')
     setIsLoading(true)
 
-    // Placeholder — replace with your backend call
-    await new Promise((r) => setTimeout(r, 600))
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `a_${Date.now()}`,
-        role: 'assistant',
-        text: "Thanks for reaching out! Give us a call at (800)\u00a0451-7213 for immediate help.",
-      },
-    ])
-    setIsLoading(false)
-  }, [input, isLoading])
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, sessionId }),
+      })
+      const data = (await res.json()) as {
+        reply?: string
+        sessionId?: string
+        error?: string
+      }
+
+      if (!res.ok || !data.reply) {
+        throw new Error(
+          data.error ??
+            'Sorry, I had trouble responding. Call us at (800) 451-7213 for immediate help.',
+        )
+      }
+
+      if (data.sessionId) {
+        setSessionId(data.sessionId)
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `a_${Date.now()}`,
+          role: 'assistant',
+          text: data.reply,
+        },
+      ])
+    } catch (error) {
+      const fallback =
+        error instanceof Error
+          ? error.message
+          : 'Sorry, I had trouble responding. Call us at (800) 451-7213 for immediate help.'
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `a_${Date.now()}`,
+          role: 'assistant',
+          text: fallback,
+        },
+      ])
+    } finally {
+      setIsLoading(false)
+    }
+  }, [input, isLoading, sessionId])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {

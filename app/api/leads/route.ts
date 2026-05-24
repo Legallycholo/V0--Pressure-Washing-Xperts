@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server"
+import { randomUUID } from "crypto"
 import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
-import { createServiceRoleClient } from "@/utils/supabase/admin"
-import { createClient } from "@/utils/supabase/server"
-import { getSupabasePublishableKey, getSupabaseUrl } from "@/utils/supabase/env"
+import { insertInboundLead } from "@/lib/bigqueryLeads"
 
 function escapeHtml(s: string): string {
   return s
@@ -67,53 +66,28 @@ export async function POST(request: Request) {
   }
 
   const { row } = built
-
-  const url = getSupabaseUrl()
-  if (!url) {
-    console.error("[api/leads] Missing Supabase URL")
-    return NextResponse.json(
-      { error: "Submission is temporarily unavailable. Please try again later." },
-      { status: 503 }
-    )
-  }
-
-  const service = createServiceRoleClient()
-  if (service) {
-    const { error } = await service.from("leads").insert(row)
-    if (error) {
-      console.error("[api/leads] Supabase insert failed (service role)", error)
-      return NextResponse.json(
-        { error: "We couldn't save your request. Please try again in a moment." },
-        { status: 500 }
-      )
-    }
-    void sendLeadNotification(body, row.rough_price_estimate ?? 0)
-    return NextResponse.json({ ok: true })
-  }
-
-  const publishable = getSupabasePublishableKey()
-  if (!publishable) {
-    console.error("[api/leads] Missing Supabase publishable key")
-    return NextResponse.json(
-      { error: "Submission is temporarily unavailable. Please try again later." },
-      { status: 503 }
-    )
-  }
-
   try {
-    const supabase = await createClient()
-    const { error } = await supabase.from("leads").insert(row)
-    if (error) {
-      console.error("[api/leads] Supabase insert failed (anon)", error)
-      return NextResponse.json(
-        { error: "We couldn't save your request. Please try again in a moment." },
-        { status: 500 }
-      )
-    }
+    await insertInboundLead({
+      lead_id: randomUUID(),
+      created_at: new Date().toISOString(),
+      submission_source: "website-form",
+      submission_type: row.submission_type,
+      full_name: row.full_name,
+      phone: row.phone,
+      email: row.email,
+      city: row.city,
+      state: row.state ?? "GA",
+      zip: row.zip,
+      approx_sqft_estimate: row.approx_sqft_estimate,
+      how_heard: row.how_heard,
+      service_request: row.message,
+      page_path: row.page_path,
+    })
+
     void sendLeadNotification(body, row.rough_price_estimate ?? 0)
     return NextResponse.json({ ok: true })
   } catch (e) {
-    console.error("[api/leads] unexpected error", e)
+    console.error("[api/leads] BigQuery insert failed", e)
     return NextResponse.json(
       { error: "We couldn't save your request. Please try again in a moment." },
       { status: 500 }
