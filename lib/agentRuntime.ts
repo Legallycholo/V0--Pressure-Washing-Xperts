@@ -5,6 +5,8 @@ type AgentEvent = {
   content?: { parts?: AgentMessagePart[]; role?: string }
 }
 
+const RETRY_DELAYS_MS = [1200, 2500]
+
 function requiredEnv(name: string) {
   const value = process.env[name]
   if (!value) throw new Error(`Missing required env var: ${name}`)
@@ -44,6 +46,22 @@ function parseStreamEvents(body: string): AgentEvent[] {
     }
   }
   return events
+}
+
+function isRateLimitError(text: string) {
+  const normalized = text.toLowerCase()
+  return (
+    normalized.includes('"code": 429') ||
+    normalized.includes("resource_exhausted") ||
+    normalized.includes("rate limit") ||
+    normalized.includes("too many requests")
+  )
+}
+
+function wait(ms: number) {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, ms)
+  })
 }
 
 // Creates a session via the native Vertex AI session API (not the ADK REST method).
@@ -103,32 +121,58 @@ export async function runAgent(params: {
     params.sessionId ?? (await createAdkSession(base, resourceId, params.userId, token))
 
   const streamEndpoint = `${base}/reasoningEngines/${resourceId}:streamQuery`
-  const response = await fetch(streamEndpoint, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      input: {
-        message: params.message,
-        user_id: params.userId,
-        session_id: sessionId,
-      },
-      class_method: "stream_query",
-    }),
-    cache: "no-store",
-  })
+  let lastBody = ""
+  let lastStatus = 0
+  let shouldRetry = false
 
-  if (!response.ok) {
-    const errText = await response.text().catch(() => "")
-    throw new Error(`Agent runtime error ${response.status}: ${errText}`)
+  for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt += 1) {
+    shouldRetry = false
+    const response = await fetch(streamEndpoint, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: {
+          message: params.message,
+          user_id: params.userId,
+          session_id: sessionId,
+        },
+        class_method: "stream_query",
+      }),
+      cache: "no-store",
+    })
+
+    lastStatus = response.status
+    const body = await response.text().catch(() => "")
+    lastBody = body
+
+    if (!response.ok) {
+      shouldRetry = response.status === 429 && attempt < RETRY_DELAYS_MS.length
+      if (!shouldRetry) {
+        throw new Error(`Agent runtime error ${response.status}: ${body}`)
+      }
+    } else {
+      const events = parseStreamEvents(body)
+      const reply = extractAssistantText(events)
+      if (reply) {
+        return { reply, sessionId }
+      }
+      shouldRetry = isRateLimitError(body) && attempt < RETRY_DELAYS_MS.length
+      if (!shouldRetry) {
+        console.error("[agentRuntime] unexpected response body:", body.slice(0, 800))
+        throw new Error("Agent returned no assistant text.")
+      }
+    }
+
+    if (shouldRetry) {
+      const delay = RETRY_DELAYS_MS[attempt]
+      console.warn(
+        `[agentRuntime] rate-limited by model provider; retrying in ${delay}ms (attempt ${attempt + 1}/${RETRY_DELAYS_MS.length + 1})`,
+      )
+      await wait(delay)
+    }
   }
 
-  const body = await response.text()
-  const events = parseStreamEvents(body)
-  const reply = extractAssistantText(events)
-  if (!reply) {
-    console.error("[agentRuntime] unexpected response body:", body.slice(0, 800))
-    throw new Error("Agent returned no assistant text.")
-  }
-
-  return { reply, sessionId }
+  throw new Error(
+    `Agent runtime exhausted retries${lastStatus ? ` (${lastStatus})` : ""}: ${lastBody.slice(0, 300)}`,
+  )
 }
