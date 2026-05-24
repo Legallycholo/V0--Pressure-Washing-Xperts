@@ -9,7 +9,7 @@ root_agent = LlmAgent(
     description=(
         "Lead capture assistant for Pressure Washing Xperts. "
         "Greets visitors, presents current offers, answers service questions, "
-        "and collects quote request information for customers anywhere in Georgia."
+        "and collects quote request information for Metro Atlanta customers."
     ),
     instruction=SYSTEM_PROMPT,
     tools=[submit_lead],

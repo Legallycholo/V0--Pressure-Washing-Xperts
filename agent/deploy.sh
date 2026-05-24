@@ -52,22 +52,20 @@ if [[ "${1:-}" == "--new" ]]; then
   echo "   and in Vercel environment variables with the new resource ID."
 else
   echo "🔄 Updating existing Vertex AI Agent Engine ($ENGINE_ID)..."
-  python3 - <<'PYEOF'
-import os, sys
-import vertexai
-from vertexai import agent_engines
-from vertexai.agent_engines import AdkApp
-
-# Add agent dir to path so imports resolve
-agent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, agent_dir)
-
-from pressure_washing_xperts___lead_agent.agent import root_agent
-
-vertexai.init(project="pressurewashing-xperts", location="us-west1")
-
-engine = agent_engines.ReasoningEngine("projects/pressurewashing-xperts/locations/us-west1/reasoningEngines/3947273131994906624")
-engine.update(reasoning_engine=AdkApp(agent=root_agent, enable_tracing=False))
-print("✅ Agent updated successfully.")
-PYEOF
+  AGENT_PKG="$SCRIPT_DIR/pressure_washing_xperts___lead_agent"
+  if adk deploy agent_engine \
+    --project="$PROJECT" \
+    --region="$REGION" \
+    --agent_engine_id="$ENGINE_ID" \
+    --display_name="$DISPLAY_NAME" \
+    --description="$DESCRIPTION" \
+    --no-trace_to_cloud \
+    "$AGENT_PKG"; then
+    echo ""
+    echo "✅ Deploy complete."
+  else
+    echo ""
+    echo "❌ Deploy failed. Retry ./agent/deploy.sh or check Cloud logs."
+    exit 1
+  fi
 fi
