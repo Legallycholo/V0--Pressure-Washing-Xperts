@@ -40,11 +40,12 @@ export async function POST(request: Request) {
     })
   }
 
-  const sessionId = asTrimmedString(body.sessionId) ?? randomUUID()
+  // null → agentRuntime will create a new ADK session automatically
+  const sessionId = asTrimmedString(body.sessionId)
 
   try {
-    const { reply } = await runAgent({ message, userId, sessionId })
-    return NextResponse.json({ reply, sessionId })
+    const { reply, sessionId: activeSessionId } = await runAgent({ message, userId, sessionId })
+    return NextResponse.json({ reply, sessionId: activeSessionId })
   } catch (error) {
     console.error("[api/chat] failed to run agent", error)
     return NextResponse.json(
