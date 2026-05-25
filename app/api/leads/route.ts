@@ -19,7 +19,7 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
   const pagePath = payload.page_path ? escapeHtml(payload.page_path) : "—"
   await resend.emails.send({
     from: "Dariel <dariel@tanygrowth.com>",
-    to: "pressurewashingxpert@gmail.com",
+    to: "dariel@tanygrowth.com",
     subject: `🔔 New Lead — ${payload.full_name} (${payload.phone})`,
     html: `
       <h2 style="color:#007bff;">New Quote Request</h2>
