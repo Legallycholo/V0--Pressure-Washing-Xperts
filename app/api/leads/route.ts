@@ -26,7 +26,7 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
 
   await resend.emails.send({
     from: "Dariel <dariel@tanygrowth.com>",
-    to: "dariel@tanygrowth.com",
+    to: "pressurewashingxperts@gmail.com",
     subject: `🔔 New Lead — ${payload.full_name} in ${payload.city || "Unknown"} (${payload.phone})`,
     html: `
 <!DOCTYPE html>
