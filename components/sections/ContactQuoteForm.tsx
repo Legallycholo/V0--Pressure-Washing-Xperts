@@ -29,6 +29,7 @@ import {
   SQFT_RANGE_OPTIONS,
 } from "@/data/sqftEstimateOptions"
 import { submitLeadRequest } from "@/lib/submitLead"
+import { trackLeadConversion } from "@/lib/leadAnalytics"
 
 export type QuoteFormCopy = typeof modalCopyDefault
 
@@ -153,6 +154,8 @@ export function ContactQuoteForm({
       setSubmitError(result.error)
       return
     }
+
+    trackLeadConversion()
 
     if (successRedirectHref) {
       const qs =

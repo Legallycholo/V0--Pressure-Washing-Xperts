@@ -31,6 +31,7 @@ import {
   type OfferId,
 } from "@/data/offers"
 import { submitLeadRequest } from "@/lib/submitLead"
+import { trackLeadConversion } from "@/lib/leadAnalytics"
 import residentialHeroImage from "@/public/services/home-residential.png"
 
 interface HeroProps {
@@ -129,6 +130,8 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       setSubmitError(result.error)
       return
     }
+
+    trackLeadConversion()
 
     setIsSubmitted(true)
     setFormStep(1)

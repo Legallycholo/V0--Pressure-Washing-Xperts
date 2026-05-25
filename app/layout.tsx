@@ -94,6 +94,18 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        {/* Google tag — loads GA4 + Google Ads on every page */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-EK4M4BMN05"
+        />
+        <Script id="google-tag" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EK4M4BMN05');
+          gtag('config', 'AW-18151841356');
+        `}</Script>
         <Script id="active-lead-activity" strategy="afterInteractive">{`
 if (typeof window !== 'undefined') {
   const startTime = Date.now();
