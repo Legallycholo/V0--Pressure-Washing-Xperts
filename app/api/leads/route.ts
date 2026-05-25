@@ -82,6 +82,13 @@ export async function POST(request: Request) {
       how_heard: row.how_heard,
       service_request: row.message,
       page_path: row.page_path,
+      utm_source: row.utm_source,
+      utm_medium: row.utm_medium,
+      utm_campaign: row.utm_campaign,
+      utm_term: row.utm_term,
+      utm_content: row.utm_content,
+      gclid: row.gclid,
+      device: row.device,
     })
 
     void sendLeadNotification(body, row.rough_price_estimate ?? 0)

@@ -19,6 +19,13 @@ export type InboundLeadRow = {
   service_request?: string | null
   page_path?: string | null
   conversation_id?: string | null
+  utm_source?: string | null
+  utm_medium?: string | null
+  utm_campaign?: string | null
+  utm_term?: string | null
+  utm_content?: string | null
+  gclid?: string | null
+  device?: string | null
 }
 
 function getCredentials() {
