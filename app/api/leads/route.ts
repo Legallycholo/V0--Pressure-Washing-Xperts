@@ -16,24 +16,127 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey) return
   const resend = new Resend(apiKey)
-  const pagePath = payload.page_path ? escapeHtml(payload.page_path) : "—"
+
+  const location = [payload.city, payload.state, payload.zip].filter(Boolean).join(", ") || "—"
+  const source = payload.utm_source
+    ? `${escapeHtml(payload.utm_source)}${payload.utm_medium ? ` / ${escapeHtml(payload.utm_medium)}` : ""}${payload.utm_campaign ? ` — ${escapeHtml(payload.utm_campaign)}` : ""}`
+    : payload.how_heard
+      ? escapeHtml(payload.how_heard)
+      : "Direct"
+
   await resend.emails.send({
     from: "Dariel <dariel@tanygrowth.com>",
     to: "dariel@tanygrowth.com",
-    subject: `🔔 New Lead — ${payload.full_name} (${payload.phone})`,
+    subject: `🔔 New Lead — ${payload.full_name} in ${payload.city || "Unknown"} (${payload.phone})`,
     html: `
-      <h2 style="color:#007bff;">New Quote Request</h2>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Name</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.full_name)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Phone</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.phone)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Email</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.email)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>City / State</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml([payload.city, payload.state].filter(Boolean).join(", ") || "—")}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Message</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.message || "—")}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Sqft Range</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.approx_sqft_estimate || "—")}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Rough Estimate</strong></td><td style="padding:8px;border:1px solid #ddd;">$${roughPrice}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>Page</strong></td><td style="padding:8px;border:1px solid #ddd;">${pagePath}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;"><strong>How Heard</strong></td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(payload.how_heard || "—")}</td></tr>
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#f4f6f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f8;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#0a2540;padding:28px 32px;">
+            <p style="margin:0 0 4px 0;font-size:12px;font-weight:600;letter-spacing:1px;color:#f0b429;text-transform:uppercase;">Pressure Washing Xperts</p>
+            <h1 style="margin:0;font-size:22px;font-weight:700;color:#ffffff;">New Quote Request</h1>
+            <p style="margin:6px 0 0 0;font-size:13px;color:#8899aa;">${new Date().toLocaleString("en-US", { timeZone: "America/New_York", dateStyle: "full", timeStyle: "short" })} ET</p>
+          </td>
+        </tr>
+
+        <!-- Price estimate banner -->
+        <tr>
+          <td style="background:#f0b429;padding:14px 32px;">
+            <p style="margin:0;font-size:13px;font-weight:600;color:#0a2540;">Rough Estimate &nbsp;·&nbsp; <span style="font-size:20px;">$${roughPrice}</span></p>
+          </td>
+        </tr>
+
+        <!-- Contact info -->
+        <tr>
+          <td style="padding:28px 32px 0;">
+            <p style="margin:0 0 16px 0;font-size:11px;font-weight:700;letter-spacing:1px;color:#8899aa;text-transform:uppercase;">Contact</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="padding-bottom:12px;">
+                  <p style="margin:0;font-size:20px;font-weight:700;color:#0a2540;">${escapeHtml(payload.full_name)}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-bottom:8px;">
+                  <a href="tel:${escapeHtml(payload.phone)}" style="font-size:16px;color:#0a72f5;text-decoration:none;font-weight:600;">📞 ${escapeHtml(payload.phone)}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-bottom:8px;">
+                  <a href="mailto:${escapeHtml(payload.email)}" style="font-size:14px;color:#0a72f5;text-decoration:none;">✉️ ${escapeHtml(payload.email)}</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p style="margin:0;font-size:14px;color:#445566;">📍 ${escapeHtml(location)}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr><td style="padding:20px 32px 0;"><hr style="border:none;border-top:1px solid #eef0f3;margin:0;" /></td></tr>
+
+        <!-- Project details -->
+        <tr>
+          <td style="padding:20px 32px 0;">
+            <p style="margin:0 0 12px 0;font-size:11px;font-weight:700;letter-spacing:1px;color:#8899aa;text-transform:uppercase;">Project Details</p>
+            <table width="100%" cellpadding="0" cellspacing="6">
+              <tr>
+                <td style="font-size:13px;color:#667788;width:40%;padding:4px 0;">Sqft estimate</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.approx_sqft_estimate || "—")}</td>
+              </tr>
+              <tr>
+                <td style="font-size:13px;color:#667788;padding:4px 0;vertical-align:top;">Description</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.message || "—")}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr><td style="padding:20px 32px 0;"><hr style="border:none;border-top:1px solid #eef0f3;margin:0;" /></td></tr>
+
+        <!-- Source -->
+        <tr>
+          <td style="padding:20px 32px 28px;">
+            <p style="margin:0 0 12px 0;font-size:11px;font-weight:700;letter-spacing:1px;color:#8899aa;text-transform:uppercase;">Lead Source</p>
+            <table width="100%" cellpadding="0" cellspacing="6">
+              <tr>
+                <td style="font-size:13px;color:#667788;width:40%;padding:4px 0;">Source</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${source}</td>
+              </tr>
+              <tr>
+                <td style="font-size:13px;color:#667788;padding:4px 0;">Device</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.device || "—")}</td>
+              </tr>
+              <tr>
+                <td style="font-size:13px;color:#667788;padding:4px 0;">Page</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${payload.page_path ? escapeHtml(payload.page_path) : "—"}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#f4f6f8;padding:16px 32px;border-top:1px solid #eef0f3;">
+            <p style="margin:0;font-size:11px;color:#aabbcc;text-align:center;">Pressure Washing Xperts · pressurewashingxperts.com</p>
+          </td>
+        </tr>
+
       </table>
+    </td></tr>
+  </table>
+</body>
+</html>
     `,
   }).catch((e) => console.error("[api/leads] Resend notification failed", e))
 }
