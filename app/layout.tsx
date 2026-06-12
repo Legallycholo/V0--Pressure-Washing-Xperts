@@ -18,6 +18,9 @@ const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "https://www.pressurewashingxpert.com",
+  },
   title: "Pressure Washing Services in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
   description:
     "Pressure Washing Xperts offers professional pressure washing, soft washing, house washing, driveway cleaning, and roof cleaning in Ellenwood, GA and Metro Atlanta. Over 15 years of experience. Call (800) 451-7213.",
@@ -44,6 +47,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: businessLegalName,
+    url: "https://www.pressurewashingxpert.com",
   },
   twitter: {
     card: "summary_large_image",
