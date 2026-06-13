@@ -170,17 +170,25 @@ async function sendSmsNotification(payload: LeadPayload, roughPrice: number) {
     Body: lines.join("\n"),
   })
 
-  await fetch(
-    `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
+  try {
+    const res = await fetch(
+      `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      }
+    )
+    if (!res.ok) {
+      const body = await res.text()
+      console.error(`[api/leads] Twilio SMS error ${res.status}:`, body)
     }
-  ).catch((e) => console.error("[api/leads] Twilio SMS failed", e))
+  } catch (e) {
+    console.error("[api/leads] Twilio SMS failed", e)
+  }
 }
 
 function isLeadPayload(body: unknown): body is LeadPayload {
