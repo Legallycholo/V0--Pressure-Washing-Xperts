@@ -15,7 +15,7 @@ export function FloatingCallButton() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 500)
+      setIsVisible(window.scrollY > 100)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })

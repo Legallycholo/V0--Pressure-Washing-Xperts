@@ -169,6 +169,48 @@ export const commercialServices: NavLinkItem[] = [
     summary:
       "Skylights, curbs, and equipment pads cleaned with low pressure safe around mechanicals.",
   },
+  {
+    href: "/services/commercial/apartment-complexes",
+    label: "Apartment Complexes",
+    summary:
+      "Exteriors, common areas, and unit entries cleaned to keep properties maintained and tenant-ready.",
+  },
+  {
+    href: "/services/commercial/office-buildings",
+    label: "Office Buildings",
+    summary:
+      "Commercial office spaces cleaned to maintain professional appearance and tenant satisfaction.",
+  },
+  {
+    href: "/services/commercial/government-complexes",
+    label: "Government Complexes",
+    summary:
+      "Government facilities and public buildings cleaned with compliance and professional standards.",
+  },
+  {
+    href: "/services/commercial/hotels-hospitality",
+    label: "Hotels & Hospitality",
+    summary:
+      "Hotel exteriors, grounds, and parking areas cleaned to keep properties guest-ready.",
+  },
+  {
+    href: "/services/commercial/gas-stations",
+    label: "Gas Stations",
+    summary:
+      "Pumps, canopies, and pavement cleaned to maintain a clean, welcoming appearance for customers.",
+  },
+  {
+    href: "/services/commercial/awning-cleaning",
+    label: "Awning Cleaning",
+    summary:
+      "Fabric and metal awnings cleaned safely to restore color and extend life without damage.",
+  },
+  {
+    href: "/services/commercial/parking-decks",
+    label: "Parking Decks",
+    summary:
+      "Multi-level parking structures cleaned with equipment access and safety protocols for occupied facilities.",
+  },
 ]
 
 export const aboutLinks: NavLinkItem[] = [

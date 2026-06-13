@@ -224,7 +224,7 @@ export function ChrisChatWidget() {
           </div>
 
           <a
-            href="tel:8004517213"
+            href="tel:+18004517213"
             className="text-blue-300 hover:text-[#fbbf24] transition-colors p-1.5 rounded-lg"
             aria-label="Call us"
             title="Call (800) 451-7213"
@@ -344,7 +344,7 @@ export function ChrisChatWidget() {
           <p className="text-xs text-slate-500">
             Prefer to talk?{' '}
             <a
-              href="tel:8004517213"
+              href="tel:+18004517213"
               className="font-semibold transition-colors"
               style={{ color: '#1e3a5f' }}
             >

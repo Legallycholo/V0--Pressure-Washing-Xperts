@@ -125,10 +125,10 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           scope. Offers are applied after the estimate, and final pricing will not go
           below $250. Offers cannot be combined. Call{" "}
           <a
-            href="tel:18004517213"
+            href="tel:+18004517213"
             className="font-semibold text-brand-blue underline-offset-2 hover:underline"
           >
-            1-800-451-7213
+            (800) 451-7213
           </a>{" "}
           for full terms.
         </p>

@@ -35,7 +35,7 @@ export default function ThankYouPage() {
         <section className="py-12">
           <div className="mx-auto max-w-lg px-4 sm:px-6 text-center space-y-6">
             <p className="text-gray-700 leading-relaxed">
-              Prefer not to wait? Call or text us anytime — we answer 24/7.
+              Prefer not to wait? Call or text us — we answer 7 days a week, 8am–10pm ET.
             </p>
             <a
               href="tel:800-451-7213"
