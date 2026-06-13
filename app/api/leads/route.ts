@@ -4,6 +4,7 @@ import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertInboundLead } from "@/lib/bigqueryLeads"
 import { businessSiteHost } from "@/data/site"
+import { sendLeadSms } from "@/lib/twilioNotify"
 
 function escapeHtml(s: string): string {
   return s
@@ -196,6 +197,18 @@ export async function POST(request: Request) {
     })
 
     void sendLeadNotification(body, row.rough_price_estimate ?? 0)
+    void sendLeadSms({
+      full_name: row.full_name,
+      email: row.email,
+      phone: row.phone,
+      city: row.city,
+      state: row.state,
+      zip: row.zip,
+      message: row.message,
+      selected_offer: row.selected_offer,
+      approx_sqft_estimate: row.approx_sqft_estimate,
+      rough_price_estimate: row.rough_price_estimate,
+    }).catch((e) => console.error("[api/leads] Twilio SMS failed", e))
     return NextResponse.json({ ok: true })
   } catch (e) {
     console.error("[api/leads] BigQuery insert failed", e)
