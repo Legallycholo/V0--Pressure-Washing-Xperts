@@ -22,15 +22,23 @@ export function buildContactSmsBody(payload: ContactSmsPayload): string {
 export async function sendContactSms(payload: ContactSmsPayload): Promise<void> {
   const config = getTwilioConfig()
   if (!config?.toNumber) {
+    console.log("[Twilio] SMS not configured - missing TWILIO_TO_NUMBER")
     throw new Error("Twilio SMS is not configured (missing TWILIO_TO_NUMBER).")
   }
 
+  console.log("[Twilio] Attempting to send contact SMS to", config.toNumber)
   const client = twilio(config.accountSid, config.authToken)
-  await client.messages.create({
-    from: config.fromNumber,
-    to: config.toNumber,
-    body: buildContactSmsBody(payload),
-  })
+  try {
+    const message = await client.messages.create({
+      from: config.fromNumber,
+      to: config.toNumber,
+      body: buildContactSmsBody(payload),
+    })
+    console.log("[Twilio] Contact SMS sent successfully - SID:", message.sid)
+  } catch (error) {
+    console.error("[Twilio] Failed to send contact SMS:", error instanceof Error ? error.message : error)
+    throw error
+  }
 }
 
 export type LeadSmsPayload = {
@@ -73,13 +81,21 @@ export function buildLeadSmsBody(payload: LeadSmsPayload): string {
 export async function sendLeadSms(payload: LeadSmsPayload): Promise<void> {
   const config = getTwilioConfig()
   if (!config?.toNumber) {
+    console.log("[Twilio] SMS not configured - missing TWILIO_TO_NUMBER")
     throw new Error("Twilio SMS is not configured (missing TWILIO_TO_NUMBER).")
   }
 
+  console.log("[Twilio] Attempting to send lead SMS to", config.toNumber)
   const client = twilio(config.accountSid, config.authToken)
-  await client.messages.create({
-    from: config.fromNumber,
-    to: config.toNumber,
-    body: buildLeadSmsBody(payload),
-  })
+  try {
+    const message = await client.messages.create({
+      from: config.fromNumber,
+      to: config.toNumber,
+      body: buildLeadSmsBody(payload),
+    })
+    console.log("[Twilio] Lead SMS sent successfully - SID:", message.sid)
+  } catch (error) {
+    console.error("[Twilio] Failed to send lead SMS:", error instanceof Error ? error.message : error)
+    throw error
+  }
 }
