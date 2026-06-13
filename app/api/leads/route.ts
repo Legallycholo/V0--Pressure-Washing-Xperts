@@ -3,6 +3,7 @@ import { randomUUID } from "crypto"
 import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertInboundLead } from "@/lib/bigqueryLeads"
+import { sendLeadSmsNotification } from "@/lib/twilioNotify"
 
 function escapeHtml(s: string): string {
   return s
@@ -141,56 +142,6 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
   }).catch((e) => console.error("[api/leads] Resend notification failed", e))
 }
 
-async function sendSmsNotification(payload: LeadPayload, roughPrice: number) {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID
-  const authToken = process.env.TWILIO_AUTH_TOKEN
-  const fromNumber = process.env.TWILIO_FROM_NUMBER
-  if (!accountSid || !authToken || !fromNumber) return
-
-  const location = [payload.city, payload.state, payload.zip].filter(Boolean).join(", ") || "—"
-  const source = payload.utm_source
-    ? `${payload.utm_source}${payload.utm_medium ? `/${payload.utm_medium}` : ""}${payload.utm_campaign ? ` — ${payload.utm_campaign}` : ""}`
-    : payload.how_heard || "Direct"
-
-  const lines: string[] = [
-    `PWX New Lead`,
-    `${payload.full_name} | ${payload.phone}`,
-    `${payload.email}`,
-    payload.submission_type ? `Service: ${payload.submission_type}` : "",
-    payload.selected_offer ? `Offer: ${payload.selected_offer}` : "",
-    `${location}${payload.approx_sqft_estimate ? ` | ~${payload.approx_sqft_estimate}` : ""}`,
-    `Est: $${roughPrice} | ${payload.device || "—"}`,
-    `Source: ${source}`,
-    payload.message ? `Note: ${payload.message.slice(0, 100)}` : "",
-  ].filter(Boolean)
-
-  const params = new URLSearchParams({
-    To: "+13102280721",
-    From: fromNumber,
-    Body: lines.join("\n"),
-  })
-
-  try {
-    const res = await fetch(
-      `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: params.toString(),
-      }
-    )
-    if (!res.ok) {
-      const body = await res.text()
-      console.error(`[api/leads] Twilio SMS error ${res.status}:`, body)
-    }
-  } catch (e) {
-    console.error("[api/leads] Twilio SMS failed", e)
-  }
-}
-
 function isLeadPayload(body: unknown): body is LeadPayload {
   if (!body || typeof body !== "object") return false
   const o = body as Record<string, unknown>
@@ -245,7 +196,9 @@ export async function POST(request: Request) {
     })
 
     void sendLeadNotification(body, row.rough_price_estimate ?? 0)
-    void sendSmsNotification(body, row.rough_price_estimate ?? 0)
+    void sendLeadSmsNotification(body, row.rough_price_estimate ?? 0).catch((e) =>
+      console.error("[api/leads] Twilio SMS notification failed", e)
+    )
     return NextResponse.json({ ok: true })
   } catch (e) {
     console.error("[api/leads] BigQuery insert failed", e)
