@@ -20,3 +20,4 @@ node_modules
 
 # Local toolchain helpers (e.g. standalone pnpm when npm/corepack unavailable)
 .tools/
+.vercel
