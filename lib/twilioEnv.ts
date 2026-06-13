@@ -7,7 +7,7 @@ export type TwilioConfig = {
   accountSid: string
   authToken: string
   fromNumber: string
-  notifyPhone?: string
+  toNumber?: string
 }
 
 /** Returns Twilio config when all required vars are set; otherwise null. */
@@ -17,15 +17,19 @@ export function getTwilioConfig(): TwilioConfig | null {
   const fromNumber = nonEmpty(process.env.TWILIO_FROM_NUMBER)
   if (!accountSid || !authToken || !fromNumber) return null
 
+  const toNumber =
+    nonEmpty(process.env.TWILIO_TO_NUMBER) ??
+    nonEmpty(process.env.TWILIO_NOTIFY_PHONE)
+
   return {
     accountSid,
     authToken,
     fromNumber,
-    notifyPhone: nonEmpty(process.env.TWILIO_NOTIFY_PHONE),
+    toNumber,
   }
 }
 
-export function isTwilioSmsNotifyEnabled(): boolean {
+export function isTwilioSmsEnabled(): boolean {
   const config = getTwilioConfig()
-  return Boolean(config?.notifyPhone)
+  return Boolean(config?.toNumber)
 }

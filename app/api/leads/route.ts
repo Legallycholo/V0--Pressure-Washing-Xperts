@@ -3,7 +3,6 @@ import { randomUUID } from "crypto"
 import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertInboundLead } from "@/lib/bigqueryLeads"
-import { sendLeadSmsNotification } from "@/lib/twilioNotify"
 import { businessSiteHost } from "@/data/site"
 
 function escapeHtml(s: string): string {
@@ -197,9 +196,6 @@ export async function POST(request: Request) {
     })
 
     void sendLeadNotification(body, row.rough_price_estimate ?? 0)
-    void sendLeadSmsNotification(body, row.rough_price_estimate ?? 0).catch((e) =>
-      console.error("[api/leads] Twilio SMS notification failed", e)
-    )
     return NextResponse.json({ ok: true })
   } catch (e) {
     console.error("[api/leads] BigQuery insert failed", e)

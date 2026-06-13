@@ -2,7 +2,7 @@
 
 import { Fragment } from "react"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
-import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard"
+import { ContactForm } from "@/components/ContactForm"
 import {
   Tooltip,
   TooltipContent,
@@ -124,9 +124,9 @@ export function ContactSection() {
             </a>
           </div>
 
-          {/* Right Column - Quote form (width matches hero quote card) */}
+          {/* Right Column - Contact form */}
           <div className="lg:col-span-7 lg:pl-5 xl:pl-8 2xl:pl-10">
-            <ContactQuoteFormCard successRedirectHref="/thank-you" />
+            <ContactForm />
           </div>
         </div>
       </div>
