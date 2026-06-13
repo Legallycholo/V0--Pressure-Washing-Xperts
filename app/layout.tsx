@@ -6,7 +6,7 @@ import "./globals.css"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { AppProviders } from "@/components/providers/AppProviders"
 import { ChrisChatWidget } from "@/components/ChrisChatWidget"
-import { businessLegalName } from "@/data/site"
+import { businessLegalName, businessSiteHost } from "@/data/site"
 import {
   buildGlobalJsonLdGraph,
   defaultLogoAbsoluteUrl,
@@ -19,7 +19,7 @@ const siteUrl = getSiteUrl()
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: "https://www.pressurewashingxpert.com",
+    canonical: siteUrl,
   },
   title: "Pressure Washing Services in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
   description:
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: businessLegalName,
-    url: "https://www.pressurewashingxpert.com",
+    url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
@@ -74,7 +74,7 @@ export default function RootLayout({
       addressCountry: "US",
     },
     telephone: "(800) 451-7213",
-    url: "https://pressurewashingxpert.com",
+    url: `https://${businessSiteHost}`,
     areaServed: ["Ellenwood, GA", "Metro Atlanta"],
     serviceType: [
       "Pressure Washing",

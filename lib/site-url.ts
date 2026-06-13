@@ -1,4 +1,6 @@
-const PRODUCTION_SITE_URL = "https://www.pressurewashingxpert.com"
+import { businessSiteUrl } from "@/data/site"
+
+const PRODUCTION_SITE_URL = businessSiteUrl
 
 /**
  * Canonical site origin for metadata, sitemap, and JSON-LD.

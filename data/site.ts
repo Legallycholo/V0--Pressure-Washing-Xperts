@@ -2,6 +2,12 @@
 
 export const businessLegalName = "Pressure Washing Xperts" as const
 
+/** Public website hostname (no protocol, no www). */
+export const businessSiteHost = "pressurewashingxpert.com" as const
+
+/** Canonical public website URL (www). */
+export const businessSiteUrl = `https://www.${businessSiteHost}` as const
+
 export const businessPhoneDisplay = "(800)-451-7213" as const
 
 export const businessPhoneTel = "8004517213" as const

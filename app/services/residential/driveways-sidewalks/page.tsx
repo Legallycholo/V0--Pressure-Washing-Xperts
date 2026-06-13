@@ -8,6 +8,7 @@ import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialDrivewaysSidewalksMedia } from "@/data/residential-service-media"
+import { businessSiteHost, businessSiteUrl } from "@/data/site"
 
 export default function DrivewaySidewalkPage() {
   const goQuote = useGoToHomeQuoteSection()
@@ -27,7 +28,7 @@ export default function DrivewaySidewalkPage() {
       "@type": "LocalBusiness",
       name: "Pressure Washing Xperts",
       telephone: "(800) 451-7213",
-      url: "https://pressurewashingxpert.com",
+      url: `https://${businessSiteHost}`,
       address: {
         "@type": "PostalAddress",
         streetAddress: "2193 Gateway Trl",
@@ -37,7 +38,7 @@ export default function DrivewaySidewalkPage() {
         addressCountry: "US",
       },
     },
-    url: "https://pressurewashingxpert.com/services/residential/driveways-sidewalks",
+    url: `${businessSiteUrl}/services/residential/driveways-sidewalks`,
   }
 
   return (

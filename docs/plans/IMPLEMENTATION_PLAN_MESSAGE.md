@@ -193,7 +193,7 @@ public.leads INSERT
 
 - Supabase project secrets (Edge Function env):
   - `RESEND_API_KEY`
-  - `RESEND_FROM` (e.g. `Pressure Washing Xperts <leads@mail.pressurewashingxperts.com>`)
+  - `RESEND_FROM` (e.g. `Pressure Washing Xperts <leads@mail.pressurewashingxpert.com>`)
   - `LEAD_NOTIFICATION_TO` (comma-separated allowed)
   - `LEAD_WEBHOOK_SECRET` (shared with the webhook header)
 - Supabase Database Webhook:

@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { businessSiteHost, businessSiteUrl } from "@/data/site"
 
 export default function RoofSoftWashingPage() {
   const goQuote = useGoToHomeQuoteSection()
@@ -26,7 +27,7 @@ export default function RoofSoftWashingPage() {
       "@type": "LocalBusiness",
       name: "Pressure Washing Xperts",
       telephone: "(800) 451-7213",
-      url: "https://pressurewashingxpert.com",
+      url: `https://${businessSiteHost}`,
       address: {
         "@type": "PostalAddress",
         streetAddress: "2193 Gateway Trl",
@@ -36,7 +37,7 @@ export default function RoofSoftWashingPage() {
         addressCountry: "US",
       },
     },
-    url: "https://pressurewashingxpert.com/services/residential/roof-soft-washing",
+    url: `${businessSiteUrl}/services/residential/roof-soft-washing`,
   }
 
   return (

@@ -183,7 +183,7 @@ public.leads INSERT
 - [ ] To pause notifications without touching inserts: Studio → **Database → Webhooks → lead_insert_to_resend** → toggle **Enabled** off.
 - [ ] To remove the function entirely: `supabase functions delete notify-new-lead --project-ref uljtanpaligqwqtojhdt`.
 - [ ] To rotate the Resend key: regenerate in Resend dashboard, `supabase secrets set RESEND_API_KEY=re_new_...`, redeploy.
-- [ ] To widen the recipient list: `supabase secrets set LEAD_NOTIFICATION_TO=dariel@tanygrowth.com,ops@pressurewashingxperts.com` — no redeploy needed, edge function reads from `Deno.env` on each invocation.
+- [ ] To widen the recipient list: `supabase secrets set LEAD_NOTIFICATION_TO=dariel@tanygrowth.com,ops@pressurewashingxpert.com` — no redeploy needed, edge function reads from `Deno.env` on each invocation.
 
 ---
 

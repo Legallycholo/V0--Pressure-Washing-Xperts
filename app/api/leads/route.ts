@@ -4,6 +4,7 @@ import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertInboundLead } from "@/lib/bigqueryLeads"
 import { sendLeadSmsNotification } from "@/lib/twilioNotify"
+import { businessSiteHost } from "@/data/site"
 
 function escapeHtml(s: string): string {
   return s
@@ -129,7 +130,7 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
         <!-- Footer -->
         <tr>
           <td style="background:#f4f6f8;padding:16px 32px;border-top:1px solid #eef0f3;">
-            <p style="margin:0;font-size:11px;color:#aabbcc;text-align:center;">Pressure Washing Xperts · pressurewashingxperts.com</p>
+            <p style="margin:0;font-size:11px;color:#aabbcc;text-align:center;">Pressure Washing Xperts · ${businessSiteHost}</p>
           </td>
         </tr>
 
