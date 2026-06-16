@@ -117,15 +117,15 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-9">
-          <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-2">
+          <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
             Testimonials
           </p>
-          <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance">
-            What Our Customers Say
+          <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
+            What Our <span className="text-ps-cyan text-glow-cyan">Customers Say</span>
           </h2>
-          <p className="mt-3 text-white/70 max-w-2xl mx-auto text-base">
+          <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-base">
             {"Don't just take our word for it."} Rated{" "}
-            <span className="text-brand-yellow font-semibold">5.0 ★</span> across{" "}
+            <span className="text-yellow-400 font-semibold">5.0 ★</span> across{" "}
             <span className="text-white font-semibold">32+ verified reviews</span>.
           </p>
           <div className="mt-4 flex justify-center">
@@ -161,12 +161,12 @@ export function Testimonials() {
                 }`}
               >
                 {/* Quote Icon */}
-                <Quote className="absolute top-3 right-3 size-7 text-brand-yellow/20" />
+                <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/30" />
 
                 {/* Rating */}
                 <div className="flex gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="size-4 fill-brand-yellow text-brand-yellow" />
+                    <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
 
@@ -200,12 +200,12 @@ export function Testimonials() {
           <div className="md:hidden">
             <div className="relative rounded-xl bg-white/10 border border-white/10 p-4">
               {/* Quote Icon */}
-              <Quote className="absolute top-3 right-3 size-7 text-brand-yellow/20" />
+              <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/30" />
 
               {/* Rating */}
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="size-4 fill-brand-yellow text-brand-yellow" />
+                  <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
 

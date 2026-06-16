@@ -1,8 +1,22 @@
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Inter, Bebas_Neue } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
+
+const bebas = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bebas",
+})
 import { JsonLd } from "@/components/seo/JsonLd"
 import { AppProviders } from "@/components/providers/AppProviders"
 import { ChrisChatWidget } from "@/components/ChrisChatWidget"
@@ -89,7 +103,7 @@ export default function RootLayout({
     ],
   }
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${bebas.variable}`}>
       <head>
         <Script
           id="localbusiness-jsonld"

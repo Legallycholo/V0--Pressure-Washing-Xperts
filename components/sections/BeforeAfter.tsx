@@ -65,17 +65,17 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
   }
 
   return (
-    <section className="bg-background py-12">
+    <section className="bg-ps-bg-alt py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-7 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-blue">
-            See The Difference
+        <div className="mb-8 text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
+            Real Results
           </p>
-          <h2 className="text-balance text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
-            Before & After Results
+          <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
+            See The <span className="text-ps-cyan text-glow-cyan">Difference</span>
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-muted-foreground">
-            Slide to compare real results from our crew.
+          <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-ps-text-muted">
+            Real results. Real homes. Metro Atlanta.
           </p>
         </div>
 
@@ -96,8 +96,8 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
           </div>
 
           <div className="mt-4 text-center">
-            <h3 className="mb-0.5 text-lg font-bold text-foreground">{current.title}</h3>
-            <p className="text-sm font-medium text-brand-blue">{current.location}</p>
+            <h3 className="mb-0.5 text-lg font-bold text-white">{current.title}</h3>
+            <p className="text-sm font-medium text-ps-cyan">{current.location}</p>
           </div>
 
           {showCarousel ? (
@@ -105,7 +105,7 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
               <button
                 type="button"
                 onClick={goToPrevious}
-                className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
+                className="rounded-full bg-white/10 p-2.5 text-white transition-colors hover:bg-ps-cyan hover:text-[#06121f]"
                 aria-label="Previous comparison"
               >
                 <ChevronLeft className="size-5" />
@@ -120,8 +120,8 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
                     }}
                     className={`h-2 rounded-full transition-all ${
                       index === currentIndex
-                        ? "w-6 bg-brand-blue"
-                        : "w-2 bg-gray-300 hover:bg-gray-400"
+                        ? "w-6 bg-ps-cyan"
+                        : "w-2 bg-white/25 hover:bg-white/40"
                     }`}
                     aria-label={`Go to comparison ${index + 1}`}
                   />
@@ -130,7 +130,7 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
               <button
                 type="button"
                 onClick={goToNext}
-                className="rounded-full bg-section-light p-2.5 transition-colors hover:bg-brand-blue hover:text-white"
+                className="rounded-full bg-white/10 p-2.5 text-white transition-colors hover:bg-ps-cyan hover:text-[#06121f]"
                 aria-label="Next comparison"
               >
                 <ChevronRight className="size-5" />
@@ -139,12 +139,12 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
           ) : null}
 
           <div className="mt-7 text-center">
-            <p className="mb-3 text-muted-foreground text-sm sm:text-base">Want results like these for your property? Call now for instant pricing.</p>
+            <p className="mb-3 text-ps-text-muted text-sm sm:text-base">Want results like these for your property? Call now for instant pricing.</p>
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button
                 asChild
                 size="lg"
-                className={`bg-brand-yellow font-bold text-brand-blue-dark hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
+                className={`bg-ps-cyan font-bold text-[#06121f] hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
               >
                 <a href={businessPhoneTelHref}>
                   <Phone className="size-5 shrink-0" aria-hidden />
@@ -155,7 +155,7 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
                 onClick={onOpenQuoteForm}
                 size="lg"
                 variant="outline"
-                className={`border-2 border-brand-blue font-bold text-brand-blue hover:bg-brand-blue hover:text-white ${ctaPress}`}
+                className={`border-2 border-ps-cyan/60 bg-transparent font-bold text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
               >
                 Get a Free Estimate
               </Button>

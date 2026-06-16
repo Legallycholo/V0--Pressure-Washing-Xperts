@@ -72,7 +72,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-[#0d1b2a] shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-ps-bg/95 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.4)] border-b border-ps-cyan/15"
     >
       <div className="hidden lg:block border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -105,7 +105,7 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                 <TooltipTrigger asChild>
                   <a
                     href={businessPhoneTelHref}
-                    className={`text-sm xl:text-base font-semibold text-brand-blue-light hover:text-brand-yellow transition-colors ${ctaPress} inline-block rounded-sm`}
+                    className={`font-display text-lg xl:text-xl tracking-wide text-ps-cyan hover:text-brand-yellow-dark transition-colors ${ctaPress} inline-block rounded-sm`}
                   >
                     {businessPhoneDisplay}
                   </a>
@@ -271,10 +271,10 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               <TooltipTrigger asChild>
                 <a
                   href={businessPhoneTelHref}
-                  className={`inline-flex items-center gap-2 px-3 py-2 text-sm xl:text-base font-bold text-brand-yellow hover:text-brand-yellow-dark transition-colors font-sans ${ctaPress}`}
+                  className={`inline-flex items-center gap-2 px-3 py-2 text-ps-cyan hover:text-brand-yellow-dark transition-colors ${ctaPress}`}
                 >
                   <Phone className="size-4 shrink-0" aria-hidden />
-                  <span>{businessPhoneDisplay}</span>
+                  <span className="font-display text-lg xl:text-xl tracking-wide">{businessPhoneDisplay}</span>
                 </a>
               </TooltipTrigger>
               <TooltipContent side="bottom">Tap to call: free quotes</TooltipContent>

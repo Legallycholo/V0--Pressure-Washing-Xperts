@@ -7,6 +7,7 @@ import {
 } from "@/data/offers"
 import type { OfferId } from "@/data/offers"
 import { Button } from "@/components/ui/button"
+import { Reveal } from "@/components/motion/Reveal"
 
 interface OffersProps {
   onOpenQuoteForm: (offerId?: OfferId) => void
@@ -18,41 +19,41 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
 
   return (
     <section
-      className="py-12 bg-section-light"
+      className="py-14 bg-ps-bg-alt"
       aria-labelledby="offers-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-9">
-          <p className="text-brand-blue font-semibold text-sm uppercase tracking-wider mb-2">
+        <Reveal className="text-center mb-9">
+          <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
             Special Offers
           </p>
           <h2
             id="offers-heading"
-            className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl text-balance"
+            className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl"
           >
-            Save on Bundles &amp; Seasonal Service
+            Save on Bundles &amp; <span className="text-ps-cyan text-glow-cyan">Seasonal Service</span>
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-sm sm:text-base">
             Promos for new customers, bundles, seasonal scheduling, and referrals.
           </p>
-        </div>
+        </Reveal>
 
         {newCustomerOffer ? (
           <div className="mb-8 flex justify-center px-1">
             <div
-              className="flex w-full max-w-3xl flex-col gap-4 rounded-2xl border border-brand-yellow/50 bg-brand-yellow/15 px-4 py-4 text-brand-blue-dark shadow-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-4"
+              className="flex w-full max-w-3xl flex-col gap-4 rounded-2xl border border-ps-cyan/40 bg-ps-cyan/10 px-4 py-4 text-white shadow-sm sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-4"
               role="note"
             >
               <div className="min-w-0 flex-1 text-center sm:text-left">
-                <p className="text-sm font-bold text-brand-blue sm:text-base">
+                <p className="text-sm font-bold text-ps-cyan sm:text-base">
                   <span>{newCustomerOffer.discount}</span>
-                  <span className="mx-1.5 font-normal text-brand-blue/50">-</span>
-                  <span>{newCustomerOffer.title}</span>
+                  <span className="mx-1.5 font-normal text-ps-cyan/60">-</span>
+                  <span className="text-white">{newCustomerOffer.title}</span>
                 </p>
-                <p className="mt-1 text-sm text-balance text-brand-blue/90 sm:text-base">
+                <p className="mt-1 text-sm text-balance text-white/85 sm:text-base">
                   {newCustomerOffer.description}
                 </p>
-                <small className="mt-2 block text-center text-xs leading-relaxed text-brand-blue/75 sm:text-left">
+                <small className="mt-2 block text-center text-xs leading-relaxed text-ps-text-muted sm:text-left">
                   {newCustomerOffer.terms} {OFFER_PRICING_SQFT_DISCLAIMER}
                 </small>
               </div>
@@ -60,7 +61,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                 <Button
                   type="button"
                   onClick={() => onOpenQuoteForm(newCustomerOffer.id)}
-                  className="min-w-[10rem] bg-brand-yellow font-semibold text-brand-blue-dark hover:bg-brand-yellow-dark"
+                  className="min-w-[10rem] bg-ps-cyan font-semibold text-[#06121f] hover:bg-brand-yellow-dark"
                   aria-label={`Claim Offer: ${newCustomerOffer.title}`}
                 >
                   Claim Offer
@@ -120,13 +121,13 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-6 text-center text-xs sm:text-sm text-ps-text-muted max-w-2xl mx-auto">
           Pricing starts at a $250 minimum and estimates reflect square footage and
           scope. Offers are applied after the estimate, and final pricing will not go
           below $250. Offers cannot be combined. Call{" "}
           <a
             href="tel:+18004517213"
-            className="font-semibold text-brand-blue underline-offset-2 hover:underline"
+            className="font-semibold text-ps-cyan underline-offset-2 hover:underline"
           >
             (800) 451-7213
           </a>{" "}

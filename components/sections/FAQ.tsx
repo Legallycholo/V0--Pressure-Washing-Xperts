@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
+import { Reveal } from "@/components/motion/Reveal"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import { homeFaqItems } from "@/data/home-faq"
@@ -18,47 +19,51 @@ interface FAQProps {
 
 export function FAQ({ onOpenQuoteForm }: FAQProps) {
   return (
-    <section id="faq" className="py-12 bg-section-light">
+    <section id="faq" className="py-14 bg-ps-bg">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-7">
-          <p className="text-brand-blue font-semibold text-sm uppercase tracking-wider mb-2">
+        <Reveal className="text-center mb-8">
+          <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
             FAQ
           </p>
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl text-balance">
-            Frequently Asked Questions
+          <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
+            Frequently Asked <span className="text-ps-cyan text-glow-cyan">Questions</span>
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
-            Quick answers to common questions. Don&apos;t see yours? Contact us.
+          <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-sm sm:text-base">
+            Quick answers to common questions. Don&apos;t see yours? Call us.
           </p>
-        </div>
+        </Reveal>
 
         {/* FAQ Accordion */}
-        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
+        <Reveal className="rounded-2xl border border-white/10 bg-ps-bg-alt p-4 md:p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
           <Accordion type="single" collapsible className="w-full">
             {homeFaqItems.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                <AccordionTrigger className="text-left text-foreground hover:text-brand-blue hover:no-underline text-sm md:text-base">
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="border-white/10 data-[state=open]:border-l-2 data-[state=open]:border-l-ps-cyan data-[state=open]:pl-3 data-[state=open]:rounded-l"
+              >
+                <AccordionTrigger className="text-left text-white hover:text-ps-cyan hover:no-underline text-sm md:text-base [&>svg]:text-ps-cyan">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
+                <AccordionContent className="text-ps-text-muted leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+        </Reveal>
 
         {/* CTA */}
         <div className="mt-8 text-center">
-          <p className="text-muted-foreground mb-3 text-sm sm:text-base">
+          <p className="text-ps-text-muted mb-3 text-sm sm:text-base">
             Still have questions? {"We're"} here to help!
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               asChild
               size="lg"
-              className={`bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
+              className={`bg-ps-cyan text-[#06121f] font-bold hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
             >
               <a href={businessPhoneTelHref}>
                 <Phone className="size-5 shrink-0" aria-hidden />
@@ -69,7 +74,7 @@ export function FAQ({ onOpenQuoteForm }: FAQProps) {
               onClick={onOpenQuoteForm}
               size="lg"
               variant="outline"
-              className={`border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white ${ctaPress}`}
+              className={`border-2 border-ps-cyan/60 bg-transparent text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
             >
               Get a Free Estimate
             </Button>

@@ -6,19 +6,21 @@ import {
   Building2,
   ChevronRight,
   Cloud,
+  Droplets,
   Fence,
   Home as HomeIcon,
   Phone,
   Square,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
 /**
- * Top 5 services that match the Google Ads keyword set + landing intent.
+ * Core services that match the Google Ads keyword set + landing intent.
  * Each card links to the existing residential/commercial leaf page and offers
- * a secondary "Get a Quote" action that opens the homepage quote form.
+ * a "Call for Pricing" action.
  */
 const topFiveServices = [
   {
@@ -55,11 +57,19 @@ const topFiveServices = [
   },
   {
     id: "commercial",
-    title: "Commercial Pressure Washing",
+    title: "Commercial Cleaning",
     description:
       "Building exteriors, parking lots, and storefronts cleaned around your schedule and customers.",
     href: "/services/commercial/building-washing",
     Icon: Building2,
+  },
+  {
+    id: "soft-washing",
+    title: "Soft Washing",
+    description:
+      "Low-pressure chemical cleaning for roofs, siding, stucco, and other delicate surfaces.",
+    href: "/soft-washing",
+    Icon: Droplets,
   },
 ] as const
 
@@ -119,52 +129,54 @@ interface ServicesProps {
 
 export function Services({ onOpenQuoteForm }: ServicesProps) {
   return (
-    <section id="services" className="py-12 bg-section-dark">
+    <section id="services" className="py-14 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-9">
-          <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-2">
-            What We Offer
+        <Reveal className="text-center mb-10">
+          <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
+            Our Services
           </p>
-          <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance">
-            Power Washing, Roof Cleaning, Gutter Cleaning & Soft Washing
+          <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
+            What We <span className="text-ps-cyan text-glow-cyan">Do</span>
           </h2>
-          <p className="mt-3 text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-sm sm:text-base">
             Residential and commercial cleaning with the right method for each surface.
           </p>
-        </div>
+        </Reveal>
 
-        {/* Top 5 services (Google Ads + SEO alignment) */}
-        <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {/* Core services (Google Ads + SEO alignment) */}
+        <RevealGroup className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {topFiveServices.map(({ id, title, description, href, Icon }) => (
-            <article
+            <RevealItem
               key={id}
-              className="group flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-brand-yellow/50 hover:bg-white/[0.07]"
+              as="article"
+              className="group relative flex h-full flex-col rounded-xl border-l-4 border-ps-cyan bg-ps-bg-alt p-5 ring-1 ring-white/5 transition-all duration-200 hover:-translate-y-1 hover:ring-ps-cyan/40 hover:shadow-[0_12px_30px_-8px_rgba(0,229,255,0.35)]"
             >
               <Link
                 href={href}
                 aria-label={`${title} pressure washing in Ellenwood, GA and Metro Atlanta`}
                 className="flex flex-1 flex-col"
               >
-                <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand-yellow/15 text-brand-yellow">
-                  <Icon className="size-5" aria-hidden />
+                <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-ps-cyan/15 text-ps-cyan">
+                  <Icon className="size-6" aria-hidden />
                 </div>
-                <h3 className="text-base font-bold text-white">{title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/70">
+                <h3 className="text-lg font-bold text-white">{title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-ps-text-muted">
                   {description}
                 </p>
               </Link>
               <a
                 href={businessPhoneTelHref}
-                className={`mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-yellow px-3 py-2 text-sm font-bold text-brand-blue-dark transition-colors hover:bg-brand-yellow-dark ${ctaPress}`}
+                className={`mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-ps-cyan transition-colors hover:text-brand-yellow-dark ${ctaPress}`}
                 aria-label={`Call ${businessPhoneDisplay} for ${title} pricing`}
               >
                 <Phone className="size-4 shrink-0" aria-hidden />
                 Call for Pricing
+                <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden />
               </a>
-            </article>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
 
         {/* Primary Services */}
         <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-2">
@@ -174,7 +186,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
               href={service.href}
               className={`group relative block overflow-hidden rounded-xl animate-fade-in-up stagger-${index + 1}`}
             >
-              <div className="absolute inset-0 rounded-xl border border-white/10" />
+              <div className="absolute inset-0 rounded-xl border border-white/10 transition-colors group-hover:border-ps-cyan/40" />
 
               <div className="relative p-5 sm:p-6">
                 <div className="relative mx-auto mb-3 max-w-lg h-48 overflow-hidden rounded-lg border border-white/10 bg-white/5">
@@ -182,7 +194,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                     src={service.imageSrc}
                     alt={service.imageAlt}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority={index === 0}
                   />
@@ -191,13 +203,13 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                 <h3 className="text-xl font-bold text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-white/75 text-sm leading-relaxed mb-3">
+                <p className="text-ps-text-muted text-sm leading-relaxed mb-3">
                   {service.description}
                 </p>
 
-                <span className="inline-flex items-center gap-1 text-brand-yellow font-semibold text-sm">
+                <span className="inline-flex items-center gap-1 text-ps-cyan font-semibold text-sm">
                   Learn more
-                  <ChevronRight className="size-4" />
+                  <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>
@@ -210,13 +222,13 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
             <Link
               key={service.id}
               href={service.href}
-              className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5 block hover:border-brand-yellow/50 transition-colors"
+              className="rounded-xl border border-white/10 bg-ps-bg-alt p-4 sm:p-5 block transition-all duration-200 hover:-translate-y-0.5 hover:border-ps-cyan/50 hover:shadow-[0_10px_24px_-10px_rgba(0,229,255,0.3)]"
             >
               <h3 className="text-lg font-bold text-white">{service.title}</h3>
-              <p className="mt-1 text-brand-blue-light text-xs uppercase tracking-wide font-semibold">
+              <p className="mt-1 text-ps-cyan text-xs uppercase tracking-wide font-semibold">
                 {service.subtitle}
               </p>
-              <p className="mt-2 text-sm text-white/70 leading-relaxed">{service.description}</p>
+              <p className="mt-2 text-sm text-ps-text-muted leading-relaxed">{service.description}</p>
             </Link>
           ))}
         </div>

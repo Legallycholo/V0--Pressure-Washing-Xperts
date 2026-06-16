@@ -2,25 +2,25 @@
 
 import { Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
-const features = [
+const steps = [
   {
-    title: "5-Star Rated",
-    description: "A 5.0 Google rating across 32+ verified customer reviews.",
+    number: "01",
+    title: "Call or Text",
+    description: "Reach us 7 days a week — we answer fast and give instant pricing.",
   },
   {
-    title: "Licensed & Insured",
-    description: "Full coverage that protects your property on every job.",
+    number: "02",
+    title: "Free On-Site Quote",
+    description: "We assess your property and give you a straight, no-obligation price.",
   },
   {
-    title: "16 Years Experience",
-    description: "A proven track record of consistent results since 2010.",
-  },
-  {
-    title: "Residential & Commercial",
-    description: "The right equipment and technique for any property type.",
+    number: "03",
+    title: "We Show Up & Clean",
+    description: "Licensed, insured crews deliver results you can see — guaranteed.",
   },
 ]
 
@@ -33,44 +33,59 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
     <section
       id="why-us"
       aria-labelledby="why-us-heading"
-      className="animate-fade-in-up bg-section-light py-10 sm:py-12 lg:py-14"
+      className="bg-ps-bg py-14 lg:py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className="mx-auto max-w-4xl text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue-light">
-            Trust the Xperts
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
+            How It Works
           </p>
           <h2
             id="why-us-heading"
-            className="text-balance text-2xl font-bold uppercase tracking-tight text-brand-blue-dark sm:text-3xl lg:text-4xl"
+            className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl"
           >
-            Why choose us?
+            Clean in <span className="text-ps-cyan text-glow-cyan">3 Steps</span>
           </h2>
-          <p className="mt-3 text-base font-semibold uppercase tracking-wide text-foreground sm:text-lg">
-            Experience, safety &amp; quality you can count on
+          <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-ps-text-muted">
+            No runaround. Just a fast call, a fair quote, and a spotless property.
           </p>
-        </header>
+        </Reveal>
 
-        <div className="mt-8 grid gap-5 md:mt-9 md:grid-cols-2 md:gap-6 lg:mt-10 lg:grid-cols-4">
-          {features.map((feature) => (
-            <article key={feature.title} className="rounded-xl border border-border/60 bg-muted/80 px-4 py-5">
-              <h3 className="font-semibold text-foreground">{feature.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                {feature.description}
+        {/* Timeline */}
+        <RevealGroup
+          stagger={0.2}
+          className="relative mt-10 grid gap-8 md:mt-12 md:grid-cols-3 md:gap-6"
+        >
+          {/* Connector line (desktop) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-0 right-0 top-7 hidden border-t-2 border-dashed border-ps-cyan/35 md:block"
+          />
+          {steps.map((step) => (
+            <RevealItem
+              key={step.number}
+              className="relative flex flex-col items-center text-center md:px-4 max-md:border-l-2 max-md:border-ps-cyan/35 max-md:pl-5 max-md:items-start max-md:text-left"
+            >
+              <span className="relative z-10 flex h-14 items-center justify-center rounded-full bg-ps-bg px-2 font-display text-5xl leading-none text-ps-cyan text-glow-cyan">
+                {step.number}
+              </span>
+              <h3 className="mt-4 text-lg font-bold text-white">{step.title}</h3>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ps-text-muted">
+                {step.description}
               </p>
-            </article>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-9 lg:mt-10">
+        <Reveal delay={0.1} className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button
             asChild
             size="lg"
-            className={`min-w-[200px] bg-brand-yellow px-8 font-bold uppercase tracking-wide text-brand-blue-dark hover:bg-brand-yellow-dark text-base ${ctaPress}`}
+            className={`animate-cyan-pulse min-w-[220px] bg-ps-cyan px-8 font-display tracking-widest text-lg text-[#06121f] hover:bg-brand-yellow-dark ${ctaPress}`}
           >
             <a href={businessPhoneTelHref}>
               <Phone className="size-5 shrink-0" aria-hidden />
-              Call {businessPhoneDisplay} Now
+              CALL {businessPhoneDisplay}
             </a>
           </Button>
           <Button
@@ -78,11 +93,11 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
             onClick={onOpenQuoteForm}
             size="lg"
             variant="outline"
-            className={`min-w-[200px] border-2 border-brand-blue px-8 font-bold uppercase tracking-wide text-brand-blue hover:bg-brand-blue hover:text-white text-base ${ctaPress}`}
+            className={`min-w-[200px] border-2 border-ps-cyan/60 bg-transparent px-8 font-semibold text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
           >
-            Get a Free Estimate
+            Get a Free Quote
           </Button>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

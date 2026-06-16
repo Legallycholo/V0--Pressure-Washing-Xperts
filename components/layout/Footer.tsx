@@ -31,7 +31,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-section-dark-alt border-t border-white/10">
+    <footer className="bg-ps-bg border-t-2 border-ps-cyan/30">
       {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-5">
@@ -48,11 +48,11 @@ export function Footer() {
             </p>
             <a
               href={`tel:+1${businessPhoneTel}`}
-              className={`inline-flex items-center gap-2 text-lg font-bold text-brand-yellow transition-colors hover:text-brand-yellow/80 ${ctaPress}`}
+              className={`inline-flex items-center gap-2 text-ps-cyan transition-colors hover:text-brand-yellow-dark text-glow-cyan ${ctaPress}`}
               aria-label={`Call us now at ${businessPhoneDisplay}`}
             >
               <Phone className="size-5 shrink-0" />
-              {businessPhoneDisplay}
+              <span className="font-display text-2xl tracking-wide">{businessPhoneDisplay}</span>
             </a>
           </div>
 

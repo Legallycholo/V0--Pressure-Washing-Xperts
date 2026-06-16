@@ -4,40 +4,56 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Brand Colors - Pressure Washing Xperts */
-  --brand-blue: #1e3a5f;
-  --brand-blue-light: #3b5998;
-  --brand-blue-dark: #0f172a;
-  --brand-yellow: #fbbf24;
-  --brand-yellow-dark: #f59e0b;
-  --brand-silver: #c0c0c0;
-  
-  /* Semantic Tokens */
+  /* ───────────────────────────────────────────────────────────
+     "POWER SHIFT" THEME — dark navy + electric cyan.
+     Brand token NAMES are kept (brand-yellow, brand-blue) so the
+     whole site re-skins through the existing utility classes, but
+     their VALUES are now the cyan/navy palette.
+     brand-yellow* = cyan highlight/CTA · brand-blue* = blue/navy
+     ─────────────────────────────────────────────────────────── */
+  --brand-blue: #0077B6;        /* accent secondary — deep blue   */
+  --brand-blue-light: #00B4D8;  /* cyan-blue                       */
+  --brand-blue-dark: #0A0F1E;   /* near-black navy (bg primary)    */
+  --brand-yellow: #00E5FF;      /* electric cyan — primary CTA/glow*/
+  --brand-yellow-dark: #00B4D8; /* cyan hover                      */
+  --brand-silver: #94A3B8;      /* muted slate                     */
+
+  /* Power Shift surfaces (used by dark homepage + chrome) */
+  --ps-bg: #0A0F1E;
+  --ps-bg-alt: #0F1A2E;
+  --ps-cyan: #00E5FF;
+  --ps-cyan-deep: #0077B6;
+  --ps-text: #F0F4F8;
+  --ps-text-muted: #94A3B8;
+  --ps-line: rgba(0, 229, 255, 0.18);
+
+  /* Semantic Tokens — light base kept for forms + inner-page bodies,
+     accents retinted to cyan. */
   --background: #ffffff;
-  --foreground: #1e293b;
+  --foreground: #0F1A2E;
   --card: #ffffff;
-  --card-foreground: #1e293b;
+  --card-foreground: #0F1A2E;
   --popover: #ffffff;
-  --popover-foreground: #1e293b;
-  --primary: #1e3a5f;
+  --popover-foreground: #0F1A2E;
+  --primary: #0077B6;
   --primary-foreground: #ffffff;
   --secondary: #f1f5f9;
-  --secondary-foreground: #1e293b;
+  --secondary-foreground: #0F1A2E;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
-  --accent: #fbbf24;
-  --accent-foreground: #1e293b;
+  --accent: #00E5FF;
+  --accent-foreground: #0A0F1E;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #1e3a5f;
+  --ring: #00B4D8;
   --radius: 0.625rem;
-  
+
   /* Section Backgrounds */
-  --section-dark: #0f172a;
-  --section-dark-alt: #1e293b;
-  --section-light: #f8fafc;
+  --section-dark: #0A0F1E;
+  --section-dark-alt: #0F1A2E;
+  --section-light: #eef3f8;
   
   /* Glass Effects */
   --glass-bg: rgba(255, 255, 255, 0.1);
@@ -49,9 +65,18 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
+  --font-sans: var(--font-inter), 'Inter Fallback', system-ui, sans-serif;
+  --font-display: var(--font-bebas), 'Bebas Neue', 'Inter Fallback', sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  
+
+  /* Power Shift surfaces */
+  --color-ps-bg: var(--ps-bg);
+  --color-ps-bg-alt: var(--ps-bg-alt);
+  --color-ps-cyan: var(--ps-cyan);
+  --color-ps-cyan-deep: var(--ps-cyan-deep);
+  --color-ps-text: var(--ps-text);
+  --color-ps-text-muted: var(--ps-text-muted);
+
   /* Brand Colors */
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-light: var(--brand-blue-light);
@@ -182,12 +207,12 @@
   0%, 100% {
     box-shadow:
       0 10px 25px -5px rgb(0 0 0 / 0.25),
-      0 0 0 0 rgba(251, 191, 36, 0.55);
+      0 0 0 0 rgba(0, 229, 255, 0.55);
   }
   50% {
     box-shadow:
       0 10px 25px -5px rgb(0 0 0 / 0.25),
-      0 0 0 10px rgba(251, 191, 36, 0);
+      0 0 0 10px rgba(0, 229, 255, 0);
   }
 }
 
@@ -275,7 +300,7 @@
 /* Navbar dropdown dark theme override */
 [data-slot="navigation-menu-viewport"],
 [data-slot="navigation-menu-content"] {
-  background-color: #0d1b2a !important;
+  background-color: #0A0F1E !important;
   color: #ffffff;
   border: none;
 }
@@ -374,6 +399,78 @@
   }
   .step-connector::after {
     opacity: 0.25;
+  }
+}
+
+/* ─── POWER SHIFT theme helpers ─── */
+
+/* Display headline font (Bebas Neue) */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+/* Cyan text glow — phone numbers + hero accents */
+.text-glow-cyan {
+  text-shadow:
+    0 0 8px rgba(0, 229, 255, 0.55),
+    0 0 22px rgba(0, 229, 255, 0.35);
+}
+
+/* Hero "water pressure beam" sweep that wipes the dark bg on load */
+@keyframes water-beam {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+.animate-water-beam {
+  animation: water-beam 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+}
+
+/* Marquee for the social-proof stats bar (mobile auto-scroll) */
+@keyframes ps-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-ps-marquee {
+  animation: ps-marquee 22s linear infinite;
+}
+
+/* Cyan glow ring used by primary CTA buttons */
+@keyframes cyan-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.45), 0 8px 24px -6px rgba(0, 229, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 229, 255, 0), 0 8px 28px -4px rgba(0, 229, 255, 0.65);
+  }
+}
+
+.animate-cyan-pulse {
+  animation: cyan-pulse 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-water-beam,
+  .animate-ps-marquee,
+  .animate-cyan-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    box-shadow: none !important;
   }
 }
 

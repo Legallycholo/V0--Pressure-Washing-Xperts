@@ -320,14 +320,14 @@ function GalleryTeaser() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-7 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-yellow">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
             Our Work
           </p>
           <h2
             id="gallery-heading"
-            className="text-balance text-2xl font-bold text-white sm:text-3xl lg:text-4xl"
+            className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl"
           >
-            Project Gallery
+            Our <span className="text-ps-cyan text-glow-cyan">Work</span>
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-base text-white/70">
             Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
@@ -422,7 +422,7 @@ function GalleryFull() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-7 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-yellow">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
             Our Work
           </p>
           <h1

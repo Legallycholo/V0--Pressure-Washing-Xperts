@@ -24,24 +24,36 @@ export function ContactSection() {
         <div className="grid gap-7 lg:grid-cols-12 lg:items-start xl:items-center">
           {/* Left Column - Contact Info */}
           <div className="lg:col-span-5">
-            <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-2">
+            <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
               Contact Us
             </p>
-            <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance mb-4">
-              Call Now for a Same-Day Free Quote
+            <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl mb-4">
+              Ready to <span className="text-ps-cyan text-glow-cyan">Get Started?</span>
             </h2>
-            <p className="text-white/70 text-base leading-relaxed mb-5">
+            <p className="text-ps-text-muted text-base leading-relaxed mb-3">
               The fastest way to get pricing is to call — we answer 7 days a week and can often schedule same-day. Prefer to write? Send the form and we&apos;ll reach out to book your free on-site visit.
             </p>
+
+            {/* Glowing phone number */}
+            <a
+              href={businessPhoneTelHref}
+              className={`group inline-flex items-center gap-2 font-display tracking-wide text-ps-cyan text-glow-cyan hover:text-brand-yellow-dark transition-colors ${ctaPress}`}
+              style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
+              aria-label={`Call us now at ${businessPhoneDisplay}`}
+            >
+              <Phone className="size-6 shrink-0 sm:size-7" aria-hidden />
+              {businessPhoneDisplay}
+            </a>
+            <p className="mt-1 mb-5 text-sm text-ps-text-muted">Mon–Sun · 8:00 AM – 10:00 PM ET</p>
 
             {/* Primary call CTA */}
             <a
               href={businessPhoneTelHref}
-              className={`mb-6 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-yellow px-6 py-4 text-base font-bold text-brand-blue-dark shadow-lg transition-colors hover:bg-brand-yellow-dark sm:w-auto ${ctaPress}`}
+              className={`animate-cyan-pulse mb-6 flex w-full items-center justify-center gap-2 rounded-xl bg-ps-cyan px-6 py-4 font-display tracking-widest text-lg text-[#06121f] shadow-lg transition-colors hover:bg-brand-yellow-dark sm:w-auto ${ctaPress}`}
               aria-label={`Call us now at ${businessPhoneDisplay}`}
             >
               <Phone className="size-5 shrink-0" aria-hidden />
-              Call {businessPhoneDisplay} Now
+              CALL {businessPhoneDisplay} NOW
             </a>
 
             {/* Contact Cards */}
