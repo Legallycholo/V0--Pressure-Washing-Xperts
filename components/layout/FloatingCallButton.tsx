@@ -9,6 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
 export function FloatingCallButton() {
   const [isVisible, setIsVisible] = useState(false)
@@ -36,12 +37,12 @@ export function FloatingCallButton() {
       <Tooltip>
         <TooltipTrigger asChild>
           <a
-            href="tel:800-451-7213"
-            className="animate-float-cta-ring motion-reduce:animate-none relative flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-brand-yellow px-4 py-3 text-sm font-bold text-brand-blue-dark shadow-lg transition-transform duration-200 hover:bg-brand-yellow-dark active:scale-[0.97] motion-reduce:active:scale-100"
-            aria-label="Call us now"
+            href={businessPhoneTelHref}
+            className="animate-float-cta-ring motion-reduce:animate-none relative flex min-h-12 flex-[1.5] items-center justify-center gap-2 rounded-full bg-brand-yellow px-4 py-3 text-sm font-bold text-brand-blue-dark shadow-lg transition-transform duration-200 hover:bg-brand-yellow-dark active:scale-[0.97] motion-reduce:active:scale-100"
+            aria-label={`Call us now at ${businessPhoneDisplay}`}
           >
             <Phone className="size-5 shrink-0" />
-            <span>Call</span>
+            <span>Call {businessPhoneDisplay}</span>
           </a>
         </TooltipTrigger>
         <TooltipContent side="top">Tap to call: we answer 7 days a week</TooltipContent>

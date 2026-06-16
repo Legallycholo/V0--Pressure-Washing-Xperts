@@ -13,6 +13,8 @@ import {
   businessAddress,
   businessHoursRows,
   businessMapsUrl,
+  businessPhoneDisplay,
+  businessPhoneTelHref,
 } from "@/data/site"
 
 export function ContactSection() {
@@ -26,25 +28,35 @@ export function ContactSection() {
               Contact Us
             </p>
             <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl text-balance mb-4">
-              Ready for a Free Quote?
+              Call Now for a Same-Day Free Quote
             </h2>
-            <p className="text-white/70 text-base leading-relaxed mb-6">
-              Fill out the form and we&apos;ll schedule a free on-site visit — we come to your property, assess the job, and give you a straight price. No guessing, no obligation.
+            <p className="text-white/70 text-base leading-relaxed mb-5">
+              The fastest way to get pricing is to call — we answer 7 days a week and can often schedule same-day. Prefer to write? Send the form and we&apos;ll reach out to book your free on-site visit.
             </p>
+
+            {/* Primary call CTA */}
+            <a
+              href={businessPhoneTelHref}
+              className={`mb-6 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-yellow px-6 py-4 text-base font-bold text-brand-blue-dark shadow-lg transition-colors hover:bg-brand-yellow-dark sm:w-auto ${ctaPress}`}
+              aria-label={`Call us now at ${businessPhoneDisplay}`}
+            >
+              <Phone className="size-5 shrink-0" aria-hidden />
+              Call {businessPhoneDisplay} Now
+            </a>
 
             {/* Contact Cards */}
             <div className="space-y-3 mb-6">
               {/* Phone */}
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <a href="tel:800-451-7213" className={contactRowDark}>
+                  <a href={businessPhoneTelHref} className={contactRowDark}>
                     <div className={`${contactIconDark} bg-brand-yellow text-brand-blue-dark`}>
                       <Phone className="size-6" />
                     </div>
                     <div>
                       <p className="text-white/60 text-sm">Call / Text</p>
                       <p className="text-white font-semibold text-base group-hover:text-brand-yellow transition-colors">
-                        (800)-451-7213
+                        {businessPhoneDisplay}
                       </p>
                     </div>
                   </a>
@@ -114,14 +126,6 @@ export function ContactSection() {
                 </div>
               </a>
             </div>
-
-            <a
-              href="tel:800-451-7213"
-              className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans ${ctaPress}`}
-            >
-              <Phone className="size-4 shrink-0" />
-              <span>Call Now</span>
-            </a>
           </div>
 
           {/* Right Column - Contact form */}

@@ -1,5 +1,6 @@
 "use client"
 
+import { Phone } from "lucide-react"
 import {
   Accordion,
   AccordionContent,
@@ -7,6 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
+import { ctaPress } from "@/lib/ctaInteraction"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import { homeFaqItems } from "@/data/home-faq"
 
 interface FAQProps {
@@ -53,21 +56,22 @@ export function FAQ({ onOpenQuoteForm }: FAQProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
-              onClick={onOpenQuoteForm}
-              size="lg"
-              className="bg-brand-blue text-white font-bold hover:bg-brand-blue-light"
-            >
-              Get a Free Quote
-            </Button>
-            <Button
               asChild
               size="lg"
-              variant="outline"
-              className="border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white"
+              className={`bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
             >
-              <a href="tel:+18004517213">
-                Call Us: (800)-451-7213
+              <a href={businessPhoneTelHref}>
+                <Phone className="size-5 shrink-0" aria-hidden />
+                Call {businessPhoneDisplay} Now
               </a>
+            </Button>
+            <Button
+              onClick={onOpenQuoteForm}
+              size="lg"
+              variant="outline"
+              className={`border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white ${ctaPress}`}
+            >
+              Get a Free Estimate
             </Button>
           </div>
         </div>

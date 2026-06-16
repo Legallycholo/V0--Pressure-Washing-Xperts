@@ -8,9 +8,12 @@ import {
   Cloud,
   Fence,
   Home as HomeIcon,
+  Phone,
   Square,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ctaPress } from "@/lib/ctaInteraction"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
 /**
  * Top 5 services that match the Google Ads keyword set + landing intent.
@@ -151,14 +154,14 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                   {description}
                 </p>
               </Link>
-              <button
-                type="button"
-                onClick={onOpenQuoteForm}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-yellow hover:underline"
+              <a
+                href={businessPhoneTelHref}
+                className={`mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-yellow px-3 py-2 text-sm font-bold text-brand-blue-dark transition-colors hover:bg-brand-yellow-dark ${ctaPress}`}
+                aria-label={`Call ${businessPhoneDisplay} for ${title} pricing`}
               >
-                Get My Free Quote
-                <ChevronRight className="size-4" aria-hidden />
-              </button>
+                <Phone className="size-4 shrink-0" aria-hidden />
+                Call for Pricing
+              </a>
             </article>
           ))}
         </div>
@@ -221,15 +224,28 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
         {/* Section CTA */}
         <div className="mt-10 text-center">
           <p className="text-white/70 mb-4 text-sm sm:text-base">
-            Not sure which service you need?
+            Not sure which service you need? Call now for instant pricing.
           </p>
-          <Button
-            onClick={onOpenQuoteForm}
-            size="lg"
-            className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
-          >
-            Request a Free Consultation
-          </Button>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button
+              asChild
+              size="lg"
+              className={`bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
+            >
+              <a href={businessPhoneTelHref}>
+                <Phone className="size-5 shrink-0" aria-hidden />
+                Call {businessPhoneDisplay} Now
+              </a>
+            </Button>
+            <Button
+              onClick={onOpenQuoteForm}
+              size="lg"
+              variant="outline"
+              className={`border-2 border-white/50 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white ${ctaPress}`}
+            >
+              Get a Free Estimate
+            </Button>
+          </div>
         </div>
       </div>
     </section>

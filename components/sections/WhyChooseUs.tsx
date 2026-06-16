@@ -1,8 +1,15 @@
 "use client"
 
+import { Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ctaPress } from "@/lib/ctaInteraction"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
 const features = [
+  {
+    title: "5-Star Rated",
+    description: "A 5.0 Google rating across 32+ verified customer reviews.",
+  },
   {
     title: "Licensed & Insured",
     description: "Full coverage that protects your property on every job.",
@@ -44,7 +51,7 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
           </p>
         </header>
 
-        <div className="mt-8 grid gap-5 md:mt-9 md:grid-cols-3 md:gap-6 lg:mt-10">
+        <div className="mt-8 grid gap-5 md:mt-9 md:grid-cols-2 md:gap-6 lg:mt-10 lg:grid-cols-4">
           {features.map((feature) => (
             <article key={feature.title} className="rounded-xl border border-border/60 bg-muted/80 px-4 py-5">
               <h3 className="font-semibold text-foreground">{feature.title}</h3>
@@ -55,14 +62,25 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
           ))}
         </div>
 
-        <div className="mt-8 flex justify-center md:mt-9 lg:mt-10">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-9 lg:mt-10">
+          <Button
+            asChild
+            size="lg"
+            className={`min-w-[200px] bg-brand-yellow px-8 font-bold uppercase tracking-wide text-brand-blue-dark hover:bg-brand-yellow-dark text-base ${ctaPress}`}
+          >
+            <a href={businessPhoneTelHref}>
+              <Phone className="size-5 shrink-0" aria-hidden />
+              Call {businessPhoneDisplay} Now
+            </a>
+          </Button>
           <Button
             type="button"
             onClick={onOpenQuoteForm}
             size="lg"
-            className="min-w-[200px] bg-brand-yellow px-8 font-bold uppercase tracking-wide text-brand-blue-dark hover:bg-brand-yellow-dark text-base"
+            variant="outline"
+            className={`min-w-[200px] border-2 border-brand-blue px-8 font-bold uppercase tracking-wide text-brand-blue hover:bg-brand-blue hover:text-white text-base ${ctaPress}`}
           >
-            Get started today
+            Get a Free Estimate
           </Button>
         </div>
       </div>

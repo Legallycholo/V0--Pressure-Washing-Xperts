@@ -8,9 +8,12 @@ export const businessSiteHost = "pressurewashingxpert.com" as const
 /** Canonical public website URL (www). */
 export const businessSiteUrl = `https://www.${businessSiteHost}` as const
 
-export const businessPhoneDisplay = "(800)-451-7213" as const
+export const businessPhoneDisplay = "(800) 451-7213" as const
 
 export const businessPhoneTel = "8004517213" as const
+
+/** E.164 `tel:` href value — use everywhere a phone link is rendered. */
+export const businessPhoneTelHref = `tel:+1${businessPhoneTel}` as const
 
 export const businessEmail = "pressurewashingxperts@gmail.com" as const
 

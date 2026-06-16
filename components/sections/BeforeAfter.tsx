@@ -1,10 +1,12 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { galleryItemIsComparison, galleryItems } from "@/data/gallery"
+import { ctaPress } from "@/lib/ctaInteraction"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
 type Comparison = {
   id: number
@@ -137,14 +139,27 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
           ) : null}
 
           <div className="mt-7 text-center">
-            <p className="mb-3 text-muted-foreground text-sm sm:text-base">Want results like these for your property?</p>
-            <Button
-              onClick={onOpenQuoteForm}
-              size="lg"
-              className="bg-brand-blue font-bold text-white hover:bg-brand-blue-light"
-            >
-              Get Your Free Quote Today
-            </Button>
+            <p className="mb-3 text-muted-foreground text-sm sm:text-base">Want results like these for your property? Call now for instant pricing.</p>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button
+                asChild
+                size="lg"
+                className={`bg-brand-yellow font-bold text-brand-blue-dark hover:bg-brand-yellow-dark shadow-lg ${ctaPress}`}
+              >
+                <a href={businessPhoneTelHref}>
+                  <Phone className="size-5 shrink-0" aria-hidden />
+                  Call {businessPhoneDisplay} Now
+                </a>
+              </Button>
+              <Button
+                onClick={onOpenQuoteForm}
+                size="lg"
+                variant="outline"
+                className={`border-2 border-brand-blue font-bold text-brand-blue hover:bg-brand-blue hover:text-white ${ctaPress}`}
+              >
+                Get a Free Estimate
+              </Button>
+            </div>
           </div>
         </div>
       </div>

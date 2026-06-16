@@ -10,6 +10,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { cn } from "@/lib/utils"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import {
   GALLERY_TEASER_COUNT,
   galleryCategories,
@@ -348,11 +349,11 @@ function GalleryTeaser() {
             <Link href="/gallery">View Full Gallery</Link>
           </Button>
           <a
-            href="tel:800-451-7213"
+            href={businessPhoneTelHref}
             className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
           >
             <Phone className="size-4 shrink-0" aria-hidden />
-            <span>Call Now</span>
+            <span>Call {businessPhoneDisplay}</span>
           </a>
         </div>
       </div>
@@ -481,11 +482,11 @@ function GalleryFull() {
           </h2>
           <p className="mt-2 text-pretty text-base text-white/70">{cta.description}</p>
           <a
-            href="tel:800-451-7213"
+            href={businessPhoneTelHref}
             className={`mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
           >
             <Phone className="size-4 shrink-0" aria-hidden />
-            <span>Call Now</span>
+            <span>Call {businessPhoneDisplay}</span>
           </a>
         </div>
 

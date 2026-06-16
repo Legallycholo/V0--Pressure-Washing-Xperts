@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { usePathname, useSearchParams } from "next/navigation"
-import { CheckCircle, Loader2, Send } from "lucide-react"
+import { CheckCircle, Loader2, Phone, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -32,6 +32,7 @@ import {
 } from "@/data/offers"
 import { submitLeadRequest } from "@/lib/submitLead"
 import { trackLeadConversion } from "@/lib/leadAnalytics"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import residentialHeroImage from "@/public/services/home-residential.png"
 
 interface HeroProps {
@@ -207,40 +208,57 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-10 sm:pb-12 lg:pb-14">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
           <div className="animate-fade-in-up lg:col-span-5 text-center lg:text-left hero-mobile-height flex flex-col justify-center lg:min-h-0">
-            <p className="mb-3 text-brand-yellow font-semibold text-sm tracking-[0.24em] uppercase">
-              Atlanta&apos;s top-rated service
+            <p className="mb-3 text-brand-yellow font-semibold text-xs sm:text-sm tracking-[0.24em] uppercase">
+              Metro Atlanta&apos;s #1 Pressure Washing Service
             </p>
 
             <h1 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
-              Professional Pressure Washing in Ellenwood, GA &amp; Metro Atlanta
+              Same-Day Pressure Washing — Call for a Free Quote
             </h1>
 
             <p className="mt-3 text-brand-yellow font-semibold text-sm sm:text-base">
-              Licensed &amp; Insured · Free Quotes · Residential &amp; Commercial
+              Licensed &amp; Insured · 5-Star Rated · Serving Metro Atlanta Since 2010
             </p>
 
-            <p className="mt-4 max-w-2xl text-base text-white/85 leading-relaxed sm:text-lg lg:mx-0 mx-auto">
-              From house washing and driveway cleaning to roof soft wash, we serve Ellenwood, GA and the greater Metro Atlanta area. Get a free quote today.
-            </p>
+            {/* Phone number — the largest, most prominent element above the fold */}
+            <a
+              href={businessPhoneTelHref}
+              className={`group mt-5 inline-flex flex-col items-center lg:items-start rounded-2xl ${ctaPress}`}
+              aria-label={`Call us now at ${businessPhoneDisplay}`}
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                Call Now · We Answer in 60 Seconds
+              </span>
+              <span className="mt-1 flex items-center gap-2 text-4xl font-extrabold tracking-tight text-brand-yellow sm:text-5xl lg:text-6xl group-hover:text-brand-yellow-dark transition-colors">
+                <Phone className="size-7 shrink-0 sm:size-8 lg:size-9" aria-hidden />
+                {businessPhoneDisplay}
+              </span>
+            </a>
 
-
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+              <Button
+                asChild
+                size="lg"
+                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg min-h-[44px] ${ctaPress}`}
+              >
+                <a href={businessPhoneTelHref}>
+                  <Phone className="size-5 shrink-0" aria-hidden />
+                  Call {businessPhoneDisplay} Now
+                </a>
+              </Button>
               <Button
                 type="button"
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold text-base px-6 py-4 hover:bg-brand-yellow-dark transition-all duration-300 shadow-lg min-h-[44px] ${ctaPress}`}
-              >
-                Get My Free Quote
-              </Button>
-              <Button
-                asChild
-                size="lg"
                 className={`w-full sm:w-auto bg-transparent border-2 border-white/50 text-white font-semibold text-base px-6 py-4 hover:bg-white/10 hover:border-white transition-all duration-300 min-h-[44px] ${ctaPress}`}
               >
-                <a href="tel:800-451-7213">Call Now: (800) 451-7213</a>
+                Get a Free Estimate
               </Button>
             </div>
+
+            <p className="mt-4 text-sm text-white/80 lg:mx-0 mx-auto">
+              Same-Day Availability · Instant Pricing · No Contracts
+            </p>
           </div>
 
           <div className="hidden lg:block animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-12">
@@ -595,10 +613,10 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
                       <p className="text-center text-sm text-muted-foreground">
                         Or call us directly at{" "}
                         <a
-                          href="tel:800-451-7213"
+                          href={businessPhoneTelHref}
                           className="font-medium text-brand-blue hover:underline"
                         >
-                          (800)-451-7213
+                          {businessPhoneDisplay}
                         </a>
                       </p>
                     </div>

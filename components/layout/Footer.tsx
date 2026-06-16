@@ -44,8 +44,16 @@ export function Footer() {
               Pressure Washing Xperts
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
-              Licensed & insured pressure washing across Metro Atlanta.
+              Licensed &amp; insured pressure washing across Metro Atlanta since 2010.
             </p>
+            <a
+              href={`tel:+1${businessPhoneTel}`}
+              className={`inline-flex items-center gap-2 text-lg font-bold text-brand-yellow transition-colors hover:text-brand-yellow/80 ${ctaPress}`}
+              aria-label={`Call us now at ${businessPhoneDisplay}`}
+            >
+              <Phone className="size-5 shrink-0" />
+              {businessPhoneDisplay}
+            </a>
           </div>
 
           {/* Services Column */}
@@ -197,8 +205,9 @@ export function Footer() {
                 </a>
               </p>
             </div>
-            <div className="flex items-center justify-center md:justify-end gap-6">
-              <span className="text-white/40 text-sm">Licensed & Insured</span>
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2">
+              <span className="text-white/40 text-sm">★ 5.0 Rated · 32+ Reviews</span>
+              <span className="text-white/40 text-sm">Licensed &amp; Insured</span>
               <button
                 onClick={scrollToTop}
                 className="flex items-center gap-2 text-white/60 hover:text-brand-yellow transition-colors text-sm"
