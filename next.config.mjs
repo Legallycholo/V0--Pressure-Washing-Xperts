@@ -22,6 +22,35 @@ const nextConfig = {
         destination: "/services/residential",
         permanent: true,
       },
+      /**
+       * Force the canonical production domain. Anyone (incl. Googlebot) hitting a
+       * known *.vercel.app alias is 301'd to www.pressurewashingxpert.com so the
+       * staging URLs get de-indexed. Scoped to specific hosts so per-deployment
+       * preview URLs keep working.
+       */
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "pressurewashingxperts\\.vercel\\.app",
+          },
+        ],
+        destination: "https://www.pressurewashingxpert.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value:
+              "v0-pressure-washing-xperts-legallycholo3-6791s-projects\\.vercel\\.app",
+          },
+        ],
+        destination: "https://www.pressurewashingxpert.com/:path*",
+        permanent: true,
+      },
     ]
   },
 }
