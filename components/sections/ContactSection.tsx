@@ -19,7 +19,7 @@ import {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="scroll-offset-header py-12 bg-section-dark">
+    <section id="contact" className="scroll-offset-header py-14 sm:py-16 lg:py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-7 lg:grid-cols-12 lg:items-start xl:items-center">
           {/* Left Column - Contact Info */}
@@ -31,7 +31,7 @@ export function ContactSection() {
               Ready to <span className="text-ps-cyan text-glow-cyan">Get Started?</span>
             </h2>
             <p className="text-ps-text-muted text-base leading-relaxed mb-3">
-              The fastest way to get pricing is to call — we answer 7 days a week and can often schedule same-day. Prefer to write? Send the form and we&apos;ll reach out to book your free on-site visit.
+              The fastest way to get pricing is to call. We answer 7 days a week and can often get you on the schedule the same day. Prefer to write? Send the form and we&apos;ll reach out to book your free on-site visit.
             </p>
 
             {/* Glowing phone number */}
@@ -49,7 +49,7 @@ export function ContactSection() {
             {/* Primary call CTA */}
             <a
               href={businessPhoneTelHref}
-              className={`animate-cyan-pulse mb-6 flex w-full items-center justify-center gap-2 rounded-xl bg-ps-cyan px-6 py-4 font-display tracking-widest text-lg text-[#06121f] shadow-lg transition-colors hover:bg-brand-yellow-dark sm:w-auto ${ctaPress}`}
+              className={`animate-cyan-pulse mb-6 flex w-full items-center justify-center gap-2 rounded-xl bg-ps-cyan px-4 sm:px-6 py-4 font-display tracking-wide sm:tracking-widest text-base sm:text-lg text-[#06121f] shadow-lg transition-colors hover:bg-brand-yellow-dark sm:w-auto ${ctaPress}`}
               aria-label={`Call us now at ${businessPhoneDisplay}`}
             >
               <Phone className="size-5 shrink-0" aria-hidden />

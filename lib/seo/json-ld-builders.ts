@@ -84,7 +84,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Pressure Washing",
-                description: "Professional pressure washing services in Ellenwood, GA and Atlanta — high-pressure cleaning for concrete, driveways, and building exteriors.",
+                description: "Professional pressure washing services in Ellenwood, GA and Atlanta. High-pressure cleaning for concrete, driveways, and building exteriors.",
                 url: absoluteUrl("/power-washing"),
               },
             },
@@ -93,7 +93,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Soft Washing",
-                description: "Low-pressure soft washing in Ellenwood, GA and Atlanta — safe chemical treatment for roofs, siding, stucco, and delicate surfaces.",
+                description: "Low-pressure soft washing in Ellenwood, GA and Atlanta. Safe chemical treatment for roofs, siding, stucco, and delicate surfaces.",
                 url: absoluteUrl("/soft-washing"),
               },
             },
@@ -102,7 +102,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "House Washing",
-                description: "Exterior house washing in Ellenwood, GA and Atlanta — soft wash removes mold, mildew, and algae from vinyl siding, brick, and stucco.",
+                description: "Exterior house washing in Ellenwood, GA and Atlanta. Soft wash removes mold, mildew, and algae from vinyl siding, brick, and stucco.",
                 url: absoluteUrl("/services/residential/house-washing"),
               },
             },
@@ -111,7 +111,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Driveway Cleaning",
-                description: "Professional driveway cleaning in Ellenwood, GA and Atlanta — surface-cleaner pressure washing removes oil stains, dirt, and mildew from concrete.",
+                description: "Professional driveway cleaning in Ellenwood, GA and Atlanta. Surface-cleaner pressure washing removes oil stains, dirt, and mildew from concrete.",
                 url: absoluteUrl("/services/residential/driveways-sidewalks"),
               },
             },
@@ -120,7 +120,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Roof Cleaning",
-                description: "Safe roof cleaning in Ellenwood, GA and Atlanta — low-pressure soft wash removes black streaks, algae, and moss without damaging asphalt shingles.",
+                description: "Safe roof cleaning in Ellenwood, GA and Atlanta. Low-pressure soft wash removes black streaks, algae, and moss without damaging asphalt shingles.",
                 url: absoluteUrl("/roof-cleaning"),
               },
             },
@@ -129,7 +129,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Gutter Cleaning",
-                description: "Professional gutter cleaning in Ellenwood, GA and Atlanta — clears debris and flushes downspouts to keep rainwater moving away from your foundation.",
+                description: "Professional gutter cleaning in Ellenwood, GA and Atlanta. Clears debris and flushes downspouts to keep rainwater moving away from your foundation.",
                 url: absoluteUrl("/services/residential/gutters"),
               },
             },
@@ -138,7 +138,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Power Washing",
-                description: "Power washing services in Ellenwood, GA and Atlanta — high-pressure cleaning for driveways, patios, sidewalks, and commercial flatwork.",
+                description: "Power washing services in Ellenwood, GA and Atlanta. High-pressure cleaning for driveways, patios, sidewalks, and commercial flatwork.",
                 url: absoluteUrl("/power-washing"),
               },
             },
@@ -147,7 +147,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Residential Pressure Washing",
-                description: "Full-service residential pressure washing in Ellenwood, GA and Atlanta — house washing, driveway cleaning, roof cleaning, and soft washing in one visit.",
+                description: "Full-service residential pressure washing in Ellenwood, GA and Atlanta. House washing, driveway cleaning, roof cleaning, and soft washing in one visit.",
                 url: absoluteUrl("/services/residential/residential-properties"),
               },
             },
@@ -156,7 +156,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Exterior Cleaning",
-                description: "Complete exterior cleaning in Ellenwood, GA and Atlanta — soft washing, pressure washing, and surface cleaning for residential and commercial properties.",
+                description: "Complete exterior cleaning in Ellenwood, GA and Atlanta. Soft washing, pressure washing, and surface cleaning for residential and commercial properties.",
                 url: absoluteUrl("/services/residential"),
               },
             },
@@ -165,7 +165,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Deck & Fence Cleaning",
-                description: "Deck and fence cleaning in Ellenwood, GA and Atlanta — wood, composite, and vinyl surfaces cleaned and prepped for stain or seal.",
+                description: "Deck and fence cleaning in Ellenwood, GA and Atlanta. Wood, composite, and vinyl surfaces cleaned and prepped for stain or seal.",
                 url: absoluteUrl("/services/residential/decks-fences"),
               },
             },
@@ -174,7 +174,7 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
               itemOffered: {
                 "@type": "Service",
                 name: "Commercial Building Washing",
-                description: "Commercial building washing in Ellenwood, GA and Atlanta — facades, storefronts, and common areas cleaned with soft wash or pressure for your cladding type.",
+                description: "Commercial building washing in Ellenwood, GA and Atlanta. Facades, storefronts, and common areas cleaned with soft wash or pressure for your cladding type.",
                 url: absoluteUrl("/services/commercial/building-washing"),
               },
             },

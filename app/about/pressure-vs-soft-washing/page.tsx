@@ -95,7 +95,7 @@ export default function PressureVsSoftWashingPage() {
               Our Xpert Approach
             </h2>
             <p className="text-sm sm:text-base text-gray-700 mb-4">
-              We assess each project individually and choose the right method—or combination—to protect your property and deliver the best results.
+              We assess each project individually and choose the right method, or a combination, to protect your property and deliver the best results.
             </p>
             <div className="bg-brand-yellow/10 p-4 rounded-lg">
               <p className="text-lg font-semibold text-brand-blue-dark">
@@ -112,7 +112,7 @@ export default function PressureVsSoftWashingPage() {
               Not Sure Which Method You Need?
             </h2>
             <p className="text-sm sm:text-base text-white/80 mb-5">
-              Free consultation—we&apos;ll recommend the best approach.
+              Free consultation. We&apos;ll recommend the best approach.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button

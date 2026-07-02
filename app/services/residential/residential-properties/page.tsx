@@ -16,8 +16,8 @@ export default function ResidentialPropertiesPage() {
     <>
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
-        title="Residential Pressure Washing Services Near Me — Ellenwood & Atlanta, GA"
-        description="Full-service residential pressure washing near you in Ellenwood GA and Metro Atlanta. One crew handles house washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing — all in a single coordinated visit. Home pressure washing done right."
+        title="Residential Pressure Washing Services Near Me in Ellenwood & Atlanta, GA"
+        description="Full-service residential pressure washing near you in Ellenwood GA and Metro Atlanta. One crew handles house washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing, all in one coordinated visit. Home pressure washing done right."
         category="Residential"
         benefits={[
           "Roof soft washing, house washing & driveway cleaning in one visit",

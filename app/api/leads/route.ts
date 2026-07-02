@@ -19,9 +19,9 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
   if (!apiKey) return
   const resend = new Resend(apiKey)
 
-  const location = [payload.city, payload.state, payload.zip].filter(Boolean).join(", ") || "—"
+  const location = [payload.city, payload.state, payload.zip].filter(Boolean).join(", ") || "N/A"
   const source = payload.utm_source
-    ? `${escapeHtml(payload.utm_source)}${payload.utm_medium ? ` / ${escapeHtml(payload.utm_medium)}` : ""}${payload.utm_campaign ? ` — ${escapeHtml(payload.utm_campaign)}` : ""}`
+    ? `${escapeHtml(payload.utm_source)}${payload.utm_medium ? ` / ${escapeHtml(payload.utm_medium)}` : ""}${payload.utm_campaign ? ` | ${escapeHtml(payload.utm_campaign)}` : ""}`
     : payload.how_heard
       ? escapeHtml(payload.how_heard)
       : "Direct"
@@ -29,7 +29,7 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
   await resend.emails.send({
     from: "Dariel <dariel@tanygrowth.com>",
     to: "pressurewashingxperts@gmail.com",
-    subject: `🔔 New Lead — ${payload.full_name} in ${payload.city || "Unknown"} (${payload.phone})`,
+    subject: `🔔 New Lead: ${payload.full_name} in ${payload.city || "Unknown"} (${payload.phone})`,
     html: `
 <!DOCTYPE html>
 <html>
@@ -93,11 +93,11 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
             <table width="100%" cellpadding="0" cellspacing="6">
               <tr>
                 <td style="font-size:13px;color:#667788;width:40%;padding:4px 0;">Sqft estimate</td>
-                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.approx_sqft_estimate || "—")}</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.approx_sqft_estimate || "N/A")}</td>
               </tr>
               <tr>
                 <td style="font-size:13px;color:#667788;padding:4px 0;vertical-align:top;">Description</td>
-                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.message || "—")}</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.message || "N/A")}</td>
               </tr>
             </table>
           </td>
@@ -117,11 +117,11 @@ async function sendLeadNotification(payload: LeadPayload, roughPrice: number) {
               </tr>
               <tr>
                 <td style="font-size:13px;color:#667788;padding:4px 0;">Device</td>
-                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.device || "—")}</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${escapeHtml(payload.device || "N/A")}</td>
               </tr>
               <tr>
                 <td style="font-size:13px;color:#667788;padding:4px 0;">Page</td>
-                <td style="font-size:13px;color:#0a2540;font-weight:600;">${payload.page_path ? escapeHtml(payload.page_path) : "—"}</td>
+                <td style="font-size:13px;color:#0a2540;font-weight:600;">${payload.page_path ? escapeHtml(payload.page_path) : "N/A"}</td>
               </tr>
             </table>
           </td>

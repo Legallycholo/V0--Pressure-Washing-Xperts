@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { usePathname, useSearchParams } from "next/navigation"
 import { motion, useReducedMotion, type Variants } from "framer-motion"
-import { CheckCircle, Loader2, Phone, Send } from "lucide-react"
+import { CheckCircle, Clock, Loader2, Phone, Send, ShieldCheck, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -239,7 +239,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
               variants={prefersReduced ? undefined : heroItem}
               className="mb-3 text-ps-cyan font-semibold text-xs sm:text-sm tracking-[0.28em] uppercase"
             >
-              Metro Atlanta&apos;s Pressure Washing Xperts
+              Ellenwood, GA · House, Roof, Driveway &amp; Commercial
             </motion.p>
 
             <motion.h1
@@ -264,20 +264,21 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
               className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
             >
               {[
-                "⭐ 5.0 Stars (32+ Reviews)",
-                "✅ Licensed & Insured",
-                "📞 Same-Day Service",
-              ].map((pill) => (
+                { Icon: Star, label: "5.0 Stars (32+ Reviews)" },
+                { Icon: ShieldCheck, label: "Licensed & Insured" },
+                { Icon: Clock, label: "Same-Day Service" },
+              ].map(({ Icon, label }) => (
                 <span
-                  key={pill}
-                  className="rounded-full border border-ps-cyan/40 bg-ps-cyan/5 px-3 py-1.5 text-xs sm:text-sm font-medium text-ps-text"
+                  key={label}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-ps-cyan/40 bg-ps-cyan/5 px-3 py-1.5 text-xs sm:text-sm font-medium text-ps-text"
                 >
-                  {pill}
+                  <Icon className="size-3.5 shrink-0 text-ps-cyan" aria-hidden />
+                  {label}
                 </span>
               ))}
             </motion.div>
 
-            {/* Phone number — largest, most prominent element above the fold */}
+            {/* Phone number: largest, most prominent element above the fold */}
             <motion.a
               variants={prefersReduced ? undefined : heroItem}
               href={businessPhoneTelHref}
@@ -300,7 +301,7 @@ export function Hero({ onOpenQuoteForm, initialOfferId }: HeroProps) {
               <Button
                 asChild
                 size="lg"
-                className={`animate-cyan-pulse w-full sm:w-auto bg-ps-cyan text-[#06121f] font-display tracking-widest text-lg px-7 py-5 hover:bg-brand-yellow-dark transition-colors min-h-[48px] ${ctaPress}`}
+                className={`animate-cyan-pulse w-full sm:w-auto bg-ps-cyan text-[#06121f] font-display tracking-wide sm:tracking-widest text-base sm:text-lg px-4 sm:px-7 py-5 hover:bg-brand-yellow-dark transition-colors min-h-[48px] ${ctaPress}`}
               >
                 <a href={businessPhoneTelHref}>
                   <Phone className="size-5 shrink-0" aria-hidden />

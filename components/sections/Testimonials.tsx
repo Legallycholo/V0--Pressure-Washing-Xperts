@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { Star, ChevronLeft, ChevronRight, Quote, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -75,17 +76,29 @@ const testimonials: Testimonial[] = [
 ]
 
 export function Testimonials() {
+  const prefersReduced = useReducedMotion()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  // Pause while the user is reading: hover, focus, or touch (WCAG 2.2.2)
+  const [isPaused, setIsPaused] = useState(false)
 
   // Auto-advance carousel
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || isPaused || prefersReduced) return
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length)
     }, 5000)
     return () => clearInterval(interval)
-  }, [isAutoPlaying])
+  }, [isAutoPlaying, isPaused, prefersReduced])
+
+  const handleSwipeEnd = (
+    _e: unknown,
+    info: { offset: { x: number }; velocity: { x: number } }
+  ) => {
+    const power = info.offset.x + info.velocity.x * 0.2
+    if (power < -60) goToNext()
+    else if (power > 60) goToPrevious()
+  }
 
   const goToPrevious = () => {
     setIsAutoPlaying(false)
@@ -113,7 +126,7 @@ export function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="py-12 bg-section-dark overflow-hidden">
+    <section id="testimonials" className="py-14 sm:py-16 lg:py-20 bg-section-dark overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-9">
@@ -148,7 +161,15 @@ export function Testimonials() {
         </div>
 
         {/* Testimonials Carousel */}
-        <div className="relative">
+        <div
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          aria-live="polite"
+        >
           {/* Desktop View - 3 cards */}
           <div className="hidden md:grid md:grid-cols-3 gap-4">
             {getVisibleTestimonials().map((testimonial, index) => (
@@ -196,9 +217,19 @@ export function Testimonials() {
             ))}
           </div>
 
-          {/* Mobile View - Single card */}
-          <div className="md:hidden">
-            <div className="relative rounded-xl bg-white/10 border border-white/10 p-4">
+          {/* Mobile View - Single swipeable card */}
+          <div className="md:hidden touch-pan-y">
+            <motion.div
+              key={currentIndex}
+              className="relative rounded-xl bg-white/10 border border-white/10 p-4"
+              drag={prefersReduced ? false : "x"}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.18}
+              onDragEnd={handleSwipeEnd}
+              initial={prefersReduced ? false : { opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
               {/* Quote Icon */}
               <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/30" />
 
@@ -230,7 +261,10 @@ export function Testimonials() {
               <div className="mt-4 inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-3 py-1 rounded-full">
                 {testimonials[currentIndex].service}
               </div>
-            </div>
+            </motion.div>
+            <p className="mt-2 text-center text-xs text-white/40" aria-hidden>
+              Swipe to see more reviews
+            </p>
           </div>
 
           {/* Navigation Arrows */}

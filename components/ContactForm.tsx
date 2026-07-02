@@ -96,7 +96,7 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
         <h3 className="text-xl font-bold text-white mb-2">Message sent!</h3>
         <p className="text-white/70 text-sm leading-relaxed">
-          Thanks — we&apos;ll be in touch soon.
+          Thanks! We&apos;ll be in touch soon.
         </p>
         <Button
           type="button"

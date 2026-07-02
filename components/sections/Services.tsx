@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
+import { StackCard, StackCards } from "@/components/motion/StackCards"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
@@ -43,7 +44,7 @@ const topFiveServices = [
     id: "roof-soft-wash",
     title: "Roof Soft Wash",
     description:
-      "Safe low-pressure roof cleaning that won't damage shingles — lifts black streaks, algae, and moss.",
+      "Safe low-pressure roof cleaning that lifts black streaks, algae, and moss without harming shingles.",
     href: "/services/residential/roof-soft-washing",
     Icon: Cloud,
   },
@@ -129,7 +130,7 @@ interface ServicesProps {
 
 export function Services({ onOpenQuoteForm }: ServicesProps) {
   return (
-    <section id="services" className="py-14 bg-section-dark">
+    <section id="services" className="py-14 sm:py-16 lg:py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <Reveal className="text-center mb-10">
@@ -144,47 +145,73 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
           </p>
         </Reveal>
 
-        {/* Core services (Google Ads + SEO alignment) */}
-        <RevealGroup className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {topFiveServices.map(({ id, title, description, href, Icon }) => (
-            <RevealItem
+        {/* Core services: scroll-stacking deck (Google Ads + SEO alignment) */}
+        <StackCards className="mx-auto mb-14 max-w-4xl">
+          {topFiveServices.map(({ id, title, description, href, Icon }, index) => (
+            <StackCard
               key={id}
-              as="article"
-              className="group relative flex h-full flex-col rounded-xl border-l-4 border-ps-cyan bg-ps-bg-alt p-5 ring-1 ring-white/5 transition-all duration-200 hover:-translate-y-1 hover:ring-ps-cyan/40 hover:shadow-[0_12px_30px_-8px_rgba(0,229,255,0.35)]"
+              index={index}
+              isLast={index === topFiveServices.length - 1}
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111D35] to-[#0C1526] ring-1 ring-white/10 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.7)] transition-colors duration-300 hover:ring-ps-cyan/40"
             >
-              <Link
-                href={href}
-                aria-label={`${title} pressure washing in Ellenwood, GA and Metro Atlanta`}
-                className="flex flex-1 flex-col"
-              >
-                <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-ps-cyan/15 text-ps-cyan">
-                  <Icon className="size-6" aria-hidden />
+              <article className="relative p-6 sm:p-8 lg:p-10">
+                {/* Oversized index watermark */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -top-2 right-4 font-display text-[5.5rem] leading-none text-white/[0.04] sm:text-[7rem]"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ps-cyan/50 to-transparent" />
+
+                <div className="flex items-start gap-4 sm:gap-6">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ps-cyan/15 text-ps-cyan ring-1 ring-ps-cyan/25 sm:h-14 sm:w-14">
+                    <Icon className="size-6 sm:size-7" aria-hidden />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <Link
+                      href={href}
+                      aria-label={`${title} pressure washing in Ellenwood, GA and Metro Atlanta`}
+                      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ps-cyan/70 rounded-md"
+                    >
+                      <h3 className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl lg:text-4xl">
+                        {title}
+                      </h3>
+                    </Link>
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ps-text-muted sm:text-base">
+                      {description}
+                    </p>
+                    <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                      <a
+                        href={businessPhoneTelHref}
+                        className={`inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-ps-cyan transition-colors hover:text-brand-yellow-dark ${ctaPress}`}
+                        aria-label={`Call ${businessPhoneDisplay} for ${title} pricing`}
+                      >
+                        <Phone className="size-4 shrink-0" aria-hidden />
+                        Call for Pricing
+                      </a>
+                      <Link
+                        href={href}
+                        className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-white/70 transition-colors hover:text-white"
+                      >
+                        Learn more
+                        <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-white">{title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-ps-text-muted">
-                  {description}
-                </p>
-              </Link>
-              <a
-                href={businessPhoneTelHref}
-                className={`mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-ps-cyan transition-colors hover:text-brand-yellow-dark ${ctaPress}`}
-                aria-label={`Call ${businessPhoneDisplay} for ${title} pricing`}
-              >
-                <Phone className="size-4 shrink-0" aria-hidden />
-                Call for Pricing
-                <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden />
-              </a>
-            </RevealItem>
+              </article>
+            </StackCard>
           ))}
-        </RevealGroup>
+        </StackCards>
 
         {/* Primary Services */}
-        <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-2">
-          {primaryServices.map((service, index) => (
+        <RevealGroup className="mx-auto grid max-w-5xl gap-5 md:grid-cols-2" stagger={0.12}>
+          {primaryServices.map((service) => (
+            <RevealItem key={service.id} as="div">
             <Link
-              key={service.id}
               href={service.href}
-              className={`group relative block overflow-hidden rounded-xl animate-fade-in-up stagger-${index + 1}`}
+              className="group relative block h-full overflow-hidden rounded-xl"
             >
               <div className="absolute inset-0 rounded-xl border border-white/10 transition-colors group-hover:border-ps-cyan/40" />
 
@@ -196,7 +223,6 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    priority={index === 0}
                   />
                 </div>
 
@@ -213,8 +239,9 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
                 </span>
               </div>
             </Link>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
 
         {/* Supporting Services */}
         <div className="mt-6 grid gap-4 md:grid-cols-3">

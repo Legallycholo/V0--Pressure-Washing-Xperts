@@ -19,7 +19,7 @@ const powerWashingSurfaces = [
 ]
 
 const whyChooseUs = [
-  "Licensed and insured — verified coverage, not just a claim",
+  "Licensed and insured with verified coverage, not just a claim",
   "15+ years serving Ellenwood and Metro Atlanta",
   "Commercial-grade equipment matched to each surface",
   "No damage guarantee on all power washing jobs",

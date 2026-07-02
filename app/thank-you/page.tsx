@@ -23,7 +23,7 @@ export default function ThankYouPage() {
               <CheckCircle className="size-9 text-brand-yellow" aria-hidden />
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl mb-3 text-balance">
-              Thank you — we received your request
+              Thank you! We received your request
             </h1>
             <p className="text-base text-white/85 leading-relaxed">
               Our team will review your details and reach out soon. We serve Ellenwood, GA and
@@ -35,7 +35,7 @@ export default function ThankYouPage() {
         <section className="py-12">
           <div className="mx-auto max-w-lg px-4 sm:px-6 text-center space-y-6">
             <p className="text-gray-700 leading-relaxed">
-              Prefer not to wait? Call or text us — we answer 7 days a week, 8am–10pm ET.
+              Prefer not to wait? Call or text us. We answer 7 days a week, 8am to 10pm ET.
             </p>
             <a
               href="tel:800-451-7213"

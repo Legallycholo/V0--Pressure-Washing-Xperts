@@ -64,7 +64,7 @@ export async function POST(req: Request) {
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Trigger:</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTriggerReason) || "—"}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTriggerReason) || "N/A"}</td>
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Current Page:</strong></td>
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><strong>Total Session Time:</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTimeSpent) || "—"}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(safeTimeSpent) || "N/A"}</td>
           </tr>
         </table>
         <br />

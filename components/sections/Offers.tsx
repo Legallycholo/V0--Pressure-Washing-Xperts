@@ -19,7 +19,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
 
   return (
     <section
-      className="py-14 bg-ps-bg-alt"
+      className="py-14 sm:py-16 lg:py-20 bg-ps-bg-alt"
       aria-labelledby="offers-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
