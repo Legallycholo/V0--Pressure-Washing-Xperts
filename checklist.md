@@ -86,4 +86,4 @@ Updated continuously during implementation.
 - [x] pnpm build green
 - [x] Zero em dashes confirmed by grep
 - [x] Ads template char counts re-verified
-- [ ] Committed and pushed to PR #11 branch
+- [x] Committed and pushed to PR #11 branch (064cc6e)
