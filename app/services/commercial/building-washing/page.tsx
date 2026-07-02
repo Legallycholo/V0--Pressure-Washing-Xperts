@@ -17,7 +17,7 @@ export default function BuildingWashingPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Commercial Building Washing"
-        description="Pressure or soft wash for Metro Atlanta office, retail, and commercial facades—matched to brick, stucco, EIFS, and metal."
+        description="Pressure or soft wash for Metro Atlanta office, retail, and commercial facades, matched to brick, stucco, EIFS, and metal."
         category="Commercial"
         benefits={[
           "Removes mold, mildew & environmental staining",

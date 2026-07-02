@@ -107,7 +107,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               ) : (
                 <div className="text-center px-6 py-8 flex flex-col items-center gap-4 max-w-sm mx-auto">
                   <p className="text-gray-700 text-base font-medium">
-                    See your neighborhood on the schedule — call for a quote.
+                    Want your neighborhood on the schedule? Call for a quote.
                   </p>
                   <Button
                     asChild
@@ -181,7 +181,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               Before and after from our crew
             </h2>
             <p className="text-gray-600 text-center mb-6 max-w-2xl mx-auto text-sm">
-              Real jobs from the gallery—ask about photos from your neighborhood.
+              Real jobs from our gallery. Ask about photos from your neighborhood.
             </p>
             <div className="grid md:grid-cols-2 gap-5">
               {galleryPairs.map((item) => (

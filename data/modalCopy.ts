@@ -2,7 +2,7 @@
 export const modalCopyDefault = {
   headline: "Book your free on-site quote",
   subline:
-    "We come to your property, look at the job, and give you a straight price — no guessing, no obligation.",
+    "We come to your property, look at the job, and give you a straight price. No guessing, no obligation.",
   badge: "Free on-site quote",
   submitLabel: "Request my free on-site quote",
   successExtra: null as string | null,

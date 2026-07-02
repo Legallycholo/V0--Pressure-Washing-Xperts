@@ -247,7 +247,7 @@ export function ServicePageTemplate({
               <div className="relative flex min-h-72 flex-col items-center justify-center rounded-lg border border-brand-blue/15 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 p-6 text-center shadow-sm">
                 <Phone className="size-10 text-brand-blue-dark mb-3" aria-hidden />
                 <h3 className="text-lg font-bold text-brand-blue-dark mb-2">
-                  See it in person—start with a call
+                  See it in person, start with a call
                 </h3>
                 <p className="text-gray-600 mb-4 max-w-sm text-pretty text-sm">
                   Talk to our team and get a straightforward quote.
@@ -316,7 +316,7 @@ export function ServicePageTemplate({
             {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
           </h2>
           <p className="text-sm sm:text-base text-white/80 mb-5">
-            {ctaSubline ?? "Straightforward quotes—know what to expect before we start."}
+            {ctaSubline ?? "Straightforward quotes. You know what to expect before we start."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button

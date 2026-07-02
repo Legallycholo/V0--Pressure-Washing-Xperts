@@ -12,7 +12,7 @@ import { ctaPress } from "@/lib/ctaInteraction"
 const softWashBenefits = [
   "Removes black streaks (Gloeocapsa magma algae) at the root",
   "Kills moss and lichen without high-pressure damage",
-  "Safe for asphalt shingles — no granule loss",
+  "Safe for asphalt shingles, no granule loss",
   "Results last longer than pressure washing alone",
   "Protects roof warranty by following manufacturer guidelines",
 ]
@@ -44,7 +44,7 @@ export default function RoofCleaningPage() {
               Professional Roof Cleaning Services in Ellenwood, GA
             </h1>
             <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-8">
-              We use low-pressure soft washing — the only method recommended by roofing manufacturers — to safely remove black streaks, algae, moss, and lichen from your roof without causing damage.
+              We use low-pressure soft washing, the only method recommended by roofing manufacturers, to safely remove black streaks, algae, moss, and lichen from your roof without causing damage.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
@@ -124,7 +124,7 @@ export default function RoofCleaningPage() {
             </div>
 
             <p className="mt-6 text-center text-sm text-gray-500">
-              At Pressure Washing Xperts we only use soft washing on roofs — never high-pressure.{" "}
+              At Pressure Washing Xperts we only use soft washing on roofs, never high pressure.{" "}
               <Link href="/about/pressure-vs-soft-washing" className="text-brand-blue hover:underline font-medium">
                 Learn more about soft washing vs. pressure washing →
               </Link>
@@ -142,7 +142,7 @@ export default function RoofCleaningPage() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {[
-                { label: "Black Streaks", detail: "Caused by Gloeocapsa magma algae — the most common roof stain in Georgia." },
+                { label: "Black Streaks", detail: "Caused by Gloeocapsa magma algae, the most common roof stain in Georgia." },
                 { label: "Moss & Lichen", detail: "Root systems that lift shingles and hold moisture against the deck." },
                 { label: "Mold & Mildew", detail: "Dark patches that accelerate shingle breakdown and look unsightly." },
                 { label: "Green Algae", detail: "Thrives in shaded, humid areas common throughout Ellenwood and Atlanta." },

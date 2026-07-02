@@ -8,7 +8,7 @@ export const metadata: Metadata = buildPublicMetadata({
   title:
     "Pressure Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
   description:
-    "Professional pressure washing in Ellenwood, GA and Metro Atlanta. House washing, driveway cleaning, roof soft wash, decks, and commercial. Licensed & insured. Free quotes — call (800) 451-7213.",
+    "Professional pressure washing in Ellenwood, GA and Metro Atlanta. House washing, driveway cleaning, roof soft wash, decks, and commercial. Licensed & insured. Free quotes. Call (800) 451-7213.",
   pathname: "/",
 })
 

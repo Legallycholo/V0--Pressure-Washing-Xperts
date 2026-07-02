@@ -19,7 +19,7 @@ interface FAQProps {
 
 export function FAQ({ onOpenQuoteForm }: FAQProps) {
   return (
-    <section id="faq" className="py-14 bg-ps-bg">
+    <section id="faq" className="py-14 sm:py-16 lg:py-20 bg-ps-bg">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <Reveal className="text-center mb-8">

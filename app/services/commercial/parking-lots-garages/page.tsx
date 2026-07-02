@@ -17,7 +17,7 @@ export default function ParkingLotsGaragesPage() {
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
         title="Parking Lot & Garage Cleaning"
-        description="Deep cleaning for asphalt and concrete lots and garages removes oil, tire marks, and organic buildup—with night or weekend scheduling."
+        description="Deep cleaning for asphalt and concrete lots and garages removes oil, tire marks, and organic buildup. Night and weekend scheduling available."
         category="Commercial"
         benefits={[
           "Removes oil, grease & tire marks",

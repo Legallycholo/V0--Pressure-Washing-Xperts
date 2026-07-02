@@ -47,7 +47,7 @@ export function CallBanner({ onOpenQuoteForm }: CallBannerProps) {
           <Button
             asChild
             size="lg"
-            className={`animate-cyan-pulse w-full sm:w-auto bg-ps-cyan text-[#06121f] font-display tracking-widest text-lg px-8 py-5 hover:bg-brand-yellow-dark min-h-[48px] ${ctaPress}`}
+            className={`animate-cyan-pulse w-full sm:w-auto bg-ps-cyan text-[#06121f] font-display tracking-wide sm:tracking-widest text-base sm:text-lg px-4 sm:px-8 py-5 hover:bg-brand-yellow-dark min-h-[48px] ${ctaPress}`}
           >
             <a href={businessPhoneTelHref}>
               <Phone className="size-5 shrink-0" aria-hidden />

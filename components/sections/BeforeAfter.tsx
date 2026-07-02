@@ -65,7 +65,7 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
   }
 
   return (
-    <section className="bg-ps-bg-alt py-14">
+    <section className="bg-ps-bg-alt py-14 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">

@@ -49,7 +49,7 @@ export default function DrivewaySidewalkPage() {
       />
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
-        title="Driveway Cleaning Near Me — Ellenwood & Atlanta, GA"
+        title="Driveway Cleaning Near Me in Ellenwood & Atlanta, GA"
         description="Professional driveway cleaning and power washing in Ellenwood GA and Metro Atlanta. We remove oil stains, dirt, mold, and mildew from driveways, sidewalks, and walkways using commercial surface-cleaner pressure washing for an even, streak-free result."
         category="Residential"
         benefits={[

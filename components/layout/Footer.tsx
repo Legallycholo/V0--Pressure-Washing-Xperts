@@ -162,7 +162,7 @@ export function Footer() {
               </details>
             </div>
 
-            {/* Social media links — add real URLs when available */}
+            {/* Social media links: add real URLs when available */}
             <div className="mt-4">
               <p className="text-white/40 text-sm mb-2">Follow Us</p>
               <div className="flex gap-3">

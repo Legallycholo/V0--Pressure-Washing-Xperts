@@ -57,7 +57,7 @@ export default function Home() {
         <CallBanner onOpenQuoteForm={() => goQuote({ target: "contact" })} />
         <Offers onOpenQuoteForm={openQuoteForm} />
         <FAQ onOpenQuoteForm={openQuoteForm} />
-        <section className="bg-ps-bg-alt py-14 sm:py-16">
+        <section className="bg-ps-bg-alt py-14 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center">
               <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
@@ -68,7 +68,7 @@ export default function Home() {
                 <span className="text-ps-cyan text-glow-cyan">Metro Atlanta &amp; Georgia</span>
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-ps-text-muted sm:text-base">
-                Based in Ellenwood, GA — tap your city or call{" "}
+                Based in Ellenwood, GA. Tap your city or call{" "}
                 <a
                   href="tel:+18004517213"
                   className="font-semibold text-ps-cyan underline-offset-2 hover:underline"
@@ -98,7 +98,7 @@ export default function Home() {
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-ps-text-muted">
               <span className="font-semibold text-white">Also serving:</span>{" "}
               Jonesboro, College Park, East Point, Riverdale, Hampton, Lovejoy,
-              Union City, Fairburn, and Peachtree City — plus surrounding
+              Union City, Fairburn, and Peachtree City, plus surrounding
               communities across Georgia.
             </p>
           </div>

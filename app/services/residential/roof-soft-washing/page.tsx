@@ -48,12 +48,12 @@ export default function RoofSoftWashingPage() {
       />
       <Header onOpenQuoteForm={() => goQuote()} />
       <ServicePageTemplate
-        title="Roof Cleaning Near Me — Ellenwood & Atlanta, GA"
+        title="Roof Cleaning Near Me in Ellenwood & Atlanta, GA"
         description="Safe soft wash roof cleaning removes algae, moss, lichen, and black streaks from asphalt shingles without high-pressure damage. Our roof cleaning near me service covers Ellenwood GA, Atlanta, Alpharetta, McDonough, and surrounding Metro Atlanta areas."
         category="Residential"
         benefits={[
           "Low-pressure soft wash roof cleaning safe for asphalt shingles",
-          "Kills algae, moss & lichen at the root — not just the surface",
+          "Kills algae, moss & lichen at the root, not just the surface",
           "Licensed & insured professionals"
         ]}
         onOpenQuoteForm={() => goQuote()}

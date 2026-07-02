@@ -112,7 +112,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        {/* Google tag — loads GA4 + Google Ads on every page */}
+        {/* Google tag: loads GA4 + Google Ads on every page */}
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-EK4M4BMN05"

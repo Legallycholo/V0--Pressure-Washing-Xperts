@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
+import { Reveal } from "@/components/motion/Reveal"
 import { cn } from "@/lib/utils"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
@@ -316,10 +317,10 @@ function GalleryTeaser() {
     <section
       id="gallery"
       aria-labelledby="gallery-heading"
-      className="animate-fade-in-up bg-section-dark py-12"
+      className="bg-section-dark py-14 sm:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-7 text-center">
+        <Reveal className="mb-7 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
             Our Work
           </p>
@@ -332,7 +333,7 @@ function GalleryTeaser() {
           <p className="mx-auto mt-3 max-w-2xl text-base text-white/70">
             Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
           </p>
-        </div>
+        </Reveal>
 
         <GalleryGrid
           itemsForView={itemsForView}

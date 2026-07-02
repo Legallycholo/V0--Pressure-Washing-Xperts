@@ -56,7 +56,7 @@ export default function WeDoXpertPage() {
                   Ready to talk?
                 </h3>
                 <p className="text-gray-600 mb-4 max-w-sm text-pretty text-sm">
-                  Call for scheduling, pricing, or what to expect on site—we&apos;re happy to help.
+                  Call for scheduling, pricing, or what to expect on site. We&apos;re happy to help.
                 </p>
                 <Button
                   asChild
@@ -108,7 +108,7 @@ export default function WeDoXpertPage() {
               Ready to Experience the Xpert Difference?
             </h2>
             <p className="text-sm sm:text-base text-white/80 mb-5">
-              Free quote—see why we&apos;re the trusted choice.
+              Get a free quote and see why neighbors keep calling us back.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button

@@ -1,6 +1,7 @@
 "use client"
 
-import type { ReactNode } from "react"
+import type { ComponentType, ReactNode } from "react"
+import { CalendarDays, Home, Phone, ShieldCheck, Star } from "lucide-react"
 import { CountUp } from "@/components/motion/CountUp"
 
 /**
@@ -8,44 +9,44 @@ import { CountUp } from "@/components/motion/CountUp"
  * Static row on desktop, auto-scrolling marquee on mobile.
  */
 type Stat = {
-  icon: string
+  Icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>
   value: ReactNode
   label: string
 }
 
 const stats: Stat[] = [
   {
-    icon: "🏠",
+    Icon: Home,
     value: <CountUp to={100} suffix="+" />,
     label: "Homes Cleaned",
   },
   {
-    icon: "⭐",
+    Icon: Star,
     value: <CountUp to={5} decimals={1} duration={1} />,
     label: "Google Rating",
   },
   {
-    icon: "📅",
+    Icon: CalendarDays,
     value: <CountUp to={16} duration={0.8} />,
     label: "Years in Business",
   },
   {
-    icon: "✅",
+    Icon: ShieldCheck,
     value: "Licensed",
     label: "& Insured",
   },
   {
-    icon: "📞",
+    Icon: Phone,
     value: "Same-Day",
     label: "Availability",
   },
 ]
 
-function StatItem({ icon, value, label }: Stat) {
+function StatItem({ Icon, value, label }: Stat) {
   return (
     <div className="flex items-center gap-3 px-6 sm:px-8 whitespace-nowrap">
-      <span className="text-2xl" aria-hidden>
-        {icon}
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ps-cyan/12 text-ps-cyan ring-1 ring-ps-cyan/20">
+        <Icon className="size-4.5" aria-hidden />
       </span>
       <span className="flex flex-col leading-none">
         <span className="font-display text-2xl sm:text-3xl tracking-wide text-ps-cyan">

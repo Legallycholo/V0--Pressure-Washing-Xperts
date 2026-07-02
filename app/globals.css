@@ -439,6 +439,28 @@
   animation: water-beam 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
 }
 
+/* ─── Scroll-stacking cards (StackCards.tsx) ───
+   Each card sticks below the fixed header; deeper cards sit slightly
+   lower so covered headers stay visible as a stacked deck. */
+.stack-card {
+  position: sticky;
+  top: calc(var(--header-offset-mobile) + 0.5rem + var(--stack-index, 0) * 0.75rem);
+}
+
+.stack-card + .stack-card {
+  margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .stack-card {
+    top: calc(var(--header-offset-desktop) + 1rem + var(--stack-index, 0) * 1rem);
+  }
+
+  .stack-card + .stack-card {
+    margin-top: 1.5rem;
+  }
+}
+
 /* Marquee for the social-proof stats bar (mobile auto-scroll) */
 @keyframes ps-marquee {
   from { transform: translateX(0); }

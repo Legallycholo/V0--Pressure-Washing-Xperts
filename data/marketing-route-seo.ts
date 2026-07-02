@@ -51,7 +51,7 @@ function buildFromNav(
 const manualCommercial: Record<string, MarketingRouteDefinition> = {
   "/services/commercial/apartment-complexes": def(
     "Apartment Complex Pressure Washing | Commercial | Pressure Washing Xperts",
-    "Breezeways, parking, pool decks, and building exteriors for Metro Atlanta apartments—scheduled to minimize disruption for residents and onsite staff.",
+    "Breezeways, parking, pool decks, and building exteriors for Metro Atlanta apartments, scheduled to minimize disruption for residents and onsite staff.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -65,7 +65,7 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/commercial/office-buildings": def(
     "Office Building Exterior Washing | Commercial | Pressure Washing Xperts",
-    "Entries, signage, walks, and facades for professional buildings—soft wash or pressure matched to cladding so your property looks maintained year-round.",
+    "Entries, signage, walks, and facades for professional buildings. We match soft wash or pressure to the cladding so your property looks maintained year-round.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -93,7 +93,7 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/commercial/hotels-hospitality": def(
     "Hotel & Hospitality Exterior Cleaning | Commercial | Pressure Washing Xperts",
-    "Porte-cochères, arrivals, loading zones, and walks kept guest-ready—night and weekend scheduling available for hospitality sites across Metro Atlanta.",
+    "Porte-cochères, arrivals, loading zones, and walks kept guest-ready, with night and weekend scheduling for hospitality sites across Metro Atlanta.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -107,7 +107,7 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/commercial/gas-stations": def(
     "Gas Station & Convenience Store Washing | Commercial | Pressure Washing Xperts",
-    "Fuel islands, pump pads, and forecourts cleaned to lift oil film and tire marks—improving appearance and traction for busy Metro Atlanta locations.",
+    "Fuel islands, pump pads, and forecourts cleaned to lift oil film and tire marks, improving appearance and traction at busy Metro Atlanta locations.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -121,7 +121,7 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/commercial/awning-cleaning": def(
     "Commercial Awning Cleaning | Commercial | Pressure Washing Xperts",
-    "Fabric and vinyl awnings brightened for retail and restaurant entrances—gentle methods that respect seams, graphics, and signage across Metro Atlanta.",
+    "Fabric and vinyl awnings brightened for retail and restaurant entrances. Gentle methods protect seams, graphics, and signage across Metro Atlanta.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -135,7 +135,7 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/commercial/parking-decks": def(
     "Parking Deck & Garage Washing | Commercial | Pressure Washing Xperts",
-    "Multi-level decks and ramps washed for oil, rubber, and seasonal film—scoped for drainage, traffic control, and off-peak scheduling in Metro Atlanta.",
+    "Multi-level decks and ramps washed for oil, rubber, and seasonal film. Scoped for drainage, traffic control, and off-peak scheduling in Metro Atlanta.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -189,7 +189,7 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
     {
       name: "House washing in Ellenwood, GA",
       description:
-        "Exterior house washing and soft wash for vinyl siding, brick, stucco, and painted surfaces — removing mold, mildew, and algae across Ellenwood, GA and Metro Atlanta.",
+        "Exterior house washing and soft wash for vinyl siding, brick, stucco, and painted surfaces. Removes mold, mildew, and algae across Ellenwood, GA and Metro Atlanta.",
     }
   ),
   "/services/residential/driveways-sidewalks": def(
@@ -203,7 +203,7 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
     {
       name: "Driveway cleaning and power washing in Ellenwood, GA",
       description:
-        "Professional driveway cleaning and sidewalk pressure washing in Ellenwood, GA and Metro Atlanta — removing oil stains, dirt, mold, and mildew from concrete surfaces.",
+        "Professional driveway cleaning and sidewalk pressure washing in Ellenwood, GA and Metro Atlanta. Removes oil stains, dirt, mold, and mildew from concrete surfaces.",
     }
   ),
   "/services/residential/roof-soft-washing": def(
@@ -217,7 +217,7 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
     {
       name: "Roof cleaning in Ellenwood, GA",
       description:
-        "Safe low-pressure soft wash roof cleaning in Ellenwood, GA and Metro Atlanta — removes algae, moss, lichen, and black streaks without damaging asphalt shingles.",
+        "Safe low-pressure soft wash roof cleaning in Ellenwood, GA and Metro Atlanta. Removes algae, moss, lichen, and black streaks without damaging asphalt shingles.",
     }
   ),
   "/services/residential/residential-properties": def(
@@ -231,7 +231,7 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
     {
       name: "Residential pressure washing in Ellenwood, GA",
       description:
-        "Full exterior residential pressure washing in Ellenwood, GA and Metro Atlanta — house washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing in one plan.",
+        "Full exterior residential pressure washing in Ellenwood, GA and Metro Atlanta. House washing, driveway cleaning, roof cleaning, gutter cleaning, and soft washing in one plan.",
     }
   ),
   "/services/residential/decks-fences": def(
@@ -300,7 +300,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/thank-you": def(
     "Thank You | Quote Request Received | Pressure Washing Xperts",
-    "Your free quote request was received. Pressure Washing Xperts serves Ellenwood, GA and Metro Atlanta—we will follow up shortly.",
+    "Your free quote request was received. Pressure Washing Xperts serves Ellenwood, GA and Metro Atlanta. We will follow up shortly.",
     [
       { name: "Home", path: "/" },
       { name: "Thank You", path: "/thank-you" },
@@ -308,7 +308,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/service-areas": def(
     "Service Areas | Metro Atlanta Pressure Washing | Pressure Washing Xperts",
-    "Cities and neighborhoods we serve across Metro Atlanta—from intown to northern suburbs—with localized pages for exterior and flatwork cleaning.",
+    "Cities and neighborhoods we serve across Metro Atlanta, from intown to the northern suburbs, with localized pages for exterior and flatwork cleaning.",
     [
       { name: "Home", path: "/" },
       { name: "Service Areas", path: "/service-areas" },
@@ -316,7 +316,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/residential": def(
     "Residential Pressure Washing & Soft Washing | Pressure Washing Xperts",
-    "House washing, roofs, driveways, decks, and more for Atlanta-area homes—soft wash where it protects paint and shingles, pressure where concrete needs it.",
+    "House washing, roofs, driveways, decks, and more for Atlanta-area homes. Soft wash where it protects paint and shingles, pressure where concrete needs it.",
     [
       { name: "Home", path: "/" },
       { name: "Residential Services", path: RES_HUB },
@@ -324,7 +324,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/services/commercial": def(
     "Commercial Pressure Washing | Retail, Offices & HOAs | Pressure Washing Xperts",
-    "Building washing, parking areas, storefronts, and fleet-ready plans for businesses across Metro Atlanta—scheduled around traffic and operations.",
+    "Building washing, parking areas, storefronts, and fleet-ready plans for businesses across Metro Atlanta, scheduled around traffic and operations.",
     [
       { name: "Home", path: "/" },
       { name: "Commercial Services", path: COM_HUB },
@@ -332,7 +332,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/about/we-do-xpert": def(
     "We Do Xpert | Our Standard | Pressure Washing Xperts",
-    "What “Xpert” means for your property: thorough prep, honest scopes, and finishes you can walk with pride—serving Metro Atlanta homeowners and businesses.",
+    "What “Xpert” means for your property: thorough prep, honest scopes, and finishes you can walk with pride. Serving Metro Atlanta homeowners and businesses.",
     [
       { name: "Home", path: "/" },
       { name: "We Do Xpert", path: "/about/we-do-xpert" },
@@ -340,7 +340,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/about/pressure-vs-soft-washing": def(
     "Pressure Washing vs Soft Washing | Pressure Washing Xperts",
-    "When high-pressure flatwork cleaning makes sense versus low-pressure soft washing for siding and roofs—plain-language guidance for Georgia homeowners.",
+    "When high-pressure flatwork cleaning makes sense versus low-pressure soft washing for siding and roofs. Plain-language guidance for Georgia homeowners.",
     [
       { name: "Home", path: "/" },
       { name: "Pressure vs Soft Washing", path: "/about/pressure-vs-soft-washing" },
@@ -348,7 +348,7 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
   ),
   "/gallery": def(
     "Project Gallery | Pressure Washing Xperts",
-    "Residential and commercial results from Pressure Washing Xperts across Metro Atlanta—siding, concrete, decks, and storefronts before and after cleaning.",
+    "Residential and commercial results from Pressure Washing Xperts across Metro Atlanta. Siding, concrete, decks, and storefronts before and after cleaning.",
     [
       { name: "Home", path: "/" },
       { name: "Gallery", path: "/gallery" },

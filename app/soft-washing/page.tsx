@@ -10,7 +10,7 @@ import Link from "next/link"
 import { ctaPress } from "@/lib/ctaInteraction"
 
 const softWashSurfaces = [
-  { surface: "Roofs (Asphalt Shingles)", detail: "The only safe cleaning method — removes algae, moss, and black streaks without voiding your warranty." },
+  { surface: "Roofs (Asphalt Shingles)", detail: "The only safe cleaning method. It removes algae, moss, and black streaks without voiding your warranty." },
   { surface: "House Siding", detail: "Vinyl, hardiplank, wood, and stucco cleaned without forcing water behind boards." },
   { surface: "Painted Surfaces", detail: "Low pressure protects paint from peeling or chipping on wood trim, shutters, and fascia." },
   { surface: "EIFS / Stucco", detail: "Moisture-sensitive cladding cleaned gently without cracking the finish coat." },
@@ -21,7 +21,7 @@ const softWashSurfaces = [
 const howItWorks = [
   { step: "1", title: "Inspect the surface", body: "We assess the type of growth, material, and slope before selecting the right cleaning solution and dilution ratio." },
   { step: "2", title: "Apply cleaning solution", body: "Biodegradable detergents are applied at low pressure (under 500 PSI) to kill algae, mold, and bacteria at the cellular level." },
-  { step: "3", title: "Dwell and rinse", body: "The solution dwells to break down organic growth, then is rinsed away — taking the staining with it." },
+  { step: "3", title: "Dwell and rinse", body: "The solution dwells to break down organic growth, then is rinsed away, taking the staining with it." },
   { step: "4", title: "Spot check & done", body: "We walk the job with you before we leave. Results continue to improve over the following days as residual treatment works." },
 ]
 
@@ -44,7 +44,7 @@ export default function SoftWashingPage() {
               Professional Soft Washing Services in Ellenwood, GA
             </h1>
             <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-8">
-              Soft wash near you — low-pressure cleaning with biodegradable solutions that kill algae, mold, and mildew at the root. Safe for roofs, siding, and any surface that can&apos;t handle high-pressure washing.
+              Soft wash near you: low-pressure cleaning with biodegradable solutions that kill algae, mold, and mildew at the root. Safe for roofs, siding, and any surface that can&apos;t handle high-pressure washing.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
@@ -79,10 +79,10 @@ export default function SoftWashingPage() {
                   What Is Soft Washing?
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Soft washing uses water pressure under 500 PSI — far below the 1,500–3,000 PSI of a standard pressure washer — combined with professional-grade cleaning solutions. The chemistry does the cleaning work, not the force of the water.
+                  Soft washing uses water pressure under 500 PSI, far below the 1,500 to 3,000 PSI of a standard pressure washer, combined with professional-grade cleaning solutions. The chemistry does the cleaning work, not the force of the water.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  This matters because many surfaces that look dirty aren&apos;t just dirty — they&apos;re colonized by living organisms like algae, mold, mildew, and lichen. High pressure knocks the visible growth off the surface but doesn&apos;t kill the roots, so it grows back faster. Soft washing kills it at the source, so results last 4–6 times longer.
+                  This matters because many surfaces that look dirty aren&apos;t just dirty. They&apos;re colonized by living organisms like algae, mold, mildew, and lichen. High pressure knocks the visible growth off the surface but doesn&apos;t kill the roots, so it grows back faster. Soft washing kills it at the source, so results last 4 to 6 times longer.
                 </p>
                 <p className="text-sm text-gray-500">
                   Wondering when to use soft washing vs. pressure washing?{" "}
@@ -150,7 +150,7 @@ export default function SoftWashingPage() {
                 <CheckCircle className="size-5 text-brand-blue shrink-0 mt-0.5" aria-hidden />
                 <div>
                   <p className="font-semibold text-brand-blue-dark text-sm">Roof Cleaning</p>
-                  <p className="text-xs text-gray-500 mt-0.5">Soft wash for asphalt shingles — removes black streaks and moss safely.</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Soft wash for asphalt shingles. Removes black streaks and moss safely.</p>
                 </div>
               </Link>
               <Link

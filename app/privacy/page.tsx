@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
                   Contact us
                 </h2>
                 <p className="mb-3">
-                  Pressure Washing Xperts — Licensed & Insured
+                  Pressure Washing Xperts, Licensed & Insured
                 </p>
                 <ul className="space-y-2">
                   <li>

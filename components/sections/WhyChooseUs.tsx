@@ -10,7 +10,7 @@ const steps = [
   {
     number: "01",
     title: "Call or Text",
-    description: "Reach us 7 days a week — we answer fast and give instant pricing.",
+    description: "Reach us 7 days a week. We pick up fast and give you pricing on the spot.",
   },
   {
     number: "02",
@@ -20,7 +20,7 @@ const steps = [
   {
     number: "03",
     title: "We Show Up & Clean",
-    description: "Licensed, insured crews deliver results you can see — guaranteed.",
+    description: "Our licensed, insured crew shows up on time and leaves your property looking like it should.",
   },
 ]
 
@@ -33,7 +33,7 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
     <section
       id="why-us"
       aria-labelledby="why-us-heading"
-      className="bg-ps-bg py-14 lg:py-16"
+      className="bg-ps-bg py-14 sm:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-4xl text-center">
@@ -81,7 +81,7 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
           <Button
             asChild
             size="lg"
-            className={`animate-cyan-pulse min-w-[220px] bg-ps-cyan px-8 font-display tracking-widest text-lg text-[#06121f] hover:bg-brand-yellow-dark ${ctaPress}`}
+            className={`animate-cyan-pulse min-w-[220px] bg-ps-cyan px-5 sm:px-8 font-display tracking-wide sm:tracking-widest text-base sm:text-lg text-[#06121f] hover:bg-brand-yellow-dark ${ctaPress}`}
           >
             <a href={businessPhoneTelHref}>
               <Phone className="size-5 shrink-0" aria-hidden />
