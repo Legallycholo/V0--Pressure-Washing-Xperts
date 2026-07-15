@@ -3,7 +3,6 @@ import { Resend } from "resend"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertLeadToSupabase } from "@/lib/supabaseLeads"
 import { businessSiteHost } from "@/data/site"
-import { sendLeadSms } from "@/lib/twilioNotify"
 
 function escapeHtml(s: string): string {
   return s
@@ -181,18 +180,6 @@ export async function POST(request: Request) {
 
   // Notify the team even if the DB write failed, so no lead gets missed.
   void sendLeadNotification(body, row.rough_price_estimate ?? 0)
-  void sendLeadSms({
-    full_name: row.full_name,
-    email: row.email,
-    phone: row.phone,
-    city: row.city,
-    state: row.state,
-    zip: row.zip,
-    message: row.message,
-    selected_offer: row.selected_offer,
-    approx_sqft_estimate: row.approx_sqft_estimate,
-    rough_price_estimate: row.rough_price_estimate,
-  }).catch((e) => console.error("[api/leads] Twilio SMS failed", e))
 
   if (insertFailed) {
     return NextResponse.json(

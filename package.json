@@ -41,8 +41,7 @@
     "react": "^19",
     "react-dom": "^19",
     "resend": "^6.12.2",
-    "tailwind-merge": "^3.3.1",
-    "twilio": "^6.0.2"
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
