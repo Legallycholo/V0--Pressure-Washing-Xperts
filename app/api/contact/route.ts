@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
+import { checkBotId } from "botid/server"
 import { insertLeadToSupabase } from "@/lib/supabaseLeads"
 import { businessSiteHost } from "@/data/site"
 
@@ -114,6 +115,11 @@ async function sendContactNotification(data: ContactData) {
 }
 
 export async function POST(request: Request) {
+  const verification = await checkBotId()
+  if (verification.isBot) {
+    return NextResponse.json({ error: "Access denied." }, { status: 403 })
+  }
+
   let raw: unknown
   try {
     raw = await request.json()
