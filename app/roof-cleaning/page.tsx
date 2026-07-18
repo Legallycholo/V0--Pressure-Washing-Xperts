@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Phone, CheckCircle, AlertTriangle } from "lucide-react"
 import Link from "next/link"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 const softWashBenefits = [
   "Removes black streaks (Gloeocapsa magma algae) at the root",
@@ -140,19 +141,19 @@ export default function RoofCleaningPage() {
                 What Our Roof Cleaning Service Removes
               </h2>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.09}>
               {[
                 { label: "Black Streaks", detail: "Caused by Gloeocapsa magma algae, the most common roof stain in Georgia." },
                 { label: "Moss & Lichen", detail: "Root systems that lift shingles and hold moisture against the deck." },
                 { label: "Mold & Mildew", detail: "Dark patches that accelerate shingle breakdown and look unsightly." },
                 { label: "Green Algae", detail: "Thrives in shaded, humid areas common throughout Ellenwood and Atlanta." },
               ].map(({ label, detail }) => (
-                <div key={label} className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+                <RevealItem key={label} as="article" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-brand-blue/30 motion-reduce:hover:translate-y-0">
                   <h3 className="font-bold text-brand-blue-dark text-base mb-2">{label}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{detail}</p>
-                </div>
+                </RevealItem>
               ))}
-            </div>
+            </RevealGroup>
           </div>
         </section>
 

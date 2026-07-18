@@ -9,6 +9,7 @@ import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { MapPin } from "lucide-react"
 import { getServiceAreasForNavigation } from "@/data/service-areas"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 export default function ServiceAreasPage() {
   const goQuote = useGoToHomeQuoteSection()
@@ -52,31 +53,32 @@ export default function ServiceAreasPage() {
       {/* Grid Section */}
       <section className="py-14 bg-[#1a2c42]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-9">
+          <Reveal className="text-center mb-9">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Communities We Serve
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto text-sm sm:text-base">
               Don&apos;t see your town? Call and we&apos;ll check the next route.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+          <RevealGroup className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4" stagger={0.04}>
             {serviceAreas.map((area) => (
-              <Link
-                key={area.slug}
-                href={`/service-areas/${area.slug}`}
-                className="bg-navy/50 border border-white/10 rounded-xl p-4 text-center hover:border-brand/40 hover:bg-navy/80 transition-all duration-300 group shadow-lg"
-              >
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand/10 text-brand mb-3 group-hover:scale-110 transition-transform">
-                  <MapPin size={24} />
-                </div>
-                <h3 className="text-lg font-semibold text-white group-hover:text-brand transition-colors">
-                  {area.cityName}
-                </h3>
-              </Link>
+              <RevealItem key={area.slug} as="article">
+                <Link
+                  href={`/service-areas/${area.slug}`}
+                  className="group block h-full bg-navy/50 border border-white/10 rounded-xl p-4 text-center hover:border-brand/40 hover:bg-navy/80 hover:-translate-y-1 transition-all duration-300 shadow-lg motion-reduce:hover:translate-y-0"
+                >
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand/10 text-brand mb-3 group-hover:scale-110 transition-transform motion-reduce:group-hover:scale-100">
+                    <MapPin size={24} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white group-hover:text-brand transition-colors">
+                    {area.cityName}
+                  </h3>
+                </Link>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -85,7 +87,7 @@ export default function ServiceAreasPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/10" />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Reveal className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-4">
             Want a number for your property?
           </h2>
@@ -98,7 +100,7 @@ export default function ServiceAreasPage() {
           >
             Get a Free Quote
           </button>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />

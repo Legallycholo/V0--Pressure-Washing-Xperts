@@ -309,6 +309,26 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
     ctaHeadline: "Building exteriors that match the quality inside.",
     ctaSubline: "Parking structures, plazas, and dumpster areas included.",
   },
+  "red-clay-removal": {
+    processSteps: s(
+      ["Show us the staining", "We note where clay splashes or washes onto siding, brick, and concrete."],
+      ["Match chemistry to the surface", "Iron-rich clay needs different products than mold or oil."],
+      ["Treat and wash", "The orange tint lifts without etching concrete or scarring paint."],
+      ["Walkthrough with you", "You check every treated area before we pack up."],
+    ),
+    ctaHeadline: "Get the red out before it sets for good.",
+    ctaSubline: "Send a photo of the staining and we will quote it fast.",
+  },
+  "red-clay-removal-commercial": {
+    processSteps: s(
+      ["Map the problem areas", "Entries, walks, and drive lanes where clay tracks in get marked."],
+      ["Pre-treat the staining", "Products made for iron-rich soil loosen clay before pressure."],
+      ["Wash and rinse", "Concrete, curbs, and verticals come back to an even tone."],
+      ["Plan for the season", "Recurring visits keep sites near grading or construction clean."],
+    ),
+    ctaHeadline: "Entries and drive lanes free of tracked-in clay.",
+    ctaSubline: "Ask about recurring service for properties near active construction.",
+  },
   "parking-decks": {
     processSteps: s(
       ["Deck traffic plan", "Ramps, levels, and exits stay open with phased washing."],

@@ -40,6 +40,7 @@ interface HeaderProps {
 export function Header({ onOpenQuoteForm }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -50,6 +51,13 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
     document.addEventListener("keydown", onKeyDown)
     return () => document.removeEventListener("keydown", onKeyDown)
   }, [isMenuOpen])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   const handleNavClick = () => {
     setIsMenuOpen(false)
@@ -72,9 +80,17 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-ps-bg/95 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.4)] border-b border-ps-cyan/15"
+      className={`fixed top-0 left-0 right-0 z-50 bg-ps-bg/95 backdrop-blur-md border-b transition-shadow duration-300 ${
+        scrolled
+          ? "shadow-[0_6px_30px_rgba(0,0,0,0.55)] border-ps-cyan/30"
+          : "shadow-[0_2px_20px_rgba(0,0,0,0.4)] border-ps-cyan/15"
+      }`}
     >
-      <div className="hidden lg:block border-b border-white/10">
+      <div
+        className={`hidden lg:block border-b border-white/10 overflow-hidden transition-all duration-300 motion-reduce:transition-none ${
+          scrolled ? "max-h-0 opacity-0" : "max-h-24 opacity-100"
+        }`}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex min-h-9 items-center justify-between text-xs text-white/65">
             <div className="flex items-center gap-4">

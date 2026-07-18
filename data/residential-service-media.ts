@@ -54,6 +54,14 @@ export const residentialGuttersMedia = {
   comparisonLabel: "roof gutter cleaning",
 } as const
 
+export const residentialRedClayRemovalMedia = {
+  beforeSrc: `${R}/red-clay-removal-before.png`,
+  afterSrc: `${R}/red-clay-removal-after.png`,
+  beforeAlt: "Two-story brick and vinyl Georgia home with orange red clay runoff staining the concrete driveway, sidewalk, and lawn edge",
+  afterAlt: "Same home and driveway returned to clean, even-toned concrete after red clay removal",
+  comparisonLabel: "red clay stain removal",
+} as const
+
 export const residentialCurbingMedia = {
   beforeSrc: `${R}/curbing-before.png`,
   afterSrc: `${R}/curbing-after.png`,

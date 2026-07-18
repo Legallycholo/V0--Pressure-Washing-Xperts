@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Phone, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 const powerWashingSurfaces = [
   { surface: "Driveways & Sidewalks", detail: "Remove oil stains, tire marks, algae, and years of grime from concrete and asphalt." },
@@ -77,14 +78,14 @@ export default function PowerWashingPage() {
                 Not every surface needs the same pressure. We use the right PSI for each job so surfaces get clean without damage.
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.07}>
               {powerWashingSurfaces.map(({ surface, detail }) => (
-                <div key={surface} className="bg-section-light rounded-xl border border-gray-200 p-5">
+                <RevealItem key={surface} as="article" className="bg-section-light rounded-xl border border-gray-200 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-brand-blue/30 motion-reduce:hover:translate-y-0">
                   <h3 className="font-bold text-brand-blue-dark text-base mb-2">{surface}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{detail}</p>
-                </div>
+                </RevealItem>
               ))}
-            </div>
+            </RevealGroup>
             <p className="mt-6 text-center text-sm text-gray-500">
               For roofs, siding, and other delicate surfaces, we use low-pressure soft washing instead.{" "}
               <Link href="/soft-washing" className="text-brand-blue hover:underline font-medium">

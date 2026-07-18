@@ -105,7 +105,7 @@ For every new service page being built, the following standard template structur
 ### Service Areas (`/service-areas`)
 - **H1:** Our Service Areas
 - **Subtitle:** Pressure Washing Xperts proudly serves residential, commercial, and industrial properties across Metro Atlanta and surrounding communities.
-- **Layout Note:** This page deviates from the service template. It features a list/grid of city/area cards followed by a CTA at the bottom. Layout parallels the structure on `prolinepressurewash.com/service-areas`.
+- **Layout Note:** This page deviates from the service template. It features a list/grid of city/area cards followed by a CTA at the bottom.
 
 ---
 

@@ -49,6 +49,20 @@ function buildFromNav(
 }
 
 const manualCommercial: Record<string, MarketingRouteDefinition> = {
+  "/services/commercial/red-clay-removal": def(
+    "Commercial Red Clay Removal | Commercial | Pressure Washing Xperts",
+    "Red clay tracked by vehicles and runoff removed from concrete, curbs, entries, and building faces at Metro Atlanta commercial sites. Recurring plans for properties near active construction.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Commercial Services", path: COM_HUB },
+      { name: "Red Clay Removal", path: "/services/commercial/red-clay-removal" },
+    ],
+    {
+      name: "Commercial red clay removal",
+      description:
+        "Clay stain removal for commercial concrete, curbs, entryways, and building exteriors across Metro Atlanta, with recurring plans for sites near grading or construction.",
+    }
+  ),
   "/services/commercial/apartment-complexes": def(
     "Apartment Complex Pressure Washing | Commercial | Pressure Washing Xperts",
     "Breezeways, parking, pool decks, and building exteriors for Metro Atlanta apartments, scheduled to minimize disruption for residents and onsite staff.",
@@ -178,6 +192,20 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
 }
 
 const manualResidential: Record<string, MarketingRouteDefinition> = {
+  "/services/residential/red-clay-removal": def(
+    "Red Clay Removal Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Red clay stain removal for siding, brick, driveways, and curbs in Ellenwood, GA and Metro Atlanta. Detergents matched to iron-rich soil lift the orange tint. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Red Clay Removal", path: "/services/residential/red-clay-removal" },
+    ],
+    {
+      name: "Red clay removal in Ellenwood, GA",
+      description:
+        "Removal of Georgia red clay staining from siding, brick, concrete, and curbs across Ellenwood, GA and Metro Atlanta using detergents matched to iron-rich soil.",
+    }
+  ),
   "/services/residential/house-washing": def(
     "House Washing Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
     "Professional house washing near you in Ellenwood, GA and Metro Atlanta. We soft wash and pressure wash vinyl siding, brick, stucco, and painted surfaces. Call (800) 451-7213 for a free quote.",

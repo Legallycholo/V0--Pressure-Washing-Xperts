@@ -19,7 +19,7 @@ export default function ThankYouPage() {
         <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
           <div className="absolute inset-0 bg-hero-pattern opacity-10" />
           <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/10">
+            <div className="animate-success-pop-in mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/10 ring-4 ring-brand-yellow/20">
               <CheckCircle className="size-9 text-brand-yellow" aria-hidden />
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl mb-3 text-balance">

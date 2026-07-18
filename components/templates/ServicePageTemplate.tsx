@@ -5,6 +5,8 @@ import { Phone, CheckCircle2, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard"
+import { SocialProofBar } from "@/components/sections/SocialProofBar"
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
 import residentialHeroImage from "@/public/services/home-residential.png"
@@ -144,7 +146,7 @@ export function ServicePageTemplate({
               <Button
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
               >
                 Get a Free Quote
               </Button>
@@ -173,76 +175,83 @@ export function ServicePageTemplate({
               showContactFormAside ? "md:items-start" : "items-center"
             )}
           >
-            <div>
+            <Reveal>
               <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
                 Why Choose Our {title} Service?
               </h2>
-              <ul className="space-y-3">
+              <RevealGroup as="ul" className="space-y-3" stagger={0.07}>
                 {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start gap-3">
+                  <RevealItem key={index} as="li" className="flex items-start gap-3">
                     <CheckCircle2 className="size-5 text-brand-yellow flex-shrink-0 mt-1" />
                     <span className="text-base text-gray-700">{benefit}</span>
-                  </li>
+                  </RevealItem>
                 ))}
-              </ul>
+              </RevealGroup>
               <div className="mt-6">
                 <Button
                   onClick={onOpenQuoteForm}
-                  className="bg-brand-blue text-white hover:bg-brand-blue-dark"
+                  className="bg-brand-blue text-white hover:bg-brand-blue-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
                 >
                   Request Your Free Quote
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </div>
-            </div>
+            </Reveal>
 
             {showContactFormAside ? (
               <ContactQuoteFormCard />
             ) : showBeforeAfter && beforeSrc && afterSrc && beforeAlt && afterAlt && comparisonLabel ? (
-              <BeforeAfterSlider
-                beforeSrc={beforeSrc}
-                afterSrc={afterSrc}
-                beforeAlt={beforeAlt}
-                afterAlt={afterAlt}
-                comparisonLabel={comparisonLabel}
-                beforeObjectPosition={beforeObjectPosition}
-                afterObjectPosition={afterObjectPosition}
-                beforeImageClassName={beforeImageClassName}
-                afterImageClassName={afterImageClassName}
-                sizes="(max-width: 896px) 100vw, 42rem"
-                aspectClassName="aspect-video"
-              />
+              <Reveal y={24}>
+                <BeforeAfterSlider
+                  beforeSrc={beforeSrc}
+                  afterSrc={afterSrc}
+                  beforeAlt={beforeAlt}
+                  afterAlt={afterAlt}
+                  comparisonLabel={comparisonLabel}
+                  beforeObjectPosition={beforeObjectPosition}
+                  afterObjectPosition={afterObjectPosition}
+                  beforeImageClassName={beforeImageClassName}
+                  afterImageClassName={afterImageClassName}
+                  sizes="(max-width: 896px) 100vw, 42rem"
+                  aspectClassName="aspect-video"
+                />
+              </Reveal>
             ) : showSplit && splitImages ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Reveal y={24} className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {splitImages.map((img) => (
                   <div
                     key={img.src}
-                    className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5"
+                    className="group relative aspect-[4/3] overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0"
                   >
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
                 ))}
-              </div>
+              </Reveal>
             ) : showSingle && imageSrc && imageAlt ? (
-              <div className="relative h-72 overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 md:mx-auto md:max-w-[90%]">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className={cn("object-cover", imageClassName)}
-                  style={
-                    imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined
-                  }
-                  sizes="(max-width: 896px) 100vw, 42rem"
-                  priority
-                />
-              </div>
+              <Reveal y={24}>
+                <div className="group relative h-72 overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0 md:mx-auto md:max-w-[90%]">
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt}
+                    fill
+                    className={cn(
+                      "object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100",
+                      imageClassName
+                    )}
+                    style={
+                      imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined
+                    }
+                    sizes="(max-width: 896px) 100vw, 42rem"
+                    priority
+                  />
+                </div>
+              </Reveal>
             ) : (
               <div className="relative flex min-h-72 flex-col items-center justify-center rounded-lg border border-brand-blue/15 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 p-6 text-center shadow-sm">
                 <Phone className="size-10 text-brand-blue-dark mb-3" aria-hidden />
@@ -277,24 +286,26 @@ export function ServicePageTemplate({
         </div>
       </section>
 
+      {/* Trust strip */}
+      <SocialProofBar />
+
       {/* Process Section */}
       <section className="py-10 bg-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-7">
+          <Reveal className="text-center mb-7">
             <h2 className="text-2xl font-bold text-brand-blue-dark mb-2">
               Our Process
             </h2>
             <p className="text-sm text-gray-600 max-w-xl mx-auto">
               Four steps from first message to final walkthrough.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.12}>
             {processItems.map((item, idx) => (
-              <div
+              <RevealItem
                 key={`${item.step}-${item.title}`}
-                className={`text-center animate-step-reveal ${idx < processItems.length - 1 ? "step-connector" : ""} ${idx === processItems.length - 1 ? "step-connector-last" : ""}`}
-                style={{ animationDelay: `${idx * 120}ms` }}
+                className={`text-center ${idx < processItems.length - 1 ? "step-connector" : ""} ${idx === processItems.length - 1 ? "step-connector-last" : ""}`}
               >
                 <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3 shadow-md ring-4 ring-brand-yellow/20">
                   {item.step}
@@ -303,15 +314,15 @@ export function ServicePageTemplate({
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-10 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <Reveal className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl font-bold mb-3">
             {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
           </h2>
@@ -322,7 +333,7 @@ export function ServicePageTemplate({
             <Button
               onClick={onOpenQuoteForm}
               size="lg"
-              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 hover:shadow-lg motion-reduce:hover:translate-y-0"
             >
               Get a Free Quote
             </Button>
@@ -338,7 +349,7 @@ export function ServicePageTemplate({
               </a>
             </Button>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {contentRevised ? (

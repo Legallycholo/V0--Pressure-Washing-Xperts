@@ -4,6 +4,8 @@ import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { NavLinkItem } from "@/data/navigation"
+import { SocialProofBar } from "@/components/sections/SocialProofBar"
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
 
 interface ServiceCategoryHubTemplateProps {
@@ -37,7 +39,7 @@ export function ServiceCategoryHubTemplate({
             <Button
               onClick={onOpenQuoteForm}
               size="lg"
-              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
+              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
             >
               Get a Free Quote
             </Button>
@@ -56,35 +58,35 @@ export function ServiceCategoryHubTemplate({
         </div>
       </section>
 
+      <SocialProofBar />
+
       <section className="py-10 sm:py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-7">
+          <Reveal className="text-center mb-7">
             <p className="text-brand-blue text-xs font-semibold uppercase tracking-[0.2em]">What We Clean</p>
             <h2 className="mt-2 text-2xl font-bold text-brand-blue-dark sm:text-3xl">Our {categoryLabel}</h2>
             <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
               Scope, benefits, process, and the fastest way to quote.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
+          <RevealGroup className="grid md:grid-cols-2 gap-3 sm:gap-4" stagger={0.05}>
             {services.map((service) => (
-              <Link
-                key={service.href}
-                href={service.href}
-                className={hubCardLight}
-              >
-                <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
-                <p className="text-sm text-gray-600 mb-3">
-                  {service.summary ??
-                    "See how we approach this service, typical surfaces, and how to request a quote."}
-                </p>
-                <span className="inline-flex items-center text-brand-blue font-semibold text-sm">
-                  Learn More
-                  <ArrowRight className="size-4 ml-1" />
-                </span>
-              </Link>
+              <RevealItem key={service.href} as="article">
+                <Link href={service.href} className={`${hubCardLight} block h-full`}>
+                  <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {service.summary ??
+                      "See how we approach this service, typical surfaces, and how to request a quote."}
+                  </p>
+                  <span className="inline-flex items-center text-brand-blue font-semibold text-sm">
+                    Learn More
+                    <ArrowRight className="size-4 ml-1 transition-transform group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+                  </span>
+                </Link>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
 
           <div className="mt-7 rounded-xl border border-brand-blue/10 bg-white p-4 sm:p-5 text-center">
             <p className="text-gray-600 text-sm sm:text-base">

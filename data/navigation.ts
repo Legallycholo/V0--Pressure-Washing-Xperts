@@ -112,6 +112,12 @@ export const residentialServices: NavLinkItem[] = [
     summary:
       "Sofas and chairs cleaned by fabric type with faster dry times and stain focus where you need it.",
   },
+  {
+    href: "/services/residential/red-clay-removal",
+    label: "Red Clay Removal",
+    summary:
+      "Georgia red clay lifted from siding, brick, driveways, and curbs with chemistry matched to iron-rich soil stains.",
+  },
 ]
 
 export const commercialServices: NavLinkItem[] = [
@@ -210,6 +216,12 @@ export const commercialServices: NavLinkItem[] = [
     label: "Parking Decks",
     summary:
       "Multi-level parking structures cleaned with equipment access and safety protocols for occupied facilities.",
+  },
+  {
+    href: "/services/commercial/red-clay-removal",
+    label: "Red Clay Removal",
+    summary:
+      "Clay tracked by vehicles and runoff removed from concrete, entries, and building faces so the property reads maintained.",
   },
 ]
 

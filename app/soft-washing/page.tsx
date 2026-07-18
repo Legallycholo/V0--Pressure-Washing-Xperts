@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Phone, CheckCircle, Droplets } from "lucide-react"
 import Link from "next/link"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 const softWashSurfaces = [
   { surface: "Roofs (Asphalt Shingles)", detail: "The only safe cleaning method. It removes algae, moss, and black streaks without voiding your warranty." },
@@ -103,14 +104,14 @@ export default function SoftWashingPage() {
                 Surfaces We Soft Wash
               </h2>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.07}>
               {softWashSurfaces.map(({ surface, detail }) => (
-                <div key={surface} className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+                <RevealItem key={surface} as="article" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-brand-blue/30 motion-reduce:hover:translate-y-0">
                   <h3 className="font-bold text-brand-blue-dark text-base mb-2">{surface}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{detail}</p>
-                </div>
+                </RevealItem>
               ))}
-            </div>
+            </RevealGroup>
           </div>
         </section>
 

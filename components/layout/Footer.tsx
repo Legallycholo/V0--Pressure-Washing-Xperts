@@ -19,6 +19,7 @@ import {
 } from "@/data/site"
 import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
 import { ctaPress } from "@/lib/ctaInteraction"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 const services = [
   ...residentialServices.slice(0, 4),
@@ -34,9 +35,9 @@ export function Footer() {
     <footer className="bg-ps-bg border-t-2 border-ps-cyan/30">
       {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-5">
+        <RevealGroup className="grid gap-7 md:grid-cols-2 lg:grid-cols-5" stagger={0.08}>
           {/* Brand Column */}
-          <div className="lg:col-span-1">
+          <RevealItem className="lg:col-span-1">
             <Link
               href="/"
               className="inline-block mb-4 text-lg font-bold text-white tracking-tight hover:text-brand-yellow transition-colors"
@@ -54,10 +55,10 @@ export function Footer() {
               <Phone className="size-5 shrink-0" />
               <span className="font-display text-2xl tracking-wide">{businessPhoneDisplay}</span>
             </a>
-          </div>
+          </RevealItem>
 
           {/* Services Column */}
-          <div>
+          <RevealItem>
             <h3 className="text-white font-bold text-base mb-4">Our Services</h3>
             <ul className="space-y-3">
               {services.map((service) => (
@@ -71,10 +72,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </RevealItem>
 
           {/* Areas We Serve Column */}
-          <div>
+          <RevealItem>
             <h3 className="text-white font-bold text-base mb-4">Areas We Serve</h3>
             <ul className="space-y-3">
               {primaryServiceAreaCities.map((city) => {
@@ -93,10 +94,10 @@ export function Footer() {
                 )
               })}
             </ul>
-          </div>
+          </RevealItem>
 
           {/* Quick Links Column */}
-          <div>
+          <RevealItem>
             <h3 className="text-white font-bold text-base mb-4">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
@@ -110,10 +111,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </RevealItem>
 
           {/* Contact Column */}
-          <div>
+          <RevealItem>
             <h3 className="text-white font-bold text-base mb-4">Contact Us</h3>
             <address className="not-italic text-sm text-white/70 leading-relaxed mb-4">
               <p className="font-semibold text-white">Pressure Washing Xperts</p>
@@ -177,8 +178,8 @@ export function Footer() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealGroup>
       </div>
 
       {/* Bottom Bar */}

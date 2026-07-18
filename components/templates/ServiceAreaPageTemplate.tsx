@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import type { ServiceAreaPageContent } from "@/data/service-areas"
 import { getCityGalleryComparisonItems } from "@/data/city-gallery"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
 
@@ -51,7 +52,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               <Button
                 onClick={onOpenQuoteForm}
                 size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark min-h-[44px]"
+                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark min-h-[44px] transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
               >
                 {city.cta.primary}
               </Button>
@@ -153,10 +154,11 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               Photos, benefits, and how we run each job. Same crew standards across the metro.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4" stagger={0.06}>
             {city.localizedServiceCards.map((service) => (
-              <div
+              <RevealItem
                 key={service.title}
+                as="article"
                 className={cn(hubCardLight, "flex h-full flex-col rounded-xl")}
               >
                 <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-1.5">{service.title}</h3>
@@ -166,11 +168,11 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
                   className="text-brand-blue font-medium hover:text-brand-blue-dark inline-flex items-center gap-1"
                 >
                   View Service
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
                 </Link>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -208,21 +210,20 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
           <div className="text-center mb-7">
             <h2 className="text-2xl font-bold text-brand-blue-dark mb-2">Our Process</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.12}>
             {city.processSteps.map((step, index) => (
-              <div
+              <RevealItem
                 key={step.title}
-                className={`text-center animate-step-reveal ${index < city.processSteps.length - 1 ? "step-connector" : ""} ${index === city.processSteps.length - 1 ? "step-connector-last" : ""}`}
-                style={{ animationDelay: `${index * 120}ms` }}
+                className={`text-center ${index < city.processSteps.length - 1 ? "step-connector" : ""} ${index === city.processSteps.length - 1 ? "step-connector-last" : ""}`}
               >
                 <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3 shadow-md ring-4 ring-brand-yellow/20">
                   {index + 1}
                 </div>
                 <h3 className="text-base font-semibold text-brand-blue-dark mb-1">{step.title}</h3>
                 <p className="text-sm text-gray-600">{step.description}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
