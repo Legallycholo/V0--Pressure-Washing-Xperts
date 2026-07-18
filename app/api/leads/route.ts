@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
+import { checkBotId } from "botid/server"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertLeadToSupabase } from "@/lib/supabaseLeads"
 import { businessSiteHost } from "@/data/site"
@@ -152,6 +153,11 @@ function isLeadPayload(body: unknown): body is LeadPayload {
 }
 
 export async function POST(request: Request) {
+  const verification = await checkBotId()
+  if (verification.isBot) {
+    return NextResponse.json({ error: "Access denied." }, { status: 403 })
+  }
+
   let body: unknown
   try {
     body = await request.json()
