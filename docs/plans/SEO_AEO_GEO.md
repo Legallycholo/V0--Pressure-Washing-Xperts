@@ -1,167 +1,137 @@
-# SEO, AEO & GEO — Implementation Plan
+# SEO, AEO & GEO — Action Plan
 
-**Status:** Planning only (no implementation in this document)  
-**Last plan revision:** 2026-04-17  
-**Out of scope for this phase:** Blog, news, or standalone “articles” routes. Educational URLs that already exist (e.g. about pages) stay as normal pages with metadata + schema, not `Article` type.
+**Status:** Foundation shipped. This doc now tracks the *remaining* work.
+**Last revised:** 2026-07-18
+**Owner split:** each task is tagged **[CODE]** (Claude implements in-repo), **[MCP]** (Claude runs via Google Search Console / GA4 MCP once re-authenticated), or **[MANUAL]** (only the business owner can do it — GBP, reviews, credentials).
+
+> **Note:** An earlier version of this file assumed no JSON-LD, sitemap, robots, or per-route metadata existed. All of that is now implemented (see §2). Do not act on the pre-2026-07 baseline.
 
 ---
 
-## 1. Goals
+## 1. Definitions
 
 | Track | Intent |
-|--------|--------|
-| **SEO** | Unique, accurate titles and descriptions per URL; crawlable discovery via sitemap and `robots.txt`; rich results where appropriate; consistent canonical and social previews. |
-| **AEO (Answer Engine Optimization)** | Clear, quotable answers (especially FAQs); structured FAQ data aligned with visible copy; sensible heading hierarchy and direct first sentences. |
-| **GEO (Generative Engine Optimization)** | Explicit entity signals (business name, location, services, service area); trustworthy `Organization` / `LocalBusiness` graphs; accurate NAP alignment with `data/site.ts`. |
+|-------|--------|
+| **SEO** | Classic organic ranking: crawlable, unique titles/descriptions, structured data, canonical + sitemap. |
+| **AEO** (Answer Engine Optimization) | Being the quoted answer in Google AI Overviews, featured snippets, and assistants. Driven by clear Q&A copy + `FAQPage` schema that matches the visible text. |
+| **GEO** (Generative / Geographic) | Two senses that both apply here: (a) *Generative* engines (ChatGPT, Perplexity, Gemini) citing the business; (b) *Geographic* local ranking — the Google Map Pack for "pressure washing near me." Both hinge on consistent entity + NAP signals and, for the map pack, **Google Business Profile**. |
 
 ---
 
-## 2. Current state (baseline)
+## 2. Current baseline (already shipped — do not redo)
 
-- **Home FAQ:** `components/sections/FAQ.tsx` is already rendered on the landing page (`app/page.tsx`). It currently holds **eight** Q&A pairs. Target: **ten** relevant FAQs (extend, do not duplicate the section).
-- **Footer:** `components/layout/Footer.tsx` — bottom bar has copyright only; **no** visible “last updated” line yet.
-- **Metadata:** Exported `metadata` / `generateMetadata` only in `app/layout.tsx`, `app/gallery/layout.tsx`, and `app/service-areas/[city]/page.tsx`. Most routes are **`"use client"`** pages, so they **inherit the root document title** unless a parent **server** `layout.tsx` supplies route-level metadata.
-- **JSON-LD:** None detected in the codebase today.
-- **Sitemap / robots:** No `app/sitemap.ts` (or `sitemap.xml`) and no `app/robots.ts` or `public/robots.txt` in the repo snapshot used for this plan.
+Verified in-repo on 2026-07-18:
 
----
+- **Metadata:** every marketing route has unique title/description/canonical via `data/marketing-route-seo.ts` + `lib/seo/create-marketing-route-layout.tsx` (build *fails* if a route is missing an entry).
+- **JSON-LD emitted today** (`lib/seo/json-ld-builders.ts`): `Organization`, `LocalBusiness` (with `geo`, `priceRange`, `openingHoursSpecification`, `areaServed`, `OfferCatalog`), `WebSite`, `FAQPage` (from shared `data/home-faq.ts`), `BreadcrumbList`, and per-leaf `Service`.
+- **Sitemap:** `app/sitemap.ts` auto-lists every route in `MARKETING_ROUTE_SEO` (services 0.8, cities 0.75, home 1.0) with `lastmod`.
+- **robots:** `app/robots.ts` allows production, disallows Vercel preview, links the sitemap.
+- **Analytics:** GA4 `G-EK4M4BMN05` + Google Ads `AW-18151841356` load site-wide (`app/layout.tsx`).
+- **Footer:** visible "content last updated" date from a shared constant.
+- **Coverage:** ~34 service pages + ~24 city pages + hubs, all in the sitemap.
 
-## 3. SPA-like caveat — recommended approach (for now)
-
-The site is **Next.js App Router**, not a hosted separate SPA, but **many pages are client components** for interactivity (quote scroll, etc.). Next.js **does not allow** exporting `metadata` from those files.
-
-**Recommended short-term pattern (minimal churn, maximum coverage):**
-
-1. **Per-segment or per-route server `layout.tsx` files** that wrap existing client `page.tsx` files unchanged. Those layouts are **Server Components** by default: they can export `metadata` or `generateMetadata` and render `{children}` only.
-2. **Group layouts** where many siblings share one template (e.g. all `app/services/residential/*/page.tsx` under `app/services/residential/layout.tsx` with `generateMetadata` reading slug from `segment` / URL — exact API depends on Next version; if dynamic metadata from segment is awkward, use **one small layout per leaf** generated or hand-maintained from the same inventory as the sitemap).
-3. **JSON-LD:** Prefer **inline `<script type="application/ld+json">` in the same server layout** (or a tiny dedicated server component imported by that layout) so JSON-LD is not duplicated inside client bundles and stays easy to audit.
-4. **Do not convert** large client pages to server components unless there is a separate need; **layouts as shells** preserve current UX while fixing SEO metadata and structured data.
-
-**Later optional hardening:** Thin server `page.tsx` that imports a client `HomePageClient` (or similar) if you want metadata colocated with the route file; layouts remain the fastest win.
+This is a strong foundation. The gaps below are refinements, not missing basics.
 
 ---
 
-## 4. Implementation phases
+## 3. Open technical items — [CODE] (Claude can implement on request)
 
-### Phase A — On-page (landing + trust)
+Ordered by impact. None are started; all are safe, small changes.
 
-| Step | Action | Primary files / notes |
-|------|--------|------------------------|
-| A.1 | **Confirm FAQ section** on home: already present; **expand to 10 FAQs** with pressure-washing / soft-wash / Metro Atlanta relevance (pricing bands, safety, prep, insurance, scheduling, commercial vs residential, environmental, “how long,” warranties if applicable — only factual claims). | `components/sections/FAQ.tsx`, optional copy review in `docs/plans/COPY_PLAN.md` if you keep plans in sync |
-| A.2 | **Visible “Last updated”** in footer (e.g. “Site content last updated: Month D, YYYY”). Use a **single exported constant** (ISO date string) in a small data module so updates are intentional and match any future `lastmod` policy. | New or existing under `data/` (e.g. extend `data/site.ts` or add `data/site-content-version.ts`), `components/layout/Footer.tsx` |
-| A.3 | **No new articles** this phase; skip `Article` / `BlogPosting` schema and any `/blog` route work. | — |
+### 3.1 Deduplicate the LocalBusiness entity — ✅ **DONE (2026-07-18)**
+There used to be **two** LocalBusiness JSON-LD blocks on every page (a thin inline one in `app/layout.tsx` and the rich one from `buildGlobalJsonLdGraph()`). The inline block was removed; the rich graph in `lib/seo/json-ld-builders.ts` is now the single source. Verified in rendered HTML: exactly **1** each of LocalBusiness / Organization / WebSite.
 
-**AEO note for FAQ copy:** First sentence = direct answer; following sentences = nuance. Keep homepage FAQ and any future `FAQPage` JSON-LD **identical** in Q/A text.
+### 3.2 Add `sameAs` (real social/citation profiles) — **high priority for GEO**
+No `sameAs` anywhere today, and the footer shows non-functional FB/IG/YT/TW placeholders. Once real profile URLs exist (see §5.4), add them to the `Organization`/`LocalBusiness` graph and wire the footer icons to them. Strengthens entity trust for both Google and generative engines. **Blocked on [MANUAL] delivering real URLs.**
 
----
+### 3.3 `aggregateRating` — **do carefully**
+Footer advertises "5.0 · 32+ Reviews" but no `aggregateRating` schema exists, so no star rich-result. Adding it can surface stars in search **only if** backed by genuine, verifiable reviews; self-serving ratings without a real source violate Google policy and risk a manual action. **Recommended:** source the rating/count from real Google reviews and keep the number in one constant so schema and footer never drift. **Blocked on [MANUAL] confirming the real, current numbers + source.**
 
-### Phase B — JSON-LD (all agreed types except Article)
+### 3.4 AEO hardening of FAQ copy — **medium**
+`FAQPage` schema already mirrors `data/home-faq.ts`. To win AI Overviews / snippets: make the **first sentence of each answer a direct, standalone answer** (then nuance), keep questions phrased the way people actually search ("How much does pressure washing cost in Atlanta?"), and consider adding 2–3 city-level FAQs to the highest-traffic city pages. Keep visible copy and schema identical. (Follows the no-em-dash copy rules in `docs/plans/IMPLEMENTATION_SERVICE_PAGES_COPYWRITING.md`.)
 
-Implement **after** FAQ text is stable and NAP/service list is agreed (reduces churn).
+### 3.5 Per-city / per-service unique OG images — **low, nice-to-have**
+Give high-value pages distinct social preview images (e.g. the new red-clay before/afters) instead of the site default. Improves CTR from social + rich cards.
 
-| Type | Where | Notes |
-|------|--------|--------|
-| **Organization** | Root or global layout | Legal name, URL, logo if stable URL exists, `sameAs` only for real profiles (omit or empty until URLs exist — avoid placeholder socials). |
-| **LocalBusiness** (or more specific subtype if justified) | Root or shared layout | Address and phone **must match** footer and `data/site.ts`; geo tied to real service area; opening hours only if verified. |
-| **WebSite** | Root | `url` + `name`; include `potentialAction` / `SearchAction` **only** if you add real on-site search — otherwise omit per Google guidelines. |
-| **FAQPage** | Home layout (server) | Exactly the 10 visible FAQ items from `FAQ.tsx` (consider **single shared data module** `data/home-faq.ts` consumed by both UI and JSON-LD). |
-| **BreadcrumbList** | Server layouts for nested routes | Home → section → leaf (and commercial/residential hubs as middle crumb). Match visible breadcrumbs if you add them later; if no UI breadcrumbs, schema-only is still valid but keep hierarchy honest. |
-| **Service** | Per service leaf layout (or page shell) | One `Service` (or item list) per URL: `name`, `description`, `provider` → Organization, `areaServed` where relevant. |
-
-**Validation:** Google Rich Results Test / Schema.org validator on home + one residential leaf + one commercial leaf + one city page.
+### 3.6 Internal linking pass — **low/medium**
+Add contextual links between related services (e.g. red-clay-removal ↔ driveways ↔ house-washing) and from city pages to the top services. Spreads authority and helps crawl depth. Data-driven via `data/navigation.ts` relationships.
 
 ---
 
-### Phase C — Metadata (all working pages)
+## 4. Search Console & GA4 tasks — [MCP] (Claude runs these directly)
 
-**Inventory:** Every `app/**/page.tsx` that represents a public marketing URL (including gallery, about, privacy, service hubs, all service leaves, service-areas index, all city pages, `about/we-do-xpert`, commercial/residential landing pages).
+**Access status (2026-07-18):** the Google Search Console + GA4 MCP is connected but the OAuth token is **expired** (`invalid_grant` / reauth required). **Action for you:** re-authenticate the "ga4-analytics" connector (or `/mcp` in an interactive session). **Once re-authed, Claude can run all of the following without further help:**
 
-| Step | Action |
-|------|--------|
-| C.1 | Maintain a **route checklist** (spreadsheet or markdown table) with columns: path, title, description, canonical notes, OG image strategy. |
-| C.2 | Add **server `layout.tsx`** (or `generateMetadata` where dynamic) for each segment lacking metadata today. **Extend** city pages: add `openGraph`, `twitter`, `alternates.canonical` using env-based site URL. |
-| C.3 | **Root `app/layout.tsx`:** broaden defaults (`metadataBase`, default `description`, OG/Twitter fallbacks) so children without overrides still look acceptable. |
-| C.4 | **Canonical base URL:** `NEXT_PUBLIC_SITE_URL` (or equivalent) in `.env.example` and Vercel env; use in `metadataBase` and sitemap/robots. |
+| # | Task | Tool |
+|---|------|------|
+| 4.1 | Confirm which GSC property covers the live domain (`pressurewashingxpert.com` vs `sc-domain:`) | `gsc_list_sites` |
+| 4.2 | Submit / confirm the sitemap (`/sitemap.xml`) | `gsc_submit_sitemap`, `gsc_list_sitemaps` |
+| 4.3 | Pull top queries, pages, CTR, and average position (baseline + ongoing) | `gsc_search_analytics` |
+| 4.4 | Inspect index status of new/key URLs (both red-clay pages, hubs, top cities) | `gsc_inspect_url`, `indexing_status` |
+| 4.5 | Identify "striking distance" keywords (positions 5–20) to prioritize on-page work | `gsc_search_analytics` (dimension: query, filter by position) |
+| 4.6 | GA4: which pages convert (quote-form + call events), traffic by source/city | `get_account_summaries`, `run_report` |
 
-**Description guidelines:** Unique per URL, 110–160 characters where possible, primary keyword + location where relevant for local pages.
-
----
-
-### Phase D — Sitemap (full map of working pages)
-
-| Step | Action |
-|------|--------|
-| D.1 | Add **`app/sitemap.ts`** (Next.js metadata route) returning **all** indexable absolute URLs. |
-| D.2 | **Sources of truth:** (1) static paths from inventory; (2) city slugs from the same module used by `generateStaticParams` in `app/service-areas/[city]/page.tsx` (`serviceAreaContent` / `getServiceAreaBySlug` from `data/service-areas.ts`). |
-| D.3 | **`lastmod`:** Prefer file or content-driven dates only where reliable; otherwise omit `lastmod` rather than fabricate. Optionally tie **global** `lastmod` to the same “site content last updated” constant from Phase A for non-dynamic URLs (document the policy). |
-| D.4 | **`changeFrequency` / `priority`:** Optional; keep conservative and consistent if used. |
+**First run once re-authed:** 4.1 → 4.2 → 4.4 for the two new red-clay URLs → 4.3 for a 3-month query baseline. Claude will report findings and fold them back into §3 priorities.
 
 ---
 
-### Phase E — `robots.txt` (recommended)
+## 5. Google Business Profile & off-site — [MANUAL] (owner only; Claude can't access GBP)
 
-| Step | Action |
-|------|--------|
-| E.1 | Add **`app/robots.ts`** that allows all public marketing crawlers by default on production. |
-| E.2 | **`sitemap`:** Absolute URL to `/sitemap.xml` (derived from `NEXT_PUBLIC_SITE_URL`). |
-| E.3 | **`host`:** Optional; set only if it matches real canonical host. |
-| E.4 | **Staging / preview:** If preview deployments should not be indexed, use env-based rules (disallow all on non-production) — align with Vercel preview URL strategy. |
+GBP is the **single biggest lever** for local/map-pack ranking and is not code — it lives in your Google account. Step by step:
 
----
+### 5.1 Claim & verify
+- Claim/verify the profile for **Pressure Washing Xperts**, Ellenwood GA (2193 Gateway Trl, 30294). Complete 100% of fields.
 
-## 5. Dependency order (recommended execution)
+### 5.2 Categories & services
+- Primary category: **Pressure Washing Service**. Add secondaries you actually offer (Gutter Cleaning Service, Building Cleaning, etc.).
+- Add each service as a GBP "Service" with a short description (mirror the site's service list, incl. Red Clay Removal).
+- Set the **service-area** cities to match your 24 city pages.
 
-1. **Phase A** (FAQ count + copy, footer last updated + shared date constant)  
-2. **Phase C** foundations: env URL + root `metadataBase` / defaults  
-3. **Phase C** per-route layouts + checklist completion  
-4. **Phase B** JSON-LD (shared FAQ data first, then global entities, then per-route Service + BreadcrumbList)  
-5. **Phase D** sitemap  
-6. **Phase E** robots  
-7. **Post-ship:** Search Console + Bing Webmaster — submit sitemap, monitor coverage and rich results.
+### 5.3 Reviews — the dominant map-pack factor
+- Get the "32+ reviews" onto **Google** specifically; respond to every one.
+- Ask customers to name the **service + city** in the review ("driveway cleaning in Stockbridge") — that keyword-in-review signal ranks.
+- Set up a short review-request link/QR to hand out after jobs.
 
----
+### 5.4 Photos, posts & social
+- Post weekly (offers + before/after — use the new red-clay photos), geotag/caption by city.
+- Create real Facebook / Instagram / YouTube profiles, then hand the URLs to Claude for §3.2 (`sameAs` + footer links).
 
-## 6. Acceptance criteria (definition of done)
+### 5.5 Citations & NAP consistency
+- List identical **Name / Address / Phone** on Yelp, BBB, Nextdoor, Angi, Bing Places. Any mismatch (incl. the singular/plural "Xpert(s)" domain — see §5.6) dilutes local ranking.
 
-- [ ] Home shows **10** FAQs in the existing FAQ section; copy is accurate and aligned with any `FAQPage` JSON-LD.
-- [ ] Footer shows a **visible** last-updated date sourced from one shared constant.
-- [ ] Every public **working** route has **unique** `title` and `description` (and canonical/OG where specified in checklist).
-- [ ] JSON-LD present for **Organization**, **LocalBusiness**, **WebSite** (no fake `SearchAction`), **FAQPage** on home, **BreadcrumbList** on nested indexable routes, **Service** on service leaf URLs — **no** `Article` / blog types this phase.
-- [ ] `sitemap.xml` lists **all** intended indexable URLs including all city and service pages.
-- [ ] `robots.txt` references the sitemap; preview/staging behavior documented and env-driven if applicable.
-- [ ] No regression to client-side navigation or existing quote/CTA behavior.
+### 5.6 Domain — ✅ **RESOLVED (2026-07-18)**
+Canonical domain is **`pressurewashingxpert.com`** (singular). The brand name "Pressure Washing Xperts" (plural) and the email `pressurewashingxperts@gmail.com` (plural) are intentional and stay as-is. Code already uses the singular host (`data/site.ts` → `https://www.pressurewashingxpert.com`); no stray plural-domain references exist. **[MANUAL] one verification left:** confirm whether the live site serves **www** or **non-www**, and that `NEXT_PUBLIC_SITE_URL` in Vercel matches that exact host — a www/non-www mismatch would split canonical signals. Make sure GBP + all citations use the same host.
 
 ---
 
-## 7. Risks and mitigations
+## 6. GEO / generative-engine visibility — [CODE] + [MANUAL]
 
-| Risk | Mitigation |
-|------|------------|
-| FAQ JSON-LD drifts from UI | Single `data/home-faq.ts` (or similar) imported by `FAQ.tsx` and home layout JSON-LD. |
-| Social placeholders in footer | Do not put fake `sameAs` URLs in Organization schema until real. |
-| Duplicate titles across service leaves | Layout-per-route or dynamic `generateMetadata` keyed by slug + central copy map (extend pattern used for cities in `data/service-areas.ts`). |
-| Wrong domain in canonical/sitemap | Single env var; document in README / internal wiki only if you already document env elsewhere (user asked not to expand docs beyond this file unless needed). |
+To be cited by ChatGPT / Perplexity / Gemini and AI Overviews:
+- **[CODE]** Keep entity schema clean and singular (fixes in §3.1–3.3 directly help).
+- **[CODE]** Ensure key facts (service area, phone, hours, what's cleaned) appear as plain crawlable text, not only in images.
+- **[MANUAL]** Off-site mentions (citations, reviews, local press/directories) are what generative engines synthesize from — §5 feeds this directly.
 
 ---
 
-## 8. Files likely touched (implementation reference)
+## 7. Recommended execution order
 
-| Area | Files (expected) |
-|------|------------------|
-| FAQ | `components/sections/FAQ.tsx`, new `data/home-faq.ts` (recommended) |
-| Footer | `components/layout/Footer.tsx`, `data/site.ts` or new version constant |
-| Metadata | New `app/**/layout.tsx` files across segments; updates to `app/layout.tsx`, `app/gallery/layout.tsx`, `app/service-areas/[city]/page.tsx` |
-| JSON-LD | Same new layouts or `components/seo/*` server-only components imported by layouts |
-| Sitemap / robots | `app/sitemap.ts`, `app/robots.ts` |
-| Config | `.env.example`, deployment env for `NEXT_PUBLIC_SITE_URL` |
+1. **[MANUAL]** Re-auth the Google connector → unblocks all of §4.
+2. **[MCP]** Baseline pull (§4.1–4.4): property, sitemap, index status of new pages, current queries.
+3. **[CODE]** §3.1 dedupe LocalBusiness (safe, high impact) — ship immediately.
+4. **[MANUAL]** §5.6 domain decision + §5.4 real social URLs → unblocks **[CODE]** §3.2 `sameAs` and §3.3 `aggregateRating`.
+5. **[CODE]** §3.4 AEO FAQ tightening + §3.6 internal links.
+6. **[MANUAL]** §5 GBP completion + review drive (ongoing; highest ROI for local).
+7. **[MCP]** Recurring monthly: §4.3/4.5 query + striking-distance report to steer new content.
 
 ---
 
-## 9. Explicit non-goals (this phase)
+## 8. What Claude can do right now vs. what it's waiting on
 
-- New **articles** section, CMS blog, or `Article` / `BlogPosting` schema.
-- Major refactors of client pages to server components (use layout shells instead).
-- Automated “freshness” updates without real content changes.
+- **Done this session:** §3.1 (LocalBusiness dedupe) and §5.6 (domain confirmed singular). §3.4 FAQ copy was reviewed and is already AEO-solid (each answer leads with a direct sentence) — no change needed.
+- **Waiting on you (GSC/GA4):** all of §4. Owner has stated GSC access can't be shared via MCP this session, so these stay owner-run in the Search Console UI (submit sitemap, watch coverage, pull query report).
+- **Waiting on you (assets):** §3.2 needs real social profile URLs; §3.3 `aggregateRating` is **not recommended** for LocalBusiness (Google no longer shows self-serving star ratings from your own site, and it risks a policy flag) — leave it off unless surfacing third-party review widgets.
+- **Cannot do (no access):** §5 GBP, reviews, citations — these are yours; Claude can draft copy, review-request text, and GBP service descriptions on request.
+- **Small polish available on request:** the footer's `FB / IG / YT / TW` badges are non-functional placeholders — either wire them to real profiles (once created) or remove them so nothing on the site looks unfinished.
 
 ---
 
