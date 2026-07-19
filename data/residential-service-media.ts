@@ -62,6 +62,14 @@ export const residentialRedClayRemovalMedia = {
   comparisonLabel: "red clay stain removal",
 } as const
 
+export const residentialPostConstructionCleanupMedia = {
+  beforeSrc: `${R}/post-construction-cleanup-before.png`,
+  afterSrc: `${R}/post-construction-cleanup-after.png`,
+  beforeAlt: "Newly built Georgia home with construction dust, paint overspray, and debris on siding, windows, and driveway",
+  afterAlt: "Same newly built home with siding, windows, and driveway clean and move-in ready after post-construction clean up",
+  comparisonLabel: "post-construction clean up",
+} as const
+
 export const residentialCurbingMedia = {
   beforeSrc: `${R}/curbing-before.png`,
   afterSrc: `${R}/curbing-after.png`,

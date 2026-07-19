@@ -63,6 +63,20 @@ const manualCommercial: Record<string, MarketingRouteDefinition> = {
         "Clay stain removal for commercial concrete, curbs, entryways, and building exteriors across Metro Atlanta, with recurring plans for sites near grading or construction.",
     }
   ),
+  "/services/commercial/post-construction-cleanup": def(
+    "Commercial Post-Construction Clean Up | Commercial | Pressure Washing Xperts",
+    "Post-construction clean up for Metro Atlanta commercial builds: dust, drywall residue, paint overspray, and window film removed from concrete, glass, and facades before turnover.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Commercial Services", path: COM_HUB },
+      { name: "Post-Construction Clean Up", path: "/services/commercial/post-construction-cleanup" },
+    ],
+    {
+      name: "Commercial post-construction clean up",
+      description:
+        "Turnover-ready exterior clean up for new builds and renovations across Metro Atlanta, clearing construction dust, overspray, and tracked-in debris from concrete, glass, and building faces.",
+    }
+  ),
   "/services/commercial/apartment-complexes": def(
     "Apartment Complex Pressure Washing | Commercial | Pressure Washing Xperts",
     "Breezeways, parking, pool decks, and building exteriors for Metro Atlanta apartments, scheduled to minimize disruption for residents and onsite staff.",
@@ -204,6 +218,20 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
       name: "Red clay removal in Ellenwood, GA",
       description:
         "Removal of Georgia red clay staining from siding, brick, concrete, and curbs across Ellenwood, GA and Metro Atlanta using detergents matched to iron-rich soil.",
+    }
+  ),
+  "/services/residential/post-construction-cleanup": def(
+    "Post-Construction Clean Up Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Post-construction clean up for new builds and renovations in Ellenwood, GA and Metro Atlanta. We clear drywall dust, paint overspray, and construction grime from siding, brick, windows, and driveways. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Post-Construction Clean Up", path: "/services/residential/post-construction-cleanup" },
+    ],
+    {
+      name: "Post-construction clean up in Ellenwood, GA",
+      description:
+        "Exterior clean up for newly built and renovated homes across Ellenwood, GA and Metro Atlanta, removing drywall dust, paint overspray, adhesive residue, and construction grime from siding, brick, windows, and concrete.",
     }
   ),
   "/services/residential/house-washing": def(

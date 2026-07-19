@@ -118,6 +118,12 @@ export const residentialServices: NavLinkItem[] = [
     summary:
       "Georgia red clay lifted from siding, brick, driveways, and curbs with chemistry matched to iron-rich soil stains.",
   },
+  {
+    href: "/services/residential/post-construction-cleanup",
+    label: "Post-Construction Clean Up",
+    summary:
+      "Drywall dust, paint overspray, and construction grime lifted from siding, brick, windows, and driveways before move-in.",
+  },
 ]
 
 export const commercialServices: NavLinkItem[] = [
@@ -222,6 +228,12 @@ export const commercialServices: NavLinkItem[] = [
     label: "Red Clay Removal",
     summary:
       "Clay tracked by vehicles and runoff removed from concrete, entries, and building faces so the property reads maintained.",
+  },
+  {
+    href: "/services/commercial/post-construction-cleanup",
+    label: "Post-Construction Clean Up",
+    summary:
+      "Dust, debris, overspray, and window film cleared from new builds and renovations so sites are turnover-ready.",
   },
 ]
 

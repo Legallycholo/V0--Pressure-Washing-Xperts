@@ -329,6 +329,26 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
     ctaHeadline: "Entries and drive lanes free of tracked-in clay.",
     ctaSubline: "Ask about recurring service for properties near active construction.",
   },
+  "post-construction-cleanup": {
+    processSteps: s(
+      ["Walk the finished spaces", "We note overspray, window film, adhesive, and dust across every surface."],
+      ["Match method to material", "New paint, siding, and glass each get a safe approach."],
+      ["Wash and detail", "Drywall dust and construction grime lift without marking fresh finishes."],
+      ["Final walkthrough", "You check the property before builders hand over the keys."],
+    ),
+    ctaHeadline: "Move-in ready before the final walkthrough.",
+    ctaSubline: "Tell us your close date and we will build the cleanup around it.",
+  },
+  "post-construction-cleanup-commercial": {
+    processSteps: s(
+      ["Site walk with your team", "Dust, overspray, and debris zones scoped against the punch list."],
+      ["Protect finished work", "New glass, signage, and paint get masked or rinsed with care."],
+      ["Wash concrete and verticals", "Tracked-in debris and film clear from entries and facades."],
+      ["Turnover-ready sign-off", "We confirm the site reads finished, not freshly built."],
+    ),
+    ctaHeadline: "Sites that read finished, not freshly built.",
+    ctaSubline: "Coordinate cleanup with your GC's turnover timeline.",
+  },
   "parking-decks": {
     processSteps: s(
       ["Deck traffic plan", "Ramps, levels, and exits stay open with phased washing."],
