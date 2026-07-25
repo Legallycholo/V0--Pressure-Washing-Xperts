@@ -79,16 +79,16 @@ export const residentialCurbingMedia = {
 } as const
 
 export const residentialRvCleaningMedia = {
-  beforeSrc: `${R}/rv-cleaning-before.png`,
-  afterSrc: `${R}/rv-cleaning-after.png`,
+  beforeSrc: `${R}/rv-cleaning-before.webp`,
+  afterSrc: `${R}/rv-cleaning-after.webp`,
   beforeAlt: "Travel trailer RV in a Georgia driveway with black streaking, oxidized fiberglass, and road grime on the exterior",
   afterAlt: "Same RV with exterior washed clean, black streaks and road grime removed",
   comparisonLabel: "RV exterior cleaning",
 } as const
 
 export const residentialTinyHouseCleaningMedia = {
-  beforeSrc: `${R}/tiny-house-cleaning-before.png`,
-  afterSrc: `${R}/tiny-house-cleaning-after.png`,
+  beforeSrc: `${R}/tiny-house-cleaning-before.webp`,
+  afterSrc: `${R}/tiny-house-cleaning-after.webp`,
   beforeAlt: "Small Georgia tiny home on a wooded lot with pollen film, mildew streaking, and dirt on the siding and skirting",
   afterAlt: "Same tiny home with siding, roofing, and skirting clean after exterior soft washing",
   comparisonLabel: "tiny house exterior cleaning",
