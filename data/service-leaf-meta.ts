@@ -359,6 +359,26 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
     ctaHeadline: "Structures that feel safer under tires and feet.",
     ctaSubline: "Off-peak scheduling keeps access moving.",
   },
+  "rv-cleaning": {
+    processSteps: s(
+      ["Walk the rig with you", "We note decals, slide-outs, awnings, and which interior areas need attention."],
+      ["Wash exterior top to bottom", "Roof, siding, and awning get pressure matched to fiberglass, aluminum, and graphics."],
+      ["Detail the cabin", "Floors, counters, and upholstery are wiped down, vacuumed, and refreshed."],
+      ["Final walkthrough", "You check inside and out before we pack up."],
+    ),
+    ctaHeadline: "Get your RV road-ready, inside and out.",
+    ctaSubline: "Book a wash and cabin refresh before your next trip or before storage.",
+  },
+  "tiny-house-cleaning": {
+    processSteps: s(
+      ["Review the whole home", "We note siding type, trim, and which interior rooms need the most attention."],
+      ["Wash exterior roof to base", "Pollen film, mildew, and algae lift without forcing water behind panels."],
+      ["Clean the interior", "Floors, counters, windows, and fixtures get detailed in every compact room."],
+      ["Final walkthrough", "You check every side and every room before we leave."],
+    ),
+    ctaHeadline: "Keep your tiny home looking as sharp as it's built.",
+    ctaSubline: "Ask about seasonal visits to stay ahead of Georgia pollen, humidity, and everyday dust.",
+  },
 }
 
 export function getServiceLeafCopy(slug: string): ServiceLeafCopy {
