@@ -304,6 +304,34 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
         "Wood, composite, and vinyl deck and fence cleaning so outdoor spaces look maintained and hold finish longer across Metro Atlanta.",
     }
   ),
+  "/services/residential/rv-cleaning": def(
+    "RV Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional RV cleaning near you in Ellenwood, GA and Metro Atlanta. Exterior soft wash for roofs, siding, and awnings plus interior cabin cleaning for floors, surfaces, and upholstery. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "RV Cleaning", path: "/services/residential/rv-cleaning" },
+    ],
+    {
+      name: "RV cleaning in Ellenwood, GA",
+      description:
+        "Exterior soft wash and interior cabin cleaning for RVs and campers across Ellenwood, GA and Metro Atlanta, covering roofs, awnings, siding, floors, and upholstery.",
+    }
+  ),
+  "/services/residential/tiny-house-cleaning": def(
+    "Tiny House Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional tiny house cleaning near you in Ellenwood, GA and Metro Atlanta. Exterior soft wash for siding and roofing plus interior deep cleaning for floors, surfaces, and windows. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Tiny House Cleaning", path: "/services/residential/tiny-house-cleaning" },
+    ],
+    {
+      name: "Tiny house cleaning in Ellenwood, GA",
+      description:
+        "Exterior soft wash and interior deep cleaning for tiny homes across Ellenwood, GA and Metro Atlanta, covering siding, roofing, skirting, floors, and fixtures.",
+    }
+  ),
 }
 
 export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {

@@ -124,6 +124,18 @@ export const residentialServices: NavLinkItem[] = [
     summary:
       "Drywall dust, paint overspray, and construction grime lifted from siding, brick, windows, and driveways before move-in.",
   },
+  {
+    href: "/services/residential/rv-cleaning",
+    label: "RV Cleaning",
+    summary:
+      "Exterior soft wash plus interior cabin cleaning for RVs and campers — roofs, awnings, floors, and upholstery refreshed before your next trip.",
+  },
+  {
+    href: "/services/residential/tiny-house-cleaning",
+    label: "Tiny House Cleaning",
+    summary:
+      "Exterior soft wash plus interior deep cleaning for tiny homes — siding, roofing, skirting, floors, and fixtures refreshed room by room.",
+  },
 ]
 
 export const commercialServices: NavLinkItem[] = [

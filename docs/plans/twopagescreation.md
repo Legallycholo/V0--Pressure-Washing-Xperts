@@ -52,6 +52,8 @@ Path convention matches existing pairs (`public/residential-services/<slug>-befo
 
 **Prompts**: Claude will provide all 4 image-generation prompts in chat (not in this file) — one before/after pair per page, for you to run through ChatGPT/Gemini/whatever image model you prefer. Once generated, hand the 4 files back and Claude will place them at the paths above and wire up the alt text.
 
+**Current state**: The 4 paths above currently hold **clearly-labeled 1600×900 placeholder PNGs** ("PLACEHOLDER — replace with generated photo") so the pages render complete and the layout is reviewable. Without them the comparison slider stays hidden behind a dark box, because `BeforeAfterSlider` only fades the pair in once both images fire `onLoad`. **These must be overwritten with the real generated photos before this ships to production.**
+
 ## 5. Draft page copy
 
 ### RV Cleaning — `/services/residential/rv-cleaning`
@@ -94,7 +96,7 @@ Path convention matches existing pairs (`public/residential-services/<slug>-befo
 
 `contentRevised`: set both pages to `"July 2026"` (matches recent pages' convention of stamping the month work landed).
 
-## 6. Build steps (in order)
+## 6. Build steps (steps 1–7 complete; step 8 pending your images)
 
 1. Add `rv-cleaning` and `tiny-house-cleaning` entries to `SERVICE_LEAF_COPY` in `data/service-leaf-meta.ts`.
 2. Add `residentialRvCleaningMedia` and `residentialTinyHouseCleaningMedia` to `data/residential-service-media.ts` (image paths only — files land in step 8).
