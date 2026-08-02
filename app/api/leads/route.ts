@@ -3,6 +3,7 @@ import { Resend } from "resend"
 import { checkBotId } from "botid/server"
 import { buildLeadInsertRow, type LeadPayload } from "@/lib/submitLead"
 import { insertLeadToSupabase } from "@/lib/supabaseLeads"
+import { sendLeadSms } from "@/lib/vonageNotify"
 import { businessSiteHost } from "@/data/site"
 
 function escapeHtml(s: string): string {
@@ -186,6 +187,9 @@ export async function POST(request: Request) {
 
   // Notify the team even if the DB write failed, so no lead gets missed.
   void sendLeadNotification(body, row.rough_price_estimate ?? 0)
+  void sendLeadSms({ fullName: body.full_name, phone: body.phone, city: body.city }).catch((e) =>
+    console.error("[api/leads] Vonage SMS notification failed", e)
+  )
 
   if (insertFailed) {
     return NextResponse.json(
