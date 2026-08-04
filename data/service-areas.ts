@@ -12,6 +12,12 @@ export const primaryServiceAreaCities = [
   "Decatur",
   "Rex",
   "Conyers",
+  "Jonesboro",
+  "Riverdale",
+  "Forest Park",
+  "Lithonia",
+  "College Park",
+  "Fayetteville",
 ] as const
 
 export interface ServiceAreaPageContent {
