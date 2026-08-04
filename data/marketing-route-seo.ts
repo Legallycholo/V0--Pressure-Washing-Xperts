@@ -332,6 +332,48 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
         "Exterior soft wash and interior deep cleaning for tiny homes across Ellenwood, GA and Metro Atlanta, covering siding, roofing, skirting, floors, and fixtures.",
     }
   ),
+  "/services/residential/window-cleaning": def(
+    "Window Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Professional exterior window cleaning near you in Ellenwood, GA and Metro Atlanta. Streak-free glass, frames, and screens, on their own or bundled with a house wash. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Window Cleaning", path: "/services/residential/window-cleaning" },
+    ],
+    {
+      name: "Window cleaning in Ellenwood, GA",
+      description:
+        "Exterior window, frame, and screen cleaning across Ellenwood, GA and Metro Atlanta, using purified water and squeegee technique for a streak-free finish.",
+    }
+  ),
+  "/services/residential/pool-deck-screen-enclosure-cleaning": def(
+    "Pool Deck & Screen Enclosure Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Pool deck and screen enclosure cleaning near you in Ellenwood, GA and Metro Atlanta. We lift algae, mineral scale, and pollen film from decking, pool cages, and lanai screens. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Pool Deck & Screen Enclosure Cleaning", path: "/services/residential/pool-deck-screen-enclosure-cleaning" },
+    ],
+    {
+      name: "Pool deck and screen enclosure cleaning in Ellenwood, GA",
+      description:
+        "Pool decking, cage frames, and lanai screens cleaned across Ellenwood, GA and Metro Atlanta with pressure and detergents matched to coatings and mesh.",
+    }
+  ),
+  "/services/residential/solar-panel-cleaning": def(
+    "Solar Panel Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
+    "Solar panel cleaning near you in Ellenwood, GA and Metro Atlanta. Soft-bristle, low-pressure rinsing clears pollen, dust, and bird droppings without damaging glass or seals. Call (800) 451-7213 for a free quote.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "Solar Panel Cleaning", path: "/services/residential/solar-panel-cleaning" },
+    ],
+    {
+      name: "Solar panel cleaning in Ellenwood, GA",
+      description:
+        "Soft-wash solar panel cleaning across Ellenwood, GA and Metro Atlanta, clearing pollen, dust, and debris film to help panels perform closer to rated output.",
+    }
+  ),
 }
 
 export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {

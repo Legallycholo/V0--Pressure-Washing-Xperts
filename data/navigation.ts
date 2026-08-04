@@ -136,6 +136,24 @@ export const residentialServices: NavLinkItem[] = [
     summary:
       "Exterior soft wash plus interior deep cleaning for tiny homes — siding, roofing, skirting, floors, and fixtures refreshed room by room.",
   },
+  {
+    href: "/services/residential/window-cleaning",
+    label: "Window Cleaning",
+    summary:
+      "Exterior window glass, frames, and screens cleaned streak-free, on their own or bundled with a full house wash.",
+  },
+  {
+    href: "/services/residential/pool-deck-screen-enclosure-cleaning",
+    label: "Pool Deck & Screen Enclosure Cleaning",
+    summary:
+      "Pool decking, cages, and lanai screens cleaned to lift algae, mineral scale, and pollen film without harming mesh or coatings.",
+  },
+  {
+    href: "/services/residential/solar-panel-cleaning",
+    label: "Solar Panel Cleaning",
+    summary:
+      "Panels rinsed clear of pollen, dust, and bird droppings using soft-bristle, low-pressure methods that protect the glass and seals.",
+  },
 ]
 
 export const commercialServices: NavLinkItem[] = [

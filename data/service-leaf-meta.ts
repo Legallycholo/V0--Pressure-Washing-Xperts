@@ -379,6 +379,36 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
     ctaHeadline: "Keep your tiny home looking as sharp as it's built.",
     ctaSubline: "Ask about seasonal visits to stay ahead of Georgia pollen, humidity, and everyday dust.",
   },
+  "window-cleaning": {
+    processSteps: s(
+      ["Walk the exterior with you", "We note screens, hard-water spotting, and any high or hard-to-reach panes."],
+      ["Wash frames and screens", "Sills and tracks get cleared of pollen and grit before glass work starts."],
+      ["Clean glass streak-free", "Purified water and squeegee technique lift film without leaving residue."],
+      ["Final check in daylight", "We look at every pane from outside before calling it done."],
+    ),
+    ctaHeadline: "See clearly out of every window again.",
+    ctaSubline: "Bundle with a house wash or book windows on their own.",
+  },
+  "pool-deck-screen-enclosure-cleaning": {
+    processSteps: s(
+      ["Inspect decking and screens", "We check for algae, mineral scale, and any loose or damaged mesh panels."],
+      ["Select safe pressure", "Coated decking and cage frames get pressure and detergent matched to the material."],
+      ["Wash deck, cage, and frame", "Green and black buildup lifts from screens and coping without tearing mesh."],
+      ["Rinse and walkthrough", "We check the whole enclosure with you before packing up."],
+    ),
+    ctaHeadline: "Bring back a clear, bright pool enclosure.",
+    ctaSubline: "Deck and screens cleaned together or scheduled separately.",
+  },
+  "solar-panel-cleaning": {
+    processSteps: s(
+      ["Review your panel layout", "We confirm roof access, panel count, and any manufacturer care notes."],
+      ["Rinse loose debris", "Pollen, dust, and leaf litter are cleared before detail cleaning starts."],
+      ["Soft-wash the panel surface", "Low-pressure water and a soft brush lift film without scratching glass or seals."],
+      ["Final rinse and inspection", "Panels are checked clear before we leave your roof."],
+    ),
+    ctaHeadline: "Let your panels catch full sun again.",
+    ctaSubline: "A seasonal rinse keeps output up through Georgia's heavy pollen season.",
+  },
 }
 
 export function getServiceLeafCopy(slug: string): ServiceLeafCopy {

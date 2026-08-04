@@ -24,6 +24,7 @@ import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 const services = [
   ...residentialServices.slice(0, 4),
   ...commercialServices.slice(0, 3),
+  ...residentialServices.slice(-3),
 ]
 
 export function Footer() {

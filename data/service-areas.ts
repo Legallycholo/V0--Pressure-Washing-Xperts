@@ -12,6 +12,12 @@ export const primaryServiceAreaCities = [
   "Decatur",
   "Rex",
   "Conyers",
+  "Jonesboro",
+  "Riverdale",
+  "Forest Park",
+  "Lithonia",
+  "College Park",
+  "Fayetteville",
 ] as const
 
 export interface ServiceAreaPageContent {
@@ -186,6 +192,13 @@ const NEIGHBOR_SLUGS: Record<string, string[]> = {
   dunwoody: ["sandy-springs", "brookhaven", "peachtree-corners"],
   brookhaven: ["atlanta", "decatur", "dunwoody"],
   tucker: ["decatur", "norcross", "brookhaven"],
+  jonesboro: ["forest-park", "riverdale", "morrow"],
+  riverdale: ["college-park", "jonesboro", "forest-park"],
+  "forest-park": ["jonesboro", "riverdale", "morrow"],
+  lithonia: ["decatur", "tucker", "ellenwood"],
+  "college-park": ["riverdale", "forest-park", "atlanta"],
+  fayetteville: ["riverdale", "college-park", "jonesboro"],
+  snellville: ["tucker", "lithonia", "norcross"],
 }
 
 function cardsForCity(cityName: string) {
@@ -275,6 +288,13 @@ const CITY_DEFINITIONS = [
   { cityName: "Dunwoody", county: "DeKalb County", priority: 20 },
   { cityName: "Brookhaven", county: "DeKalb County", priority: 21 },
   { cityName: "Tucker", county: "DeKalb County", priority: 22 },
+  { cityName: "Jonesboro", county: "Clayton County", priority: 23 },
+  { cityName: "Riverdale", county: "Clayton County", priority: 24 },
+  { cityName: "Forest Park", county: "Clayton County", priority: 25 },
+  { cityName: "Lithonia", county: "DeKalb County", priority: 26 },
+  { cityName: "College Park", county: "Fulton County", priority: 27 },
+  { cityName: "Fayetteville", county: "Fayette County", priority: 28 },
+  { cityName: "Snellville", county: "Gwinnett County", priority: 29 },
 ] as const
 
 /** Scheduling and response copy per city (owner-style detail for planning). */
