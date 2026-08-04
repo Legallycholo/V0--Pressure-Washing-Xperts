@@ -198,6 +198,7 @@ const NEIGHBOR_SLUGS: Record<string, string[]> = {
   lithonia: ["decatur", "tucker", "ellenwood"],
   "college-park": ["riverdale", "forest-park", "atlanta"],
   fayetteville: ["riverdale", "college-park", "jonesboro"],
+  snellville: ["tucker", "lithonia", "norcross"],
 }
 
 function cardsForCity(cityName: string) {
@@ -293,6 +294,7 @@ const CITY_DEFINITIONS = [
   { cityName: "Lithonia", county: "DeKalb County", priority: 26 },
   { cityName: "College Park", county: "Fulton County", priority: 27 },
   { cityName: "Fayetteville", county: "Fayette County", priority: 28 },
+  { cityName: "Snellville", county: "Gwinnett County", priority: 29 },
 ] as const
 
 /** Scheduling and response copy per city (owner-style detail for planning). */
