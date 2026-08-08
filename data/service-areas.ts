@@ -80,9 +80,14 @@ export interface ServiceAreaPageContent {
  * dunwoody after · brookhaven after · tucker after — all verified clean exterior finals.
  *
  * South-metro set (jonesboro · riverdale · forest-park · lithonia · college-park · fayetteville ·
- * snellville) sources from `/gallery/wix-before-after/*`: the `before-after/*.png` files are only
- * 320x240, too small to hold up as hero backgrounds. Each wix pick was checked frame by frame,
- * because both the filenames and the `galleryItems` alt text are unreliable for this set.
+ * snellville) reuses the homepage `/gallery/gallery-*.png` teaser images as an interim stand-in
+ * until city-specific photography is shot. Reuse across slugs is expected here and already the
+ * norm above (gallery-01 covers both ellenwood and atlanta).
+ *
+ * Avoid `/gallery/before-after/*.png` for heroes: despite the extension they are 320x240 JPEGs,
+ * too small for a full-bleed background. Their `galleryItems` alt text is also unreliable
+ * (`09-after` is siding, not a retaining wall; `12-after` is a sidewalk, not a patio), so verify
+ * any frame visually before assigning it.
  */
 const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
   ellenwood: {
@@ -174,34 +179,32 @@ const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
     alt: "Driveway with mulch beds and house in the background after cleaning",
   },
   jonesboro: {
-    src: "/gallery/wix-before-after/overflow-04.jpg",
-    alt: "Brick two-story home with a clean concrete driveway and double garage in Jonesboro, Georgia",
+    src: "/gallery/gallery-04.png",
+    alt: "Front of a split-level home with tan siding, brick, and garage after washing in Jonesboro, Georgia",
   },
   riverdale: {
-    src: "/gallery/wix-before-after/pair-10-after.jpg",
-    alt: "Wide concrete driveway and stone-front townhome after pressure washing in Riverdale, Georgia",
+    src: "/gallery/gallery-07.png",
+    alt: "Backyard stone paver patio with a wooden pergola after cleaning in Riverdale, Georgia",
   },
   "forest-park": {
-    src: "/gallery/wix-before-after/overflow-06.jpg",
-    alt: "Tall cream lap siding and gutter run after soft washing in Forest Park, Georgia",
+    src: "/gallery/gallery-02.png",
+    alt: "Commercial building facade and parking lot after exterior cleaning in Forest Park, Georgia",
   },
   lithonia: {
-    src: "/gallery/wix-before-after/overflow-08.jpg",
-    alt: "Long residential driveway leading up to a home after concrete cleaning in Lithonia, Georgia",
+    src: "/gallery/gallery-10.png",
+    alt: "Square concrete pavers beside a brick house wall after cleaning in Lithonia, Georgia",
   },
   "college-park": {
-    src: "/gallery/wix-before-after/pair-08-after.jpg",
-    alt: "Sloped driveway and tan siding townhome after pressure washing in College Park, Georgia",
+    src: "/gallery/gallery-03.png",
+    alt: "Elevated wood deck and railing on a residential building after washing in College Park, Georgia",
   },
   fayetteville: {
-    src: "/gallery/wix-before-after/overflow-02.jpg",
-    alt: "Clean cream siding on a two-story home under blue sky in Fayetteville, Georgia",
+    src: "/gallery/gallery-08.png",
+    alt: "Front of a two-story home with light siding and brick around the garage after cleaning in Fayetteville, Georgia",
   },
   snellville: {
-    // Wix export filenames are unreliable: `pair-11-before.jpg` is the cleaned
-    // frame (see `galleryItems` id 29, which uses it as `afterSrc`).
-    src: "/gallery/wix-before-after/pair-11-before.jpg",
-    alt: "Clean white siding on a two-story home side elevation in Snellville, Georgia",
+    src: "/gallery/gallery-05.png",
+    alt: "Long residential concrete driveway leading toward a garage after pressure washing in Snellville, Georgia",
   },
 }
 
