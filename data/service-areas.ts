@@ -18,6 +18,7 @@ export const primaryServiceAreaCities = [
   "Lithonia",
   "College Park",
   "Fayetteville",
+  "Snellville",
 ] as const
 
 export interface ServiceAreaPageContent {
@@ -77,6 +78,16 @@ export interface ServiceAreaPageContent {
  * marietta PNG · roswell PNG · sandy-springs PNG · johns-creek PNG · duluth PNG · norcross PNG ·
  * peachtree-corners after · suwanee after · cumming after · decatur after · smyrna after ·
  * dunwoody after · brookhaven after · tucker after — all verified clean exterior finals.
+ *
+ * South-metro set (jonesboro · riverdale · forest-park · lithonia · college-park · fayetteville ·
+ * snellville) reuses the homepage `/gallery/gallery-*.png` teaser images as an interim stand-in
+ * until city-specific photography is shot. Reuse across slugs is expected here and already the
+ * norm above (gallery-01 covers both ellenwood and atlanta).
+ *
+ * Avoid `/gallery/before-after/*.png` for heroes: despite the extension they are 320x240 JPEGs,
+ * too small for a full-bleed background. Their `galleryItems` alt text is also unreliable
+ * (`09-after` is siding, not a retaining wall; `12-after` is a sidewalk, not a patio), so verify
+ * any frame visually before assigning it.
  */
 const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
   ellenwood: {
@@ -166,6 +177,34 @@ const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
   tucker: {
     src: "/gallery/before-after/08-after.png",
     alt: "Driveway with mulch beds and house in the background after cleaning",
+  },
+  jonesboro: {
+    src: "/gallery/gallery-04.png",
+    alt: "Front of a split-level home with tan siding, brick, and garage after washing in Jonesboro, Georgia",
+  },
+  riverdale: {
+    src: "/gallery/gallery-07.png",
+    alt: "Backyard stone paver patio with a wooden pergola after cleaning in Riverdale, Georgia",
+  },
+  "forest-park": {
+    src: "/gallery/gallery-02.png",
+    alt: "Commercial building facade and parking lot after exterior cleaning in Forest Park, Georgia",
+  },
+  lithonia: {
+    src: "/gallery/gallery-10.png",
+    alt: "Square concrete pavers beside a brick house wall after cleaning in Lithonia, Georgia",
+  },
+  "college-park": {
+    src: "/gallery/gallery-03.png",
+    alt: "Elevated wood deck and railing on a residential building after washing in College Park, Georgia",
+  },
+  fayetteville: {
+    src: "/gallery/gallery-08.png",
+    alt: "Front of a two-story home with light siding and brick around the garage after cleaning in Fayetteville, Georgia",
+  },
+  snellville: {
+    src: "/gallery/gallery-05.png",
+    alt: "Long residential concrete driveway leading toward a garage after pressure washing in Snellville, Georgia",
   },
 }
 
@@ -343,6 +382,20 @@ const SERVICE_AVAILABILITY_BY_SLUG: Record<string, string> = {
     "Brookhaven routes run Monday through Friday with Saturday backup. Reply within one business day. Alley and tight-access homes get a walk-through note on your quote.",
   tucker:
     "Tucker and north DeKalb jobs run Monday, Wednesday, and Friday. Quotes within one business day. Quick curb and gutter add-ons fit between larger house washes.",
+  jonesboro:
+    "Jonesboro sits on our core Clayton County run, so crews are nearby most weekdays plus Saturday. Quote requests sent before 4 p.m. usually get a same-day answer.",
+  riverdale:
+    "Riverdale routes run Monday through Saturday and pair with nearby College Park and Forest Park stops. Expect a call or text back within one business day.",
+  "forest-park":
+    "Forest Park jobs run Monday through Friday with Saturday overflow for commercial work. Storefront and lot cleaning can be scheduled outside business hours on request.",
+  lithonia:
+    "Lithonia and east DeKalb visits run Monday, Wednesday, and Friday. Most quotes return within one business day, weather permitting.",
+  "college-park":
+    "College Park routes run Monday through Saturday, grouped with Riverdale and Forest Park to keep drive time short. Same-day quote replies when you send details before 3 p.m.",
+  fayetteville:
+    "Fayetteville service runs Tuesday, Thursday, and Saturday on the Fayette County route. New requests hear back by the next business morning at the latest.",
+  snellville:
+    "Snellville falls on Monday, Wednesday, and Saturday runs alongside nearby Gwinnett stops. Response within one business day, with same-week slots when the weather holds.",
 }
 
 const NEARBY_NOTE_BY_SLUG: Record<string, string> = {
@@ -352,6 +405,20 @@ const NEARBY_NOTE_BY_SLUG: Record<string, string> = {
     "East Cobb tree cover and red-clay splash hit siding and concrete differently than open lots. We adjust pretreatment and rinse paths for Marietta streets off Roswell Road, Whitlock, and the historic square. Mention your neighborhood for the right crew pairing.",
   roswell:
     "Roswell mixes heavy canopy near the river with open subdivisions off Holcomb Bridge. We plan water flow away from driveways onto landscaping you care about and keep pressure down on older brick walks. Tell us if you are closer to Alpharetta or Sandy Springs for routing.",
+  jonesboro:
+    "We run Jonesboro with the rest of our Clayton County work, from the older streets around the historic downtown out to the newer subdivisions past Tara Boulevard. Drop your cross streets in the form and we will put you on the closest run.",
+  riverdale:
+    "Riverdale pairs naturally with College Park and Forest Park stops, so we batch them on the same day. If you are near the Highway 85 corridor, say so and we can usually fit you in earlier that week.",
+  "forest-park":
+    "Forest Park work often lines up with nearby Morrow and Riverdale jobs. Commercial sites near the farmers market can be scheduled before opening so we are out before your customers arrive.",
+  lithonia:
+    "Lithonia sits between our Decatur and Ellenwood routes, which makes midweek scheduling easy. Mention whether you are closer to Stonecrest or the Arabia Mountain side and we will match you to the nearest crew.",
+  "college-park":
+    "College Park splits between the historic district and the newer builds closer to the airport, and those need different pressure. Tell us which side you are on so the right setup comes out with the crew.",
+  fayetteville:
+    "Fayetteville rides the same route as Riverdale and Jonesboro, so grouping helps. Larger driveways and multi-surface jobs usually book midweek when we have the longer window.",
+  snellville:
+    "Snellville groups with Tucker, Lithonia, and Norcross depending on the week. Give us your subdivision and we will slot you where the drive time is shortest.",
 }
 
 function defaultNearbyNote(cityName: string) {
@@ -411,6 +478,41 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
     "River corridor humidity grows mildew fast on decks and siding. We use wood-safe washing and low roof pressure where tree cover is heavy.",
     "Brick walks near downtown and newer siding off Highway 9 both get methods that lift growth without etching.",
     "If you border Alpharetta or Sandy Springs, we route you with the nearest team to cut wait time.",
+  ],
+  jonesboro: [
+    "Older homes near the historic downtown sit under heavy oak canopy, so north-facing siding greens up first. We soft wash those elevations instead of forcing pressure into painted wood.",
+    "Clayton County clay stains concrete a rust color that a garden hose will not touch. Our surface cleaner pulls it out of driveways and walkways without leaving wand stripes.",
+    "Quotes separate house washing, driveway cleaning, and roof work so you can stage the job across seasons instead of paying for all of it at once.",
+  ],
+  riverdale: [
+    "Homes along the Highway 85 corridor pick up road film and exhaust grit that plain rinsing smears around. We pretreat those surfaces so the dirt releases instead of streaking.",
+    "Airport-adjacent roofs collect algae quickly in this humidity. Soft wash roof cleaning kills it at the root and takes off black streaks without loosening shingle granules.",
+    "We work around shift schedules and can start early or late so nobody has to move a car mid-job.",
+  ],
+  "forest-park": [
+    "Between the farmers market traffic and the freight routes, storefronts and entry concrete here take a beating. We clean building washing, parking areas, storefronts on a rotation that fits business hours.",
+    "Older brick and block walls need controlled pressure, not a blast. We keep mortar joints intact while lifting mildew and traffic film.",
+    "Residential and commercial crews run the same standards, so a duplex gets the same walkthrough a retail block does.",
+  ],
+  lithonia: [
+    "Granite dust and red clay both settle into concrete pores around here, which is why driveways look dingy again a week after a rinse. Hot water and a surface cleaner get it out properly.",
+    "Tree cover near the Arabia Mountain corridor keeps roofs damp, so algae, moss, lichen, and black streaks come back fast. Soft wash roof cleaning slows that cycle down.",
+    "You get a firm scope before we start, including which surfaces we soft wash and which get pressure.",
+  ],
+  "college-park": [
+    "Historic Main Street district homes have original wood, older paint, and detailed trim. We drop pressure and switch to soft wash rather than risk lifting a paint edge.",
+    "Flight-path grime settles on siding and gutters faster here than further out. Regular exterior cleaning keeps it from baking into the finish.",
+    "We plan water flow away from mature plantings and note anything fragile on the quote before cleaning day.",
+  ],
+  fayetteville: [
+    "Subdivision driveways off the main corridors are wide and sun-exposed, so mildew shows up as dark blotches rather than an even layer. Surface cleaning evens the whole slab back out.",
+    "Newer vinyl and fiber cement both clean up well with soft wash, which lifts pollen and mildew without driving water behind the boards.",
+    "Fayette County jobs are grouped on the same run, so you get a real arrival window instead of an all-day wait.",
+  ],
+  snellville: [
+    "Mature subdivisions off US-78 have decades of tree growth overhead, which means shaded siding and slick walkways. We treat the growth instead of just rinsing the surface.",
+    "Concrete here often has control joints packed with moss. Our flatwork pass clears the joints so the slab reads clean edge to edge.",
+    "If you sit closer to the Loganville or Lawrenceville line, mention it and we will slot you on the tightest route that week.",
   ],
 }
 

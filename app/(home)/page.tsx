@@ -21,11 +21,11 @@ import { HomeQuoteScrollHandler } from "@/components/sections/HomeQuoteScrollHan
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { isOfferId, type OfferId } from "@/data/offers"
-import { getTopServiceAreas } from "@/data/service-areas"
+import { getServiceAreasForNavigation } from "@/data/service-areas"
 
 export default function Home() {
   const goQuote = useGoToHomeQuoteSection()
-  const topServiceAreas = getTopServiceAreas(24)
+  const topServiceAreas = getServiceAreasForNavigation()
 
   /** Accepts an optional offer id from Offers; ignores React click events from other CTAs */
   const openQuoteForm = (maybeOffer?: unknown) => {
@@ -97,9 +97,8 @@ export default function Home() {
             </RevealGroup>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-ps-text-muted">
               <span className="font-semibold text-white">Also serving:</span>{" "}
-              Jonesboro, College Park, East Point, Riverdale, Hampton, Lovejoy,
-              Union City, Fairburn, and Peachtree City, plus surrounding
-              communities across Georgia.
+              East Point, Hampton, Lovejoy, Union City, Fairburn, and Peachtree
+              City, plus surrounding communities across Georgia.
             </p>
           </div>
         </section>

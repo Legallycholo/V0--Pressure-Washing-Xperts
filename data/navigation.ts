@@ -287,19 +287,4 @@ export const headerServiceAreaLinks: NavLinkItem[] = getServiceAreasForNavigatio
   label: `${area.cityName}, ${area.stateCode}`,
 }))
 
-const footerPrimaryServiceAreaSlugs = [
-  "ellenwood",
-  "stockbridge",
-  "decatur",
-  "conyers",
-  "mcdonough",
-] as const
-
-export const footerTopServiceAreaLinks: NavLinkItem[] = footerPrimaryServiceAreaSlugs
-  .map((slug) => getServiceAreasForNavigation().find((area) => area.slug === slug))
-  .filter((area): area is NonNullable<typeof area> => Boolean(area))
-  .map((area) => ({
-    href: `/service-areas/${area.slug}`,
-    label: `${area.cityName}, ${area.stateCode}`,
-  }))
 
