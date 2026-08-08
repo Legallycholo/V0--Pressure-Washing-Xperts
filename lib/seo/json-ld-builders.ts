@@ -230,7 +230,8 @@ export function buildServiceJsonLd(
   baseUrl: string,
   pathname: string,
   name: string,
-  description: string
+  description: string,
+  areaServedName: string = businessAreaServedDescription
 ) {
   return {
     "@context": "https://schema.org",
@@ -241,7 +242,7 @@ export function buildServiceJsonLd(
     provider: organizationRef(baseUrl),
     areaServed: {
       "@type": "AdministrativeArea",
-      name: businessAreaServedDescription,
+      name: areaServedName,
     },
   }
 }

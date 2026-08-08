@@ -7,7 +7,10 @@ import {
   serviceAreaContent,
 } from "@/data/service-areas"
 import { ServiceAreaCityPageClient } from "@/app/service-areas/[city]/service-area-city-page-client"
-import { buildBreadcrumbListJsonLd } from "@/lib/seo/json-ld-builders"
+import {
+  buildBreadcrumbListJsonLd,
+  buildServiceJsonLd,
+} from "@/lib/seo/json-ld-builders"
 import { buildPublicMetadata } from "@/lib/seo/build-page-metadata"
 import { getSiteUrl } from "@/lib/site-url"
 
@@ -58,6 +61,15 @@ export default async function ServiceAreaPage({ params }: ServiceAreaPageProps) 
   return (
     <>
       <JsonLd data={buildBreadcrumbListJsonLd(base, breadcrumbItems)} />
+      <JsonLd
+        data={buildServiceJsonLd(
+          base,
+          pathname,
+          `Pressure Washing in ${city.cityName}, ${city.stateCode}`,
+          city.seo.description,
+          `${city.cityName}, ${city.stateCode}`
+        )}
+      />
       <ServiceAreaCityPageClient city={city} />
     </>
   )
