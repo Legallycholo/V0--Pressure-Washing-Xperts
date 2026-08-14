@@ -278,6 +278,19 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+
+              {/* Newsletter & Blog */}
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/newsletter"
+                    onClick={handleNavClick}
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none"
+                  >
+                    Newsletter &amp; Blog
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -449,6 +462,15 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               </div>
             )}
           </div>
+
+          {/* Newsletter & Blog */}
+          <Link
+            href="/newsletter"
+            onClick={handleNavClick}
+            className="block text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px] flex items-center"
+          >
+            Newsletter &amp; Blog
+          </Link>
 
           <div className="pt-4 border-t border-white/10 space-y-4">
             <a

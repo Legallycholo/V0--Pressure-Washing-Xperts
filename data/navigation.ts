@@ -271,13 +271,14 @@ export const aboutLinks: NavLinkItem[] = [
   { href: "/about/we-do-xpert", label: "We do Xpert" },
   { href: "/about/pressure-vs-soft-washing", label: "Pressure Washing vs. Soft Washing" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/newsletter", label: "Newsletter & Blog" },
 ]
 
 export const quickLinks: NavLinkItem[] = [
   { href: "/services/residential", label: "Residential Services" },
   { href: "/services/commercial", label: "Commercial Services" },
   { href: "/service-areas", label: "Service Areas" },
-  { href: "/#newsletter", label: "Newsletter & Blog" },
+  { href: "/newsletter", label: "Newsletter & Blog" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },
