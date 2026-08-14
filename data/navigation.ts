@@ -277,6 +277,7 @@ export const quickLinks: NavLinkItem[] = [
   { href: "/services/residential", label: "Residential Services" },
   { href: "/services/commercial", label: "Commercial Services" },
   { href: "/service-areas", label: "Service Areas" },
+  { href: "/#newsletter", label: "Newsletter & Blog" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },

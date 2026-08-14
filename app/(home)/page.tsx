@@ -15,6 +15,7 @@ import { BeforeAfter } from "@/components/sections/BeforeAfter"
 import { Testimonials } from "@/components/sections/Testimonials"
 import { CallBanner } from "@/components/sections/CallBanner"
 import { FAQ } from "@/components/sections/FAQ"
+import { Newsletter } from "@/components/sections/Newsletter"
 import { ContactSection } from "@/components/sections/ContactSection"
 import { Footer } from "@/components/layout/Footer"
 import { HomeQuoteScrollHandler } from "@/components/sections/HomeQuoteScrollHandler"
@@ -57,6 +58,7 @@ export default function Home() {
         <CallBanner onOpenQuoteForm={() => goQuote({ target: "contact" })} />
         <Offers onOpenQuoteForm={openQuoteForm} />
         <FAQ onOpenQuoteForm={openQuoteForm} />
+        <Newsletter />
         <section className="bg-ps-bg-alt py-14 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center">
