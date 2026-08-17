@@ -107,7 +107,7 @@ async function sendContactNotification(data: ContactData) {
 
   await resend.emails.send({
     from: "Pressure Washing Xperts <leads@tanygrowth.com>",
-    to: "pressurewashingxperts@gmail.com",
+    to: ["pressurewashingxperts@gmail.com", "dariel@tanygrowth.com"],
     subject: `Callback request: ${data.name}${locationText}`,
     html,
     text,
