@@ -5,14 +5,18 @@ import { insertLeadToSupabase } from "@/lib/supabaseLeads"
 import { sendContactSms } from "@/lib/vonageNotify"
 import { businessSiteHost } from "@/data/site"
 
-type ContactBody = {
-  name?: unknown
-  email?: unknown
-  phone?: unknown
-  message?: unknown
+type ContactData = {
+  name: string
+  email: string
+  phone: string
+  city: string
+  zip: string
+  services: string
+  best_time: string
+  how_heard: string
+  message: string
+  approx_sqft: string
 }
-
-type ContactData = { name: string; email: string; phone: string; message: string }
 
 function escapeHtml(s: string): string {
   return s
@@ -22,20 +26,38 @@ function escapeHtml(s: string): string {
     .replace(/"/g, "&quot;")
 }
 
-function validateContactBody(body: ContactBody): { ok: true; data: ContactData } | { ok: false; error: string } {
-  const name = typeof body.name === "string" ? body.name.trim() : ""
-  const email = typeof body.email === "string" ? body.email.trim() : ""
-  const phone = typeof body.phone === "string" ? body.phone.trim() : ""
-  const message = typeof body.message === "string" ? body.message.trim() : ""
-
-  if (!name || !email || !phone || !message) {
-    return { ok: false, error: "All fields are required." }
+function parseContactBody(body: Record<string, unknown>): { ok: true; data: ContactData } | { ok: false; error: string } {
+  const str = (v: unknown, cap: number) => (typeof v === "string" ? v.trim().slice(0, cap) : "")
+  
+  const name = str(body.name, 120)
+  const email = str(body.email, 200)
+  const phone = str(body.phone, 40)
+  
+  if (!name || !email || !phone) {
+    return { ok: false, error: "Name, email, and phone are required." }
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
     return { ok: false, error: "Please enter a valid email address." }
   }
+  if ((phone.match(/\d/g)?.length ?? 0) < 7) {
+    return { ok: false, error: "Please enter a valid phone number." }
+  }
 
-  return { ok: true, data: { name, email, phone, message } }
+  return { 
+    ok: true, 
+    data: { 
+      name, 
+      email, 
+      phone, 
+      city: str(body.city, 120),
+      zip: str(body.zip, 20),
+      services: str(body.services, 400),
+      best_time: str(body.best_time, 80),
+      how_heard: str(body.how_heard, 80),
+      message: str(body.message, 5000),
+      approx_sqft: str(body.approx_sqft, 80),
+    } 
+  }
 }
 
 async function sendContactNotification(data: ContactData) {
@@ -43,75 +65,53 @@ async function sendContactNotification(data: ContactData) {
   if (!apiKey) return
   const resend = new Resend(apiKey)
 
+  const rows = [
+    ["Call back on", data.phone],
+    ["Best time", data.best_time],
+    ["Name", data.name],
+    ["Town", data.city],
+    ["Zip", data.zip],
+    ["Wants cleaned", data.services],
+    ["Approx Sqft", data.approx_sqft],
+    ["Notes", data.message],
+    ["Email", data.email],
+    ["Found us via", data.how_heard],
+  ].filter(([, value]) => value)
+
+  const heading = "New Callback Request"
+  const locationText = data.city ? ` (${data.city})` : ""
+
+  const html = `<!doctype html><html><body style="margin:0;padding:24px;background:#f4f6f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#16232e">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <div style="background:#0a2540;padding:20px 24px">
+      <div style="color:#ffffff;font-size:18px;font-weight:700">${heading}</div>
+      <div style="color:#a3c0d8;font-size:13px;margin-top:4px">Pressure Washing Xperts · via the website</div>
+    </div>
+    <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse">
+      ${rows
+        .map(
+          ([label, value]) => `<tr>
+        <td style="padding:12px 24px;border-bottom:1px solid #eef2f6;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#64748b;white-space:nowrap;vertical-align:top">${escapeHtml(label as string)}</td>
+        <td style="padding:12px 24px;border-bottom:1px solid #eef2f6;font-size:15px;line-height:1.5;color:#16232e;white-space:pre-wrap">${escapeHtml(value as string)}</td>
+      </tr>`,
+        )
+        .join("")}
+    </table>
+    <div style="padding:20px 24px 24px">
+      <a href="tel:${escapeHtml(data.phone.replace(/[^\d+]/g, ""))}" style="display:block;background:#f0b429;color:#0a2540;font-size:16px;font-weight:700;text-align:center;text-decoration:none;padding:14px 20px;border-radius:999px">Call ${escapeHtml(data.name)} back</a>
+    </div>
+  </div>
+</body></html>`
+
+  const text = [`${heading}`, "", ...rows.map(([l, v]) => `${l}: ${v}`)].join("\n")
+
   await resend.emails.send({
     from: "Dariel <dariel@tanygrowth.com>",
     to: "pressurewashingxperts@gmail.com",
-    subject: `🔔 New Contact Message: ${data.name} (${data.phone})`,
-    html: `
-<!DOCTYPE html>
-<html>
-<body style="margin:0;padding:0;background:#f4f6f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f8;padding:32px 16px;">
-    <tr><td align="center">
-      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-
-        <!-- Header -->
-        <tr>
-          <td style="background:#0a2540;padding:28px 32px;">
-            <p style="margin:0 0 4px 0;font-size:12px;font-weight:600;letter-spacing:1px;color:#f0b429;text-transform:uppercase;">Pressure Washing Xperts</p>
-            <h1 style="margin:0;font-size:22px;font-weight:700;color:#ffffff;">New Contact Message</h1>
-            <p style="margin:6px 0 0 0;font-size:13px;color:#8899aa;">${new Date().toLocaleString("en-US", { timeZone: "America/New_York", dateStyle: "full", timeStyle: "short" })} ET</p>
-          </td>
-        </tr>
-
-        <!-- Contact info -->
-        <tr>
-          <td style="padding:28px 32px 0;">
-            <p style="margin:0 0 16px 0;font-size:11px;font-weight:700;letter-spacing:1px;color:#8899aa;text-transform:uppercase;">Contact</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td style="padding-bottom:12px;">
-                  <p style="margin:0;font-size:20px;font-weight:700;color:#0a2540;">${escapeHtml(data.name)}</p>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding-bottom:8px;">
-                  <a href="tel:${escapeHtml(data.phone)}" style="font-size:16px;color:#0a72f5;text-decoration:none;font-weight:600;">📞 ${escapeHtml(data.phone)}</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding-bottom:8px;">
-                  <a href="mailto:${escapeHtml(data.email)}" style="font-size:14px;color:#0a72f5;text-decoration:none;">✉️ ${escapeHtml(data.email)}</a>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- Divider -->
-        <tr><td style="padding:20px 32px 0;"><hr style="border:none;border-top:1px solid #eef0f3;margin:0;" /></td></tr>
-
-        <!-- Message -->
-        <tr>
-          <td style="padding:20px 32px 28px;">
-            <p style="margin:0 0 12px 0;font-size:11px;font-weight:700;letter-spacing:1px;color:#8899aa;text-transform:uppercase;">Message</p>
-            <p style="margin:0;font-size:14px;color:#0a2540;">${escapeHtml(data.message)}</p>
-          </td>
-        </tr>
-
-        <!-- Footer -->
-        <tr>
-          <td style="background:#f4f6f8;padding:16px 32px;border-top:1px solid #eef0f3;">
-            <p style="margin:0;font-size:11px;color:#aabbcc;text-align:center;">Pressure Washing Xperts · ${businessSiteHost}</p>
-          </td>
-        </tr>
-
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>
-    `,
+    subject: `Callback request: ${data.name}${locationText}`,
+    html,
+    text,
+    replyTo: data.email,
   }).catch((e) => console.error("[api/contact] Resend notification failed", e))
 }
 
@@ -121,57 +121,50 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Access denied." }, { status: 403 })
   }
 
-  let raw: unknown
+  let body: unknown
   try {
-    raw = await request.json()
+    body = await request.json()
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 })
   }
 
-  if (!raw || typeof raw !== "object") {
+  if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 })
   }
 
-  const validated = validateContactBody(raw as ContactBody)
-  if (!validated.ok) {
-    return NextResponse.json({ error: validated.error }, { status: 400 })
+  // Honeypot check (hidden field to trap bots)
+  const b = body as Record<string, unknown>
+  if (typeof b._hp === "string" && b._hp.trim()) {
+    return NextResponse.json({ ok: true })
   }
 
-  const { data } = validated
+  const parsed = parseContactBody(b)
+  if (!parsed.ok) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 })
+  }
+
+  const { data } = parsed
 
   let insertFailed = false
   try {
     await insertLeadToSupabase({
-      full_name: data.name,
+      name: data.name,
       email: data.email,
       phone: data.phone,
-      message: data.message,
-      city: null,
-      state: null,
-      zip: null,
-      how_heard: null,
-      selected_offer: null,
-      approx_sqft_estimate: null,
-      rough_price_estimate: null,
-      rough_price_version: null,
-      approx_sq_footage: null,
-      submission_type: "contact-form",
-      page_path: null,
-      utm_source: null,
-      utm_medium: null,
-      utm_campaign: null,
-      utm_term: null,
-      utm_content: null,
-      gclid: null,
-      device: null,
-      submission_source: "website-form",
+      city: data.city || null,
+      zip: data.zip || null,
+      services: data.services || null,
+      best_time: data.best_time || null,
+      how_heard: data.how_heard || null,
+      message: data.message || null,
+      approx_sqft: data.approx_sqft || null,
     })
   } catch (e) {
     insertFailed = true
     console.error("[api/contact] Supabase insert failed", e)
   }
 
-  // Notify the team even if the DB write failed, so no message gets missed.
+  // Notify the team even if the DB write failed
   await Promise.allSettled([
     sendContactNotification(data),
     sendContactSms({ name: data.name, phone: data.phone })

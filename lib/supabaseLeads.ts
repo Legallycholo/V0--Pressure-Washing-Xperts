@@ -1,14 +1,21 @@
 import { createClient } from "@supabase/supabase-js"
 import { createServiceRoleClient } from "@/utils/supabase/admin"
 import { getSupabasePublishableKey, getSupabaseUrl } from "@/utils/supabase/env"
-import type { LeadInsertRow } from "@/lib/submitLead"
 
-export type SupabaseLeadRow = LeadInsertRow & {
-  submission_source: "website-form" | "ai-agent-chat"
-  desired_timeline?: string | null
+export type SupabaseContactRow = {
+  name: string
+  email: string
+  phone: string
+  city: string | null
+  zip: string | null
+  services: string | null
+  best_time: string | null
+  how_heard: string | null
+  message: string | null
+  approx_sqft: string | null
 }
 
-/** Prefers the service role; falls back to the anon key (RLS allows anon inserts on leads). */
+/** Prefers the service role; falls back to the anon key. */
 function createLeadsClient() {
   const serviceClient = createServiceRoleClient()
   if (serviceClient) return serviceClient
@@ -20,9 +27,9 @@ function createLeadsClient() {
   })
 }
 
-export async function insertLeadToSupabase(row: SupabaseLeadRow) {
+export async function insertLeadToSupabase(row: SupabaseContactRow) {
   const client = createLeadsClient()
   if (!client) throw new Error("Supabase client is not configured")
-  const { error } = await client.from("leads").insert(row)
+  const { error } = await client.from("pressure contacts").insert(row)
   if (error) throw error
 }
