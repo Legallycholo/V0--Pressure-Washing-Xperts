@@ -106,7 +106,7 @@ async function sendContactNotification(data: ContactData) {
   const text = [`${heading}`, "", ...rows.map(([l, v]) => `${l}: ${v}`)].join("\n")
 
   await resend.emails.send({
-    from: "Dariel <dariel@tanygrowth.com>",
+    from: "Pressure Washing Xperts <leads@tanygrowth.com>",
     to: "pressurewashingxperts@gmail.com",
     subject: `Callback request: ${data.name}${locationText}`,
     html,
