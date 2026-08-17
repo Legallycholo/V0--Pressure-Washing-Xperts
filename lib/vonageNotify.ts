@@ -2,15 +2,14 @@ import { getVonageConfig } from "@/lib/vonageEnv"
 
 const VONAGE_SMS_ENDPOINT = "https://rest.nexmo.com/sms/json"
 
-async function sendSms(text: string) {
-  const config = getVonageConfig()
+async function sendSmsToOne(to: string, text: string, config: ReturnType<typeof getVonageConfig>) {
   if (!config) return
 
   const body = new URLSearchParams({
     api_key: config.apiKey,
     api_secret: config.apiSecret,
     from: config.from,
-    to: config.to,
+    to,
     text,
   })
 
@@ -23,8 +22,16 @@ async function sendSms(text: string) {
   const result = (await res.json()) as { messages?: Array<{ status?: string; "error-text"?: string }> }
   const failed = result.messages?.find((m) => m.status !== "0")
   if (failed) {
-    throw new Error(`Vonage SMS failed: ${failed["error-text"] ?? "unknown error"}`)
+    throw new Error(`Vonage SMS failed to ${to}: ${failed["error-text"] ?? "unknown error"}`)
   }
+}
+
+/** Sends SMS to all configured TO numbers. */
+async function sendSms(text: string) {
+  const config = getVonageConfig()
+  if (!config) return
+
+  await Promise.all(config.to.map((to) => sendSmsToOne(to, text, config)))
 }
 
 export async function sendLeadSms(params: { fullName: string; phone: string; city?: string | null }) {
