@@ -167,7 +167,7 @@ export async function POST(request: Request) {
   // Notify the team even if the DB write failed
   await Promise.allSettled([
     sendContactNotification(data),
-    sendContactSms({ name: data.name, phone: data.phone })
+    sendContactSms(data)
   ])
 
   if (insertFailed) {

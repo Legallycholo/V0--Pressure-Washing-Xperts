@@ -39,6 +39,32 @@ export async function sendLeadSms(params: { fullName: string; phone: string; cit
   await sendSms(`New quote request${location}: ${params.fullName}, ${params.phone}`)
 }
 
-export async function sendContactSms(params: { name: string; phone: string }) {
-  await sendSms(`New contact message: ${params.name}, ${params.phone}`)
+export async function sendContactSms(params: {
+  name: string
+  email: string
+  phone: string
+  city: string
+  zip: string
+  services: string
+  best_time: string
+  how_heard: string
+  message: string
+  approx_sqft: string
+}) {
+  const dateStr = new Date().toLocaleString()
+  const text = [
+    `Created_at: ${dateStr}`,
+    `Name: ${params.name}`,
+    `email: ${params.email}`,
+    `Phone: ${params.phone}`,
+    `city: ${params.city}`,
+    `zip: ${params.zip}`,
+    `service chosen: ${params.services}`,
+    `message: ${params.message}`,
+    `how heard: ${params.how_heard}`,
+    `approx_sqft: ${params.approx_sqft}`,
+    `Best time to get back to: ${params.best_time}`
+  ].join("\n")
+
+  await sendSms(text)
 }
