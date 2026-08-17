@@ -172,10 +172,10 @@ export async function POST(request: Request) {
   }
 
   // Notify the team even if the DB write failed, so no message gets missed.
-  void sendContactNotification(data)
-  void sendContactSms({ name: data.name, phone: data.phone }).catch((e) =>
-    console.error("[api/contact] Vonage SMS notification failed", e)
-  )
+  await Promise.allSettled([
+    sendContactNotification(data),
+    sendContactSms({ name: data.name, phone: data.phone })
+  ])
 
   if (insertFailed) {
     return NextResponse.json(

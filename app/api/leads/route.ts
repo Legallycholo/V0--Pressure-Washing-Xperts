@@ -186,10 +186,10 @@ export async function POST(request: Request) {
   }
 
   // Notify the team even if the DB write failed, so no lead gets missed.
-  void sendLeadNotification(body, row.rough_price_estimate ?? 0)
-  void sendLeadSms({ fullName: body.full_name, phone: body.phone, city: body.city }).catch((e) =>
-    console.error("[api/leads] Vonage SMS notification failed", e)
-  )
+  await Promise.allSettled([
+    sendLeadNotification(body, row.rough_price_estimate ?? 0),
+    sendLeadSms({ fullName: body.full_name, phone: body.phone, city: body.city })
+  ])
 
   if (insertFailed) {
     return NextResponse.json(
