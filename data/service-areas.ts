@@ -339,59 +339,59 @@ const CITY_DEFINITIONS = [
 /** Scheduling and response copy per city (owner-style detail for planning). */
 const SERVICE_AVAILABILITY_BY_SLUG: Record<string, string> = {
   ellenwood:
-    "Ellenwood routes run Monday through Saturday and stay closest to our core service hub. Most quote requests receive same-day responses when details are submitted before 4 p.m.",
+    "Ellenwood routes run Monday through Saturday and stay closest to our core service hub. Most callback requests receive same-day responses when details are submitted before 4 p.m.",
   stockbridge:
-    "Stockbridge appointments are available throughout the week with priority same-week scheduling. We typically return quotes within one business day.",
+    "Stockbridge appointments are available throughout the week with priority same-week scheduling. We typically return callback requests within one business day.",
   rex:
-    "Rex service windows are open Monday through Friday with Saturday overflow. We usually respond to new quote requests within four business hours on weekdays.",
+    "Rex service windows are open Monday through Friday with Saturday overflow. We usually respond to new callback requests within four business hours on weekdays.",
   morrow:
     "Morrow jobs are grouped on weekday routes for efficient turnaround. Expect a call or text back within one business day for scheduling.",
   mcdonough:
-    "McDonough routes run several days each week, with faster booking when grouped near Stockbridge. Most estimate requests are answered the same day or next business morning.",
+    "McDonough routes run several days each week, with faster booking when grouped near Stockbridge. Most callback requests are answered the same day or next business morning.",
   conyers:
-    "Conyers service is available on rotating weekday and Saturday routes. Quote response time is typically within one business day, weather permitting.",
+    "Conyers service is available on rotating weekday and Saturday routes. Callback response time is typically within one business day, weather permitting.",
   atlanta:
-    "We run Atlanta routes Monday through Saturday. Most quotes return same day if you submit before 3 p.m. Same-week appointments open in many neighborhoods.",
+    "We run Atlanta routes Monday through Saturday. Most callback requests get a same-day response if you submit before 3 p.m. Same-week appointments open in many neighborhoods.",
   alpharetta:
-    "Alpharetta routes focus on Tuesday, Thursday, and Saturday. We usually reply to new quotes within four business hours. Same-week slots open when the schedule allows.",
+    "Alpharetta routes focus on Tuesday, Thursday, and Saturday. We usually reply to new callback requests within four business hours. Same-week slots open when the schedule allows.",
   marietta:
     "Marietta and east Cobb crews run Monday, Wednesday, and Friday. Expect a call or email back within one business day. Weekend slots book fast in spring.",
   roswell:
     "Roswell jobs typically land on Monday, Wednesday, or Saturday. New inquiries get a response by the next business morning at the latest. We can often fit small curb or driveway washes midweek.",
   "sandy-springs":
-    "Sandy Springs is on a Monday through Friday rotation with optional Saturday overflow. Quotes within one business day. Same-week exterior washes when rain cooperates.",
+    "Sandy Springs is on a Monday through Friday rotation with optional Saturday overflow. Callbacks within one business day. Same-week exterior washes when rain cooperates.",
   "johns-creek":
     "Johns Creek routes run Tuesday, Thursday, and Saturday. Response within four business hours on weekdays. We group jobs by neighborhood to keep drive time low.",
   duluth:
-    "Duluth and central Gwinnett visits run Monday, Wednesday, and Friday. You hear back within one business day. Evening estimates by request.",
+    "Duluth and central Gwinnett visits run Monday, Wednesday, and Friday. You hear back within one business day. Evening appointments by request.",
   norcross:
     "Norcross crews move Monday through Thursday plus Saturday mornings. Same-day replies when you submit early. Tight turnaround for storefront concrete when you need it.",
   "peachtree-corners":
-    "Peachtree Corners falls on Tuesday, Thursday, and Saturday routes. Quotes return same day before 2 p.m. most weekdays. Commercial after-hours washing available.",
+    "Peachtree Corners falls on Tuesday, Thursday, and Saturday routes. Callbacks return same day before 2 p.m. most weekdays. Commercial after-hours washing available.",
   suwanee:
     "Suwanee jobs run Monday, Wednesday, Friday, and every other Saturday. Response within one business day. HOA and residential clusters scheduled back-to-back when possible.",
   cumming:
     "Cumming and south Forsyth routes run Tuesday, Thursday, and Saturday. New leads hear back next business morning at the latest. Large driveways often book midweek.",
   decatur:
-    "Decatur and intown DeKalb routes run Monday through Friday. Quotes same day if you send details before 4 p.m. We watch porch gardens and tight lot lines closely.",
+    "Decatur and intown DeKalb routes run Monday through Friday. Callbacks same day if you send details before 4 p.m. We watch porch gardens and tight lot lines closely.",
   smyrna:
     "Smyrna crews run Monday, Wednesday, Friday, and Saturday. Response within four business hours. Same-week house washes common outside heavy pollen weeks.",
   dunwoody:
-    "Dunwoody visits concentrate on Tuesday, Thursday, and Saturday. One-business-day quote turnaround. Early-morning starts for zero interference with school traffic.",
+    "Dunwoody visits concentrate on Tuesday, Thursday, and Saturday. Callback requests are answered within one business day. Early-morning starts help avoid school traffic.",
   brookhaven:
-    "Brookhaven routes run Monday through Friday with Saturday backup. Reply within one business day. Alley and tight-access homes get a walk-through note on your quote.",
+    "Brookhaven routes run Monday through Friday with Saturday backup. Reply within one business day. Alley and tight-access homes get a walk-through note before service.",
   tucker:
-    "Tucker and north DeKalb jobs run Monday, Wednesday, and Friday. Quotes within one business day. Quick curb and gutter add-ons fit between larger house washes.",
+    "Tucker and north DeKalb jobs run Monday, Wednesday, and Friday. Callbacks within one business day. Quick curb and gutter add-ons fit between larger house washes.",
   jonesboro:
-    "Jonesboro sits on our core Clayton County run, so crews are nearby most weekdays plus Saturday. Quote requests sent before 4 p.m. usually get a same-day answer.",
+    "Jonesboro sits on our core Clayton County run, so crews are nearby most weekdays plus Saturday. Callback requests sent before 4 p.m. usually get a same-day answer.",
   riverdale:
     "Riverdale routes run Monday through Saturday and pair with nearby College Park and Forest Park stops. Expect a call or text back within one business day.",
   "forest-park":
     "Forest Park jobs run Monday through Friday with Saturday overflow for commercial work. Storefront and lot cleaning can be scheduled outside business hours on request.",
   lithonia:
-    "Lithonia and east DeKalb visits run Monday, Wednesday, and Friday. Most quotes return within one business day, weather permitting.",
+    "Lithonia and east DeKalb visits run Monday, Wednesday, and Friday. Most callback requests get a response within one business day, weather permitting.",
   "college-park":
-    "College Park routes run Monday through Saturday, grouped with Riverdale and Forest Park to keep drive time short. Same-day quote replies when you send details before 3 p.m.",
+    "College Park routes run Monday through Saturday, grouped with Riverdale and Forest Park to keep drive time short. Same-day replies when you send details before 3 p.m.",
   fayetteville:
     "Fayetteville service runs Tuesday, Thursday, and Saturday on the Fayette County route. New requests hear back by the next business morning at the latest.",
   snellville:
@@ -429,7 +429,7 @@ function defaultTrust(cityName: string, county: string): string[] {
   return [
     `Licensed and insured team that works ${cityName} and ${county} regularly.`,
     "Soft wash and pressure washing matched to siding, concrete, wood, and roof materials.",
-    "Straightforward quotes with a clear scope before we start.",
+    "Straightforward scheduling with a clear scope before we start.",
   ]
 }
 
@@ -442,7 +442,7 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
   stockbridge: [
     "Stockbridge routes are frequent, which helps us keep scheduling flexible and response times fast.",
     "We handle algae-prone siding and high-traffic concrete with methods tailored to each material.",
-    "Quotes break out options clearly so you can choose the right level of service for your property.",
+    "Callbacks break out options clearly so you can choose the right level of service for your property.",
   ],
   rex: [
     "Rex properties are part of our regular South Metro route planning, not occasional overflow stops.",
@@ -452,7 +452,7 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
   morrow: [
     "Morrow homes and commercial sites are serviced on repeat routes for reliable turnaround.",
     "We protect landscaping, trim, and surrounding surfaces while removing algae, dirt, and traffic buildup.",
-    "Service plans are straightforward, with clear communication from quote through completion.",
+    "Service plans are straightforward, with clear communication from callback through completion.",
   ],
   mcdonough: [
     "McDonough scheduling is coordinated with nearby Henry County work to reduce wait time and travel delays.",
@@ -467,7 +467,7 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
   alpharetta: [
     "Windward, Avalon, and Crabapple jobs are a regular part of our week, so we know the HOA expectations and tight lot lines.",
     "Algae on north faces and shaded walks is common here. We soft wash siding and surface clean flatwork without blasting finish or mortar.",
-    "Quotes spell out house wash, concrete, deck, and roof options so you pick what fits your street and your timeline.",
+    "Callbacks spell out house wash, concrete, deck, and roof options so you pick what fits your street and your timeline.",
   ],
   marietta: [
     "East Cobb shade and clay splash are familiar problems here. We pretreat stains and rinse so runoff does not ruin fresh mulch beds.",
@@ -482,7 +482,7 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
   jonesboro: [
     "Older homes near the historic downtown sit under heavy oak canopy, so north-facing siding greens up first. We soft wash those elevations instead of forcing pressure into painted wood.",
     "Clayton County clay stains concrete a rust color that a garden hose will not touch. Our surface cleaner pulls it out of driveways and walkways without leaving wand stripes.",
-    "Quotes separate house washing, driveway cleaning, and roof work so you can stage the job across seasons instead of paying for all of it at once.",
+    "Callbacks separate house washing, driveway cleaning, and roof work so you can stage the job across seasons instead of paying for all of it at once.",
   ],
   riverdale: [
     "Homes along the Highway 85 corridor pick up road film and exhaust grit that plain rinsing smears around. We pretreat those surfaces so the dirt releases instead of streaking.",
@@ -502,7 +502,7 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
   "college-park": [
     "Historic Main Street district homes have original wood, older paint, and detailed trim. We drop pressure and switch to soft wash rather than risk lifting a paint edge.",
     "Flight-path grime settles on siding and gutters faster here than further out. Regular exterior cleaning keeps it from baking into the finish.",
-    "We plan water flow away from mature plantings and note anything fragile on the quote before cleaning day.",
+    "We plan water flow away from mature plantings and note anything fragile before cleaning day.",
   ],
   fayetteville: [
     "Subdivision driveways off the main corridors are wide and sun-exposed, so mildew shows up as dark blotches rather than an even layer. Surface cleaning evens the whole slab back out.",
@@ -517,7 +517,7 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
 }
 
 function heroSubline(cityName: string) {
-  return `${cityName} picks up pollen, humidity, and algae like the rest of the metro. We match soft wash and pressure washing to your surfaces and give you a quote you can read before we start.`
+  return `${cityName} picks up pollen, humidity, and algae like the rest of the metro. We match soft wash and pressure washing to your surfaces and give you a clear service scope before we start.`
 }
 
 export function cityNameToSlug(cityName: string): string {
@@ -568,18 +568,18 @@ function createServiceAreaContent(
     processSteps: processForCity(cityName),
     faqItems: faqForCity(cityName),
     cta: {
-      primary: `Get a Free Quote for ${cityName}`,
+      primary: `Request Callback for ${cityName}`,
       secondary: `Call About ${cityName} Service`,
     },
     seo: {
       title: `Pressure Washing in ${cityName}, GA | Pressure Washing Xperts`,
-      description: `House washing, roof soft wash, concrete, and storefronts in ${cityName}, GA. Licensed crew, straight quotes, work you can see from the curb.`,
+      description: `House washing, roof soft wash, concrete, and storefronts in ${cityName}, GA. Licensed crew, clear scheduling, work you can see from the curb.`,
     },
     cityGalleryItemIds: CITY_GALLERY_ITEM_IDS[slug] ?? [11, 12],
     testimonials: getCityTestimonials(slug),
     serviceAvailability:
       SERVICE_AVAILABILITY_BY_SLUG[slug] ??
-      `We serve ${cityName} on rotating weekly routes. Most quotes return within one business day. Same-week appointments available when weather allows.`,
+      `We serve ${cityName} on rotating weekly routes. Most callback requests get a response within one business day. Same-week appointments available when weather allows.`,
     nearbyAreasNote: NEARBY_NOTE_BY_SLUG[slug] ?? defaultNearbyNote(cityName),
     lastUpdatedIso: "2026-04-12",
     contentReviewedLabel: "April 2026",

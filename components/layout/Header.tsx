@@ -34,7 +34,7 @@ import {
 import { ctaPress } from "@/lib/ctaInteraction"
 
 interface HeaderProps {
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
 export function Header({ onOpenQuoteForm }: HeaderProps) {
@@ -42,6 +42,9 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const openContact = onOpenQuoteForm ?? (() => {
+    window.location.href = "/contact"
+  })
 
   useEffect(() => {
     if (!isMenuOpen) return
@@ -294,18 +297,18 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
                   <span className="font-display text-lg xl:text-xl tracking-wide">{businessPhoneDisplay}</span>
                 </a>
               </TooltipTrigger>
-              <TooltipContent side="bottom">Tap to call: free quotes</TooltipContent>
+              <TooltipContent side="bottom">Tap to call: ready-to-book service</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  onClick={onOpenQuoteForm}
+                  onClick={openContact}
                   className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
                 >
-                  Get a Free Estimate
+                  Request Callback
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="bottom">Free quote, no obligation</TooltipContent>
+              <TooltipContent side="bottom">Booking request, no obligation</TooltipContent>
             </Tooltip>
           </div>
 
@@ -461,13 +464,13 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             </a>
             <Button
               onClick={() => {
-                onOpenQuoteForm()
+                openContact()
                 setIsMenuOpen(false)
               }}
               variant="outline"
               className="w-full border-2 border-white/60 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white min-h-[44px]"
             >
-              Get a Free Estimate
+              Request Callback
             </Button>
           </div>
         </nav>

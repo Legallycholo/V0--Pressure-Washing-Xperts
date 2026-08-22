@@ -50,9 +50,9 @@ export async function POST(req: Request) {
   const safeUrl = clip(url, 2000)
   const safeTriggerReason = clip(trigger_reason, 500)
   const safeTimeSpent = clip(time_spent, 80)
-  const pagePath = new URL(safeUrl).pathname
-
   try {
+    const parsedUrl = safeUrl ? new URL(safeUrl) : null
+    const pagePath = parsedUrl?.pathname || "unknown"
     const { data, error } = await resend.emails.send({
       from: "Dariel <dariel@tanygrowth.com>",
       to: "pressurewashingxperts@gmail.com",

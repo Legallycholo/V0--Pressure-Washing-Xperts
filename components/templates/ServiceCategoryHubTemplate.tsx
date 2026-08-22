@@ -41,7 +41,7 @@ export function ServiceCategoryHubTemplate({
               size="lg"
               className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
             >
-              Get a Free Quote
+              Request Callback
             </Button>
             <Button
               asChild
@@ -66,7 +66,7 @@ export function ServiceCategoryHubTemplate({
             <p className="text-brand-blue text-xs font-semibold uppercase tracking-[0.2em]">What We Clean</p>
             <h2 className="mt-2 text-2xl font-bold text-brand-blue-dark sm:text-3xl">Our {categoryLabel}</h2>
             <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-              Scope, benefits, process, and the fastest way to quote.
+              Scope, benefits, process, and the fastest way to schedule.
             </p>
           </Reveal>
 
@@ -77,7 +77,7 @@ export function ServiceCategoryHubTemplate({
                   <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
                   <p className="text-sm text-gray-600 mb-3">
                     {service.summary ??
-                      "See how we approach this service, typical surfaces, and how to request a quote."}
+                      "See how we approach this service, typical surfaces, and how to request a callback."}
                   </p>
                   <span className="inline-flex items-center text-brand-blue font-semibold text-sm">
                     Learn More
@@ -96,7 +96,7 @@ export function ServiceCategoryHubTemplate({
               onClick={onOpenQuoteForm}
               className="mt-4 bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
             >
-              Get a Free Quote
+              Request Callback
             </Button>
           </div>
         </div>
@@ -110,4 +110,3 @@ export function ServiceCategoryHubTemplate({
     </div>
   )
 }
-

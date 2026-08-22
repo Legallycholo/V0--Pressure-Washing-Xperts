@@ -54,7 +54,7 @@ export default function PowerWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-                Get a Free Power Washing Estimate
+                Request Callback
               </Button>
               <a
                 href="tel:800-451-7213"
@@ -129,7 +129,7 @@ export default function PowerWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-                Get a Free Quote
+                Request Callback
               </Button>
               <a
                 href="tel:800-451-7213"

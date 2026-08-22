@@ -1,19 +1,27 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
 
-/**
- * `/contact` historically appeared in Google Ads sitelinks and external links
- * but the site only ships a `#contact` section on the homepage. This redirect
- * keeps those links working without diluting the homepage canonical.
- */
 export const metadata: Metadata = {
-  title:
-    "Contact Pressure Washing Xperts | Free Quote | Ellenwood, GA & Metro Atlanta",
+  title: "Request a Callback | Pressure Washing Xperts | Metro Atlanta",
   description:
-    "Get a free pressure washing quote in Ellenwood, GA and Metro Atlanta. Call (800) 451-7213 or fill out our quick online form. Licensed & insured.",
-  robots: { index: false, follow: true },
+    "Request a callback from Pressure Washing Xperts for pressure washing, soft washing, roof cleaning, driveway cleaning, and commercial services in Metro Atlanta.",
+  alternates: { canonical: "/contact" },
 }
 
 export default function ContactPage() {
-  redirect("/#contact")
+  return (
+    <>
+      <Header />
+      <main>
+        <section className="bg-section-dark px-4 pb-14 pt-header-offset text-center text-white sm:px-6 lg:px-8">
+          <h1 className="font-display text-4xl uppercase tracking-wide sm:text-5xl">Request a Callback</h1>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-white/70 sm:text-base">
+            Tell us what needs cleaning and we&apos;ll help confirm the scope and next available time.
+          </p>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
 }

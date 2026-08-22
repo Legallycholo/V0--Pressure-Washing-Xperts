@@ -92,13 +92,13 @@ export default function ServiceAreasPage() {
             Want a number for your property?
           </h2>
           <p className="text-base sm:text-lg mb-5 opacity-90 font-medium">
-            Free quote, clear scope, no pressure.
+            Booking request, clear scope, no pressure.
           </p>
           <button 
             onClick={() => goQuote()}
             className="bg-navy text-white hover:text-brand px-8 py-3 rounded-xl font-bold text-base hover:bg-navy-light transition-all transform hover:-translate-y-1 shadow-[0_10px_20px_rgba(13,27,42,0.3)]"
           >
-            Get a Free Quote
+            Request Callback
           </button>
         </Reveal>
       </section>

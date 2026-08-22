@@ -20,6 +20,7 @@ import {
 import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
+import { ContactSection } from "@/components/sections/ContactSection"
 
 const services = [
   ...residentialServices.slice(0, 4),
@@ -33,7 +34,9 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-ps-bg border-t-2 border-ps-cyan/30">
+    <>
+      <ContactSection />
+      <footer className="bg-ps-bg border-t-2 border-ps-cyan/30">
       {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
         <RevealGroup className="grid gap-7 md:grid-cols-2 lg:grid-cols-5" stagger={0.08}>
@@ -222,6 +225,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   )
 }

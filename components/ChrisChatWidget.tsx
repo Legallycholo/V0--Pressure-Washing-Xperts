@@ -18,7 +18,7 @@ const GREETING =
 
 const ATTENTION_DELAY_MS = 25_000
 
-const ATTENTION_BUBBLE_TEXT = "👋 Need a free quote? I'm here to help!"
+const ATTENTION_BUBBLE_TEXT = "👋 Need a booking request? I'm here to help!"
 
 /* ─── Helpers ───────────────────────────────────────────────────────────────── */
 
@@ -145,7 +145,7 @@ export function ChrisChatWidget() {
         {
           id: `a_${Date.now()}`,
           role: 'assistant',
-          text: data.reply,
+          text: data.reply ?? '',
         },
       ])
     } catch (error) {
@@ -250,7 +250,7 @@ export function ChrisChatWidget() {
         >
           <Droplets size={12} style={{ color: '#fbbf24' }} />
           <p className="text-xs" style={{ color: '#92400e' }}>
-            Free in-person quotes · No obligation · Serving Metro Atlanta & GA
+            Ready-to-book service · Serving Metro Atlanta & GA
           </p>
         </div>
 

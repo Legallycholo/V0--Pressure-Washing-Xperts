@@ -60,7 +60,7 @@ export function CallBanner({ onOpenQuoteForm }: CallBannerProps) {
             size="lg"
             className={`w-full sm:w-auto bg-transparent border-2 border-ps-cyan/60 text-ps-cyan font-semibold text-base px-8 py-4 hover:bg-ps-cyan/10 hover:border-ps-cyan min-h-[48px] ${ctaPress}`}
           >
-            Get a Free Quote
+            Request Callback
           </Button>
         </div>
       </div>

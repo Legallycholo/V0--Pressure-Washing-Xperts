@@ -33,8 +33,10 @@ function parseContactBody(body: Record<string, unknown>): { ok: true; data: Cont
   const email = str(body.email, 200)
   const phone = str(body.phone, 40)
   
-  if (!name || !email || !phone) {
-    return { ok: false, error: "Name, email, and phone are required." }
+  const services = str(body.services, 400)
+
+  if (!name || !email || !phone || !services) {
+    return { ok: false, error: "Name, email, phone, and service are required." }
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
     return { ok: false, error: "Please enter a valid email address." }
@@ -51,7 +53,7 @@ function parseContactBody(body: Record<string, unknown>): { ok: true; data: Cont
       phone, 
       city: str(body.city, 120),
       zip: str(body.zip, 20),
-      services: str(body.services, 400),
+      services,
       best_time: str(body.best_time, 80),
       how_heard: str(body.how_heard, 80),
       message: str(body.message, 5000),
@@ -116,9 +118,19 @@ async function sendContactNotification(data: ContactData) {
 }
 
 export async function POST(request: Request) {
-  const verification = await checkBotId()
-  if (verification.isBot) {
-    return NextResponse.json({ error: "Access denied." }, { status: 403 })
+  // BotID relies on Vercel OIDC headers and is not available in local builds.
+  // Keep production fail-closed while allowing the route's own validation and
+  // honeypot to be exercised during local development and CI.
+  if (process.env.VERCEL === "1") {
+    try {
+      const verification = await checkBotId()
+      if (verification.isBot) {
+        return NextResponse.json({ error: "Access denied." }, { status: 403 })
+      }
+    } catch (error) {
+      console.error("[api/contact] BotID verification failed", error)
+      return NextResponse.json({ error: "Bot protection is unavailable." }, { status: 503 })
+    }
   }
 
   let body: unknown
