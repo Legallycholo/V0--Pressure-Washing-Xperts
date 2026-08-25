@@ -36,7 +36,7 @@ async function sendSms(text: string) {
 
 export async function sendLeadSms(params: { fullName: string; phone: string; city?: string | null }) {
   const location = params.city ? ` in ${params.city}` : ""
-  await sendSms(`New quote request${location}: ${params.fullName}, ${params.phone}`)
+  await sendSms(`New callback request${location}: ${params.fullName}, ${params.phone}`)
 }
 
 export async function sendContactSms(params: {

@@ -60,7 +60,11 @@ export function CallBanner({ onOpenQuoteForm }: CallBannerProps = {}) {
             size="lg"
             className={`w-full sm:w-auto bg-transparent border-2 border-ps-cyan/60 text-ps-cyan font-semibold text-base px-8 py-4 hover:bg-ps-cyan/10 hover:border-ps-cyan min-h-[48px] ${ctaPress}`}
           >
+<<<<<<< HEAD
             <Link href="/contact">Request Callback</Link>
+=======
+            Request Callback
+>>>>>>> origin/main
           </Button>
         </div>
       </div>

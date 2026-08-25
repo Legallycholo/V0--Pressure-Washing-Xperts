@@ -11,7 +11,7 @@ export function trackLeadConversion(): void {
   // GA4 key event — imported into Google Ads as the active "generate_lead" conversion
   window.gtag('event', 'generate_lead', {
     event_category: 'lead',
-    event_label: 'quote_form',
+    event_label: 'callback_form',
     ...utms,
   })
 }

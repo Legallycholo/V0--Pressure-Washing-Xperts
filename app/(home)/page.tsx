@@ -13,7 +13,6 @@ import { Testimonials } from "@/components/sections/Testimonials"
 import { CallBanner } from "@/components/sections/CallBanner"
 import { FAQ } from "@/components/sections/FAQ"
 import { Newsletter } from "@/components/sections/Newsletter"
-import { ContactSection } from "@/components/sections/ContactSection"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { getServiceAreasForNavigation } from "@/data/service-areas"
@@ -82,7 +81,6 @@ export default function Home() {
             </p>
           </div>
         </section>
-        <ContactSection />
       </main>
 
       <Footer />

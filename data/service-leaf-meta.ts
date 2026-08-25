@@ -17,7 +17,7 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
       ["Walkthrough with you", "You check the result before we pack up."],
     ),
     ctaHeadline: "Freshen your siding before stains set in.",
-    ctaSubline: "Get a quote for your home and your timeline.",
+    ctaSubline: "Request a callback for your home and timeline.",
   },
   "decks-fences": {
     processSteps: s(
@@ -27,7 +27,7 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
       ["Dry and next steps", "We point out when stain or seal makes sense."],
     ),
     ctaHeadline: "Enjoy your deck and fence again this season.",
-    ctaSubline: "Request a quote for rails, boards, and posts.",
+    ctaSubline: "Request a callback for rails, boards, and posts.",
   },
   "driveways-sidewalks": {
     processSteps: s(
@@ -116,7 +116,7 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
       ["Execute in logical order", "We work top-down so rinse water does not ruin a fresh area."],
       ["Final tour", "You sign off on the full property in one visit."],
     ),
-    ctaHeadline: "One quote for roof, siding, and flatwork together.",
+    ctaHeadline: "One clear scope for roof, siding, and flatwork together.",
     ctaSubline: "Strong fit for spring refreshes and pre-listing prep.",
   },
   "stain-cleaning": {
@@ -317,7 +317,7 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
       ["Walkthrough with you", "You check every treated area before we pack up."],
     ),
     ctaHeadline: "Get the red out before it sets for good.",
-    ctaSubline: "Send a photo of the staining and we will quote it fast.",
+    ctaSubline: "Send a photo of the staining and we will help schedule it fast.",
   },
   "red-clay-removal-commercial": {
     processSteps: s(
@@ -421,7 +421,7 @@ export function getServiceLeafCopy(slug: string): ServiceLeafCopy {
         ["Walkthrough", "You approve before we wrap."],
       ),
       ctaHeadline: "Ready to clean up your exterior?",
-      ctaSubline: "Straightforward quotes so you know what to expect before we start.",
+      ctaSubline: "Straightforward scheduling so you know what to expect before we start.",
     }
   )
 }

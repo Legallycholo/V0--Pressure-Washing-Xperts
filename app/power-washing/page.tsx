@@ -52,7 +52,11 @@ export default function PowerWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
+<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
+=======
+                Request Callback
+>>>>>>> origin/main
               </Button>
               <a
                 href="tel:800-451-7213"
@@ -127,7 +131,11 @@ export default function PowerWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
+<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
+=======
+                Request Callback
+>>>>>>> origin/main
               </Button>
               <a
                 href="tel:800-451-7213"

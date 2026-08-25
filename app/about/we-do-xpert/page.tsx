@@ -107,7 +107,7 @@ export default function WeDoXpertPage() {
               Ready to Experience the Xpert Difference?
             </h2>
             <p className="text-sm sm:text-base text-white/80 mb-5">
-              Get a free quote and see why neighbors keep calling us back.
+              Request Callback and see why neighbors keep calling us back.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
@@ -115,7 +115,11 @@ export default function WeDoXpertPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
               >
+<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
+=======
+                Request Callback
+>>>>>>> origin/main
               </Button>
               <Button
                 asChild

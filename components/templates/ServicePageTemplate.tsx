@@ -57,7 +57,7 @@ export function ServicePageTemplate({
     "Eco-Friendly Cleaning Solutions",
     "Licensed & Insured",
     "Satisfaction Guaranteed",
-    "Free Quotes",
+    "Ready-to-Book Service",
     "Competitive Pricing"
   ],
   onOpenQuoteForm,
@@ -110,7 +110,7 @@ export function ServicePageTemplate({
           desc: step.description,
         }))
       : [
-          { step: "1", title: "Contact Us", desc: "Reach out for a free quote" },
+          { step: "1", title: "Contact Us", desc: "Reach out for a booking request" },
           { step: "2", title: "Assessment", desc: "We evaluate your needs" },
           { step: "3", title: "Service", desc: "Professional cleaning" },
           { step: "4", title: "Satisfaction", desc: "Guaranteed results" },
@@ -149,7 +149,11 @@ export function ServicePageTemplate({
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
               >
+<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
+=======
+                Request Callback
+>>>>>>> origin/main
               </Button>
               <Button
                 asChild
@@ -190,6 +194,7 @@ export function ServicePageTemplate({
               </RevealGroup>
               <div className="mt-6">
                 <Button
+<<<<<<< HEAD
                   asChild
                   className="bg-brand-blue text-white hover:bg-brand-blue-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
                 >
@@ -197,6 +202,13 @@ export function ServicePageTemplate({
                     Request Callback
                     <ArrowRight className="ml-2 size-4" />
                   </Link>
+=======
+                onClick={onOpenQuoteForm}
+                  className="bg-brand-blue text-white hover:bg-brand-blue-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
+                >
+                  Request Callback
+                  <ArrowRight className="ml-2 size-4" />
+>>>>>>> origin/main
                 </Button>
               </div>
             </Reveal>
@@ -264,7 +276,7 @@ export function ServicePageTemplate({
                   See it in person, start with a call
                 </h3>
                 <p className="text-gray-600 mb-4 max-w-sm text-pretty text-sm">
-                  Talk to our team and get a straightforward quote.
+                  Talk to our team and request a callback.
                 </p>
                 <Button
                   asChild
@@ -282,7 +294,11 @@ export function ServicePageTemplate({
                   variant="outline"
                   className="mt-4 border-brand-blue/30 text-brand-blue-dark hover:bg-brand-blue/5"
                 >
+<<<<<<< HEAD
                   <Link href="/contact">Request Callback</Link>
+=======
+                  Request Callback
+>>>>>>> origin/main
                 </Button>
               </div>
             )}
@@ -331,7 +347,7 @@ export function ServicePageTemplate({
             {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
           </h2>
           <p className="text-sm sm:text-base text-white/80 mb-5">
-            {ctaSubline ?? "Straightforward quotes. You know what to expect before we start."}
+            {ctaSubline ?? "Straightforward scheduling. You know what to expect before we start."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
@@ -339,7 +355,11 @@ export function ServicePageTemplate({
               size="lg"
               className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 hover:shadow-lg motion-reduce:hover:translate-y-0"
             >
+<<<<<<< HEAD
               <Link href="/contact">Request Callback</Link>
+=======
+              Request Callback
+>>>>>>> origin/main
             </Button>
             <Button
               asChild

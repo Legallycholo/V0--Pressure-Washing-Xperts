@@ -33,11 +33,22 @@ import {
 } from "@/components/ui/tooltip"
 import { ctaPress } from "@/lib/ctaInteraction"
 
+<<<<<<< HEAD
 export function Header() {
+=======
+interface HeaderProps {
+  onOpenQuoteForm?: () => void
+}
+
+export function Header({ onOpenQuoteForm }: HeaderProps) {
+>>>>>>> origin/main
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const openContact = onOpenQuoteForm ?? (() => {
+    window.location.href = "/contact"
+  })
 
   useEffect(() => {
     if (!isMenuOpen) return
@@ -290,18 +301,25 @@ export function Header() {
                   <span className="font-display text-lg xl:text-xl tracking-wide">{businessPhoneDisplay}</span>
                 </a>
               </TooltipTrigger>
-              <TooltipContent side="bottom">Tap to call: free quotes</TooltipContent>
+              <TooltipContent side="bottom">Tap to call: ready-to-book service</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
+<<<<<<< HEAD
                   asChild
                   className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
                 >
                   <Link href="/contact">Request Callback</Link>
+=======
+                  onClick={openContact}
+                  className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
+                >
+                  Request Callback
+>>>>>>> origin/main
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="bottom">Free quote, no obligation</TooltipContent>
+              <TooltipContent side="bottom">Booking request, no obligation</TooltipContent>
             </Tooltip>
           </div>
 
@@ -456,6 +474,7 @@ export function Header() {
               <span>Call {businessPhoneDisplay} Now</span>
             </a>
             <Button
+<<<<<<< HEAD
               asChild
               variant="outline"
               className="w-full border-2 border-white/60 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white min-h-[44px]"
@@ -463,6 +482,16 @@ export function Header() {
               <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
                 Request Callback
               </Link>
+=======
+              onClick={() => {
+                openContact()
+                setIsMenuOpen(false)
+              }}
+              variant="outline"
+              className="w-full border-2 border-white/60 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white min-h-[44px]"
+            >
+              Request Callback
+>>>>>>> origin/main
             </Button>
           </div>
         </nav>

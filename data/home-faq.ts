@@ -16,7 +16,7 @@ export const homeFaqItems: HomeFaqItem[] = [
   {
     question: "How much does pressure washing cost in Metro Atlanta?",
     answer:
-      "Many driveways and walks fall in roughly the low hundreds, while full home exteriors often range from a few hundred up based on size, height, and how much organic growth is present. We provide free quotes so pricing matches your property, not a generic online guess.",
+      "Many driveways and walks fall in roughly the low hundreds, while full home exteriors often range from a few hundred up based on size, height, and how much organic growth is present. We provide ready-to-book service so pricing matches your property, not a generic online guess.",
   },
   {
     question: "Is pressure washing safe for my property?",

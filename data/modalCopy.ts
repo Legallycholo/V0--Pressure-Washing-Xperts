@@ -1,16 +1,16 @@
 /** Default quote modal (header, services, FAQ, etc.) */
 export const modalCopyDefault = {
-  headline: "Book your free on-site quote",
+  headline: "Request a callback",
   subline:
-    "We come to your property, look at the job, and give you a straight price. No guessing, no obligation.",
-  badge: "Free on-site quote",
-  submitLabel: "Request my free on-site quote",
+    "Tell us what needs cleaning and we will help confirm the scope and next available time.",
+  badge: "Ready to get scheduled",
+  submitLabel: "Request my callback",
   successExtra: null as string | null,
-  successLead: "We'll reach out to schedule your free on-site visit.",
+  successLead: "We received your callback request.",
   successFollowUp:
-    "We usually call or text within one business day to book your on-site quote. You may hear from us at (800) 451-7213.",
+    "We usually call or text within one business day to confirm the job and next available time. You may hear from us at (800) 451-7213.",
   trustNote:
-    "No commitment required. We come to you, assess the job, and give you an exact price.",
+    "Tell us what you need cleaned and we will take it from there.",
 }
 
 /** Opened from Special Offers: Claim Offer */
@@ -18,7 +18,7 @@ export const modalCopyOfferIntent = {
   ...modalCopyDefault,
   headline: "Claim your offer",
   subline:
-    "Send your details and we will confirm your offer when we prepare your estimate.",
+    "Send your details and we will confirm the service and scheduling details when we call.",
   badge: "Special offer",
   submitLabel: "Claim offer & send details",
   successExtra:

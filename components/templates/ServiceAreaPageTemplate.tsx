@@ -108,7 +108,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               ) : (
                 <div className="text-center px-6 py-8 flex flex-col items-center gap-4 max-w-sm mx-auto">
                   <p className="text-gray-700 text-base font-medium">
-                    Want your neighborhood on the schedule? Call for a quote.
+                    Want your neighborhood on the schedule? Request a callback.
                   </p>
                   <Button
                     asChild
@@ -294,7 +294,7 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
             Ready to Refresh Your {city.cityName} Property?
           </h2>
           <p className="text-base text-white/80 mb-3">
-            Request a quote and we will hold a slot that fits your week.
+            Request a callback and we will help find a slot that fits your week.
           </p>
           <p className="text-sm text-white/70 mb-6">{city.serviceAvailability}</p>
           <Button
@@ -302,10 +302,15 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
             size="lg"
             className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
           >
+<<<<<<< HEAD
             <Link href="/contact">
               Request Callback
               <ArrowRight className="ml-2 size-4" />
             </Link>
+=======
+            Request Callback
+            <ArrowRight className="ml-2 size-4" />
+>>>>>>> origin/main
           </Button>
         </div>
       </section>

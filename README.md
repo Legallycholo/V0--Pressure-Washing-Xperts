@@ -12,7 +12,7 @@ The UI was originally bootstrapped with [v0](https://v0.app); this repo is the N
 | UI | [React](https://react.dev) 19, TypeScript |
 | Styling | [Tailwind CSS](https://tailwindcss.com) 4, PostCSS |
 | Components | [Radix UI](https://www.radix-ui.com) primitives, [class-variance-authority](https://cva.style), [Lucide](https://lucide.dev) icons |
-| Database (leads) | [Supabase](https://supabase.com) Postgres (`public.leads`; inserts via `/api/leads` using service role when set, falling back to SSR anon + RLS) |
+| Database (leads) | [Supabase](https://supabase.com) Postgres (`public."pressure contacts"`; inserts via `/api/contact`) |
 | Hosting / observability | [Vercel](https://vercel.com) — [Analytics](https://vercel.com/analytics), [Speed Insights](https://vercel.com/docs/speed-insights) |
 
 Package manager: **pnpm** (see `packageManager` in `package.json`).
@@ -57,7 +57,7 @@ pnpm import:wix-gallery
 
 ## Environment & lead capture
 
-Quote and contact forms (`components/sections/Hero.tsx`, `components/sections/ContactQuoteForm.tsx`) call `submitLeadRequest()` in [`lib/submitLead.ts`](lib/submitLead.ts), which `POST`s to [`/api/leads`](app/api/leads/route.ts). The API route validates the payload, computes a rough price estimate, and inserts a row into `public.leads` using the Supabase **service role** when available, otherwise falling back to the SSR **anon** client + the `Allow anonymous inserts on leads` RLS policy.
+All page contact forms render the canonical `components/ContactForm.tsx` component and POST to `/api/contact`. The route validates the callback payload and inserts a row into `public."pressure contacts"` using the server-only Supabase service role when configured, with the anonymous insert policy as the fallback.
 
 Copy [`.env.example`](.env.example) to `.env.local` and set:
 
