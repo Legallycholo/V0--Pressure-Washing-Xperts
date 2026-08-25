@@ -84,13 +84,13 @@ export default function RootLayout({
           <>
             <Script
               strategy="afterInteractive"
-              src="https://www.googletagmanager.com/gtag/js?id=G-EK4M4BMN05"
+              src="https://www.googletagmanager.com/gtag/js?id=G-KY5L5PHMVH"
             />
             <Script id="google-tag" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-EK4M4BMN05');
+          gtag('config', 'G-KY5L5PHMVH');
           gtag('config', 'AW-18151841356');
         `}</Script>
           </>
