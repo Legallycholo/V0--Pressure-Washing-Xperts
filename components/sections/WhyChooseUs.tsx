@@ -15,7 +15,7 @@ const steps = [
   },
   {
     number: "02",
-    title: "Ready-to-Book Service",
+    title: "Free On-Site Quote",
     description: "We assess your property and give you a straight, no-obligation price.",
   },
   {
@@ -98,11 +98,7 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps = {}) {
             variant="outline"
             className={`min-w-[200px] border-2 border-ps-cyan/60 bg-transparent px-8 font-semibold text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
           >
-<<<<<<< HEAD
             <Link href="/contact">Request Callback</Link>
-=======
-            Request Callback
->>>>>>> origin/main
           </Button>
         </Reveal>
       </div>

@@ -66,12 +66,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
-  other: {
-    "geo.region": "US-GA",
-    "geo.placename": "Ellenwood, Georgia",
-    "geo.position": "33.5965;-84.2916",
-    "ICBM": "33.5965, -84.2916",
-  },
 }
 
 export default function RootLayout({

@@ -282,11 +282,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps = {}) {
               variant="outline"
               className={`border-2 border-white/50 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white ${ctaPress}`}
             >
-<<<<<<< HEAD
               <Link href="/contact">Request Callback</Link>
-=======
-              Request Callback
->>>>>>> origin/main
             </Button>
           </div>
         </div>

@@ -118,11 +118,7 @@ export default function PressureVsSoftWashingPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
               >
-<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
-=======
-                Request Callback
->>>>>>> origin/main
               </Button>
               <Button
                 asChild

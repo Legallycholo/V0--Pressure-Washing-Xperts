@@ -31,7 +31,7 @@ export function ContactSection() {
               Ready to <span className="text-ps-cyan text-glow-cyan">Get Started?</span>
             </h2>
             <p className="text-ps-text-muted text-base leading-relaxed mb-3">
-              Call for the fastest response, or send the form and we&apos;ll reach out to help get your service on the schedule.
+              The fastest way to get pricing is to call. We answer 7 days a week and can often get you on the schedule the same day. Prefer to write? Send the form and we&apos;ll reach out to book your free on-site visit.
             </p>
 
             {/* Glowing phone number */}

@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
-import { trackLeadConversion } from "@/lib/leadAnalytics"
 
 const STEPS = [
   { n: 1 as const, label: "What needs cleaning" },
@@ -63,10 +62,9 @@ const emptyForm = (): FormState => ({
 
 export interface ContactFormProps {
   className?: string
-  successRedirectHref?: string
 }
 
-export function ContactForm({ className, successRedirectHref = "/thank-you" }: ContactFormProps) {
+export function ContactForm({ className }: ContactFormProps) {
   const uid = useId()
   const fieldId = (name: string) => `${uid}-${name}`
   const router = useRouter()
@@ -176,9 +174,9 @@ export function ContactForm({ className, successRedirectHref = "/thank-you" }: C
         return
       }
 
-      trackLeadConversion()
       setIsSubmitted(true)
-      router.push(successRedirectHref)
+      // Redirect or show in-place
+      router.push("/thank-you")
     } catch {
       setSubmitError("We couldn't send your message. Please try again in a moment.")
       setIsSubmitting(false)

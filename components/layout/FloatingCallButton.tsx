@@ -53,13 +53,13 @@ export function FloatingCallButton() {
           <Link
             href="/#contact"
             className="flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full border-2 border-white/80 bg-brand-blue-dark px-4 py-3 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:border-white hover:bg-brand-blue active:scale-[0.97] motion-reduce:active:scale-100"
-            aria-label="Request a booking request"
+            aria-label="Request a free quote"
           >
             <MessageSquareText className="size-5 shrink-0" />
-            <span>Callback</span>
+            <span>Quote</span>
           </Link>
         </TooltipTrigger>
-        <TooltipContent side="top">Booking request, no obligation</TooltipContent>
+        <TooltipContent side="top">Free quote, no obligation</TooltipContent>
       </Tooltip>
     </div>
   )

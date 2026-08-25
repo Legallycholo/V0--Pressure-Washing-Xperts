@@ -51,11 +51,7 @@ export default function RoofCleaningPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
-=======
-                Request Callback
->>>>>>> origin/main
               </Button>
               <a
                 href="tel:800-451-7213"
@@ -166,7 +162,7 @@ export default function RoofCleaningPage() {
               Ready to Schedule Your Roof Cleaning?
             </h2>
             <p className="text-white/75 mb-8 text-sm sm:text-base">
-              Serving Ellenwood, Stockbridge, Decatur, McDonough, Conyers, and all of Metro Atlanta. Licensed &amp; insured. Ready-to-book service.
+              Serving Ellenwood, Stockbridge, Decatur, McDonough, Conyers, and all of Metro Atlanta. Licensed &amp; insured. Free quotes.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
@@ -174,11 +170,7 @@ export default function RoofCleaningPage() {
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
-=======
-                Request Callback
->>>>>>> origin/main
               </Button>
               <a
                 href="tel:800-451-7213"

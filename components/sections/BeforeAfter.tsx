@@ -158,11 +158,7 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps = {}) {
                 variant="outline"
                 className={`border-2 border-ps-cyan/60 bg-transparent font-bold text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
               >
-<<<<<<< HEAD
                 <Link href="/contact">Request Callback</Link>
-=======
-                Request Callback
->>>>>>> origin/main
               </Button>
             </div>
           </div>
