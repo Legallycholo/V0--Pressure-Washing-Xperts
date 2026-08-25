@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -9,12 +8,11 @@ import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function GasStationsPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("gas-stations")
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Gas Station Cleaning"
         description="Forecourt-to-building cleaning for fuel spills, tire marks, and buildup so your site meets brand standards and stays safer for customers."
@@ -24,7 +22,6 @@ export default function GasStationsPage() {
           "Canopy underside and overhead structure cleaning",
           "Reduces slip hazard from organic buildup"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
         {...leaf}
         contentRevised="April 2026"

@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -9,12 +8,11 @@ import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function StainCleaningPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("stain-cleaning")
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Stain Cleaning"
         description="Targeted treatments plus pressure washing lift rust, oil, paint, and organic stains without damaging the surface."
@@ -24,7 +22,6 @@ export default function StainCleaningPage() {
           "Surface-specific products to avoid substrate damage",
           "Licensed & insured professionals"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
         {...leaf}
         contentRevised="April 2026"

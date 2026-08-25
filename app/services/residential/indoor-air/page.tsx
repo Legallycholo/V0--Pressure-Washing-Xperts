@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -9,12 +8,11 @@ import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function IndoorAirPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("indoor-air")
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Indoor Air Quality"
         description="We clean vents and ductwork so your HVAC circulates less dust and fewer allergens."
@@ -24,7 +22,6 @@ export default function IndoorAirPage() {
           "Reduces airborne allergens and dust circulation",
           "Licensed & insured professionals"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
         {...leaf}
         contentRevised="April 2026"

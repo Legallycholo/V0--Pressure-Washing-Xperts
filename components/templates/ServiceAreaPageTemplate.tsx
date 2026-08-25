@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils"
 
 interface ServiceAreaPageTemplateProps {
   city: ServiceAreaPageContent
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
 export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPageTemplateProps) {
@@ -50,11 +50,11 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                onClick={onOpenQuoteForm}
+                asChild
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark min-h-[44px] transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
               >
-                {city.cta.primary}
+                <Link href="/contact">Request Callback</Link>
               </Button>
               <Button
                 asChild
@@ -298,12 +298,14 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
           </p>
           <p className="text-sm text-white/70 mb-6">{city.serviceAvailability}</p>
           <Button
-            onClick={onOpenQuoteForm}
+            asChild
             size="lg"
             className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
           >
-            Get a Free Quote
-            <ArrowRight className="ml-2 size-4" />
+            <Link href="/contact">
+              Request Callback
+              <ArrowRight className="ml-2 size-4" />
+            </Link>
           </Button>
         </div>
       </section>

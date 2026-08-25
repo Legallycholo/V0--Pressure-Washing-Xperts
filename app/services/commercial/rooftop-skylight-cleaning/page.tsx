@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -9,12 +8,11 @@ import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function RooftopSkylightCleaningPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("rooftop-skylight-cleaning")
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Rooftop & Skylight Cleaning"
         description="Safe low-pressure cleaning around rooftop HVAC, pads, and skylights to restore light transmission and clear droppings, algae, and debris."
@@ -24,7 +22,6 @@ export default function RooftopSkylightCleaningPage() {
           "Restores skylight and glazing light transmission",
           "Low-pressure method for fragile skylight frames"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
         {...leaf}
         contentRevised="April 2026"

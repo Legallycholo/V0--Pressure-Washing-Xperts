@@ -140,12 +140,14 @@ export function ChrisChatWidget() {
         setSessionId(data.sessionId)
       }
 
+      const replyText = data.reply
+
       setMessages((prev) => [
         ...prev,
         {
           id: `a_${Date.now()}`,
           role: 'assistant',
-          text: data.reply,
+          text: replyText,
         },
       ])
     } catch (error) {

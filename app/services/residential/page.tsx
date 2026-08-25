@@ -5,20 +5,17 @@ import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { ServiceCategoryHubTemplate } from "@/components/templates/ServiceCategoryHubTemplate"
 import { residentialServices } from "@/data/navigation"
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 export default function ResidentialServicesHubPage() {
-  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServiceCategoryHubTemplate
         categoryLabel="Residential Services"
         title="Residential Pressure Washing Services"
         description="Soft wash and pressure washing for siding, roofs, concrete, decks, and full-property exteriors."
         services={residentialServices}
-        onOpenQuoteForm={() => goQuote()}
         contentRevised="April 2026"
       />
       <Footer />

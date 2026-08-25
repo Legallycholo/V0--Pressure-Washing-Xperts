@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import {
   getOfferById,
   offers,
@@ -10,10 +11,10 @@ import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/motion/Reveal"
 
 interface OffersProps {
-  onOpenQuoteForm: (offerId?: OfferId) => void
+  onOpenQuoteForm?: (offerId?: OfferId) => void
 }
 
-export function Offers({ onOpenQuoteForm }: OffersProps) {
+export function Offers({ onOpenQuoteForm }: OffersProps = {}) {
   const newCustomerOffer = getOfferById("first-time")
   const gridOffers = offers.filter((o) => o.id !== "first-time")
 
@@ -59,12 +60,11 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
               </div>
               <div className="flex shrink-0 justify-center sm:justify-end">
                 <Button
-                  type="button"
-                  onClick={() => onOpenQuoteForm(newCustomerOffer.id)}
+                  asChild
                   className="min-w-[10rem] bg-ps-cyan font-semibold text-[#06121f] hover:bg-brand-yellow-dark"
                   aria-label={`Claim Offer: ${newCustomerOffer.title}`}
                 >
-                  Claim Offer
+                  <Link href="/contact">Request Callback</Link>
                 </Button>
               </div>
             </div>
@@ -104,8 +104,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
 
                 <div className="mt-auto pt-0">
                   <Button
-                    type="button"
-                    onClick={() => onOpenQuoteForm(offer.id)}
+                    asChild
                     className={`w-full ${
                       offer.highlight
                         ? "bg-brand-yellow text-brand-blue-dark hover:bg-brand-yellow-dark"
@@ -113,7 +112,7 @@ export function Offers({ onOpenQuoteForm }: OffersProps) {
                     }`}
                     aria-label={`Claim Offer: ${offer.title}`}
                   >
-                    Claim Offer
+                    <Link href="/contact">Request Callback</Link>
                   </Button>
                 </div>
               </div>

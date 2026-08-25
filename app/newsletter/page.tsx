@@ -8,7 +8,6 @@ import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { Newsletter } from "@/components/sections/Newsletter"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 const featuredArticles = [
   {
@@ -44,11 +43,10 @@ const featuredArticles = [
 ]
 
 export default function NewsletterPage() {
-  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <div className="min-h-screen bg-ps-bg text-white">
-      <Header onOpenQuoteForm={() => goQuote({ target: "contact" })} />
+      <Header />
 
       <main className="pt-24 sm:pt-28 lg:pt-32">
         {/* Page Hero Banner */}

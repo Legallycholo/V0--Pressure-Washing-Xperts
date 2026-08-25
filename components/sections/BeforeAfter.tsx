@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import Link from "next/link"
 import { ChevronLeft, ChevronRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
@@ -42,10 +43,10 @@ function buildComparisons(): Comparison[] {
 }
 
 interface BeforeAfterProps {
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
-export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
+export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps = {}) {
   const comparisons = useMemo(() => buildComparisons(), [])
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -152,12 +153,12 @@ export function BeforeAfter({ onOpenQuoteForm }: BeforeAfterProps) {
                 </a>
               </Button>
               <Button
-                onClick={onOpenQuoteForm}
+                asChild
                 size="lg"
                 variant="outline"
                 className={`border-2 border-ps-cyan/60 bg-transparent font-bold text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
               >
-                Get a Free Estimate
+                <Link href="/contact">Request Callback</Link>
               </Button>
             </div>
           </div>

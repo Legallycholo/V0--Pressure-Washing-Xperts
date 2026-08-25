@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
@@ -28,11 +27,10 @@ const whyChooseUs = [
 ]
 
 export default function PowerWashingPage() {
-  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
 
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         {/* Hero */}
@@ -50,11 +48,11 @@ export default function PowerWashingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                onClick={() => goQuote()}
+                asChild
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-                Get a Free Power Washing Estimate
+                <Link href="/contact">Request Callback</Link>
               </Button>
               <a
                 href="tel:800-451-7213"
@@ -125,11 +123,11 @@ export default function PowerWashingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                onClick={() => goQuote()}
+                asChild
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
               >
-                Get a Free Quote
+                <Link href="/contact">Request Callback</Link>
               </Button>
               <a
                 href="tel:800-451-7213"

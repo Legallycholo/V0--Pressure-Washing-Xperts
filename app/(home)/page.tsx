@@ -1,11 +1,8 @@
-"use client"
-
-import { Suspense } from "react"
 import Link from "next/link"
 import { MapPin } from "lucide-react"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { Header } from "@/components/layout/Header"
-import { Hero, HeroWithOfferFromUrl } from "@/components/sections/Hero"
+import { Hero } from "@/components/sections/Hero"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
 import { Services } from "@/components/sections/Services"
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs"
@@ -18,46 +15,27 @@ import { FAQ } from "@/components/sections/FAQ"
 import { Newsletter } from "@/components/sections/Newsletter"
 import { ContactSection } from "@/components/sections/ContactSection"
 import { Footer } from "@/components/layout/Footer"
-import { HomeQuoteScrollHandler } from "@/components/sections/HomeQuoteScrollHandler"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
-import { isOfferId, type OfferId } from "@/data/offers"
 import { getServiceAreasForNavigation } from "@/data/service-areas"
 
 export default function Home() {
-  const goQuote = useGoToHomeQuoteSection()
   const topServiceAreas = getServiceAreasForNavigation()
-
-  /** Accepts an optional offer id from Offers; ignores React click events from other CTAs */
-  const openQuoteForm = (maybeOffer?: unknown) => {
-    const offerId: OfferId | undefined = isOfferId(maybeOffer) ? maybeOffer : undefined
-    goQuote({ target: "contact", offerId })
-  }
 
   return (
     <>
-      <HomeQuoteScrollHandler />
-      <Header onOpenQuoteForm={() => goQuote({ target: "contact" })} />
+      <Header />
 
       <main>
-        <Suspense
-          fallback={
-            <Hero onOpenQuoteForm={() => goQuote({ target: "contact" })} />
-          }
-        >
-          <HeroWithOfferFromUrl
-            onOpenQuoteForm={() => goQuote({ target: "contact" })}
-          />
-        </Suspense>
+        <Hero />
         <SocialProofBar />
-        <Services onOpenQuoteForm={openQuoteForm} />
-        <BeforeAfter onOpenQuoteForm={openQuoteForm} />
-        <WhyChooseUs onOpenQuoteForm={openQuoteForm} />
+        <Services />
+        <BeforeAfter />
+        <WhyChooseUs />
         <Gallery variant="teaser" />
         <Testimonials />
-        <CallBanner onOpenQuoteForm={() => goQuote({ target: "contact" })} />
-        <Offers onOpenQuoteForm={openQuoteForm} />
-        <FAQ onOpenQuoteForm={openQuoteForm} />
+        <CallBanner />
+        <Offers />
+        <FAQ />
         <Newsletter />
         <section className="bg-ps-bg-alt py-14 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

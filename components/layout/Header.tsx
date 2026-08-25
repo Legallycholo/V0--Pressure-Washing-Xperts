@@ -33,11 +33,7 @@ import {
 } from "@/components/ui/tooltip"
 import { ctaPress } from "@/lib/ctaInteraction"
 
-interface HeaderProps {
-  onOpenQuoteForm: () => void
-}
-
-export function Header({ onOpenQuoteForm }: HeaderProps) {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
@@ -299,10 +295,10 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  onClick={onOpenQuoteForm}
+                  asChild
                   className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
                 >
-                  Get a Free Estimate
+                  <Link href="/contact">Request Callback</Link>
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="bottom">Free quote, no obligation</TooltipContent>
@@ -460,14 +456,13 @@ export function Header({ onOpenQuoteForm }: HeaderProps) {
               <span>Call {businessPhoneDisplay} Now</span>
             </a>
             <Button
-              onClick={() => {
-                onOpenQuoteForm()
-                setIsMenuOpen(false)
-              }}
+              asChild
               variant="outline"
               className="w-full border-2 border-white/60 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white min-h-[44px]"
             >
-              Get a Free Estimate
+              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+                Request Callback
+              </Link>
             </Button>
           </div>
         </nav>

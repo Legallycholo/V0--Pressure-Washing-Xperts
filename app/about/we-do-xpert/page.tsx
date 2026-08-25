@@ -1,6 +1,6 @@
 "use client"
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
+import Link from "next/link"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
@@ -10,11 +10,10 @@ import { ctaPress } from "@/lib/ctaInteraction"
 import { navSlogan } from "@/data/site"
 
 export default function WeDoXpertPage() {
-  const goHomeQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goHomeQuote({ target: "contact" })} />
+      <Header />
       
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         {/* Hero Section */}
@@ -112,11 +111,11 @@ export default function WeDoXpertPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                onClick={() => goHomeQuote({ target: "contact" })}
+                asChild
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
               >
-                Get a Free Quote
+                <Link href="/contact">Request Callback</Link>
               </Button>
               <Button
                 asChild

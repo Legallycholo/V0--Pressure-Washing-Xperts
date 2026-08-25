@@ -1,19 +1,27 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
+import { Header } from "@/components/layout/Header"
+import { ContactSection } from "@/components/sections/ContactSection"
+import { Footer } from "@/components/layout/Footer"
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
+import { buildPublicMetadata } from "@/lib/seo/build-page-metadata"
 
-/**
- * `/contact` historically appeared in Google Ads sitelinks and external links
- * but the site only ships a `#contact` section on the homepage. This redirect
- * keeps those links working without diluting the homepage canonical.
- */
-export const metadata: Metadata = {
-  title:
-    "Contact Pressure Washing Xperts | Free Quote | Ellenwood, GA & Metro Atlanta",
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Contact Us | Request a Callback | Pressure Washing Xperts",
   description:
-    "Get a free pressure washing quote in Ellenwood, GA and Metro Atlanta. Call (800) 451-7213 or fill out our quick online form. Licensed & insured.",
-  robots: { index: false, follow: true },
-}
+    "Request a callback from Pressure Washing Xperts. Fill out our quick contact form and we'll call you back to book your free pressure washing quote. Serving Ellenwood, GA and Metro Atlanta.",
+  pathname: "/contact",
+})
 
 export default function ContactPage() {
-  redirect("/#contact")
+  return (
+    <>
+      <Header />
+      <main className="pt-header-offset">
+        <ContactSection />
+      </main>
+      <Footer />
+      <FloatingCallButton />
+    </>
+  )
 }
+

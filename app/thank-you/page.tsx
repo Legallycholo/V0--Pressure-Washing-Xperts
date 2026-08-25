@@ -5,15 +5,13 @@ import { CheckCircle } from "lucide-react"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 import { ctaPress } from "@/lib/ctaInteraction"
 
 export default function ThankYouPage() {
-  const goHomeQuote = useGoToHomeQuoteSection()
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goHomeQuote({ target: "contact" })} />
+      <Header />
 
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">

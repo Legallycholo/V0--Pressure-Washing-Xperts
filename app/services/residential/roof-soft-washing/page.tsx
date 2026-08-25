@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -10,7 +9,6 @@ import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { businessSiteHost, businessSiteUrl } from "@/data/site"
 
 export default function RoofSoftWashingPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("roof-soft-washing")
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -46,7 +44,7 @@ export default function RoofSoftWashingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Roof Cleaning Near Me in Ellenwood & Atlanta, GA"
         description="Safe soft wash roof cleaning removes algae, moss, lichen, and black streaks from asphalt shingles without high-pressure damage. Our roof cleaning near me service covers Ellenwood GA, Atlanta, Alpharetta, McDonough, and surrounding Metro Atlanta areas."
@@ -56,7 +54,6 @@ export default function RoofSoftWashingPage() {
           "Kills algae, moss & lichen at the root, not just the surface",
           "Licensed & insured professionals"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
         {...leaf}
         contentRevised="April 2026"

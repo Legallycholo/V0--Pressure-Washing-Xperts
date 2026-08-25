@@ -14,7 +14,11 @@ export function getVonageConfig(): VonageConfig | null {
   // Support both VONAGE_TO_NUMBERS (comma-separated) and legacy VONAGE_TO_NUMBER
   const toRaw = process.env.VONAGE_TO_NUMBERS ?? process.env.VONAGE_TO_NUMBER
   const to = toRaw
-    ? toRaw.split(",").map((n) => n.trim()).filter(Boolean)
+    ? toRaw.split(",").map((n) => {
+        let clean = n.replace(/\D/g, "")
+        if (clean.length === 10) clean = "1" + clean
+        return clean
+      }).filter(Boolean)
     : []
 
   if (!apiKey || !apiSecret || !from || to.length === 0) return null

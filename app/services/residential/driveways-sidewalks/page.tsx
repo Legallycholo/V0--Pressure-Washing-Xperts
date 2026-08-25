@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -11,7 +10,6 @@ import { residentialDrivewaysSidewalksMedia } from "@/data/residential-service-m
 import { businessSiteHost, businessSiteUrl } from "@/data/site"
 
 export default function DrivewaySidewalkPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("driveways-sidewalks")
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -47,7 +45,7 @@ export default function DrivewaySidewalkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Driveway Cleaning Near Me in Ellenwood & Atlanta, GA"
         description="Professional driveway cleaning and power washing in Ellenwood GA and Metro Atlanta. We remove oil stains, dirt, mold, and mildew from driveways, sidewalks, and walkways using commercial surface-cleaner pressure washing for an even, streak-free result."
@@ -57,7 +55,6 @@ export default function DrivewaySidewalkPage() {
           "Removes oil, rust, tire marks & mildew from driveways & sidewalks",
           "Licensed & insured professionals"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         {...residentialDrivewaysSidewalksMedia}
         beforeSrc="/before-after/driveway-before.png"
         afterSrc="/before-after/driveway-after.png"

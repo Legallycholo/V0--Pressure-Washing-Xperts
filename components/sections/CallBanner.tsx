@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ctaPress } from "@/lib/ctaInteraction"
@@ -10,10 +11,10 @@ import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
  * number and a tap-to-call button, with the quote form as a secondary path.
  */
 interface CallBannerProps {
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
-export function CallBanner({ onOpenQuoteForm }: CallBannerProps) {
+export function CallBanner({ onOpenQuoteForm }: CallBannerProps = {}) {
   return (
     <section
       aria-label="Call Pressure Washing Xperts now"
@@ -55,12 +56,11 @@ export function CallBanner({ onOpenQuoteForm }: CallBannerProps) {
             </a>
           </Button>
           <Button
-            type="button"
-            onClick={onOpenQuoteForm}
+            asChild
             size="lg"
             className={`w-full sm:w-auto bg-transparent border-2 border-ps-cyan/60 text-ps-cyan font-semibold text-base px-8 py-4 hover:bg-ps-cyan/10 hover:border-ps-cyan min-h-[48px] ${ctaPress}`}
           >
-            Get a Free Quote
+            <Link href="/contact">Request Callback</Link>
           </Button>
         </div>
       </div>

@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
@@ -9,12 +8,11 @@ import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 export default function AwningCleaningPage() {
-  const goQuote = useGoToHomeQuoteSection()
   const leaf = getServiceLeafCopy("awning-cleaning")
 
   return (
     <>
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       <ServicePageTemplate
         title="Awning Cleaning Services"
         description="Low-pressure commercial awning cleaning that removes mold, droppings, and film without damaging fabric, vinyl, or metal."
@@ -24,7 +22,6 @@ export default function AwningCleaningPage() {
           "Removes mold, mildew & bird droppings",
           "Extends awning lifespan with proper cleaning"
         ]}
-        onOpenQuoteForm={() => goQuote()}
         benefitsAside="contactForm"
         {...leaf}
         contentRevised="April 2026"

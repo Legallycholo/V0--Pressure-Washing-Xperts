@@ -13,7 +13,7 @@ interface ServiceCategoryHubTemplateProps {
   title: string
   description: string
   services: NavLinkItem[]
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
   contentRevised?: string
 }
 
@@ -37,11 +37,11 @@ export function ServiceCategoryHubTemplate({
           <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">{description}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
-              onClick={onOpenQuoteForm}
+              asChild
               size="lg"
               className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
             >
-              Get a Free Quote
+              <Link href="/contact">Request Callback</Link>
             </Button>
             <Button
               asChild
@@ -93,10 +93,10 @@ export function ServiceCategoryHubTemplate({
               Not sure which service? We&apos;ll recommend the best approach for your property.
             </p>
             <Button
-              onClick={onOpenQuoteForm}
+              asChild
               className="mt-4 bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
             >
-              Get a Free Quote
+              <Link href="/contact">Request Callback</Link>
             </Button>
           </div>
         </div>

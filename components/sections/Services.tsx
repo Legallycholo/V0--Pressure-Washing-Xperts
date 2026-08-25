@@ -125,10 +125,10 @@ const supportingServices = [
 ]
 
 interface ServicesProps {
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
-export function Services({ onOpenQuoteForm }: ServicesProps) {
+export function Services({ onOpenQuoteForm }: ServicesProps = {}) {
   return (
     <section id="services" className="py-14 sm:py-16 lg:py-20 bg-section-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -277,12 +277,12 @@ export function Services({ onOpenQuoteForm }: ServicesProps) {
               </a>
             </Button>
             <Button
-              onClick={onOpenQuoteForm}
+              asChild
               size="lg"
               variant="outline"
               className={`border-2 border-white/50 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white ${ctaPress}`}
             >
-              Get a Free Estimate
+              <Link href="/contact">Request Callback</Link>
             </Button>
           </div>
         </div>

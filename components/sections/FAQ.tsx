@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Phone } from "lucide-react"
 import {
   Accordion,
@@ -14,10 +15,10 @@ import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import { homeFaqItems } from "@/data/home-faq"
 
 interface FAQProps {
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
-export function FAQ({ onOpenQuoteForm }: FAQProps) {
+export function FAQ({ onOpenQuoteForm }: FAQProps = {}) {
   return (
     <section id="faq" className="py-14 sm:py-16 lg:py-20 bg-ps-bg">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -71,12 +72,12 @@ export function FAQ({ onOpenQuoteForm }: FAQProps) {
               </a>
             </Button>
             <Button
-              onClick={onOpenQuoteForm}
+              asChild
               size="lg"
               variant="outline"
               className={`border-2 border-ps-cyan/60 bg-transparent text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
             >
-              Get a Free Estimate
+              <Link href="/contact">Request Callback</Link>
             </Button>
           </div>
         </div>

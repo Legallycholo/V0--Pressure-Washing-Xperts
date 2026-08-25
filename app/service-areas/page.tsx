@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import Link from "next/link"
 import { Header } from "@/components/layout/Header"
@@ -12,13 +11,12 @@ import { ctaPress } from "@/lib/ctaInteraction"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 export default function ServiceAreasPage() {
-  const goQuote = useGoToHomeQuoteSection()
 
   const serviceAreas = getServiceAreasForNavigation()
 
   return (
     <div className="min-h-screen bg-navy flex flex-col">
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
       
       {/* Hero Section */}
       <section className="relative pt-header-offset pb-12 overflow-hidden bg-[#0d1b2a]">
@@ -34,12 +32,12 @@ export default function ServiceAreasPage() {
             Metro Atlanta homes and businesses. Pick your city or request a quote.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button 
-              onClick={() => goQuote()}
-              className="bg-brand text-navy px-6 py-3 rounded-lg font-bold text-base hover:bg-brand-light transition-all transform hover:-translate-y-1 active:scale-[0.98] motion-reduce:transform-none shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
+            <Link 
+              href="/contact"
+              className="bg-brand text-navy px-6 py-3 rounded-lg font-bold text-base hover:bg-brand-light transition-all transform hover:-translate-y-1 active:scale-[0.98] motion-reduce:transform-none shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] inline-flex items-center justify-center"
             >
-              Check My Area
-            </button>
+              Request Callback
+            </Link>
             <a 
               href="tel:8004517213" 
               className={`bg-white/10 text-white border-2 border-white/20 px-6 py-3 rounded-lg font-bold text-base hover:bg-white hover:text-navy transition-all ${ctaPress}`}
@@ -94,12 +92,12 @@ export default function ServiceAreasPage() {
           <p className="text-base sm:text-lg mb-5 opacity-90 font-medium">
             Free quote, clear scope, no pressure.
           </p>
-          <button 
-            onClick={() => goQuote()}
-            className="bg-navy text-white hover:text-brand px-8 py-3 rounded-xl font-bold text-base hover:bg-navy-light transition-all transform hover:-translate-y-1 shadow-[0_10px_20px_rgba(13,27,42,0.3)]"
+          <Link 
+            href="/contact"
+            className="bg-navy text-white hover:text-brand px-8 py-3 rounded-xl font-bold text-base hover:bg-navy-light transition-all transform hover:-translate-y-1 shadow-[0_10px_20px_rgba(13,27,42,0.3)] inline-flex items-center justify-center"
           >
-            Get a Free Quote
-          </button>
+            Request Callback
+          </Link>
         </Reveal>
       </section>
 

@@ -1,6 +1,6 @@
 "use client"
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
+import Link from "next/link"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
@@ -9,11 +9,9 @@ import { Phone, Droplets, Gauge } from "lucide-react"
 import { ctaPress } from "@/lib/ctaInteraction"
 
 export default function PressureVsSoftWashingPage() {
-  const goHomeQuote = useGoToHomeQuoteSection()
-
   return (
     <>
-      <Header onOpenQuoteForm={() => goHomeQuote({ target: "contact" })} />
+      <Header />
       
       <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
         {/* Hero Section */}
@@ -25,7 +23,7 @@ export default function PressureVsSoftWashingPage() {
                 Pressure Washing vs. Soft Washing
               </h1>
               <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed">
-                Understanding the difference helps us choose the right method for your property
+                Understanding the difference between high-pressure washing and low-pressure soft washing protects your home&apos;s exterior surfaces from damage while getting the deepest clean.
               </p>
             </div>
           </div>
@@ -48,9 +46,9 @@ export default function PressureVsSoftWashingPage() {
                 </p>
                 <h3 className="font-semibold text-base mb-2">Best For:</h3>
                 <ul className="space-y-1.5 text-gray-700 mb-3 text-sm">
-                  <li>• Concrete driveways & sidewalks</li>
-                  <li>• Parking lots & garages</li>
-                  <li>• Brick, stone & heavy-duty hardscapes</li>
+                  <li>• Concrete driveways &amp; sidewalks</li>
+                  <li>• Parking lots &amp; garages</li>
+                  <li>• Brick, stone &amp; heavy-duty hardscapes</li>
                 </ul>
                 <h3 className="font-semibold text-base mb-2">Features:</h3>
                 <ul className="space-y-1.5 text-gray-700 text-sm">
@@ -73,14 +71,14 @@ export default function PressureVsSoftWashingPage() {
                 </p>
                 <h3 className="font-semibold text-base mb-2">Best For:</h3>
                 <ul className="space-y-1.5 text-gray-700 mb-3 text-sm">
-                  <li>• House siding & exterior walls</li>
-                  <li>• Roofs & shingles</li>
-                  <li>• Wood decks, fences & painted surfaces</li>
+                  <li>• House siding &amp; exterior walls</li>
+                  <li>• Roofs &amp; shingles</li>
+                  <li>• Wood decks, fences &amp; painted surfaces</li>
                 </ul>
                 <h3 className="font-semibold text-base mb-2">Features:</h3>
                 <ul className="space-y-1.5 text-gray-700 text-sm">
                   <li>• Low PSI with biodegradable solutions</li>
-                  <li>• Kills mold, mildew & algae at the root</li>
+                  <li>• Kills mold, mildew &amp; algae at the root</li>
                   <li>• Long-lasting, surface-safe results</li>
                 </ul>
               </div>
@@ -99,7 +97,7 @@ export default function PressureVsSoftWashingPage() {
             </p>
             <div className="bg-brand-yellow/10 p-4 rounded-lg">
               <p className="text-lg font-semibold text-brand-blue-dark">
-                "The right technique for the right surface, every time."
+                &ldquo;The right technique for the right surface, every time.&rdquo;
               </p>
             </div>
           </div>
@@ -116,11 +114,11 @@ export default function PressureVsSoftWashingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                onClick={() => goHomeQuote({ target: "contact" })}
+                asChild
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
               >
-                Get a Free Quote
+                <Link href="/contact">Request Callback</Link>
               </Button>
               <Button
                 asChild

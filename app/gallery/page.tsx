@@ -1,6 +1,5 @@
 "use client"
 
-import { useGoToHomeQuoteSection } from "@/hooks/useGoToHomeQuoteSection"
 
 import { Suspense } from "react"
 import { Header } from "@/components/layout/Header"
@@ -19,11 +18,10 @@ function GalleryFallback() {
 }
 
 export default function GalleryPage() {
-  const goQuote = useGoToHomeQuoteSection()
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onOpenQuoteForm={() => goQuote()} />
+      <Header />
 
       <main className="pt-header-offset">
         <Suspense fallback={<GalleryFallback />}>

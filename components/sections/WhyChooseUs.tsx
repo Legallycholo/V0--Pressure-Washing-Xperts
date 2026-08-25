@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
@@ -25,10 +26,10 @@ const steps = [
 ]
 
 interface WhyChooseUsProps {
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
 }
 
-export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
+export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps = {}) {
   return (
     <section
       id="why-us"
@@ -44,33 +45,36 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
             id="why-us-heading"
             className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl"
           >
-            Clean in <span className="text-ps-cyan text-glow-cyan">3 Steps</span>
+            Simple, Fast, and{" "}
+            <span className="text-ps-cyan text-glow-cyan">Hassle-Free</span>
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-ps-text-muted">
-            No runaround. Just a fast call, a fair quote, and a spotless property.
+          <p className="mt-3 text-base text-ps-text-muted sm:text-lg">
+            From first contact to final walkthrough, we keep things simple and clear.
           </p>
         </Reveal>
 
         {/* Timeline */}
         <RevealGroup
-          stagger={0.2}
-          className="relative mt-10 grid gap-8 md:mt-12 md:grid-cols-3 md:gap-6"
+          as="div"
+          stagger={0.12}
+          className="mt-12 grid gap-6 md:grid-cols-3"
         >
-          {/* Connector line (desktop) */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-0 right-0 top-7 hidden border-t-2 border-dashed border-ps-cyan/35 md:block"
-          />
           {steps.map((step) => (
             <RevealItem
               key={step.number}
-              className="relative flex flex-col items-center text-center md:px-4 max-md:border-l-2 max-md:border-ps-cyan/35 max-md:pl-5 max-md:items-start max-md:text-left"
+              as="article"
+              className="relative flex flex-col rounded-2xl border border-white/10 bg-ps-bg-alt p-6 sm:p-7 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-1 hover:border-ps-cyan/40 hover:shadow-[0_20px_50px_-15px_rgba(0,229,255,0.2)]"
             >
-              <span className="relative z-10 flex h-14 items-center justify-center rounded-full bg-ps-bg px-2 font-display text-5xl leading-none text-ps-cyan text-glow-cyan">
-                {step.number}
-              </span>
-              <h3 className="mt-4 text-lg font-bold text-white">{step.title}</h3>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ps-text-muted">
+              <div className="flex items-center justify-between">
+                <span className="font-display text-4xl sm:text-5xl text-ps-cyan/80">
+                  {step.number}
+                </span>
+                <span className="h-2 w-2 rounded-full bg-ps-cyan shadow-[0_0_12px_#00e5ff]" />
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-white sm:text-2xl">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ps-text-muted sm:text-base">
                 {step.description}
               </p>
             </RevealItem>
@@ -89,13 +93,12 @@ export function WhyChooseUs({ onOpenQuoteForm }: WhyChooseUsProps) {
             </a>
           </Button>
           <Button
-            type="button"
-            onClick={onOpenQuoteForm}
+            asChild
             size="lg"
             variant="outline"
             className={`min-w-[200px] border-2 border-ps-cyan/60 bg-transparent px-8 font-semibold text-ps-cyan hover:bg-ps-cyan/10 hover:text-ps-cyan ${ctaPress}`}
           >
-            Get a Free Quote
+            <Link href="/contact">Request Callback</Link>
           </Button>
         </Reveal>
       </div>

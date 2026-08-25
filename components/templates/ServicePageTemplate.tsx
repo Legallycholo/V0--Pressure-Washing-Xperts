@@ -1,10 +1,11 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Phone, CheckCircle2, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
-import { ContactQuoteFormCard } from "@/components/sections/ContactQuoteFormCard"
+import { ContactForm } from "@/components/ContactForm"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { ctaPress } from "@/lib/ctaInteraction"
@@ -19,7 +20,7 @@ interface ServicePageTemplateProps {
   description: string
   category: "Residential" | "Commercial"
   benefits?: string[]
-  onOpenQuoteForm: () => void
+  onOpenQuoteForm?: () => void
   /** When set, replaces the default four process cards. */
   processSteps?: ServiceProcessStep[]
   ctaHeadline?: string
@@ -144,11 +145,11 @@ export function ServicePageTemplate({
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                onClick={onOpenQuoteForm}
+                asChild
                 size="lg"
                 className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
               >
-                Get a Free Quote
+                <Link href="/contact">Request Callback</Link>
               </Button>
               <Button
                 asChild
@@ -189,17 +190,21 @@ export function ServicePageTemplate({
               </RevealGroup>
               <div className="mt-6">
                 <Button
-                  onClick={onOpenQuoteForm}
+                  asChild
                   className="bg-brand-blue text-white hover:bg-brand-blue-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
                 >
-                  Request Your Free Quote
-                  <ArrowRight className="ml-2 size-4" />
+                  <Link href="/contact">
+                    Request Callback
+                    <ArrowRight className="ml-2 size-4" />
+                  </Link>
                 </Button>
               </div>
             </Reveal>
 
             {showContactFormAside ? (
-              <ContactQuoteFormCard />
+              <div className="relative w-full min-w-0">
+                <ContactForm />
+              </div>
             ) : showBeforeAfter && beforeSrc && afterSrc && beforeAlt && afterAlt && comparisonLabel ? (
               <Reveal y={24}>
                 <BeforeAfterSlider
@@ -273,12 +278,11 @@ export function ServicePageTemplate({
                 </Button>
                 <p className="mt-4 text-sm font-medium text-brand-blue-dark">(800)-451-7213</p>
                 <Button
-                  type="button"
+                  asChild
                   variant="outline"
                   className="mt-4 border-brand-blue/30 text-brand-blue-dark hover:bg-brand-blue/5"
-                  onClick={onOpenQuoteForm}
                 >
-                  Get a Free Quote
+                  <Link href="/contact">Request Callback</Link>
                 </Button>
               </div>
             )}
@@ -331,11 +335,11 @@ export function ServicePageTemplate({
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
-              onClick={onOpenQuoteForm}
+              asChild
               size="lg"
               className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 hover:shadow-lg motion-reduce:hover:translate-y-0"
             >
-              Get a Free Quote
+              <Link href="/contact">Request Callback</Link>
             </Button>
             <Button
               asChild
