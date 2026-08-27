@@ -9,18 +9,18 @@ export type CityTestimonial = {
 /** Two reviews shown per city page. Alpharetta, Marietta, and Roswell use localized voice; others use strong Atlanta Metro reviews. */
 const ATLANTA_METRO_PAIR: CityTestimonial[] = [
   {
-    name: "Giselle",
-    locationLabel: "Atlanta Metro",
+    name: "Mina Beverly",
+    locationLabel: "Metro Atlanta",
     rating: 5,
-    text: "Arthur did an amazing job! My house looks brand new! He did a walk through with me and fully explained what to expect. Will definitely use his services again.",
+    text: "Arthur did a thorough job. My home looks almost brand new. I’m happy with his work. I would recommend.",
     service: "House Washing",
   },
   {
-    name: "Jasmin",
-    locationLabel: "Atlanta Metro",
+    name: "Vanessa Cook",
+    locationLabel: "Metro Atlanta",
     rating: 5,
-    text: "Arthur was prompt and professional. He did an amazing job pressure washing my home and patio area. Will definitely use him again!",
-    service: "House & Patio Washing",
+    text: "This young man did an excellent job. I am well pleased with the entire house pressure washing, driveway and sidewalk. Very professional and thorough.",
+    service: "House, Driveway & Sidewalk",
   },
 ]
 

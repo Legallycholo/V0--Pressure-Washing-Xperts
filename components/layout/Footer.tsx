@@ -208,7 +208,9 @@ export function Footer() {
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2">
-              <span className="text-white/40 text-sm">★ 5.0 Rated · 32+ Reviews</span>
+              <Link href="/reviews" className="text-white/60 hover:text-brand-yellow transition-colors text-sm">
+                ★ 5.0 Rated · 100+ Reviews
+              </Link>
               <span className="text-white/40 text-sm">Licensed &amp; Insured</span>
               <button
                 onClick={scrollToTop}

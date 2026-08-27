@@ -480,6 +480,14 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
       { name: "Gallery", path: "/gallery" },
     ]
   ),
+  "/reviews": def(
+    "Customer Reviews | 5.0 Star Google Rating | Pressure Washing Xperts",
+    "Read 100+ verified 5-star Google reviews for Pressure Washing Xperts in Ellenwood and Metro Atlanta. Real feedback from homeowners and local businesses.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Reviews", path: "/reviews" },
+    ]
+  ),
   ...buildFromNav(residentialServices, "Residential Services", RES_HUB),
   ...manualResidential,
   ...buildFromNav(commercialServices, "Commercial Services", COM_HUB),

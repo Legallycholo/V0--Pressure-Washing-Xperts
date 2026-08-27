@@ -98,7 +98,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
               className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
             >
               {[
-                { Icon: Star, label: "5.0 Stars (32+ Reviews)" },
+                { Icon: Star, label: "5.0 Stars (100+ Reviews)" },
                 { Icon: ShieldCheck, label: "Licensed & Insured" },
                 { Icon: Clock, label: "Same-Day Service" },
               ].map(({ Icon, label }) => (

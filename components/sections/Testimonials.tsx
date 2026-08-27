@@ -1,79 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
-import { Star, ChevronLeft, ChevronRight, Quote, ExternalLink } from "lucide-react"
+import { Star, ChevronLeft, ChevronRight, Quote, ExternalLink, ArrowRight, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const GOOGLE_BUSINESS_REVIEW_URL =
-  "https://www.google.com/maps/place/Pressure+Washing+Xperts/@33.6543368,-84.2940254,12z/data=!4m12!1m2!2m1!1sPressure+Washing+Xperts+LLC+dekalb!3m8!1s0x88f4ff586effbf87:0xdce4ba9e7e2c13d9!8m2!3d33.6542916!4d-84.2938419!9m1!1b1!15sCiJQcmVzc3VyZSBXYXNoaW5nIFhwZXJ0cyBMTEMgZGVrYWxiWiQiInByZXNzdXJlIHdhc2hpbmcgeHBlcnRzIGxsYyBkZWthbGKSARhwcmVzc3VyZV93YXNoaW5nX3NlcnZpY2WaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjV3UzJScVdYUk5WM2hoVVZkS1JGUnNSbmxWU0ZJelRsUkdhRTFJWXhBQuABAPoBBAgAED4!16s%2Fg%2F11vpwbzydj?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
-
-type Testimonial = {
-  id: number
-  name: string
-  location: string
-  rating: number
-  text: string
-  service: string
-  source: string
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Giselle",
-    location: "Atlanta, GA",
-    rating: 5,
-    text: "Arthur did an amazing job! My house looks brand new! He did a walk through with me and fully explained what to expect. Will definitely use his services again. Try him! You won't regret it.",
-    service: "House Washing",
-    source: "Groupon · Top Reviewer",
-  },
-  {
-    id: 2,
-    name: "Jasmin",
-    location: "Atlanta, GA",
-    rating: 5,
-    text: "Arthur was prompt and professional. He did an amazing job pressure washing my home and patio area. Will definitely use him again!",
-    service: "House & Patio Washing",
-    source: "Google · Top Reviewer",
-  },
-  {
-    id: 3,
-    name: "Keera",
-    location: "Atlanta, GA",
-    rating: 5,
-    text: "Great communication and speedy service! Worked diligently around our home and has it looking brand new. Most definitely recommend!",
-    service: "Residential Cleaning",
-    source: "Groupon · Verified Review",
-  },
-  {
-    id: 4,
-    name: "Lynette",
-    location: "Atlanta, GA",
-    rating: 5,
-    text: "Art did an amazing job on the house. He was thorough and on time. My house looks as good as the day we moved in.",
-    service: "House Washing",
-    source: "Google · Verified Review",
-  },
-  {
-    id: 5,
-    name: "Ben",
-    location: "Atlanta, GA",
-    rating: 5,
-    text: "Was able to come to do the job very quickly, great service and will use again!",
-    service: "Pressure Washing",
-    source: "Google · Verified Review",
-  },
-  {
-    id: 6,
-    name: "Yvonne",
-    location: "Atlanta, GA",
-    rating: 5,
-    text: "Great service.",
-    service: "Residential Cleaning",
-    source: "Groupon · Verified Review",
-  },
-]
+import {
+  GOOGLE_REVIEWS,
+  GOOGLE_BUSINESS_REVIEW_URL,
+  getReviewStats,
+  type GoogleReview,
+} from "@/data/reviews"
 
 export function Testimonials() {
   const prefersReduced = useReducedMotion()
@@ -82,6 +19,10 @@ export function Testimonials() {
   // Pause while the user is reading: hover, focus, or touch (WCAG 2.2.2)
   const [isPaused, setIsPaused] = useState(false)
 
+  // Use top curated real Google reviews for homepage carousel
+  const testimonials = GOOGLE_REVIEWS.slice(0, 15)
+  const stats = getReviewStats()
+
   // Auto-advance carousel
   useEffect(() => {
     if (!isAutoPlaying || isPaused || prefersReduced) return
@@ -89,7 +30,7 @@ export function Testimonials() {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length)
     }, 5000)
     return () => clearInterval(interval)
-  }, [isAutoPlaying, isPaused, prefersReduced])
+  }, [isAutoPlaying, isPaused, prefersReduced, testimonials.length])
 
   const handleSwipeEnd = (
     _e: unknown,
@@ -117,7 +58,7 @@ export function Testimonials() {
 
   // Get visible testimonials for desktop (3 at a time)
   const getVisibleTestimonials = () => {
-    const items = []
+    const items: (GoogleReview & { displayIndex: number })[] = []
     for (let i = 0; i < 3; i++) {
       const index = (currentIndex + i) % testimonials.length
       items.push({ ...testimonials[index], displayIndex: i })
@@ -131,7 +72,7 @@ export function Testimonials() {
         {/* Section Header */}
         <div className="text-center mb-9">
           <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
-            Testimonials
+            Verified Testimonials
           </p>
           <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
             What Our <span className="text-ps-cyan text-glow-cyan">Customers Say</span>
@@ -139,13 +80,24 @@ export function Testimonials() {
           <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-base">
             {"Don't just take our word for it."} Rated{" "}
             <span className="text-yellow-400 font-semibold">5.0 ★</span> across{" "}
-            <span className="text-white font-semibold">32+ verified reviews</span>.
+            <span className="text-white font-semibold">{stats.displayCount} verified Google reviews</span>.
           </p>
-          <div className="mt-4 flex justify-center">
+          <div className="mt-5 flex flex-wrap justify-center items-center gap-3">
             <Button
               asChild
               size="lg"
-              className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark gap-2"
+              className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark gap-2 shadow-lg"
+            >
+              <Link href="/reviews">
+                View All {stats.total} Reviews
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white/30 text-white bg-transparent hover:bg-white/10 gap-2"
             >
               <a
                 href={GOOGLE_BUSINESS_REVIEW_URL}
@@ -175,43 +127,63 @@ export function Testimonials() {
             {getVisibleTestimonials().map((testimonial, index) => (
               <div
                 key={`${testimonial.id}-${index}`}
-                className={`relative rounded-xl p-4 transition-all duration-500 ${
+                className={`relative flex flex-col justify-between rounded-xl p-5 transition-all duration-500 ${
                   index === 1
-                    ? "bg-white/10 border-2 border-brand-yellow scale-[1.02]"
+                    ? "bg-white/10 border-2 border-brand-yellow scale-[1.02] shadow-xl shadow-brand-yellow/10"
                     : "bg-white/5 border border-white/10"
                 }`}
               >
-                {/* Quote Icon */}
-                <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/30" />
+                <div>
+                  {/* Quote Icon */}
+                  <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/25" />
 
-                {/* Rating */}
-                <div className="flex gap-1 mb-3">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
-                  ))}
+                  {/* Rating + Time */}
+                  <div className="flex items-center justify-between mb-3 pr-8">
+                    <div className="flex gap-1" aria-label={`${testimonial.rating} out of 5 stars`}>
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <span className="text-xs text-white/50">{testimonial.timeAgo}</span>
+                  </div>
+
+                  {/* Text */}
+                  <p className="text-white/85 text-sm leading-relaxed mb-4 min-h-[72px]">
+                    {`"${testimonial.text}"`}
+                  </p>
                 </div>
 
-                {/* Text */}
-                <p className="text-white/80 text-sm leading-relaxed mb-4 min-h-[88px]">
-                  {`"${testimonial.text}"`}
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-3">
-                  {/* Avatar Placeholder */}
-                  <div className="w-12 h-12 rounded-full bg-brand-blue/30 flex items-center justify-center text-white font-bold">
-                    {testimonial.name.charAt(0)}
+                <div>
+                  {/* Author */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-white/10">
+                    {/* Avatar */}
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-ps-cyan flex items-center justify-center text-white font-bold text-sm shrink-0">
+                      {testimonial.author.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-white text-sm truncate flex items-center gap-1.5">
+                        <span>{testimonial.author}</span>
+                        {testimonial.isLocalGuide && (
+                          <span className="text-[10px] font-normal text-orange-400 bg-orange-400/10 px-1 py-0.2 rounded inline-flex items-center gap-0.5">
+                            <ShieldCheck className="size-2.5" /> Guide
+                          </span>
+                        )}
+                      </p>
+                      <p className="text-white/50 text-xs">Google Verified Review</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-white">{testimonial.name}</p>
-                    <p className="text-white/60 text-sm">{testimonial.location}</p>
-                    <p className="text-white/40 text-xs mt-0.5">{testimonial.source}</p>
-                  </div>
-                </div>
 
-                {/* Service Badge */}
-                <div className="mt-4 inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-3 py-1 rounded-full">
-                  {testimonial.service}
+                  {/* Service Badge */}
+                  <div className="mt-3 flex items-center justify-between">
+                    <div className="inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-2.5 py-0.5 rounded-full">
+                      {testimonial.serviceLabel}
+                    </div>
+                    {testimonial.highlightTag && (
+                      <span className="text-[11px] text-white/50 italic">
+                        {testimonial.highlightTag}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -221,7 +193,7 @@ export function Testimonials() {
           <div className="md:hidden touch-pan-y">
             <motion.div
               key={currentIndex}
-              className="relative rounded-xl bg-white/10 border border-white/10 p-4"
+              className="relative flex flex-col justify-between rounded-xl bg-white/10 border border-white/10 p-5 min-h-[260px]"
               drag={prefersReduced ? false : "x"}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.18}
@@ -230,36 +202,51 @@ export function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Quote Icon */}
-              <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/30" />
+              <div>
+                {/* Quote Icon */}
+                <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/25" />
 
-              {/* Rating */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
-                ))}
+                {/* Rating */}
+                <div className="flex items-center justify-between mb-3 pr-8">
+                  <div className="flex gap-1">
+                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                      <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="text-xs text-white/50">{testimonials[currentIndex].timeAgo}</span>
+                </div>
+
+                {/* Text */}
+                <p className="text-white/90 text-sm leading-relaxed mb-4">
+                  {`"${testimonials[currentIndex].text}"`}
+                </p>
               </div>
 
-              {/* Text */}
-              <p className="text-white/80 text-sm leading-relaxed mb-4">
-                {`"${testimonials[currentIndex].text}"`}
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-brand-blue/30 flex items-center justify-center text-white font-bold">
-                  {testimonials[currentIndex].name.charAt(0)}
+              <div>
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-3 border-t border-white/10">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-ps-cyan flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    {testimonials[currentIndex].author.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-sm">
+                      {testimonials[currentIndex].author}
+                    </p>
+                    <p className="text-white/50 text-xs">Google Verified Review</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-white">{testimonials[currentIndex].name}</p>
-                  <p className="text-white/60 text-sm">{testimonials[currentIndex].location}</p>
-                  <p className="text-white/40 text-xs mt-0.5">{testimonials[currentIndex].source}</p>
-                </div>
-              </div>
 
-              {/* Service Badge */}
-              <div className="mt-4 inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-3 py-1 rounded-full">
-                {testimonials[currentIndex].service}
+                {/* Service Badge */}
+                <div className="mt-3 flex items-center justify-between">
+                  <div className="inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-2.5 py-0.5 rounded-full">
+                    {testimonials[currentIndex].serviceLabel}
+                  </div>
+                  {testimonials[currentIndex].highlightTag && (
+                    <span className="text-[11px] text-white/50 italic">
+                      {testimonials[currentIndex].highlightTag}
+                    </span>
+                  )}
+                </div>
               </div>
             </motion.div>
             <p className="mt-2 text-center text-xs text-white/40" aria-hidden>

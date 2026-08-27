@@ -250,3 +250,45 @@ export function buildServiceJsonLd(
 export function defaultLogoAbsoluteUrl(baseUrl: string) {
   return absoluteUrl("/site-tab-icon.png")
 }
+
+export function buildReviewsJsonLd(
+  baseUrl: string,
+  ratingValue: number = 5.0,
+  reviewCount: number = 100,
+  reviews?: Array<{ author: string; rating: number; text: string }>
+) {
+  const ld: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": LOCAL_ID(baseUrl),
+    name: businessLegalName,
+    url: baseUrl,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: ratingValue.toFixed(1),
+      reviewCount: String(reviewCount),
+      bestRating: "5",
+      worstRating: "1",
+    },
+  }
+
+  if (reviews && reviews.length > 0) {
+    ld.review = reviews.map((r) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: r.author,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: String(r.rating),
+        bestRating: "5",
+        worstRating: "1",
+      },
+      reviewBody: r.text,
+    }))
+  }
+
+  return ld
+}
+
