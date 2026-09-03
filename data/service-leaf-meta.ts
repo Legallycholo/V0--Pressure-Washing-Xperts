@@ -409,6 +409,26 @@ export const SERVICE_LEAF_COPY: Record<string, ServiceLeafCopy> = {
     ctaHeadline: "Let your panels catch full sun again.",
     ctaSubline: "A seasonal rinse keeps output up through Georgia's heavy pollen season.",
   },
+  "4-wheelers-cleaning": {
+    processSteps: s(
+      ["Walk the rig & flag sensitive zones", "We inspect airboxes, electrical harnesses, custom wraps, and intake snorkels."],
+      ["Pre-treat mud & red clay", "Biodegradable foaming detergents soften baked-on mud, clay deposits, and trail grease."],
+      ["Controlled pressure & detail rinse", "Low-to-medium pressure lifts caked mud from frame rails, A-arms, and wheel wells."],
+      ["Final inspection & check", "We verify plastics, wheels, and frame are clean before we pack up."],
+    ),
+    ctaHeadline: "Get your 4-wheeler trail-ready and mud-free.",
+    ctaSubline: "Request a fast callback for your ATV, UTV, or off-road fleet.",
+  },
+  "truck-washing": {
+    processSteps: s(
+      ["Site & equipment assessment", "We review truck types, surface cladding, aluminum finishes, and drainage setup."],
+      ["Degrease & road film pre-soak", "Industrial surfactants dissolve diesel soot, bug splatter, and heavy road grime."],
+      ["High-volume hot/cold wash", "Surface-safe pressure cleans cabs, trailers, chassis, wheels, and fuel tanks."],
+      ["Spot-free rinse & walkthrough", "Thorough rinse ensures bright metal and streak-free glass before turnover."],
+    ),
+    ctaHeadline: "Keep your trucks looking professional on every route.",
+    ctaSubline: "Schedule a one-time deep wash or recurring yard maintenance plan.",
+  },
 }
 
 export function getServiceLeafCopy(slug: string): ServiceLeafCopy {

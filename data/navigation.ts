@@ -154,9 +154,21 @@ export const residentialServices: NavLinkItem[] = [
     summary:
       "Panels rinsed clear of pollen, dust, and bird droppings using soft-bristle, low-pressure methods that protect the glass and seals.",
   },
+  {
+    href: "/services/residential/4-wheelers-cleaning",
+    label: "4-Wheelers & ATVs",
+    summary:
+      "Mud and red clay stripped from 4-wheelers, ATVs, and UTVs with pressure dialed to protect wiring, seals, and plastics.",
+  },
 ]
 
 export const commercialServices: NavLinkItem[] = [
+  {
+    href: "/services/commercial/truck-washing",
+    label: "Commercial Truck Washing",
+    summary:
+      "On-site washing for semi-trucks, box trucks, dump trucks, and utility work vehicles across Metro Atlanta freight corridors.",
+  },
   {
     href: "/services/commercial/building-washing",
     label: "Commercial Building Washing",

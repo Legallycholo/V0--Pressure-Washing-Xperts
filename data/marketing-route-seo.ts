@@ -49,6 +49,20 @@ function buildFromNav(
 }
 
 const manualCommercial: Record<string, MarketingRouteDefinition> = {
+  "/services/commercial/truck-washing": def(
+    "Commercial Truck Washing & Fleet Pressure Washing Atlanta | Pressure Washing Xperts",
+    "On-site pressure washing for semi-trucks, box trucks, dump trucks, and utility fleets in Ellenwood and Metro Atlanta. Mobile hot-water wash rigs. Call (800) 451-7213.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Commercial Services", path: COM_HUB },
+      { name: "Commercial Truck Washing", path: "/services/commercial/truck-washing" },
+    ],
+    {
+      name: "Commercial truck washing in Metro Atlanta",
+      description:
+        "Mobile on-site pressure washing for commercial trucks, semi-trucks, box trucks, dump trucks, trailers, and utility fleets across Ellenwood, GA and Metro Atlanta.",
+    }
+  ),
   "/services/commercial/red-clay-removal": def(
     "Commercial Red Clay Removal | Commercial | Pressure Washing Xperts",
     "Red clay tracked by vehicles and runoff removed from concrete, curbs, entries, and building faces at Metro Atlanta commercial sites. Recurring plans for properties near active construction.",
@@ -316,6 +330,20 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
       name: "RV cleaning in Ellenwood, GA",
       description:
         "Exterior soft wash and interior cabin cleaning for RVs and campers across Ellenwood, GA and Metro Atlanta, covering roofs, awnings, siding, floors, and upholstery.",
+    }
+  ),
+  "/services/residential/4-wheelers-cleaning": def(
+    "4-Wheeler & ATV Pressure Washing Ellenwood & Atlanta GA | Pressure Washing Xperts",
+    "Mud, red clay, and trail grit removed from 4-wheelers, ATVs, UTVs, and side-by-sides in Ellenwood, GA and Metro Atlanta. Safe pressure protects electrical lines and seals. Call (800) 451-7213.",
+    [
+      { name: "Home", path: "/" },
+      { name: "Residential Services", path: RES_HUB },
+      { name: "4-Wheelers & ATVs", path: "/services/residential/4-wheelers-cleaning" },
+    ],
+    {
+      name: "4-wheeler & ATV pressure washing in Ellenwood, GA",
+      description:
+        "Specialized pressure washing and mud removal for 4-wheelers, ATVs, UTVs, and off-road vehicles across Ellenwood, GA and Metro Atlanta, safe for wiring, bearings, and plastics.",
     }
   ),
   "/services/residential/tiny-house-cleaning": def(

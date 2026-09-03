@@ -93,3 +93,12 @@ export const residentialTinyHouseCleaningMedia = {
   afterAlt: "Same tiny home with siding, roofing, and skirting clean after exterior soft washing",
   comparisonLabel: "tiny house exterior cleaning",
 } as const
+
+export const residential4WheelersCleaningMedia = {
+  beforeSrc: `${R}/4-wheelers-cleaning-before.webp`,
+  afterSrc: `${R}/4-wheelers-cleaning-after.webp`,
+  beforeAlt: "Mud-covered 4-wheeler ATV with Georgia red clay caked on tires, suspension, frame, and fenders after trail riding",
+  afterAlt: "Same 4-wheeler ATV thoroughly washed, plastics bright and frame free of red clay and trail grime",
+  comparisonLabel: "4-wheeler & ATV mud wash",
+} as const
+
