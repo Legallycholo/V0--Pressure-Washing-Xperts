@@ -103,6 +103,12 @@ export function ContactForm({ className }: ContactFormProps) {
       if (!formData.phone.trim()) gaps.push("phone")
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email.trim())) gaps.push("email")
     }
+    if (which === 3) {
+      if (!formData.city.trim()) gaps.push("city")
+      if (!formData.zip.trim()) gaps.push("zip")
+      if (!formData.approx_sqft.trim()) gaps.push("approx_sqft")
+      if (!formData.message.trim()) gaps.push("message")
+    }
     setMissing(gaps)
     return gaps
   }
@@ -116,7 +122,7 @@ export function ContactForm({ className }: ContactFormProps) {
           ? "Pick at least one thing you'd like cleaned."
           : gaps.includes("email") && gaps.length === 1
             ? "That email address doesn't look right."
-            : "We need those fields to be able to call you back."
+            : "Please fill in all required fields."
       )
       return
     }
@@ -137,17 +143,22 @@ export function ContactForm({ className }: ContactFormProps) {
       return
     }
 
-    const gaps = [...validate(1), ...validate(2)]
+    const gaps = [...validate(1), ...validate(2), ...validate(3)]
     setMissing(gaps)
     if (gaps.length) {
-      const firstBad = gaps.some((g) => g === "services") ? 1 : 2
+      const firstBad = gaps.some((g) => g === "services")
+        ? 1
+        : gaps.some((g) => ["name", "phone", "email"].includes(g))
+          ? 2
+          : 3
       setStep(firstBad as 1 | 2 | 3)
-      setSubmitError("Something above got cleared. Check the highlighted fields.")
+      setSubmitError("Please fill in all required fields.")
       return
     }
 
     setIsSubmitting(true)
     setSubmitError(null)
+
 
     try {
       const res = await fetch("/api/contact", {
@@ -309,36 +320,45 @@ export function ContactForm({ className }: ContactFormProps) {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor={fieldId("city")} className={labelClass}>Town / City</Label>
+                <Label htmlFor={fieldId("city")} className={labelClass}>
+                  Town / City <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id={fieldId("city")}
+                  required
                   value={formData.city}
                   onChange={(e) => set("city", e.target.value)}
                   placeholder="Atlanta"
-                  className={fieldClass}
+                  className={cn(fieldClass, invalid("city") && "border-destructive")}
                 />
               </div>
               <div>
-                <Label htmlFor={fieldId("zip")} className={labelClass}>Zip Code</Label>
+                <Label htmlFor={fieldId("zip")} className={labelClass}>
+                  Zip Code <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id={fieldId("zip")}
+                  required
                   value={formData.zip}
                   onChange={(e) => set("zip", e.target.value)}
                   placeholder="30301"
-                  className={fieldClass}
+                  className={cn(fieldClass, invalid("zip") && "border-destructive")}
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor={fieldId("approx_sqft")} className={labelClass}>Approx Sq Ft</Label>
+                <Label htmlFor={fieldId("approx_sqft")} className={labelClass}>
+                  Approx Sq Ft <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id={fieldId("approx_sqft")}
+                  required
                   value={formData.approx_sqft}
                   onChange={(e) => set("approx_sqft", e.target.value)}
                   placeholder="e.g. 2500"
-                  className={fieldClass}
+                  className={cn(fieldClass, invalid("approx_sqft") && "border-destructive")}
                 />
               </div>
               <div>
@@ -373,16 +393,17 @@ export function ContactForm({ className }: ContactFormProps) {
 
             <div>
               <Label htmlFor={fieldId("message")} className={labelClass}>
-                Anything we should know?
+                Project Details / Notes <span className="text-destructive">*</span>
               </Label>
-              <p className="mt-0.5 text-xs text-white/50">Optional. Notes about the project, timelines, etc.</p>
+              <p className="mt-0.5 text-xs text-white/50">Tell us about the surfaces, condition, or timelines.</p>
               <Textarea
                 id={fieldId("message")}
+                required
                 rows={3}
                 value={formData.message}
                 onChange={(e) => set("message", e.target.value)}
-                placeholder="North side is green and there's a dog in the yard."
-                className={cn(fieldClass, "resize-y")}
+                placeholder="e.g., North siding has algae buildup, driveway needs red clay stain lift."
+                className={cn(fieldClass, "resize-y", invalid("message") && "border-destructive")}
               />
             </div>
           </div>

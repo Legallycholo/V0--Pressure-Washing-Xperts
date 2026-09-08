@@ -32,9 +32,16 @@ function parseContactBody(body: Record<string, unknown>): { ok: true; data: Cont
   const name = str(body.name, 120)
   const email = str(body.email, 200)
   const phone = str(body.phone, 40)
+  const city = str(body.city, 120)
+  const zip = str(body.zip, 20)
+  const services = str(body.services, 400)
+  const approx_sqft = str(body.approx_sqft, 80)
+  const message = str(body.message, 5000)
+  const best_time = str(body.best_time, 80)
+  const how_heard = str(body.how_heard, 80)
   
-  if (!name || !email || !phone) {
-    return { ok: false, error: "Name, email, and phone are required." }
+  if (!name || !email || !phone || !services || !city || !zip || !approx_sqft || !message) {
+    return { ok: false, error: "Please fill in all required fields." }
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
     return { ok: false, error: "Please enter a valid email address." }
@@ -49,13 +56,13 @@ function parseContactBody(body: Record<string, unknown>): { ok: true; data: Cont
       name, 
       email, 
       phone, 
-      city: str(body.city, 120),
-      zip: str(body.zip, 20),
-      services: str(body.services, 400),
-      best_time: str(body.best_time, 80),
-      how_heard: str(body.how_heard, 80),
-      message: str(body.message, 5000),
-      approx_sqft: str(body.approx_sqft, 80),
+      city,
+      zip,
+      services,
+      best_time,
+      how_heard,
+      message,
+      approx_sqft,
     } 
   }
 }
