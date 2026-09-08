@@ -95,6 +95,16 @@ const primaryServices = [
     imageAlt:
       "Commercial building with block and metal facade, storefront windows, and parking lot.",
   },
+  {
+    id: "fleet-washing",
+    title: "Fleet Vehicle Washing",
+    description:
+      "One truck or a whole fleet: semis, trailers, box trucks, RVs, and service vehicles.",
+    href: "/services/commercial/fleet-washing",
+    imageSrc: "/services/home-fleet-washing.png",
+    imageAlt:
+      "Commercial fleet vehicles, semi-trucks, and service vans washed clean.",
+  },
 ]
 
 const supportingServices = [
@@ -141,7 +151,7 @@ export function Services({ onOpenQuoteForm }: ServicesProps = {}) {
             What We <span className="text-ps-cyan text-glow-cyan">Do</span>
           </h2>
           <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-sm sm:text-base">
-            Residential and commercial cleaning with the right method for each surface.
+            Residential, commercial, and fleet cleaning with the right method for each surface.
           </p>
         </Reveal>
 
@@ -205,40 +215,40 @@ export function Services({ onOpenQuoteForm }: ServicesProps = {}) {
           ))}
         </StackCards>
 
-        {/* Primary Services */}
-        <RevealGroup className="mx-auto grid max-w-5xl gap-5 md:grid-cols-2" stagger={0.12}>
+        {/* Primary Services (3 Pillar Cards: Residential, Commercial, Fleet) */}
+        <RevealGroup className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.12}>
           {primaryServices.map((service) => (
             <RevealItem key={service.id} as="div">
-            <Link
-              href={service.href}
-              className="group relative block h-full overflow-hidden rounded-xl"
-            >
-              <div className="absolute inset-0 rounded-xl border border-white/10 transition-colors group-hover:border-ps-cyan/40" />
-
-              <div className="relative p-5 sm:p-6">
-                <div className="relative mx-auto mb-3 max-w-lg h-48 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+              <Link
+                href={service.href}
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#111D35]/80 to-[#0C1526]/80 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ps-cyan/50 hover:shadow-[0_12px_32px_-12px_rgba(0,229,255,0.25)]"
+              >
+                <div className="relative mb-4 h-48 sm:h-52 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
                   <Image
                     src={service.imageSrc}
                     alt={service.imageAlt}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-ps-text-muted text-sm leading-relaxed mb-3">
-                  {service.description}
-                </p>
+                <div className="flex flex-1 flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-ps-cyan transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-ps-text-muted text-sm leading-relaxed mb-4">
+                      {service.description}
+                    </p>
+                  </div>
 
-                <span className="inline-flex items-center gap-1 text-ps-cyan font-semibold text-sm">
-                  Learn more
-                  <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </span>
-              </div>
-            </Link>
+                  <span className="inline-flex items-center gap-1 text-ps-cyan font-semibold text-sm group-hover:text-brand-yellow-dark transition-colors">
+                    Learn more
+                    <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-1.5" />
+                  </span>
+                </div>
+              </Link>
             </RevealItem>
           ))}
         </RevealGroup>
