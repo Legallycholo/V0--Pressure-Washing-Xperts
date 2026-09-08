@@ -116,9 +116,15 @@ async function sendContactNotification(data: ContactData) {
 }
 
 export async function POST(request: Request) {
-  const verification = await checkBotId()
-  if (verification.isBot) {
-    return NextResponse.json({ error: "Access denied." }, { status: 403 })
+  // Safe BotID verification (fail-open so legitimate leads are never dropped on config errors)
+  try {
+    const verification = await checkBotId()
+    if (verification && verification.isBot && !verification.bypassed) {
+      console.warn("[api/contact] Bot detected by checkBotId, rejecting submission.")
+      return NextResponse.json({ error: "Access denied." }, { status: 403 })
+    }
+  } catch (err) {
+    console.warn("[api/contact] checkBotId skipped/errored (non-fatal):", err)
   }
 
   let body: unknown
@@ -132,9 +138,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 })
   }
 
-  // Honeypot check (hidden field to trap bots)
+  // Honeypot check (hidden field to trap bots silently)
   const b = body as Record<string, unknown>
   if (typeof b._hp === "string" && b._hp.trim()) {
+    console.warn("[api/contact] Honeypot field filled, silently discarding bot lead.")
     return NextResponse.json({ ok: true })
   }
 
@@ -145,7 +152,7 @@ export async function POST(request: Request) {
 
   const { data } = parsed
 
-  let insertFailed = false
+  let supabaseSuccess = false
   try {
     await insertLeadToSupabase({
       name: data.name,
@@ -159,22 +166,37 @@ export async function POST(request: Request) {
       message: data.message || null,
       approx_sqft: data.approx_sqft || null,
     })
+    supabaseSuccess = true
+    console.log("[api/contact] Lead saved to Supabase successfully:", data.name)
   } catch (e) {
-    insertFailed = true
-    console.error("[api/contact] Supabase insert failed", e)
+    console.error("[api/contact] Supabase insert failed:", e)
   }
 
-  // Notify the team even if the DB write failed
-  await Promise.allSettled([
+  // Always attempt to notify the team via Resend Email and Vonage SMS
+  const notificationResults = await Promise.allSettled([
     sendContactNotification(data),
     sendContactSms(data)
   ])
 
-  if (insertFailed) {
-    return NextResponse.json(
-      { error: "We couldn't send your message. Please try again in a moment." },
-      { status: 500 }
-    )
+  const emailResult = notificationResults[0]
+  const smsResult = notificationResults[1]
+
+  if (emailResult.status === "rejected") {
+    console.error("[api/contact] Email notification failed:", emailResult.reason)
   }
-  return NextResponse.json({ ok: true })
+  if (smsResult.status === "rejected") {
+    console.error("[api/contact] SMS notification failed:", smsResult.reason)
+  }
+
+  // If Supabase succeeded OR at least one notification dispatched, treat as successful
+  if (supabaseSuccess || emailResult.status === "fulfilled" || smsResult.status === "fulfilled") {
+    return NextResponse.json({ ok: true })
+  }
+
+  // Only return error if every single pipeline failed
+  return NextResponse.json(
+    { error: "We couldn't send your message. Please try again in a moment." },
+    { status: 500 }
+  )
 }
+
