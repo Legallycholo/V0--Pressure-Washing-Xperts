@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/ContactForm"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
+import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
 import residentialHeroImage from "@/public/services/home-residential.png"
 
 interface HeroProps {
@@ -98,7 +99,10 @@ export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
               className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
             >
               {[
-                { Icon: Star, label: "5.0 Stars (100+ Reviews)" },
+                {
+                  Icon: Star,
+                  label: `${GOOGLE_REVIEW_RATING.toFixed(1)} Rating (${GOOGLE_REVIEW_COUNT} Reviews)`,
+                },
                 { Icon: ShieldCheck, label: "Licensed & Insured" },
                 { Icon: Clock, label: "Same-Day Service" },
               ].map(({ Icon, label }) => (

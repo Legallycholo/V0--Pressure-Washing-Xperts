@@ -20,6 +20,7 @@ import {
 import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
+import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
 
 const services = [
   ...residentialServices.slice(0, 4),
@@ -209,7 +210,7 @@ export function Footer() {
             </div>
             <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2">
               <Link href="/reviews" className="text-white/60 hover:text-brand-yellow transition-colors text-sm">
-                ★ 5.0 Rated · 100+ Reviews
+                ★ {GOOGLE_REVIEW_RATING.toFixed(1)} Rated · {GOOGLE_REVIEW_COUNT} Reviews
               </Link>
               <span className="text-white/40 text-sm">Licensed &amp; Insured</span>
               <button

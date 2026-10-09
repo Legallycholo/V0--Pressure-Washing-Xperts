@@ -94,7 +94,7 @@ export default function ReviewsPage() {
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 rounded-full border border-ps-cyan/30 bg-ps-cyan/10 px-3.5 py-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-ps-cyan mb-4">
                 <Sparkles className="size-4" />
-                Verified Customer Reviews
+                Google Customer Reviews
               </div>
 
               <h1 className="font-display uppercase tracking-wide text-white text-3xl sm:text-4xl lg:text-6xl leading-[0.95]">
@@ -103,9 +103,9 @@ export default function ReviewsPage() {
               </h1>
 
               <p className="mt-4 text-base sm:text-lg text-ps-text-muted leading-relaxed">
-                Read all {stats.total} actual, verified reviews from Google Business Profile. From
-                residential house washing and driveway cleaning to commercial properties across
-                Metro Atlanta.
+                Browse all {stats.total} reviews shown on our Google Business Profile, covering
+                house washing, driveway cleaning, and commercial pressure washing in Ellenwood and
+                nearby communities.
               </p>
 
               {/* Aggregated Rating Card */}
@@ -115,7 +115,7 @@ export default function ReviewsPage() {
                   <div className="flex flex-col items-center">
                     <div className="flex items-center gap-2">
                       <span className="font-display text-4xl sm:text-5xl text-white font-bold">
-                        5.0
+                        {stats.ratingText}
                       </span>
                       <div className="flex flex-col">
                         <div className="flex gap-0.5 text-yellow-400">
@@ -133,15 +133,15 @@ export default function ReviewsPage() {
                     <span className="font-display text-3xl sm:text-4xl text-ps-cyan font-bold">
                       {stats.displayCount}
                     </span>
-                    <span className="text-xs sm:text-sm text-white/70">Verified 5-Star Reviews</span>
+                    <span className="text-xs sm:text-sm text-white/70">Google Reviews</span>
                   </div>
 
                   {/* Recommendation Rate */}
                   <div className="pt-4 sm:pt-0 flex flex-col items-center">
                     <span className="font-display text-3xl sm:text-4xl text-brand-yellow font-bold">
-                      100%
+                      {stats.ratingText}
                     </span>
-                    <span className="text-xs sm:text-sm text-white/70">Customer Satisfaction</span>
+                    <span className="text-xs sm:text-sm text-white/70">Overall Rating</span>
                   </div>
                 </div>
 
@@ -156,12 +156,12 @@ export default function ReviewsPage() {
                       href={GOOGLE_BUSINESS_REVIEW_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Leave us a review on Google Business Profile (opens in new window)"
+                      aria-label="View all reviews on Google Business Profile (opens in new window)"
                     >
                       <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.761H12.545z" />
                       </svg>
-                      Leave a Google Review
+                      View Reviews on Google
                       <ExternalLink className="size-4 ml-1" />
                     </a>
                   </Button>
@@ -330,7 +330,7 @@ export default function ReviewsPage() {
                           </div>
 
                           {/* Google G Icon */}
-                          <div className="shrink-0 size-7 rounded-full bg-white/10 flex items-center justify-center text-white/70" title="Verified Google Review">
+                          <div className="shrink-0 size-7 rounded-full bg-white/10 flex items-center justify-center text-white/70" title="Google Review">
                             <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor">
                               <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.761H12.545z" />
                             </svg>
@@ -358,7 +358,7 @@ export default function ReviewsPage() {
 
                         {/* Review Body */}
                         <p className="text-white/85 text-sm leading-relaxed mb-4">
-                          {review.text}
+                          {review.text || "Rating-only review"}
                         </p>
 
                         {/* Owner Response Box if exists */}
@@ -381,7 +381,7 @@ export default function ReviewsPage() {
                         <span className="inline-block rounded-full bg-white/10 px-2.5 py-0.5 text-white/70 font-medium">
                           {review.serviceLabel}
                         </span>
-                        <span className="text-ps-cyan text-[11px]">Google Verified</span>
+                        <span className="text-ps-cyan text-[11px]">Google Review</span>
                       </div>
                     </motion.div>
                   ))}
@@ -408,17 +408,33 @@ export default function ReviewsPage() {
         <section className="bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-14 border-t border-ps-cyan/20">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wide mb-3">
-              Ready to Join Our 100+ Satisfied Customers?
+              Ready for Results Worth Reviewing?
             </h2>
             <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mb-6">
-              Get an honest, upfront quote with same-day availability across Ellenwood, GA and
-              Metro Atlanta.
+              Get an honest, upfront quote with same-day availability in Ellenwood, GA and nearby
+              communities.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center items-center">
               <Button
                 asChild
                 size="lg"
-                className={`bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark text-base px-8 py-6 rounded-md shadow-lg ${ctaPress}`}
+                variant="outline"
+                className="w-full sm:w-auto border-white/30 bg-white/5 text-white hover:bg-white/10 text-base px-8 py-6"
+              >
+                <a
+                  href={GOOGLE_BUSINESS_REVIEW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`See all ${stats.total} reviews on Google (opens in a new tab)`}
+                >
+                  See All {stats.total} Reviews on Google
+                  <ExternalLink className="ml-2 size-5" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                className={`w-full sm:w-auto bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark text-base px-8 py-6 rounded-md shadow-lg ${ctaPress}`}
               >
                 <Link href="/contact">
                   Request Free Callback
@@ -429,7 +445,7 @@ export default function ReviewsPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className={`border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark text-base px-8 py-6 rounded-md ${ctaPress}`}
+                className={`w-full sm:w-auto border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark text-base px-8 py-6 rounded-md ${ctaPress}`}
               >
                 <a href={businessPhoneTelHref}>
                   <Phone className="mr-2 size-5" />

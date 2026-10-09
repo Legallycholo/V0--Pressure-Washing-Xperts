@@ -5,6 +5,7 @@ import { buildBreadcrumbListJsonLd, buildReviewsJsonLd } from "@/lib/seo/json-ld
 import { buildPublicMetadata } from "@/lib/seo/build-page-metadata"
 import { getSiteUrl } from "@/lib/site-url"
 import { GOOGLE_REVIEWS } from "@/data/reviews"
+import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
 
 const reviewsSeo = getMarketingRoute("/reviews")
 if (!reviewsSeo) {
@@ -23,13 +24,15 @@ export default function ReviewsLayout({ children }: { children: React.ReactNode 
   const sampleReviews = GOOGLE_REVIEWS.slice(0, 15).map((r) => ({
     author: r.author,
     rating: r.rating,
-    text: r.text,
+    text: r.text || "Rating-only review",
   }))
 
   return (
     <>
       <JsonLd data={buildBreadcrumbListJsonLd(base, reviewsRoute.breadcrumbs)} />
-      <JsonLd data={buildReviewsJsonLd(base, 5.0, GOOGLE_REVIEWS.length, sampleReviews)} />
+      <JsonLd
+        data={buildReviewsJsonLd(base, GOOGLE_REVIEW_RATING, GOOGLE_REVIEW_COUNT, sampleReviews)}
+      />
       {children}
     </>
   )

@@ -17,7 +17,7 @@ type Stat = {
 const stats: Stat[] = [
   {
     Icon: Home,
-    value: <CountUp to={100} suffix="+" />,
+    value: <CountUp to={500} suffix="+" />,
     label: "Homes Cleaned",
   },
   {

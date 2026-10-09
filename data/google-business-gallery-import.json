@@ -1,0 +1,39 @@
+{
+  "snapshotDate": "2026-10-09",
+  "source": "Google Business Profile photo gallery supplied by the business owner",
+  "policy": "Only photos clearly credited to Pressure Washing Xperts or authorized staff may be imported. Customer-contributed photos are excluded.",
+  "slots": [
+    { "slot": 1, "contributor": "GOPS", "contributorId": "114021186448785904606", "date": "Sep 2026", "status": "ownership-excluded" },
+    { "slot": 2, "contributor": "Victor Allen", "contributorId": "107202745237298264860", "date": "May 2025", "status": "ownership-excluded" },
+    { "slot": 3, "contributor": "My Email", "contributorId": "104234331660336326914", "date": "Jul 2026", "status": "ownership-excluded" },
+    { "slot": 4, "contributor": "Dionne Burnett", "contributorId": "101158449543698758597", "date": "Aug 2025", "status": "ownership-excluded" },
+    { "slot": 5, "contributor": "GOPS", "contributorId": "114021186448785904606", "date": "Sep 2026", "status": "ownership-excluded" },
+    { "slot": 6, "contributor": "Yolanda Davis", "contributorId": "103248343862800201193", "date": "May 2025", "status": "ownership-excluded" },
+    { "slot": 7, "contributor": "arty smash", "contributorId": "109111764441965669335", "date": "Feb 2024", "status": "ownership-excluded" },
+    { "slot": 8, "contributor": "GOPS", "contributorId": "114021186448785904606", "date": "Sep 2026", "status": "ownership-excluded" },
+    { "slot": 9, "contributor": "Julian Cabrera", "contributorId": "113013326451523886787", "date": "Jan 2026", "status": "ownership-excluded" },
+    { "slot": 10, "contributor": "marquis heath", "contributorId": "104376084776160325074", "date": "Dec 2025", "status": "ownership-excluded" },
+    { "slot": 11, "contributor": "victoria keaton", "contributorId": "100852463340232113199", "date": "Jul 2024", "status": "ownership-excluded" },
+    { "slot": 12, "contributor": "GOPS", "contributorId": "114021186448785904606", "date": "Sep 2026", "status": "ownership-excluded" },
+    { "slot": 13, "contributor": "Cristian Williams", "contributorId": "101853632182817241748", "date": "Sep 2025", "status": "ownership-excluded" },
+    { "slot": 14, "contributor": "Rakhee Ganti", "contributorId": "109055229930021812531", "date": "Apr 2024", "status": "ownership-excluded" },
+    { "slot": 15, "contributor": "Lisa Nelson", "contributorId": "101750130827333501109", "date": "May 2024", "status": "ownership-excluded" },
+    { "slot": 16, "contributor": "GOPS", "contributorId": "114021186448785904606", "date": "Sep 2026", "status": "ownership-excluded" },
+    { "slot": 17, "contributor": "MarTif Property Mgnt Grp", "contributorId": "102778651981448560027", "date": "Jul 2025", "status": "ownership-excluded" },
+    { "slot": 18, "contributor": "marquis heath", "contributorId": "104376084776160325074", "date": "Dec 2025", "status": "ownership-excluded" },
+    { "slot": 19, "contributor": "GOPS", "contributorId": "114021186448785904606", "date": "Sep 2026", "status": "ownership-excluded" },
+    { "slot": 20, "contributor": "Julian Cabrera", "contributorId": "113013326451523886787", "date": "Jan 2026", "status": "ownership-excluded" }
+  ],
+  "includedSingles": [],
+  "confirmedPairs": [],
+  "duplicates": [],
+  "totals": {
+    "auditedGoogleSlots": 20,
+    "ownershipExcluded": 20,
+    "includedSingles": 0,
+    "confirmedPairs": 0,
+    "duplicates": 0,
+    "existingGalleryItems": 37,
+    "finalGalleryItems": 37
+  }
+}
