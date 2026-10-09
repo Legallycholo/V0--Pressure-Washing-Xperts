@@ -5,10 +5,9 @@ import { buildFaqPageJsonLd } from "@/lib/seo/json-ld-builders"
 import { buildPublicMetadata } from "@/lib/seo/build-page-metadata"
 
 export const metadata: Metadata = buildPublicMetadata({
-  title:
-    "Pressure Washing Near Me | Ellenwood, GA & Metro Atlanta | Pressure Washing Xperts",
+  title: "Best Pressure Washing in Ellenwood, GA | House & Driveway",
   description:
-    "Professional pressure washing in Ellenwood, GA and Metro Atlanta. House washing, driveway cleaning, roof soft wash, decks, and commercial. Licensed & insured. Free quotes. Call (800) 451-7213.",
+    "Professional pressure washing in Ellenwood, GA. House washing, driveway cleaning, roof soft washing, and commercial exterior cleaning. Free quotes.",
   pathname: "/",
 })
 

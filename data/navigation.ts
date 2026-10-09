@@ -279,6 +279,16 @@ export const commercialServices: NavLinkItem[] = [
   },
 ]
 
+/** High-intent fleet links surfaced in their own header dropdown. */
+const fleetServiceHrefOrder = [
+  "/services/commercial/fleet-washing",
+  "/services/commercial/truck-washing",
+]
+
+export const fleetServices: NavLinkItem[] = fleetServiceHrefOrder
+  .map((href) => commercialServices.find((service) => service.href === href))
+  .filter((service): service is NavLinkItem => service !== undefined)
+
 export const aboutLinks: NavLinkItem[] = [
   { href: "/about/we-do-xpert", label: "We do Xpert" },
   { href: "/about/pressure-vs-soft-washing", label: "Pressure Washing vs. Soft Washing" },
@@ -302,5 +312,3 @@ export const headerServiceAreaLinks: NavLinkItem[] = getServiceAreasForNavigatio
   href: `/service-areas/${area.slug}`,
   label: `${area.cityName}, ${area.stateCode}`,
 }))
-
-

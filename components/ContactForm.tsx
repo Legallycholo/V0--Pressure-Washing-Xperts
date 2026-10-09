@@ -196,7 +196,7 @@ export function ContactForm({ className }: ContactFormProps) {
 
   if (isSubmitted) {
     return (
-      <div className={cn("animate-success-pop-in rounded-2xl border border-white/10 bg-white/5 p-8 text-center", className)}>
+      <div className={cn("animate-success-pop-in rounded-2xl border border-white/10 bg-ps-bg-alt p-8 text-center shadow-[0_24px_60px_-24px_rgba(0,0,0,0.7)] [color-scheme:dark]", className)}>
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-500/20">
           <CheckCircle className="size-8 text-green-400" aria-hidden />
         </div>
@@ -211,7 +211,7 @@ export function ContactForm({ className }: ContactFormProps) {
   const invalid = (name: string) => missing.includes(name)
 
   return (
-    <div className={cn("relative overflow-hidden rounded-2xl border border-white/10 bg-white/5", className)}>
+    <div className={cn("relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-ps-bg-alt to-ps-bg text-white shadow-[0_24px_60px_-24px_rgba(0,0,0,0.7)] [color-scheme:dark]", className)}>
       <div className="bg-black/20 px-5 py-4 sm:px-6">
         <div className="flex items-baseline justify-between gap-3">
           <h3 className="font-display text-lg text-white sm:text-xl">

@@ -148,7 +148,8 @@ export function Services({ onOpenQuoteForm }: ServicesProps = {}) {
             Our Services
           </p>
           <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
-            What We <span className="text-ps-cyan text-glow-cyan">Do</span>
+            <span className="text-ps-cyan text-glow-cyan">House Washing</span>, Driveway Cleaning
+            {" "}&amp; Roof Soft Washing
           </h2>
           <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-sm sm:text-base">
             Residential, commercial, and fleet cleaning with the right method for each surface.

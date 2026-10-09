@@ -81,8 +81,8 @@ export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
               className="font-display uppercase leading-[0.92] tracking-wide text-white"
               style={{ fontSize: "clamp(2.75rem, 8vw, 6rem)" }}
             >
-              Metro Atlanta&apos;s{" "}
-              <span className="text-ps-cyan text-glow-cyan">Pressure Washing</span> Xperts
+              Best <span className="text-ps-cyan text-glow-cyan">Pressure Washing</span>{" "}
+              in Ellenwood, GA
             </motion.h1>
 
             <motion.p

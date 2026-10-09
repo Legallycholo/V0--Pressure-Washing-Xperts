@@ -44,8 +44,7 @@ export default function Home() {
                 Service Areas
               </p>
               <h2 className="font-display uppercase tracking-wide text-white text-3xl sm:text-4xl lg:text-5xl">
-                Proudly Serving All of{" "}
-                <span className="text-ps-cyan text-glow-cyan">Metro Atlanta &amp; Georgia</span>
+                Based in <span className="text-ps-cyan text-glow-cyan">Ellenwood, Georgia</span>
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-ps-text-muted sm:text-base">
                 Based in Ellenwood, GA. Tap your city or call{" "}

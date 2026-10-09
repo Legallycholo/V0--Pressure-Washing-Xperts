@@ -17,6 +17,7 @@ import {
 import {
   residentialServices,
   commercialServices,
+  fleetServices,
   headerServiceAreaLinks,
   aboutLinks,
 } from "@/data/navigation"
@@ -169,14 +170,14 @@ export function Header() {
             viewport={false}
             onValueChange={() => {}}
           >
-            <NavigationMenuList>
+            <NavigationMenuList className="gap-0 xl:gap-1">
               {/* Home */}
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
                     onClick={scrollToHero}
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-2.5 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none xl:px-4"
                   >
                     Home
                   </Link>
@@ -185,7 +186,7 @@ export function Header() {
 
               {/* Residential */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
+                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
                   Residential
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
@@ -208,7 +209,7 @@ export function Header() {
 
               {/* Commercial */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
+                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
                   Commercial
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
@@ -229,9 +230,32 @@ export function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
+              {/* Fleet Washing */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent px-2.5 font-semibold text-brand-yellow hover:bg-white/10 hover:text-brand-yellow-dark data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow-dark xl:px-4">
+                  Fleet Washing
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
+                  <ul className="flex w-max min-w-[240px] flex-col bg-[#0d1b2a] py-2">
+                    {fleetServices.map((service) => (
+                      <li key={service.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={service.href}
+                            className="block whitespace-nowrap px-5 py-3 text-sm text-white/90 no-underline outline-none transition-colors hover:bg-white/10 hover:text-brand-yellow"
+                          >
+                            <div className="font-medium leading-none">{service.label}</div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
               {/* Service Areas */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
+                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
                   Service Areas
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
@@ -254,7 +278,7 @@ export function Header() {
 
               {/* About */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow">
+                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
                   About
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
@@ -284,7 +308,7 @@ export function Header() {
               <TooltipTrigger asChild>
                 <a
                   href={businessPhoneTelHref}
-                  className={`inline-flex items-center gap-2 px-3 py-2 text-ps-cyan hover:text-brand-yellow-dark transition-colors ${ctaPress}`}
+                  className={`hidden items-center gap-2 px-3 py-2 text-ps-cyan hover:text-brand-yellow-dark transition-colors xl:inline-flex ${ctaPress}`}
                 >
                   <Phone className="size-4 shrink-0" aria-hidden />
                   <span className="font-display text-lg xl:text-xl tracking-wide">{businessPhoneDisplay}</span>
@@ -389,6 +413,34 @@ export function Header() {
                     href={service.href}
                     onClick={handleNavClick}
                     className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
+                  >
+                    {service.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Fleet Washing Dropdown */}
+          <div>
+            <button
+              type="button"
+              onClick={() => toggleMobileDropdown('fleet')}
+              className="flex min-h-[44px] w-full items-center justify-between py-3 text-base font-semibold text-brand-yellow transition-colors hover:text-brand-yellow-dark"
+              aria-expanded={openMobileDropdown === 'fleet'}
+              aria-controls="mobile-fleet-menu"
+            >
+              Fleet Washing
+              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'fleet' ? 'rotate-180' : ''}`} />
+            </button>
+            {openMobileDropdown === 'fleet' && (
+              <div id="mobile-fleet-menu" className="mt-1 space-y-1 pl-4">
+                {fleetServices.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    onClick={handleNavClick}
+                    className="flex min-h-[44px] items-center py-2.5 text-sm text-white/80 transition-colors hover:text-brand-yellow"
                   >
                     {service.label}
                   </Link>
