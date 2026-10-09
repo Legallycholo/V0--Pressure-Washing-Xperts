@@ -2,10 +2,12 @@ import { randomUUID } from "crypto"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 import { runAgent } from "@/lib/agentRuntime"
+import { runLocalChris, type LocalChrisState } from "@/lib/localChris"
 
 type ChatRequestBody = {
   message?: unknown
   sessionId?: unknown
+  state?: unknown
 }
 
 function asTrimmedString(value: unknown): string | null {
@@ -40,20 +42,21 @@ export async function POST(request: Request) {
     })
   }
 
-  // null → agentRuntime will create a new ADK session automatically
+  // The local assistant is the no-credit default. Set CHRIS_CHAT_PROVIDER=google
+  // to use the existing Vertex agent; any provider failure falls back locally.
   const sessionId = asTrimmedString(body.sessionId)
+  const provider = process.env.CHRIS_CHAT_PROVIDER?.trim().toLowerCase()
+  const hasLocalState = Boolean(body.state && typeof body.state === "object")
 
-  try {
-    const { reply, sessionId: activeSessionId } = await runAgent({ message, userId, sessionId })
-    return NextResponse.json({ reply, sessionId: activeSessionId })
-  } catch (error) {
-    console.error("[api/chat] failed to run agent", error)
-    return NextResponse.json(
-      {
-        error:
-          "I had trouble reaching our assistant. You can call us at (800) 451-7213 for immediate help.",
-      },
-      { status: 502 },
-    )
+  if (provider === "google" && !hasLocalState) {
+    try {
+      const { reply, sessionId: activeSessionId } = await runAgent({ message, userId, sessionId })
+      return NextResponse.json({ reply, sessionId: activeSessionId })
+    } catch (error) {
+      console.error("[api/chat] Google agent unavailable; using local Chris", error)
+    }
   }
+
+  const result = runLocalChris(message, body.state as LocalChrisState | undefined)
+  return NextResponse.json(result)
 }

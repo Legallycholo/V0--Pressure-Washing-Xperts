@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { X, Send, MessageCircle, Phone, Droplets } from 'lucide-react'
+import { trackLeadConversion } from '@/lib/leadAnalytics'
+import type { ChatLeadPayload, LocalChrisState } from '@/lib/localChris'
 
 /* ─── Types ────────────────────────────────────────────────────────────────── */
 
@@ -68,6 +70,7 @@ export function ChrisChatWidget() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [sessionId, setSessionId] = useState<string | null>(null)
+  const [localState, setLocalState] = useState<LocalChrisState | null>(null)
 
   /* Attention state */
   const [showBubble, setShowBubble] = useState(false)
@@ -121,11 +124,13 @@ export function ChrisChatWidget() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, sessionId }),
+        body: JSON.stringify({ message: text, sessionId, state: localState }),
       })
       const data = (await res.json()) as {
         reply?: string
         sessionId?: string
+        state?: LocalChrisState
+        lead?: ChatLeadPayload
         error?: string
       }
 
@@ -139,15 +144,38 @@ export function ChrisChatWidget() {
       if (data.sessionId) {
         setSessionId(data.sessionId)
       }
+      if (data.state) {
+        setLocalState(data.state)
+      }
 
-      const replyText = data.reply
+      let reply = data.reply
+      if (data.lead) {
+        const leadResponse = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data.lead),
+        })
+        const leadResult = (await leadResponse.json().catch(() => ({}))) as {
+          error?: string
+        }
+        if (leadResponse.ok) {
+          trackLeadConversion()
+          setLocalState((current) =>
+            current ? { ...current, submitted: true } : current,
+          )
+          reply =
+            "You're all set—I sent this to the team. Someone will reach out within 24 hours to schedule your free quote. You can also call (800) 451-7213 anytime."
+        } else {
+          reply = `${leadResult.error ?? "We couldn't send your request."} Your details are still here, so send “retry” or call (800) 451-7213.`
+        }
+      }
 
       setMessages((prev) => [
         ...prev,
         {
           id: `a_${Date.now()}`,
           role: 'assistant',
-          text: replyText,
+          text: reply,
         },
       ])
     } catch (error) {
@@ -166,7 +194,7 @@ export function ChrisChatWidget() {
     } finally {
       setIsLoading(false)
     }
-  }, [input, isLoading, sessionId])
+  }, [input, isLoading, localState, sessionId])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {

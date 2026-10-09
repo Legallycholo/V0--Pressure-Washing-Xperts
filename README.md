@@ -69,13 +69,9 @@ Copy [`.env.example`](.env.example) to `.env.local` and set:
 
 \* Required unless you exclusively rely on `SUPABASE_SERVICE_ROLE_KEY` for writes.
 
-### `public.leads` columns
+### Chris chat assistant
 
-The API route expects the following columns on `public.leads` (see [`supabase/migrations/`](supabase/migrations/)):
-
-`id, created_at, full_name, email, phone, city, state, zip, message, how_heard, selected_offer, submission_type, page_path, approx_sqft_estimate, approx_sq_footage, rough_price_estimate, rough_price_version`.
-
-Apply the migrations to your Supabase project (SQL Editor, Supabase CLI `db push`, or the Supabase MCP `apply_migration` tool) before the first lead submission — the route no longer carries a legacy-schema fallback.
+The on-site Chris widget works without an AI provider by default. Its local conversation flow answers common service questions, collects the required callback details, and submits them through the same `/api/contact` pipeline as the Rays-style contact form. That pipeline writes to the existing `public."pressure contacts"` table and sends the configured email and SMS notifications. The existing Google Vertex AI agent under `agent/` and its Next.js runtime are preserved. Set `CHRIS_CHAT_PROVIDER=google` in the server environment to use that agent; if Google is unavailable, the chat automatically continues with the local lead flow.
 
 ## Deployment
 
