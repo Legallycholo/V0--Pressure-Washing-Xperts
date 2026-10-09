@@ -309,7 +309,11 @@ function GalleryGrid({
 }
 
 function GalleryTeaser() {
-  const itemsForView = useMemo(() => galleryItems.slice(0, GALLERY_TEASER_COUNT), [])
+  const itemsForView = useMemo(() => {
+    const featured = galleryItems.filter((item) => item.homepageFeatured)
+    const remaining = galleryItems.filter((item) => !item.homepageFeatured)
+    return [...featured, ...remaining].slice(0, GALLERY_TEASER_COUNT)
+  }, [])
   const { lightboxIndex, openLightbox, closeLightbox, navigateLightbox } =
     useGalleryLightbox(itemsForView)
 

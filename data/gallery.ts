@@ -24,6 +24,8 @@ export interface GalleryItem {
   id: number
   category: GalleryItemCategory
   title: string
+  /** Prioritize this result in the homepage gallery teaser. */
+  homepageFeatured?: boolean
   /** Public path for full-size image (optional until assets exist). */
   imageSrc?: string
   /** Thumbnail path for grid tiles (optional). */
@@ -118,6 +120,106 @@ export const galleryCtaByCategory: Record<
 
 /** Order is intentional: on the All tab, adjacent tiles use different `tagPlaceholder` values where possible. */
 export const galleryItems: GalleryItem[] = [
+  {
+    id: 38,
+    category: "residential",
+    title: "Clean house siding",
+    homepageFeatured: true,
+    imageSrc: "/gallery/google-business/gbp-04-clean-siding.webp",
+    thumbSrc: "/gallery/google-business/gbp-04-clean-siding-thumb.webp",
+    alt: "Freshly washed gray house siding with clean trim and windows beside a green lawn.",
+    tagPlaceholder: "Residential",
+  },
+  {
+    id: 39,
+    category: "driveways",
+    title: "Driveway cleaning in progress",
+    imageSrc: "/gallery/google-business/gbp-06-driveway-cleaning.webp",
+    thumbSrc: "/gallery/google-business/gbp-06-driveway-cleaning-thumb.webp",
+    alt: "Pressure washing in progress showing a clear contrast between cleaned and stained concrete driveway sections.",
+    tagPlaceholder: "Driveways & Patios",
+    thumbObjectPosition: "center 55%",
+  },
+  {
+    id: 40,
+    category: "driveways",
+    title: "Clean concrete entry steps",
+    imageSrc: "/gallery/google-business/gbp-11-clean-concrete-steps.webp",
+    thumbSrc: "/gallery/google-business/gbp-11-clean-concrete-steps-thumb.webp",
+    alt: "Bright concrete entry steps after pressure washing between red-painted railings.",
+    tagPlaceholder: "Driveways & Patios",
+    thumbObjectPosition: "center 48%",
+  },
+  {
+    id: 41,
+    category: "driveways",
+    title: "Freshly cleaned sidewalk",
+    imageSrc: "/gallery/google-business/gbp-13-clean-sidewalk.webp",
+    thumbSrc: "/gallery/google-business/gbp-13-clean-sidewalk-thumb.webp",
+    alt: "Long residential sidewalk looking bright and even after pressure washing.",
+    tagPlaceholder: "Driveways & Patios",
+    thumbObjectPosition: "center 60%",
+  },
+  {
+    id: 42,
+    category: "masonry",
+    title: "Restored brick entry steps",
+    imageSrc: "/gallery/google-business/gbp-14-clean-brick-steps.webp",
+    thumbSrc: "/gallery/google-business/gbp-14-clean-brick-steps-thumb.webp",
+    alt: "Red brick front steps and concrete landing after detailed pressure washing.",
+    tagPlaceholder: "Masonry & Stone",
+    thumbObjectPosition: "center 52%",
+  },
+  {
+    id: 43,
+    category: "driveways",
+    title: "Clean backyard patio",
+    imageSrc: "/gallery/google-business/gbp-15-clean-patio.webp",
+    thumbSrc: "/gallery/google-business/gbp-15-clean-patio-thumb.webp",
+    alt: "Backyard concrete patio with clean alternating sections beside outdoor furniture.",
+    tagPlaceholder: "Driveways & Patios",
+    thumbObjectPosition: "center 58%",
+  },
+  {
+    id: 44,
+    category: "residential",
+    title: "Clean covered patio exterior",
+    imageSrc: "/gallery/google-business/gbp-16-clean-covered-patio.webp",
+    thumbSrc: "/gallery/google-business/gbp-16-clean-covered-patio-thumb.webp",
+    alt: "Clean covered patio lattice, trim, and brick exterior after washing.",
+    tagPlaceholder: "Residential",
+    thumbObjectPosition: "center 48%",
+  },
+  {
+    id: 45,
+    category: "driveways",
+    title: "Brightened concrete walkway",
+    imageSrc: "/gallery/google-business/gbp-17-clean-walkway.webp",
+    thumbSrc: "/gallery/google-business/gbp-17-clean-walkway-thumb.webp",
+    alt: "Curved concrete walkway looking bright and clean through landscaped garden beds.",
+    tagPlaceholder: "Driveways & Patios",
+    thumbObjectPosition: "center 55%",
+  },
+  {
+    id: 46,
+    category: "commercial",
+    title: "Commercial storefront exterior",
+    homepageFeatured: true,
+    imageSrc: "/gallery/google-business/gbp-18-clean-commercial-front.webp",
+    thumbSrc: "/gallery/google-business/gbp-18-clean-commercial-front-thumb.webp",
+    alt: "Clean commercial storefront, sidewalk, and parking area after exterior washing.",
+    tagPlaceholder: "Commercial",
+  },
+  {
+    id: 47,
+    category: "residential",
+    title: "Clean painted-brick exterior",
+    homepageFeatured: true,
+    imageSrc: "/gallery/google-business/gbp-19-clean-home-exterior.webp",
+    thumbSrc: "/gallery/google-business/gbp-19-clean-home-exterior-thumb.webp",
+    alt: "Freshly cleaned white painted-brick home exterior with bright trim and entry door.",
+    tagPlaceholder: "Residential",
+  },
   {
     id: 1,
     category: "residential",
