@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X, Phone, ChevronDown, LogOut } from "lucide-react"
+import { Menu, X, Phone, ChevronDown, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -20,23 +20,64 @@ import {
   fleetServices,
   headerServiceAreaLinks,
   aboutLinks,
+  type NavLinkItem,
 } from "@/data/navigation"
-import {
-  businessAddressLines,
-  businessPhoneDisplay,
-  businessPhoneTelHref,
-  navSlogan,
-} from "@/data/site"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { ctaPress } from "@/lib/ctaInteraction"
+import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
+import { cn } from "@/lib/utils"
+import logo from "@/public/logo.png"
+
+type NavGroup = {
+  id: string
+  label: string
+  links: NavLinkItem[]
+  /** Hub page shown as "View all" at the bottom of the dropdown. */
+  hub?: { href: string; label: string }
+  /** Tailwind grid classes for the desktop dropdown. */
+  gridClassName: string
+}
+
+const navGroups: NavGroup[] = [
+  {
+    id: "residential",
+    label: "Residential",
+    links: residentialServices,
+    hub: { href: "/services/residential", label: "All residential services" },
+    gridClassName: "w-[min(46rem,calc(100vw-4rem))] grid-cols-2 xl:grid-cols-3",
+  },
+  {
+    id: "commercial",
+    label: "Commercial",
+    links: commercialServices,
+    hub: { href: "/services/commercial", label: "All commercial services" },
+    gridClassName: "w-[min(36rem,calc(100vw-4rem))] grid-cols-2",
+  },
+  {
+    id: "fleet",
+    label: "Fleet Washing",
+    links: fleetServices,
+    gridClassName: "w-60 grid-cols-1",
+  },
+  {
+    id: "areas",
+    label: "Service Areas",
+    links: headerServiceAreaLinks,
+    hub: { href: "/service-areas", label: "All service areas" },
+    gridClassName: "w-[22rem] grid-cols-2 xl:w-[34rem] xl:grid-cols-3",
+  },
+  {
+    id: "about",
+    label: "About",
+    links: aboutLinks,
+    gridClassName: "w-64 grid-cols-1",
+  },
+]
+
+const desktopTriggerClass =
+  "h-10 bg-transparent px-3 text-[0.9375rem] font-medium text-brand-blue-dark hover:bg-accent hover:text-brand-blue focus:bg-accent data-[state=open]:bg-accent data-[state=open]:text-brand-blue"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null)
+  const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
@@ -46,473 +87,205 @@ export function Header() {
       if (e.key === "Escape") setIsMenuOpen(false)
     }
     document.addEventListener("keydown", onKeyDown)
-    return () => document.removeEventListener("keydown", onKeyDown)
+    // Lock page scroll behind the full-height mobile menu
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
   }, [isMenuOpen])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => setScrolled(window.scrollY > 8)
     window.addEventListener("scroll", onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const handleNavClick = () => {
+  const closeMenu = () => {
     setIsMenuOpen(false)
-    setOpenMobileDropdown(null)
+    setOpenMobileGroup(null)
   }
 
-  const scrollToHero = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Only hijack the click on the homepage (smooth scroll).
     // On any other page, let Next.js navigate to "/" normally.
     if (pathname === "/") {
       e.preventDefault()
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
-    handleNavClick()
-  }
-
-  const toggleMobileDropdown = (menu: string) => {
-    setOpenMobileDropdown(openMobileDropdown === menu ? null : menu)
+    closeMenu()
   }
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-ps-bg/95 backdrop-blur-md border-b transition-shadow duration-300 ${
-        scrolled
-          ? "shadow-[0_6px_30px_rgba(0,0,0,0.55)] border-ps-cyan/30"
-          : "shadow-[0_2px_20px_rgba(0,0,0,0.4)] border-ps-cyan/15"
-      }`}
+      className={cn(
+        "fixed inset-x-0 top-0 z-[60] border-b bg-white transition-shadow duration-300",
+        scrolled ? "border-border shadow-[0_4px_20px_-12px_rgba(11,34,57,0.35)]" : "border-transparent"
+      )}
     >
-      <div
-        className={`hidden lg:block border-b border-white/10 overflow-hidden transition-all duration-300 motion-reduce:transition-none ${
-          scrolled ? "max-h-0 opacity-0" : "max-h-24 opacity-100"
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex min-h-9 items-center justify-between text-xs text-white/65">
-            <div className="flex items-center gap-4">
-              <span>Pressure Washing Xperts LLC</span>
-              <span className="text-white/30">|</span>
-              <span>{navSlogan}</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="hidden xl:inline text-right leading-tight">
-                {businessAddressLines.join(", ")}
-              </span>
-              <span className="xl:hidden text-right leading-tight">
-                {businessAddressLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </span>
-              <span className="text-white/30">|</span>
-              <a
-                href="mailto:pressurewashingxperts@gmail.com"
-                className="text-sm xl:text-base text-white/75 hover:text-white transition-colors"
-              >
-                pressurewashingxperts@gmail.com
-              </a>
-              <span className="text-white/30">|</span>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <a
-                    href={businessPhoneTelHref}
-                    className={`font-display text-lg xl:text-xl tracking-wide text-ps-cyan hover:text-brand-yellow-dark transition-colors ${ctaPress} inline-block rounded-sm`}
-                  >
-                    {businessPhoneDisplay}
-                  </a>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">Tap to call</TooltipContent>
-              </Tooltip>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
-        <div className="relative flex min-h-[48px] items-center">
-          <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center">
-            <Link
-              href="/"
-              onClick={scrollToHero}
-              className="inline-flex shrink-0 items-center rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
-              aria-label="Pressure Washing Xperts home"
-            >
-              <Image
-                src="/navbar-logo.png"
-                alt="Pressure Washing Xperts logo"
-                width={320}
-                height={160}
-                priority
-                className="h-10 xl:h-11 w-auto bg-transparent object-contain"
-              />
-            </Link>
-          </div>
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:h-20 lg:px-8">
+        <Link
+          href="/"
+          onClick={scrollToTop}
+          className="shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          aria-label="Pressure Washing Xperts home"
+        >
+          <Image
+            src={logo}
+            alt="Pressure Washing Xperts logo"
+            priority
+            sizes="112px"
+            className="h-11 w-auto lg:h-16"
+          />
+        </Link>
 
-          <Link
-            href="/"
-            onClick={scrollToHero}
-            className="mr-2 inline-flex items-center rounded-md bg-transparent lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/80"
-            aria-label="Pressure Washing Xperts home"
-          >
-            <Image
-              src="/navbar-logo.png"
-              alt="Pressure Washing Xperts logo"
-              width={200}
-              height={100}
-              priority
-              className="h-8 w-auto bg-transparent object-contain"
-            />
-          </Link>
-          {/* Desktop Navigation */}
-          <NavigationMenu
-            className="relative z-20 hidden min-w-0 shrink-0 lg:flex"
-            viewport={false}
-            onValueChange={() => {}}
-          >
-            <NavigationMenuList className="gap-0 xl:gap-1">
-              {/* Home */}
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/"
-                    onClick={scrollToHero}
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-2.5 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none xl:px-4"
-                  >
-                    Home
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-
-              {/* Residential */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
-                  Residential
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
-                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
-                    {residentialServices.map((service) => (
-                      <li key={service.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={service.href}
-                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
-                          >
-                            <div className="font-medium leading-none">{service.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* Commercial */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
-                  Commercial
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
-                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
-                    {commercialServices.map((service) => (
-                      <li key={service.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={service.href}
-                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
-                          >
-                            <div className="font-medium leading-none">{service.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* Fleet Washing */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-2.5 font-semibold text-brand-yellow hover:bg-white/10 hover:text-brand-yellow-dark data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow-dark xl:px-4">
-                  Fleet Washing
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
-                  <ul className="flex w-max min-w-[240px] flex-col bg-[#0d1b2a] py-2">
-                    {fleetServices.map((service) => (
-                      <li key={service.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={service.href}
-                            className="block whitespace-nowrap px-5 py-3 text-sm text-white/90 no-underline outline-none transition-colors hover:bg-white/10 hover:text-brand-yellow"
-                          >
-                            <div className="font-medium leading-none">{service.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* Service Areas */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
-                  Service Areas
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
-                  <ul className="grid grid-cols-2 w-max min-w-[340px] max-w-[440px] py-2 bg-[#0d1b2a]">
-                    {headerServiceAreaLinks.map((area) => (
-                      <li key={area.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={area.href}
-                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
-                          >
-                            <div className="font-medium leading-none">{area.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* About */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
-                  About
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="border-t-2 border-brand-yellow shadow-[0_8px_24px_rgba(0,0,0,0.4)] rounded-none mt-0">
-                  <ul className="flex flex-col w-max min-w-[220px] max-w-[260px] py-2 bg-[#0d1b2a]">
-                    {aboutLinks.map((link) => (
+        {/* Desktop navigation */}
+        <NavigationMenu viewport={false} className="ml-4 hidden flex-1 justify-start lg:flex xl:ml-8">
+          <NavigationMenuList className="gap-0.5">
+            {navGroups.map((group) => (
+              <NavigationMenuItem key={group.id}>
+                <NavigationMenuTrigger className={desktopTriggerClass}>{group.label}</NavigationMenuTrigger>
+                <NavigationMenuContent className="p-0">
+                  <ul className={cn("grid gap-x-2 p-3", group.gridClassName)}>
+                    {group.links.map((link) => (
                       <li key={link.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={link.href}
-                            className="block px-5 py-3 text-sm text-white/90 hover:text-brand-yellow hover:bg-white/10 transition-colors no-underline outline-none whitespace-nowrap"
+                            className="block rounded-lg px-3 py-2 text-sm font-medium text-brand-blue-dark hover:bg-accent hover:text-brand-blue"
                           >
-                            <div className="font-medium leading-none">{link.label}</div>
+                            {link.label}
                           </Link>
                         </NavigationMenuLink>
                       </li>
                     ))}
                   </ul>
+                  {group.hub ? (
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={group.hub.href}
+                        className="flex flex-row items-center justify-between rounded-none border-t border-border bg-section-light px-6 py-3 text-sm font-semibold text-brand-blue hover:bg-accent"
+                      >
+                        {group.hub.label}
+                        <ArrowRight className="size-4 text-brand-blue" aria-hidden />
+                      </Link>
+                    </NavigationMenuLink>
+                  ) : null}
                 </NavigationMenuContent>
               </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
-            </NavigationMenuList>
-          </NavigationMenu>
+        <div className="ml-auto flex items-center gap-2 lg:gap-3">
+          <a
+            href={businessPhoneTelHref}
+            className="hidden items-center gap-2 rounded-lg px-2 py-2 text-[0.9375rem] font-semibold text-brand-blue-dark transition-colors hover:text-brand-blue xl:inline-flex"
+          >
+            <Phone className="size-4 text-brand-blue" aria-hidden />
+            {businessPhoneDisplay}
+          </a>
+          <Button asChild className="hidden h-10 px-5 lg:inline-flex">
+            <Link href="/contact">Request Callback</Link>
+          </Button>
 
-          {/* Desktop CTA */}
-          <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <a
-                  href={businessPhoneTelHref}
-                  className={`hidden items-center gap-2 px-3 py-2 text-ps-cyan hover:text-brand-yellow-dark transition-colors xl:inline-flex ${ctaPress}`}
-                >
-                  <Phone className="size-4 shrink-0" aria-hidden />
-                  <span className="font-display text-lg xl:text-xl tracking-wide">{businessPhoneDisplay}</span>
-                </a>
-              </TooltipTrigger>
-              <TooltipContent side="bottom">Tap to call: free quotes</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  asChild
-                  className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark px-5 font-sans"
-                >
-                  <Link href="/contact">Request Callback</Link>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="bottom">Free quote, no obligation</TooltipContent>
-            </Tooltip>
-          </div>
-
-          {/* Mobile Menu Button */}
+          {/* Mobile: one-tap call + menu toggle */}
+          <a
+            href={businessPhoneTelHref}
+            className="inline-flex size-10 items-center justify-center rounded-lg bg-brand-blue text-white lg:hidden"
+            aria-label={`Call ${businessPhoneDisplay}`}
+          >
+            <Phone className="size-5" aria-hidden />
+          </a>
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden ml-auto p-2 text-white"
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="inline-flex size-10 items-center justify-center rounded-lg text-brand-blue-dark hover:bg-accent lg:hidden"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${
-          isMenuOpen ? "max-h-[80vh] overflow-y-auto" : "max-h-0"
-        }`}
+        id="mobile-menu"
+        className={cn(
+          "overflow-y-auto overscroll-contain border-t border-border bg-white lg:hidden",
+          isMenuOpen ? "h-[calc(100dvh-4rem)]" : "hidden"
+        )}
       >
-        <nav className="bg-brand-blue-dark/95 backdrop-blur-md px-4 py-4 space-y-2">
-          <div className="flex items-center justify-between gap-3 pb-3 mb-1 border-b border-white/10">
-            <span className="text-xs font-semibold uppercase tracking-wider text-white/45">
-              Menu
-            </span>
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen(false)}
-              className={`inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow ${ctaPress}`}
-              aria-label="Exit menu"
-            >
-              <LogOut className="size-4" aria-hidden />
-              Exit menu
-            </button>
-          </div>
-
-          {/* Home */}
+        <nav className="px-4 pb-8 pt-2" aria-label="Mobile">
           <Link
             href="/"
-            onClick={scrollToHero}
-            className="block text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px] flex items-center"
+            onClick={scrollToTop}
+            className="flex min-h-12 items-center border-b border-border text-base font-semibold text-brand-blue-dark"
           >
             Home
           </Link>
 
-          {/* Residential Dropdown */}
-          <div>
-            <button
-              onClick={() => toggleMobileDropdown('residential')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
-            >
-              Residential
-              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'residential' ? 'rotate-180' : ''}`} />
-            </button>
-            {openMobileDropdown === 'residential' && (
-              <div className="pl-4 space-y-1 mt-1">
-                {residentialServices.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
-                  >
-                    {service.label}
-                  </Link>
-                ))}
+          {navGroups.map((group) => {
+            const isOpen = openMobileGroup === group.id
+            return (
+              <div key={group.id} className="border-b border-border">
+                <button
+                  type="button"
+                  onClick={() => setOpenMobileGroup(isOpen ? null : group.id)}
+                  className="flex min-h-12 w-full items-center justify-between text-base font-semibold text-brand-blue-dark"
+                  aria-expanded={isOpen}
+                  aria-controls={`mobile-group-${group.id}`}
+                >
+                  {group.label}
+                  <ChevronDown
+                    className={cn("size-5 text-muted-foreground transition-transform", isOpen && "rotate-180")}
+                    aria-hidden
+                  />
+                </button>
+                {isOpen ? (
+                  <ul id={`mobile-group-${group.id}`} className="pb-3">
+                    {group.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          onClick={closeMenu}
+                          className="flex min-h-11 items-center rounded-lg px-3 text-[0.9375rem] text-slate-700 hover:bg-accent hover:text-brand-blue"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                    {group.hub ? (
+                      <li>
+                        <Link
+                          href={group.hub.href}
+                          onClick={closeMenu}
+                          className="flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-[0.9375rem] font-semibold text-brand-blue hover:bg-accent"
+                        >
+                          {group.hub.label}
+                          <ArrowRight className="size-4" aria-hidden />
+                        </Link>
+                      </li>
+                    ) : null}
+                  </ul>
+                ) : null}
               </div>
-            )}
-          </div>
+            )
+          })}
 
-          {/* Commercial Dropdown */}
-          <div>
-            <button
-              onClick={() => toggleMobileDropdown('commercial')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
-            >
-              Commercial
-              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'commercial' ? 'rotate-180' : ''}`} />
-            </button>
-            {openMobileDropdown === 'commercial' && (
-              <div className="pl-4 space-y-1 mt-1">
-                {commercialServices.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
-                  >
-                    {service.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Fleet Washing Dropdown */}
-          <div>
-            <button
-              type="button"
-              onClick={() => toggleMobileDropdown('fleet')}
-              className="flex min-h-[44px] w-full items-center justify-between py-3 text-base font-semibold text-brand-yellow transition-colors hover:text-brand-yellow-dark"
-              aria-expanded={openMobileDropdown === 'fleet'}
-              aria-controls="mobile-fleet-menu"
-            >
-              Fleet Washing
-              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'fleet' ? 'rotate-180' : ''}`} />
-            </button>
-            {openMobileDropdown === 'fleet' && (
-              <div id="mobile-fleet-menu" className="mt-1 space-y-1 pl-4">
-                {fleetServices.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    onClick={handleNavClick}
-                    className="flex min-h-[44px] items-center py-2.5 text-sm text-white/80 transition-colors hover:text-brand-yellow"
-                  >
-                    {service.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Service Areas Dropdown */}
-          <div>
-            <button
-              onClick={() => toggleMobileDropdown('areas')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
-            >
-              Service Areas
-              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'areas' ? 'rotate-180' : ''}`} />
-            </button>
-            {openMobileDropdown === 'areas' && (
-              <div className="pl-4 space-y-1 mt-1">
-                {headerServiceAreaLinks.map((area) => (
-                  <Link
-                    key={area.href}
-                    href={area.href}
-                    onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
-                  >
-                    {area.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* About Dropdown */}
-          <div>
-            <button
-              onClick={() => toggleMobileDropdown('about')}
-              className="flex items-center justify-between w-full text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px]"
-            >
-              About
-              <ChevronDown className={`size-5 transition-transform ${openMobileDropdown === 'about' ? 'rotate-180' : ''}`} />
-            </button>
-            {openMobileDropdown === 'about' && (
-              <div className="pl-4 space-y-1 mt-1">
-                {aboutLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={handleNavClick}
-                    className="block text-sm text-white/80 transition-colors hover:text-brand-yellow py-2.5 min-h-[44px] flex items-center"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="pt-4 border-t border-white/10 space-y-4">
-            <a
-              href={businessPhoneTelHref}
-              className={`flex items-center justify-center gap-2 rounded-md bg-brand-yellow px-4 text-base font-bold text-brand-blue-dark transition-colors hover:bg-brand-yellow-dark min-h-[48px] ${ctaPress}`}
-            >
-              <Phone className="size-5" />
-              <span>Call {businessPhoneDisplay} Now</span>
-            </a>
-            <Button
-              asChild
-              variant="outline"
-              className="w-full border-2 border-white/60 bg-transparent text-white font-semibold hover:bg-white/10 hover:text-white min-h-[44px]"
-            >
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+          <div className="mt-6 grid gap-3">
+            <Button asChild size="lg">
+              <a href={businessPhoneTelHref}>
+                <Phone className="size-4" aria-hidden />
+                Call {businessPhoneDisplay}
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/contact" onClick={closeMenu}>
                 Request Callback
               </Link>
             </Button>

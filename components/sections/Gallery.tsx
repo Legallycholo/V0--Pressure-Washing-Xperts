@@ -5,13 +5,13 @@ import { createPortal } from "react-dom"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { X, ChevronLeft, ChevronRight, Expand, Phone } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Expand, ArrowRight } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
+import { CtaButtons } from "@/components/sections/CtaButtons"
+import { SectionHeading } from "@/components/sections/SectionHeading"
 import { Reveal } from "@/components/motion/Reveal"
 import { cn } from "@/lib/utils"
-import { ctaPress } from "@/lib/ctaInteraction"
-import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import {
   GALLERY_TEASER_COUNT,
   galleryCategories,
@@ -245,7 +245,7 @@ function GalleryGrid({
       {itemsForView.map((item, index) => (
         <div
           key={item.id}
-          className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl"
+          className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl bg-section-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           onClick={(e) => onOpen(index, e.currentTarget)}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -280,28 +280,21 @@ function GalleryGrid({
             </div>
           )}
 
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-3 pb-3 pt-10">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded bg-white/20 px-1.5 text-xs font-bold text-white">
-                {item.id}
+          {showTagChips && item.tagPlaceholder ? (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-3 pt-10">
+              <span className="line-clamp-2 inline-block rounded-full bg-white/95 px-2.5 py-0.5 text-left text-[11px] font-semibold leading-tight text-brand-blue-dark sm:text-xs">
+                {item.tagPlaceholder}
               </span>
-              {showTagChips && item.tagPlaceholder ? (
-                <span className="line-clamp-2 rounded-full bg-brand-yellow/95 px-2.5 py-0.5 text-left text-[11px] font-semibold leading-tight text-brand-blue-dark sm:text-xs">
-                  {item.tagPlaceholder}
-                </span>
-              ) : null}
             </div>
-          </div>
+          ) : null}
 
-          <div className="absolute inset-0 flex items-center justify-center bg-brand-blue-dark/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <div className="text-center px-2">
-              <Expand className="mx-auto mb-2 size-8 text-brand-yellow" aria-hidden />
+          <div className="absolute inset-0 flex items-center justify-center bg-brand-blue-dark/75 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+            <div className="px-2 text-center">
+              <Expand className="mx-auto mb-2 size-7 text-white" aria-hidden />
               <p className="text-sm font-medium text-white">{item.title}</p>
-              <p className="text-xs text-white/60">{getGalleryCategoryLabel(item.category)}</p>
+              <p className="text-xs text-white/70">{getGalleryCategoryLabel(item.category)}</p>
             </div>
           </div>
-
-          <div className="pointer-events-none absolute inset-0 rounded-xl border border-white/10" />
         </div>
       ))}
     </div>
@@ -321,22 +314,16 @@ function GalleryTeaser() {
     <section
       id="gallery"
       aria-labelledby="gallery-heading"
-      className="bg-section-dark py-14 sm:py-16 lg:py-20"
+      className="bg-white py-16 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mb-7 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
-            Our Work
-          </p>
-          <h2
+        <Reveal className="mb-10">
+          <SectionHeading
             id="gallery-heading"
-            className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl"
-          >
-            Our <span className="text-ps-cyan text-glow-cyan">Work</span>
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-base text-white/70">
-            Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
-          </p>
+            eyebrow="Our work"
+            title="Recent projects around Metro Atlanta"
+            description="Homes, driveways, and commercial properties we've cleaned recently. Tap any photo to view it full size."
+          />
         </Reveal>
 
         <GalleryGrid
@@ -345,21 +332,13 @@ function GalleryTeaser() {
           showTagChips={false}
         />
 
-        <div className="mt-7 flex flex-col items-center gap-3 text-center">
-          <Button
-            asChild
-            size="lg"
-            className="bg-brand-yellow font-bold text-brand-blue-dark hover:bg-brand-yellow-dark"
-          >
-            <Link href="/gallery">View Full Gallery</Link>
+        <div className="mt-8 text-center">
+          <Button asChild size="lg" variant="outline">
+            <Link href="/gallery">
+              View full gallery
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
           </Button>
-          <a
-            href={businessPhoneTelHref}
-            className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
-          >
-            <Phone className="size-4 shrink-0" aria-hidden />
-            <span>Call {businessPhoneDisplay}</span>
-          </a>
         </div>
       </div>
 
@@ -423,25 +402,19 @@ function GalleryFull() {
     <section
       id="gallery"
       aria-labelledby="gallery-heading"
-      className="animate-fade-in-up bg-section-dark py-12"
+      className="bg-white py-12 sm:py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-7 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
-            Our Work
-          </p>
-          <h1
-            id="gallery-heading"
-            className="text-balance text-2xl font-bold text-white sm:text-3xl lg:text-4xl"
-          >
-            Project Gallery
-          </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-base text-white/70">
-            Browse our portfolio of completed residential and commercial projects across Metro Atlanta.
-          </p>
-        </div>
+        <SectionHeading
+          as="h1"
+          id="gallery-heading"
+          eyebrow="Our work"
+          title="Project gallery"
+          description="Completed residential and commercial projects across Metro Atlanta. Filter by service or tap a photo to view it full size."
+          className="mb-8"
+        />
 
-        <div className="mb-6">
+        <div className="mb-8">
           <div
             role="tablist"
             aria-label="Filter gallery by category"
@@ -455,10 +428,10 @@ function GalleryFull() {
                 aria-selected={activeCategory === category.id}
                 id={`gallery-tab-${category.id}`}
                 onClick={() => setCategory(category.id)}
-                className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${
+                className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   activeCategory === category.id
-                    ? "bg-brand-yellow text-brand-blue-dark"
-                    : "bg-white/10 text-white/80 hover:bg-white/20"
+                    ? "border-brand-blue bg-brand-blue text-white"
+                    : "border-border bg-white text-brand-blue-dark hover:border-brand-blue/40 hover:bg-accent"
                 }`}
               >
                 {category.label}
@@ -468,7 +441,7 @@ function GalleryFull() {
         </div>
 
         {filteredItems.length === 0 ? (
-          <p className="py-8 text-center text-base text-white/60">
+          <p className="py-8 text-center text-base text-muted-foreground">
             Images coming soon.
           </p>
         ) : (
@@ -476,23 +449,17 @@ function GalleryFull() {
         )}
 
         <div
-          className="mx-auto mt-8 max-w-2xl text-center"
+          className="mx-auto mt-14 max-w-2xl rounded-2xl border border-border bg-section-light px-6 py-10 text-center"
           aria-labelledby="gallery-cta-heading"
         >
           <h2
             id="gallery-cta-heading"
-            className="text-balance text-xl font-bold text-white sm:text-2xl"
+            className="text-xl font-bold text-brand-blue-dark sm:text-2xl"
           >
             {cta.title}
           </h2>
-          <p className="mt-2 text-pretty text-base text-white/70">{cta.description}</p>
-          <a
-            href={businessPhoneTelHref}
-            className={`mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-white/60 rounded-md hover:border-white hover:bg-white/10 transition-all font-sans focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-section-dark ${ctaPress}`}
-          >
-            <Phone className="size-4 shrink-0" aria-hidden />
-            <span>Call {businessPhoneDisplay}</span>
-          </a>
+          <p className="mt-2 text-pretty text-base text-muted-foreground">{cta.description}</p>
+          <CtaButtons className="mt-6" />
         </div>
 
         {lightboxIndex !== null && (

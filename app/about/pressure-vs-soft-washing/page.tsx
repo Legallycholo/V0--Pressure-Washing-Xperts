@@ -1,139 +1,98 @@
 "use client"
 
-import Link from "next/link"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
-import { Button } from "@/components/ui/button"
-import { Phone, Droplets, Gauge } from "lucide-react"
-import { ctaPress } from "@/lib/ctaInteraction"
+import { Droplets, Gauge, type LucideIcon } from "lucide-react"
+import { CtaBand } from "@/components/sections/CtaBand"
+import { PageHero } from "@/components/sections/PageHero"
+import { SectionHeading } from "@/components/sections/SectionHeading"
+
+const methods: {
+  title: string
+  Icon: LucideIcon
+  summary: string
+  bestFor: string[]
+  features: string[]
+}[] = [
+  {
+    title: "Pressure Washing",
+    Icon: Gauge,
+    summary: "High-pressure water for tough, durable surfaces.",
+    bestFor: ["Concrete driveways & sidewalks", "Parking lots & garages", "Brick, stone & heavy-duty hardscapes"],
+    features: ["High PSI for stubborn stains", "Fast results on hard surfaces", "Removes deep grime and buildup"],
+  },
+  {
+    title: "Soft Washing",
+    Icon: Droplets,
+    summary: "Low-pressure cleaning with specialized solutions for delicate surfaces.",
+    bestFor: ["House siding & exterior walls", "Roofs & shingles", "Wood decks, fences & painted surfaces"],
+    features: [
+      "Low PSI with biodegradable solutions",
+      "Kills mold, mildew & algae at the root",
+      "Long-lasting, surface-safe results",
+    ],
+  },
+]
 
 export default function PressureVsSoftWashingPage() {
   return (
     <>
       <Header />
-      
-      <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
-          <div className="absolute inset-0 bg-hero-pattern opacity-10" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-                Pressure Washing vs. Soft Washing
-              </h1>
-              <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed">
-                Understanding the difference between high-pressure washing and low-pressure soft washing protects your home&apos;s exterior surfaces from damage while getting the deepest clean.
-              </p>
-            </div>
-          </div>
-        </section>
 
-        {/* Comparison Section */}
-        <section className="py-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-5">
-              {/* Pressure Washing */}
-              <div className="bg-white p-4 sm:p-5 rounded-lg shadow-lg border-2 border-brand-blue">
-                <div className="flex items-center gap-3 mb-3">
-                  <Gauge className="size-8 sm:size-10 text-brand-blue" />
-                  <h2 className="text-xl sm:text-2xl font-bold text-brand-blue-dark">
-                    Pressure Washing
-                  </h2>
-                </div>
-                <p className="text-sm text-gray-700 mb-3">
-                  High-pressure water for tough, durable surfaces.
-                </p>
-                <h3 className="font-semibold text-base mb-2">Best For:</h3>
-                <ul className="space-y-1.5 text-gray-700 mb-3 text-sm">
-                  <li>• Concrete driveways &amp; sidewalks</li>
-                  <li>• Parking lots &amp; garages</li>
-                  <li>• Brick, stone &amp; heavy-duty hardscapes</li>
-                </ul>
-                <h3 className="font-semibold text-base mb-2">Features:</h3>
-                <ul className="space-y-1.5 text-gray-700 text-sm">
-                  <li>• High PSI for stubborn stains</li>
-                  <li>• Fast results on hard surfaces</li>
-                  <li>• Removes deep grime and buildup</li>
-                </ul>
-              </div>
+      <main className="min-h-screen bg-white">
+        <PageHero
+          title="Pressure Washing vs. Soft Washing"
+          description="Understanding the difference between high-pressure washing and low-pressure soft washing protects your home's exterior surfaces from damage while getting the deepest clean."
+          showCtas={false}
+        />
 
-              {/* Soft Washing */}
-              <div className="bg-white p-4 sm:p-5 rounded-lg shadow-lg border-2 border-brand-yellow">
-                <div className="flex items-center gap-3 mb-3">
-                  <Droplets className="size-8 sm:size-10 text-brand-yellow" />
-                  <h2 className="text-xl sm:text-2xl font-bold text-brand-blue-dark">
-                    Soft Washing
-                  </h2>
+        {/* Comparison */}
+        <section className="py-14 sm:py-16">
+          <div className="mx-auto grid max-w-5xl gap-5 px-4 sm:px-6 md:grid-cols-2 lg:px-8">
+            {methods.map(({ title, Icon, summary, bestFor, features }) => (
+              <article key={title} className="rounded-2xl border border-border bg-white p-6 sm:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-11 items-center justify-center rounded-xl bg-accent text-brand-blue">
+                    <Icon className="size-6" aria-hidden />
+                  </span>
+                  <h2 className="text-xl font-bold text-brand-blue-dark sm:text-2xl">{title}</h2>
                 </div>
-                <p className="text-sm text-gray-700 mb-3">
-                  Low-pressure cleaning with specialized solutions for delicate surfaces.
-                </p>
-                <h3 className="font-semibold text-base mb-2">Best For:</h3>
-                <ul className="space-y-1.5 text-gray-700 mb-3 text-sm">
-                  <li>• House siding &amp; exterior walls</li>
-                  <li>• Roofs &amp; shingles</li>
-                  <li>• Wood decks, fences &amp; painted surfaces</li>
+                <p className="mt-4 text-slate-700">{summary}</p>
+                <h3 className="mt-6 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Best for</h3>
+                <ul className="mt-2 space-y-1.5 text-slate-700">
+                  {bestFor.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
                 </ul>
-                <h3 className="font-semibold text-base mb-2">Features:</h3>
-                <ul className="space-y-1.5 text-gray-700 text-sm">
-                  <li>• Low PSI with biodegradable solutions</li>
-                  <li>• Kills mold, mildew &amp; algae at the root</li>
-                  <li>• Long-lasting, surface-safe results</li>
+                <h3 className="mt-6 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Features</h3>
+                <ul className="mt-2 space-y-1.5 text-slate-700">
+                  {features.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
                 </ul>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
         </section>
 
         {/* Expert Approach */}
-        <section className="py-10 bg-section-light">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
-              Our Xpert Approach
-            </h2>
-            <p className="text-sm sm:text-base text-gray-700 mb-4">
-              We assess each project individually and choose the right method, or a combination, to protect your property and deliver the best results.
+        <section className="bg-section-light py-14 sm:py-16">
+          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+            <SectionHeading
+              title="Our Xpert approach"
+              description="We assess each project individually and choose the right method, or a combination, to protect your property and deliver the best results."
+            />
+            <p className="mt-8 rounded-2xl border border-border bg-white p-6 text-lg font-semibold text-brand-blue-dark">
+              &ldquo;The right technique for the right surface, every time.&rdquo;
             </p>
-            <div className="bg-brand-yellow/10 p-4 rounded-lg">
-              <p className="text-lg font-semibold text-brand-blue-dark">
-                &ldquo;The right technique for the right surface, every time.&rdquo;
-              </p>
-            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-10 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold mb-3">
-              Not Sure Which Method You Need?
-            </h2>
-            <p className="text-sm sm:text-base text-white/80 mb-5">
-              Free consultation. We&apos;ll recommend the best approach.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
-              >
-                <Link href="/contact">Request Callback</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
-              >
-                <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
-                  <Phone className="size-5" />
-                  Call Now
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title="Not sure which method you need?"
+          description="Free consultation. We'll recommend the best approach."
+        />
       </main>
 
       <Footer />

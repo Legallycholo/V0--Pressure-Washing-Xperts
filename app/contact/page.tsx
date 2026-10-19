@@ -16,8 +16,8 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="pt-header-offset">
-        <ContactSection />
+      <main className="bg-section-light pt-header-offset">
+        <ContactSection headingAs="h1" />
       </main>
       <Footer />
       <FloatingCallButton />

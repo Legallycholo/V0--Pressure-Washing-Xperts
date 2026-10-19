@@ -2,7 +2,7 @@
 
 import { type ReactNode, useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
 
 /**
  * Subtle cross-page fade on navigation.
@@ -14,18 +14,16 @@ import { motion, useReducedMotion } from "framer-motion"
  * `hasMounted` starts false so the server render and the first client render
  * both paint at full opacity (`initial={false}`) — the fade must never gate
  * first-load LCP. Only later client-side navigations (a new pathname key after
- * mount) fade in. No-ops under prefers-reduced-motion.
+ * mount) fade in. The element tree is identical for every visitor so reduced-
+ * motion users do not trigger a hydration mismatch.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  const prefersReduced = useReducedMotion()
   const [hasMounted, setHasMounted] = useState(false)
 
   useEffect(() => {
     setHasMounted(true)
   }, [])
-
-  if (prefersReduced) return <>{children}</>
 
   return (
     <motion.div

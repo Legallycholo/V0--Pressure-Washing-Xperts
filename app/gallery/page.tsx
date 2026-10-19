@@ -9,8 +9,8 @@ import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
 function GalleryFallback() {
   return (
-    <section className="bg-section-dark py-12" aria-busy="true" aria-label="Loading gallery">
-      <div className="mx-auto max-w-7xl px-4 text-center text-white/60 sm:px-6 lg:px-8">
+    <section className="bg-white py-12" aria-busy="true" aria-label="Loading gallery">
+      <div className="mx-auto max-w-7xl px-4 text-center text-muted-foreground sm:px-6 lg:px-8">
         Loading gallery…
       </div>
     </section>

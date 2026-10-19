@@ -1,177 +1,104 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
-import { motion, useReducedMotion, type Variants } from "framer-motion"
-import { Clock, Phone, ShieldCheck, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { motion, type Variants } from "framer-motion"
+import { ShieldCheck, Star, CalendarCheck } from "lucide-react"
 import { ContactForm } from "@/components/ContactForm"
-import { ctaPress } from "@/lib/ctaInteraction"
-import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
+import { CtaButtons } from "@/components/sections/CtaButtons"
 import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
 import residentialHeroImage from "@/public/services/home-residential.png"
 
-interface HeroProps {
-  onOpenQuoteForm?: () => void
-}
-
 const EASE = [0.22, 1, 0.36, 1] as const
 
-/** Orchestrated entrance: content reveals after the water beam wipes (≈0.4s). */
 const heroContainer: Variants = {
   hidden: {},
-  show: { transition: { delayChildren: 0.4, staggerChildren: 0.12 } },
+  show: { transition: { delayChildren: 0.1, staggerChildren: 0.08 } },
 }
 
 const heroItem: Variants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 14 },
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
 }
 
-export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
-  const prefersReduced = useReducedMotion()
-  const motionProps = prefersReduced
-    ? {}
-    : { variants: heroContainer, initial: "hidden" as const, animate: "show" as const }
-
+export function Hero() {
   return (
     <section
       id="hero"
-      className="scroll-offset-header relative overflow-hidden bg-[#0A0F1E] pt-header-offset"
+      className="scroll-offset-header relative overflow-hidden bg-brand-blue-dark pt-header-offset text-white"
     >
-      {/* LCP-optimized hero background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={residentialHeroImage}
-          alt="Professional pressure washing service on a residential exterior in Ellenwood, GA"
-          fill
-          priority
-          sizes="100vw"
-          placeholder="blur"
-          className="object-cover opacity-20"
-        />
-      </div>
-      <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
-      {/* Power Shift gradient + cyan glow accents */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0F1E] via-[#0c1733]/80 to-[#0A0F1E]" />
-        <div className="absolute -top-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-ps-cyan/10 blur-3xl" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-transparent" />
-      </div>
-      {/* Signature: cyan water-pressure beam wipes across on load */}
-      <div className="pointer-events-none absolute inset-0 z-[5] overflow-hidden" aria-hidden>
-        <div className="animate-water-beam absolute top-0 -left-1/3 h-full w-1/3 bg-gradient-to-r from-transparent via-ps-cyan/70 to-transparent blur-md" />
-      </div>
+      <Image
+        src={residentialHeroImage}
+        alt="Freshly pressure washed residential patio in Ellenwood, GA"
+        fill
+        priority
+        sizes="100vw"
+        placeholder="blur"
+        className="object-cover"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-r from-brand-blue-dark via-brand-blue-dark/90 to-brand-blue-dark/55"
+      />
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-10 sm:pb-12 lg:pb-14">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
-          <motion.div
-            {...motionProps}
-            className="lg:col-span-5 text-center lg:text-left hero-mobile-height flex flex-col justify-center lg:min-h-0"
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-8 lg:py-20">
+        <motion.div
+          variants={heroContainer}
+          initial="hidden"
+          animate="show"
+          className="text-center lg:col-span-6 lg:text-left"
+        >
+          <motion.p
+            variants={heroItem}
+            className="text-sm font-semibold uppercase tracking-wider text-brand-blue-light"
           >
-            <motion.p
-              variants={prefersReduced ? undefined : heroItem}
-              className="mb-3 text-ps-cyan font-semibold text-xs sm:text-sm tracking-[0.28em] uppercase"
-            >
-              Ellenwood, GA · House, Roof, Driveway &amp; Commercial
-            </motion.p>
+            Ellenwood, GA &amp; Metro Atlanta
+          </motion.p>
 
-            <motion.h1
-              variants={prefersReduced ? undefined : heroItem}
-              className="font-display uppercase leading-[0.92] tracking-wide text-white"
-              style={{ fontSize: "clamp(2.75rem, 8vw, 6rem)" }}
-            >
-              Best <span className="text-ps-cyan text-glow-cyan">Pressure Washing</span>{" "}
-              in Ellenwood, GA
-            </motion.h1>
+          <motion.h1
+            variants={heroItem}
+            className="mt-3 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+          >
+            Best Pressure Washing in Ellenwood, GA
+          </motion.h1>
 
-            <motion.p
-              variants={prefersReduced ? undefined : heroItem}
-              className="mt-4 text-base sm:text-lg font-semibold text-ps-text-muted"
-            >
-              Same-Day Free Quotes · Licensed &amp; Insured · Serving GA Since 2010
-            </motion.p>
+          <motion.p
+            variants={heroItem}
+            className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/80 lg:mx-0"
+          >
+            House, roof, driveway, and commercial exterior cleaning done right the first time.
+            Free quotes and same-day availability.
+          </motion.p>
 
-            {/* Trust pills */}
-            <motion.div
-              variants={prefersReduced ? undefined : heroItem}
-              className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
-            >
-              {[
-                {
-                  Icon: Star,
-                  label: `${GOOGLE_REVIEW_RATING.toFixed(1)} Rating (${GOOGLE_REVIEW_COUNT} Reviews)`,
-                },
-                { Icon: ShieldCheck, label: "Licensed & Insured" },
-                { Icon: Clock, label: "Same-Day Service" },
-              ].map(({ Icon, label }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-ps-cyan/40 bg-ps-cyan/5 px-3 py-1.5 text-xs sm:text-sm font-medium text-ps-text"
-                >
-                  <Icon className="size-3.5 shrink-0 text-ps-cyan" aria-hidden />
-                  {label}
-                </span>
-              ))}
-            </motion.div>
-
-            {/* Phone number: largest, most prominent element above the fold */}
-            <motion.a
-              variants={prefersReduced ? undefined : heroItem}
-              href={businessPhoneTelHref}
-              className={`group mt-6 inline-flex flex-col items-center lg:items-start rounded-2xl ${ctaPress}`}
-              aria-label={`Call us now at ${businessPhoneDisplay}`}
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ps-text-muted">
-                Call Now · We Answer in 60 Seconds
+          <motion.ul
+            variants={heroItem}
+            className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/85 lg:justify-start"
+          >
+            <li className="inline-flex items-center gap-1.5">
+              <Star className="size-4 fill-amber-400 text-amber-400" aria-hidden />
+              <span>
+                <strong className="font-semibold text-white">{GOOGLE_REVIEW_RATING.toFixed(1)}</strong> from{" "}
+                {GOOGLE_REVIEW_COUNT} Google reviews
               </span>
-              <span className="mt-1 flex items-center gap-2 font-display tracking-wide text-ps-cyan text-glow-cyan group-hover:text-brand-yellow-dark transition-colors" style={{ fontSize: "clamp(2.5rem, 7vw, 4.5rem)" }}>
-                <Phone className="size-7 shrink-0 sm:size-9" aria-hidden />
-                {businessPhoneDisplay}
-              </span>
-            </motion.a>
+            </li>
+            <li className="inline-flex items-center gap-1.5">
+              <ShieldCheck className="size-4 text-brand-blue-light" aria-hidden />
+              Licensed &amp; insured
+            </li>
+            <li className="inline-flex items-center gap-1.5">
+              <CalendarCheck className="size-4 text-brand-blue-light" aria-hidden />
+              Serving Georgia since 2010
+            </li>
+          </motion.ul>
 
-            <motion.div
-              variants={prefersReduced ? undefined : heroItem}
-              className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start"
-            >
-              <Button
-                asChild
-                size="lg"
-                className={`animate-cyan-pulse w-full sm:w-auto bg-ps-cyan text-[#06121f] font-display tracking-wide sm:tracking-widest text-base sm:text-lg px-4 sm:px-7 py-5 hover:bg-brand-yellow-dark transition-colors min-h-[48px] ${ctaPress}`}
-              >
-                <a href={businessPhoneTelHref}>
-                  <Phone className="size-5 shrink-0" aria-hidden />
-                  CALL {businessPhoneDisplay} NOW
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className={`w-full sm:w-auto bg-transparent border-2 border-ps-cyan/60 text-ps-cyan font-semibold text-base px-6 py-4 hover:bg-ps-cyan/10 hover:border-ps-cyan transition-all duration-300 min-h-[48px] ${ctaPress}`}
-              >
-                <Link href="/contact">Request Callback →</Link>
-              </Button>
-            </motion.div>
-
-            <motion.p
-              variants={prefersReduced ? undefined : heroItem}
-              className="mt-4 text-sm text-ps-text-muted lg:mx-0 mx-auto"
-            >
-              Same-Day Availability · Instant Pricing · No Contracts
-            </motion.p>
+          <motion.div variants={heroItem}>
+            <CtaButtons tone="dark" className="mt-8 lg:justify-start" />
           </motion.div>
+        </motion.div>
 
-          <div className="hidden lg:block animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-12">
-            <ContactForm />
-          </div>
+        <div className="hidden lg:col-span-6 lg:block">
+          <ContactForm />
         </div>
       </div>
     </section>
   )
-}
-
-export function HeroWithOfferFromUrl(props: HeroProps = {}) {
-  return <Hero {...props} />
 }

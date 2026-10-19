@@ -3,11 +3,12 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
-import { Button } from "@/components/ui/button"
-import { Phone, CheckCircle, AlertTriangle } from "lucide-react"
+import { CheckCircle, AlertTriangle } from "lucide-react"
 import Link from "next/link"
-import { ctaPress } from "@/lib/ctaInteraction"
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
+import { CtaBand } from "@/components/sections/CtaBand"
+import { PageHero } from "@/components/sections/PageHero"
+import { SectionHeading } from "@/components/sections/SectionHeading"
 
 const softWashBenefits = [
   "Removes black streaks (Gloeocapsa magma algae) at the root",
@@ -31,54 +32,25 @@ export default function RoofCleaningPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
-        {/* Hero */}
-        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-14 pt-header-offset">
-          <div className="absolute inset-0 bg-hero-pattern opacity-10" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-brand-yellow font-semibold text-sm uppercase tracking-wider mb-3">
-              Ellenwood, GA &amp; Metro Atlanta
-            </p>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-              Professional Roof Cleaning Services in Ellenwood, GA
-            </h1>
-            <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-8">
-              We use low-pressure soft washing, the only method recommended by roofing manufacturers, to safely remove black streaks, algae, moss, and lichen from your roof without causing damage.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
-              >
-                <Link href="/contact">Request Callback</Link>
-              </Button>
-              <a
-                href="tel:800-451-7213"
-                className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm font-semibold text-white border border-white/30 hover:bg-white/10 transition-colors ${ctaPress}`}
-              >
-                <Phone className="size-4" aria-hidden />
-                (800) 451-7213
-              </a>
-            </div>
-          </div>
-        </section>
+      <main className="min-h-screen bg-white">
+        <PageHero
+          eyebrow="Ellenwood, GA & Metro Atlanta"
+          title="Professional Roof Cleaning Services in Ellenwood, GA"
+          description="We use low-pressure soft washing, the only method recommended by roofing manufacturers, to safely remove black streaks, algae, moss, and lichen from your roof without causing damage."
+        />
 
         {/* Soft Wash vs Pressure Washing */}
-        <section className="py-12 bg-white">
+        <section className="py-14 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-brand-blue-dark sm:text-3xl">
-                Soft Wash Roof Cleaning vs. Pressure Washing
-              </h2>
-              <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Not all roof cleaning is the same. Understanding the difference protects your biggest investment.
-              </p>
-            </div>
+            <SectionHeading
+              title="Soft wash roof cleaning vs. pressure washing"
+              description="Not all roof cleaning is the same. Understanding the difference protects your biggest investment."
+              className="mb-10"
+            />
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Soft Washing */}
-              <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
+              <div className="rounded-2xl border border-green-200 bg-green-50 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <CheckCircle className="size-8 text-green-600 shrink-0" aria-hidden />
                   <h3 className="text-xl font-bold text-green-800">Soft Wash Roof Cleaning</h3>
@@ -100,7 +72,7 @@ export default function RoofCleaningPage() {
               </div>
 
               {/* Pressure Washing */}
-              <div className="bg-red-50 border-2 border-red-400 rounded-xl p-6">
+              <div className="rounded-2xl border border-red-200 bg-red-50 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <AlertTriangle className="size-8 text-red-600 shrink-0" aria-hidden />
                   <h3 className="text-xl font-bold text-red-800">Pressure Washing a Roof</h3>
@@ -122,9 +94,9 @@ export default function RoofCleaningPage() {
               </div>
             </div>
 
-            <p className="mt-6 text-center text-sm text-gray-500">
+            <p className="mt-8 text-center text-sm text-muted-foreground">
               At Pressure Washing Xperts we only use soft washing on roofs, never high pressure.{" "}
-              <Link href="/about/pressure-vs-soft-washing" className="text-brand-blue hover:underline font-medium">
+              <Link href="/about/pressure-vs-soft-washing" className="font-semibold text-brand-blue hover:underline">
                 Learn more about soft washing vs. pressure washing →
               </Link>
             </p>
@@ -132,56 +104,29 @@ export default function RoofCleaningPage() {
         </section>
 
         {/* What We Remove */}
-        <section className="py-12 bg-section-light">
+        <section className="bg-section-light py-14 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-brand-blue-dark sm:text-3xl">
-                What Our Roof Cleaning Service Removes
-              </h2>
-            </div>
-            <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.09}>
+            <SectionHeading title="What our roof cleaning service removes" className="mb-10" />
+            <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { label: "Black Streaks", detail: "Caused by Gloeocapsa magma algae, the most common roof stain in Georgia." },
                 { label: "Moss & Lichen", detail: "Root systems that lift shingles and hold moisture against the deck." },
                 { label: "Mold & Mildew", detail: "Dark patches that accelerate shingle breakdown and look unsightly." },
                 { label: "Green Algae", detail: "Thrives in shaded, humid areas common throughout Ellenwood and Atlanta." },
               ].map(({ label, detail }) => (
-                <RevealItem key={label} as="article" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-brand-blue/30 motion-reduce:hover:translate-y-0">
-                  <h3 className="font-bold text-brand-blue-dark text-base mb-2">{label}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{detail}</p>
+                <RevealItem key={label} as="article" className="rounded-2xl border border-border bg-white p-6">
+                  <h3 className="font-semibold text-brand-blue-dark">{label}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
                 </RevealItem>
               ))}
             </RevealGroup>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-12 bg-brand-blue-dark text-white">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold sm:text-3xl mb-4">
-              Ready to Schedule Your Roof Cleaning?
-            </h2>
-            <p className="text-white/75 mb-8 text-sm sm:text-base">
-              Serving Ellenwood, Stockbridge, Decatur, McDonough, Conyers, and all of Metro Atlanta. Licensed &amp; insured. Free quotes.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark shadow-lg"
-              >
-                <Link href="/contact">Request Callback</Link>
-              </Button>
-              <a
-                href="tel:800-451-7213"
-                className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm font-semibold text-white border border-white/30 hover:bg-white/10 transition-colors ${ctaPress}`}
-              >
-                <Phone className="size-4" aria-hidden />
-                (800) 451-7213
-              </a>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title="Ready to schedule your roof cleaning?"
+          description="Serving Ellenwood, Stockbridge, Decatur, McDonough, Conyers, and all of Metro Atlanta. Licensed & insured. Free quotes."
+        />
       </main>
 
       <Footer />

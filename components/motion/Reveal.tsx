@@ -1,12 +1,12 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { motion, useReducedMotion, type Variants } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 
 /**
- * Scroll-triggered reveal primitives for the Power Shift homepage.
- * Everything respects prefers-reduced-motion: when reduced, children
- * render immediately with no transform.
+ * Scroll-triggered reveal primitives. The rendered element tree is the same
+ * for every visitor; `MotionConfig reducedMotion="user"` (AppProviders) drops
+ * the upward drift for people who prefer reduced motion.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -24,24 +24,18 @@ interface RevealProps {
 export function Reveal({
   children,
   delay = 0,
-  y = 20,
+  y = 16,
   className,
   as = "div",
 }: RevealProps) {
-  const prefersReduced = useReducedMotion()
   const MotionTag = motion[as]
-
-  if (prefersReduced) {
-    const Tag = as
-    return <Tag className={className}>{children}</Tag>
-  }
 
   return (
     <MotionTag
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: EASE, delay }}
     >
       {children}
@@ -53,7 +47,7 @@ export function Reveal({
 export function RevealGroup({
   children,
   className,
-  stagger = 0.1,
+  stagger = 0.08,
   as = "div",
 }: {
   children: ReactNode
@@ -61,13 +55,7 @@ export function RevealGroup({
   stagger?: number
   as?: "div" | "ul" | "section"
 }) {
-  const prefersReduced = useReducedMotion()
   const MotionTag = motion[as]
-
-  if (prefersReduced) {
-    const Tag = as
-    return <Tag className={className}>{children}</Tag>
-  }
 
   const container: Variants = {
     hidden: {},
@@ -80,7 +68,7 @@ export function RevealGroup({
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
     >
       {children}
     </MotionTag>
@@ -88,8 +76,8 @@ export function RevealGroup({
 }
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
 }
 
 export function RevealItem({
@@ -101,13 +89,7 @@ export function RevealItem({
   className?: string
   as?: "div" | "li" | "article"
 }) {
-  const prefersReduced = useReducedMotion()
   const MotionTag = motion[as]
-
-  if (prefersReduced) {
-    const Tag = as
-    return <Tag className={className}>{children}</Tag>
-  }
 
   return (
     <MotionTag className={className} variants={itemVariants}>

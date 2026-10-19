@@ -209,7 +209,7 @@ export function ChrisChatWidget() {
     <>
       {/* ── Chat Panel ─────────────────────────────────────────────────────── */}
       <div
-        className={`fixed bottom-[5.5rem] right-4 z-50 flex flex-col rounded-2xl overflow-hidden transition-all duration-300 origin-bottom-right ${
+        className={`fixed bottom-[10rem] right-4 z-50 flex flex-col md:bottom-[5.5rem] rounded-2xl overflow-hidden transition-all duration-300 origin-bottom-right ${
           isOpen
             ? 'opacity-100 scale-100 pointer-events-auto'
             : 'opacity-0 scale-90 pointer-events-none'
@@ -231,17 +231,17 @@ export function ChrisChatWidget() {
           className="flex items-center gap-3 px-4 py-3 shrink-0"
           style={{
             background:
-              'linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%)',
+              'linear-gradient(135deg, #12406b 0%, #0b2239 100%)',
           }}
         >
           <div className="relative shrink-0">
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
-              style={{ background: '#fbbf24', color: '#1e3a5f' }}
+              style={{ background: '#1b6cb5', color: '#ffffff' }}
             >
               C
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#0f172a]" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#0b2239]" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -255,7 +255,7 @@ export function ChrisChatWidget() {
 
           <a
             href="tel:+18004517213"
-            className="text-blue-300 hover:text-[#fbbf24] transition-colors p-1.5 rounded-lg"
+            className="text-blue-300 hover:text-white transition-colors p-1.5 rounded-lg"
             aria-label="Call us"
             title="Call (800) 451-7213"
           >
@@ -274,12 +274,12 @@ export function ChrisChatWidget() {
         <div
           className="flex items-center gap-2 px-4 py-1.5 shrink-0"
           style={{
-            background: 'rgba(251,191,36,0.12)',
-            borderBottom: '1px solid rgba(251,191,36,0.2)',
+            background: '#eaf3fb',
+            borderBottom: '1px solid #d6e6f5',
           }}
         >
-          <Droplets size={12} style={{ color: '#fbbf24' }} />
-          <p className="text-xs" style={{ color: '#92400e' }}>
+          <Droplets size={12} style={{ color: '#1b6cb5' }} />
+          <p className="text-xs" style={{ color: '#0b2239' }}>
             Free in-person quotes · No obligation · Serving Metro Atlanta & GA
           </p>
         </div>
@@ -299,7 +299,7 @@ export function ChrisChatWidget() {
               {msg.role === 'assistant' && (
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                  style={{ background: '#fbbf24', color: '#1e3a5f' }}
+                  style={{ background: '#1b6cb5', color: '#ffffff' }}
                 >
                   C
                 </div>
@@ -311,7 +311,7 @@ export function ChrisChatWidget() {
                 }`}
                 style={
                   msg.role === 'user'
-                    ? { background: '#1e3a5f', color: '#ffffff' }
+                    ? { background: '#1b6cb5', color: '#ffffff' }
                     : {
                         background: '#ffffff',
                         color: '#1e293b',
@@ -330,7 +330,7 @@ export function ChrisChatWidget() {
             <div className="flex items-end gap-2 justify-start">
               <div
                 className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                style={{ background: '#fbbf24', color: '#1e3a5f' }}
+                style={{ background: '#1b6cb5', color: '#ffffff' }}
               >
                 C
               </div>
@@ -376,7 +376,7 @@ export function ChrisChatWidget() {
             <a
               href="tel:+18004517213"
               className="font-semibold transition-colors"
-              style={{ color: '#1e3a5f' }}
+              style={{ color: '#1b6cb5' }}
             >
               (800) 451-7213
             </a>
@@ -411,7 +411,7 @@ export function ChrisChatWidget() {
             onClick={sendMessage}
             disabled={!input.trim() || isLoading}
             className="rounded-xl p-2.5 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 shrink-0"
-            style={{ background: '#1e3a5f', color: '#fbbf24' }}
+            style={{ background: '#1b6cb5', color: '#ffffff' }}
             aria-label="Send message"
           >
             <Send size={16} />
@@ -422,15 +422,15 @@ export function ChrisChatWidget() {
       {/* ── Attention Bubble ────────────────────────────────────────────────── */}
       {showBubble && !isOpen && (
         <div
-          className="fixed bottom-[5.5rem] right-20 z-50 animate-in fade-in slide-in-from-bottom-2 duration-300"
+          className="fixed bottom-[10rem] right-20 z-50 md:bottom-[5.5rem] animate-in fade-in slide-in-from-bottom-2 duration-300"
           style={{ maxWidth: '220px' }}
         >
           <div
             className="rounded-2xl rounded-br-sm px-4 py-3 text-sm font-medium shadow-lg"
             style={{
-              background: '#1e3a5f',
+              background: '#0b2239',
               color: '#ffffff',
-              boxShadow: '0 8px 24px rgba(30,58,95,0.35)',
+              boxShadow: '0 8px 24px rgba(11,34,57,0.35)',
             }}
           >
             {ATTENTION_BUBBLE_TEXT}
@@ -441,7 +441,7 @@ export function ChrisChatWidget() {
             style={{
               borderTop: '6px solid transparent',
               borderBottom: '6px solid transparent',
-              borderLeft: '8px solid #1e3a5f',
+              borderLeft: '8px solid #0b2239',
             }}
           />
         </div>
@@ -450,18 +450,18 @@ export function ChrisChatWidget() {
       {/* ── Ping Ring ───────────────────────────────────────────────────────── */}
       {showPing && !isOpen && (
         <span
-          className="fixed bottom-6 right-4 z-40 w-14 h-14 rounded-full animate-ping pointer-events-none"
-          style={{ background: 'rgba(251,191,36,0.35)' }}
+          className="fixed bottom-[5.5rem] right-4 z-40 w-14 h-14 rounded-full animate-ping pointer-events-none md:bottom-6"
+          style={{ background: 'rgba(74,163,227,0.35)' }}
         />
       )}
 
       {/* ── Floating Bubble Button ──────────────────────────────────────────── */}
       <button
         onClick={() => setIsOpen((o) => !o)}
-        className="fixed bottom-6 right-4 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+        className="fixed bottom-[5.5rem] right-4 z-50 w-14 h-14 rounded-full flex md:bottom-6 items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
         style={{
-          background: 'linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%)',
-          boxShadow: '0 8px 28px rgba(15,23,42,0.4)',
+          background: '#1b6cb5',
+          boxShadow: '0 8px 28px rgba(11,34,57,0.35)',
         }}
         aria-label={isOpen ? 'Close chat' : 'Chat with Chris'}
         aria-expanded={isOpen}
@@ -472,21 +472,21 @@ export function ChrisChatWidget() {
             isOpen ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'
           }`}
         >
-          <X size={22} style={{ color: '#fbbf24' }} />
+          <X size={22} style={{ color: '#ffffff' }} />
         </span>
         <span
           className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${
             isOpen ? 'opacity-0 -rotate-90' : 'opacity-100 rotate-0'
           }`}
         >
-          <MessageCircle size={22} style={{ color: '#fbbf24' }} />
+          <MessageCircle size={22} style={{ color: '#ffffff' }} />
         </span>
 
         {/* Unread badge */}
         {hasUnread && !isOpen && (
           <span
             className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold animate-in zoom-in duration-200"
-            style={{ background: '#fbbf24', color: '#1e3a5f' }}
+            style={{ background: '#ef4444', color: '#ffffff', boxShadow: '0 0 0 2px #ffffff' }}
             aria-label="1 unread message"
           >
             1

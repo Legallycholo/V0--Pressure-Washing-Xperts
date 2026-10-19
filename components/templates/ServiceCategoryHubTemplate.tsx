@@ -1,19 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 import type { NavLinkItem } from "@/data/navigation"
+import { CtaBand } from "@/components/sections/CtaBand"
+import { PageHero } from "@/components/sections/PageHero"
+import { SectionHeading } from "@/components/sections/SectionHeading"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
-import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 
 interface ServiceCategoryHubTemplateProps {
   categoryLabel: string
   title: string
   description: string
   services: NavLinkItem[]
-  onOpenQuoteForm?: () => void
   contentRevised?: string
 }
 
@@ -22,92 +22,55 @@ export function ServiceCategoryHubTemplate({
   title,
   description,
   services,
-  onOpenQuoteForm,
   contentRevised,
 }: ServiceCategoryHubTemplateProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-8 sm:py-12 pt-header-offset">
-        <div className="absolute inset-0 bg-hero-pattern opacity-10" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm uppercase tracking-wide">
-            {categoryLabel}
-          </span>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">{title}</h1>
-          <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">{description}</p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
-            >
-              <Link href="/contact">Request Callback</Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
-            >
-              <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
-                <Phone className="size-5" />
-                Call/Text: (800)-451-7213
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
+    <main className="min-h-screen bg-white">
+      <PageHero eyebrow={categoryLabel} title={title} description={description} />
 
       <SocialProofBar />
 
-      <section className="py-10 sm:py-12">
+      <section className="bg-section-light py-14 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center mb-7">
-            <p className="text-brand-blue text-xs font-semibold uppercase tracking-[0.2em]">What We Clean</p>
-            <h2 className="mt-2 text-2xl font-bold text-brand-blue-dark sm:text-3xl">Our {categoryLabel}</h2>
-            <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-              Scope, benefits, process, and the fastest way to quote.
-            </p>
-          </Reveal>
+          <SectionHeading
+            eyebrow="What we clean"
+            title={`Our ${categoryLabel.toLowerCase()}`}
+            description="Pick a service to see scope, benefits, and how we approach the job."
+          />
 
-          <RevealGroup className="grid md:grid-cols-2 gap-3 sm:gap-4" stagger={0.05}>
+          <RevealGroup className="mt-10 grid gap-4 md:grid-cols-2">
             {services.map((service) => (
               <RevealItem key={service.href} as="article">
-                <Link href={service.href} className={`${hubCardLight} block h-full`}>
-                  <h3 className="text-base sm:text-lg font-semibold text-brand-blue-dark mb-2">{service.label}</h3>
-                  <p className="text-sm text-gray-600 mb-3">
+                <Link
+                  href={service.href}
+                  className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-blue/40 hover:shadow-[0_16px_32px_-20px_rgba(11,34,57,0.35)]"
+                >
+                  <h3 className="text-lg font-semibold text-brand-blue-dark">{service.label}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {service.summary ??
                       "See how we approach this service, typical surfaces, and how to request a quote."}
                   </p>
-                  <span className="inline-flex items-center text-brand-blue font-semibold text-sm">
-                    Learn More
-                    <ArrowRight className="size-4 ml-1 transition-transform group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue">
+                    Learn more
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
                   </span>
                 </Link>
               </RevealItem>
             ))}
           </RevealGroup>
-
-          <div className="mt-7 rounded-xl border border-brand-blue/10 bg-white p-4 sm:p-5 text-center">
-            <p className="text-gray-600 text-sm sm:text-base">
-              Not sure which service? We&apos;ll recommend the best approach for your property.
-            </p>
-            <Button
-              asChild
-              className="mt-4 bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
-            >
-              <Link href="/contact">Request Callback</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
+      <CtaBand
+        title="Not sure which service you need?"
+        description="Tell us about the property and we'll recommend the right approach."
+      />
+
       {contentRevised ? (
-        <p className="text-center text-xs text-gray-500 py-6 px-4">
+        <p className="px-4 py-4 text-center text-xs text-muted-foreground">
           Content reviewed {contentRevised}
         </p>
       ) : null}
-    </div>
+    </main>
   )
 }
-

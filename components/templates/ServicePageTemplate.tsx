@@ -1,14 +1,15 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
-import { Phone, CheckCircle2, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { CheckCircle2 } from "lucide-react"
 import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { ContactForm } from "@/components/ContactForm"
+import { CtaBand } from "@/components/sections/CtaBand"
+import { CtaButtons } from "@/components/sections/CtaButtons"
+import { PageHero } from "@/components/sections/PageHero"
+import { SectionHeading } from "@/components/sections/SectionHeading"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
-import { ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
 import residentialHeroImage from "@/public/services/home-residential.png"
 import commercialHeroImage from "@/public/services/home-commercial.png"
@@ -20,7 +21,6 @@ interface ServicePageTemplateProps {
   description: string
   category: "Residential" | "Commercial"
   benefits?: string[]
-  onOpenQuoteForm?: () => void
   /** When set, replaces the default four process cards. */
   processSteps?: ServiceProcessStep[]
   ctaHeadline?: string
@@ -60,7 +60,6 @@ export function ServicePageTemplate({
     "Free Quotes",
     "Competitive Pricing"
   ],
-  onOpenQuoteForm,
   imageSrc,
   imageAlt,
   imageClassName,
@@ -104,101 +103,46 @@ export function ServicePageTemplate({
 
   const processItems =
     processSteps && processSteps.length > 0
-      ? processSteps.map((step, i) => ({
-          step: String(i + 1),
-          title: step.title,
-          desc: step.description,
-        }))
+      ? processSteps.map((step) => ({ title: step.title, desc: step.description }))
       : [
-          { step: "1", title: "Contact Us", desc: "Reach out for a free quote" },
-          { step: "2", title: "Assessment", desc: "We evaluate your needs" },
-          { step: "3", title: "Service", desc: "Professional cleaning" },
-          { step: "4", title: "Satisfaction", desc: "Guaranteed results" },
+          { title: "Contact Us", desc: "Reach out for a free quote" },
+          { title: "Assessment", desc: "We evaluate your needs" },
+          { title: "Service", desc: "Professional cleaning" },
+          { title: "Satisfaction", desc: "Guaranteed results" },
         ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-section-light to-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-8 sm:py-12 pt-header-offset">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={heroImage}
-            alt={heroImageAlt}
-            fill
-            priority
-            sizes="100vw"
-            placeholder="blur"
-            className="object-cover opacity-20"
-          />
-        </div>
-        <div className="absolute inset-0 z-0 bg-hero-pattern opacity-10" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm">
-              {category} Services
-            </span>
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">
-              {title}
-            </h1>
-            <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">
-              {description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
-              >
-                <Link href="/contact">Request Callback</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
-              >
-                <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
-                  <Phone className="size-5" />
-                  Call/Text: (800)-451-7213
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <main className="min-h-screen bg-white">
+      <PageHero
+        eyebrow={`${category} services`}
+        title={title}
+        description={description}
+        image={heroImage}
+        imageAlt={heroImageAlt}
+      />
 
-      {/* Benefits Section */}
-      <section className="py-10">
+      {/* Benefits */}
+      <section className="py-14 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={cn(
-              "grid md:grid-cols-2 gap-7",
+              "grid gap-10 md:grid-cols-2 lg:gap-14",
               showContactFormAside ? "md:items-start" : "items-center"
             )}
           >
             <Reveal>
-              <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
-                Why Choose Our {title} Service?
+              <h2 className="text-2xl font-bold tracking-tight text-brand-blue-dark sm:text-3xl">
+                Why choose our {title} service?
               </h2>
-              <RevealGroup as="ul" className="space-y-3" stagger={0.07}>
-                {benefits.map((benefit, index) => (
-                  <RevealItem key={index} as="li" className="flex items-start gap-3">
-                    <CheckCircle2 className="size-5 text-brand-yellow flex-shrink-0 mt-1" />
-                    <span className="text-base text-gray-700">{benefit}</span>
+              <RevealGroup as="ul" className="mt-6 space-y-3">
+                {benefits.map((benefit) => (
+                  <RevealItem key={benefit} as="li" className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-blue" aria-hidden />
+                    <span className="text-base text-slate-700">{benefit}</span>
                   </RevealItem>
                 ))}
               </RevealGroup>
-              <div className="mt-6">
-                <Button
-                  asChild
-                  className="bg-brand-blue text-white hover:bg-brand-blue-dark transition-transform hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
-                >
-                  <Link href="/contact">
-                    Request Callback
-                    <ArrowRight className="ml-2 size-4" />
-                  </Link>
-                </Button>
-              </div>
+              {showContactFormAside ? null : <CtaButtons align="start" className="mt-8" />}
             </Reveal>
 
             {showContactFormAside ? (
@@ -222,17 +166,17 @@ export function ServicePageTemplate({
                 />
               </Reveal>
             ) : showSplit && splitImages ? (
-              <Reveal y={24} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Reveal y={24} className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {splitImages.map((img) => (
                   <div
                     key={img.src}
-                    className="group relative aspect-[4/3] overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0"
+                    className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-border"
                   >
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100"
+                      className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
@@ -240,127 +184,78 @@ export function ServicePageTemplate({
               </Reveal>
             ) : showSingle && imageSrc && imageAlt ? (
               <Reveal y={24}>
-                <div className="group relative h-72 overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0 md:mx-auto md:max-w-[90%]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-border">
                   <Image
                     src={imageSrc}
                     alt={imageAlt}
                     fill
-                    className={cn(
-                      "object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100",
-                      imageClassName
-                    )}
+                    className={cn("object-cover", imageClassName)}
                     style={
                       imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined
                     }
                     sizes="(max-width: 896px) 100vw, 42rem"
-                    priority
                   />
                 </div>
               </Reveal>
             ) : (
-              <div className="relative flex min-h-72 flex-col items-center justify-center rounded-lg border border-brand-blue/15 bg-gradient-to-br from-brand-blue/10 to-brand-yellow/10 p-6 text-center shadow-sm">
-                <Phone className="size-10 text-brand-blue-dark mb-3" aria-hidden />
-                <h3 className="text-lg font-bold text-brand-blue-dark mb-2">
+              <div className="rounded-2xl border border-border bg-section-light p-8 text-center">
+                <h3 className="text-lg font-semibold text-brand-blue-dark">
                   See it in person, start with a call
                 </h3>
-                <p className="text-gray-600 mb-4 max-w-sm text-pretty text-sm">
-                  Talk to our team and get a straightforward quote.
+                <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
+                  Talk to our team and get a straightforward quote before any work starts.
                 </p>
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark"
-                >
-                  <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
-                    <Phone className="size-5" aria-hidden />
-                    Call Now
-                  </a>
-                </Button>
-                <p className="mt-4 text-sm font-medium text-brand-blue-dark">(800)-451-7213</p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="mt-4 border-brand-blue/30 text-brand-blue-dark hover:bg-brand-blue/5"
-                >
-                  <Link href="/contact">Request Callback</Link>
-                </Button>
               </div>
             )}
           </div>
         </div>
       </section>
 
-      {/* Trust strip */}
       <SocialProofBar />
 
-      {/* Process Section */}
-      <section className="py-10 bg-section-light">
+      {/* Process */}
+      <section className="bg-section-light py-14 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center mb-7">
-            <h2 className="text-2xl font-bold text-brand-blue-dark mb-2">
-              Our Process
-            </h2>
-            <p className="text-sm text-gray-600 max-w-xl mx-auto">
-              Four steps from first message to final walkthrough.
-            </p>
-          </Reveal>
+          <SectionHeading
+            title="Our process"
+            description={`${processItems.length} steps from first message to final walkthrough.`}
+          />
 
-          <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.12}>
+          <RevealGroup
+            className={cn(
+              "mt-10 grid gap-6 sm:grid-cols-2",
+              processItems.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
+            )}
+          >
             {processItems.map((item, idx) => (
               <RevealItem
-                key={`${item.step}-${item.title}`}
-                className={`text-center ${idx < processItems.length - 1 ? "step-connector" : ""} ${idx === processItems.length - 1 ? "step-connector-last" : ""}`}
+                key={item.title}
+                className={cn(
+                  "text-center",
+                  idx < processItems.length - 1 ? "step-connector" : "step-connector-last"
+                )}
               >
-                <div className="mx-auto w-14 h-14 bg-brand-yellow text-brand-blue-dark rounded-full flex items-center justify-center text-xl font-bold mb-3 shadow-md ring-4 ring-brand-yellow/20">
-                  {item.step}
+                <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-brand-blue text-base font-bold text-white ring-4 ring-white">
+                  {idx + 1}
                 </div>
-                <h3 className="text-base font-semibold text-brand-blue-dark mb-1">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
+                <h3 className="font-semibold text-brand-blue-dark">{item.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
               </RevealItem>
             ))}
           </RevealGroup>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-10 bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white">
-        <Reveal className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-3">
-            {ctaHeadline ?? "Ready to Clean Up Your Exterior?"}
-          </h2>
-          <p className="text-sm sm:text-base text-white/80 mb-5">
-            {ctaSubline ?? "Straightforward quotes. You know what to expect before we start."}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-brand-yellow text-brand-blue-dark font-semibold hover:bg-brand-yellow-dark transition-transform hover:-translate-y-0.5 hover:shadow-lg motion-reduce:hover:translate-y-0"
-            >
-              <Link href="/contact">Request Callback</Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-brand-blue-dark"
-            >
-              <a href="tel:800-451-7213" className={`flex items-center gap-2 ${ctaPress}`}>
-                <Phone className="size-5" />
-                Call Now
-              </a>
-            </Button>
-          </div>
-        </Reveal>
-      </section>
+      <CtaBand
+        title={ctaHeadline ?? "Ready to clean up your exterior?"}
+        description={ctaSubline ?? "Straightforward quotes. You know what to expect before we start."}
+      />
 
       {contentRevised ? (
-        <p className="text-center text-xs text-gray-500 py-4 px-4">
+        <p className="px-4 py-4 text-center text-xs text-muted-foreground">
           Content reviewed {contentRevised}
         </p>
       ) : null}
-    </div>
+    </main>
   )
 }

@@ -5,7 +5,8 @@ import { CheckCircle } from "lucide-react"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
-import { ctaPress } from "@/lib/ctaInteraction"
+import { CtaButtons } from "@/components/sections/CtaButtons"
+import { PageHero } from "@/components/sections/PageHero"
 
 export default function ThankYouPage() {
 
@@ -13,39 +14,23 @@ export default function ThankYouPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
-        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
-          <div className="absolute inset-0 bg-hero-pattern opacity-10" />
-          <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-            <div className="animate-success-pop-in mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/10 ring-4 ring-brand-yellow/20">
-              <CheckCircle className="size-9 text-brand-yellow" aria-hidden />
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl mb-3 text-balance">
-              Thank you! We received your request
-            </h1>
-            <p className="text-base text-white/85 leading-relaxed">
-              Our team will review your details and reach out soon. We serve Ellenwood, GA and
-              Metro Atlanta with licensed, insured pressure and soft washing.
-            </p>
-          </div>
-        </section>
+      <main className="min-h-screen bg-white">
+        <PageHero
+          title="Thank you! We received your request"
+          description="Our team will review your details and reach out soon. We serve Ellenwood, GA and Metro Atlanta with licensed, insured pressure and soft washing."
+          showCtas={false}
+        >
+          <CheckCircle className="mx-auto mt-6 size-10 text-brand-blue-light" aria-hidden />
+        </PageHero>
 
-        <section className="py-12">
-          <div className="mx-auto max-w-lg px-4 sm:px-6 text-center space-y-6">
-            <p className="text-gray-700 leading-relaxed">
-              Prefer not to wait? Call or text us. We answer 7 days a week, 8am to 10pm ET.
+        <section className="py-14 sm:py-16">
+          <div className="mx-auto max-w-lg px-4 text-center sm:px-6">
+            <p className="text-lg leading-relaxed text-slate-700">
+              Prefer not to wait? Call or text us. We answer 7 days a week, 8 AM to 10 PM ET.
             </p>
-            <a
-              href="tel:800-451-7213"
-              className={`inline-flex w-full sm:w-auto items-center justify-center rounded-lg bg-brand-yellow px-6 py-3 text-base font-bold text-brand-blue-dark hover:bg-brand-yellow-dark ${ctaPress}`}
-            >
-              (800)-451-7213
-            </a>
-            <p>
-              <Link
-                href="/"
-                className="text-brand-blue font-semibold underline underline-offset-2 hover:text-brand-blue-dark"
-              >
+            <CtaButtons className="mt-6" />
+            <p className="mt-8">
+              <Link href="/" className="font-semibold text-brand-blue underline-offset-2 hover:underline">
                 Back to home
               </Link>
             </p>

@@ -3,17 +3,57 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
-import { Star, ChevronLeft, ChevronRight, Quote, ExternalLink, ArrowRight, ShieldCheck } from "lucide-react"
+import { Star, ChevronLeft, ChevronRight, Quote, ExternalLink, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  GOOGLE_BUSINESS_REVIEW_URL,
-} from "@/data/review-summary"
+import { SectionHeading } from "@/components/sections/SectionHeading"
+import { GOOGLE_BUSINESS_REVIEW_URL } from "@/data/review-summary"
 import type { GoogleReview } from "@/data/reviews"
+import { cn } from "@/lib/utils"
 
 interface TestimonialsCarouselProps {
   testimonials: GoogleReview[]
   reviewCount: number
   rating: number
+}
+
+const arrowClass =
+  "inline-flex size-10 items-center justify-center rounded-full border border-border bg-white text-brand-blue-dark shadow-sm transition-colors hover:border-brand-blue hover:text-brand-blue"
+
+function ReviewCard({ review, featured = false }: { review: GoogleReview; featured?: boolean }) {
+  return (
+    <figure
+      className={cn(
+        "relative flex h-full flex-col rounded-2xl border bg-white p-6",
+        featured ? "border-brand-blue/40 shadow-[0_16px_40px_-24px_rgba(27,108,181,0.6)]" : "border-border"
+      )}
+    >
+      <Quote className="absolute right-5 top-5 size-7 text-accent" aria-hidden />
+      <div className="flex items-center gap-2 pr-8">
+        <div className="flex gap-0.5" aria-label={`${review.rating} out of 5 stars`}>
+          {Array.from({ length: review.rating }).map((_, i) => (
+            <Star key={i} className="size-4 fill-amber-400 text-amber-400" aria-hidden />
+          ))}
+        </div>
+        <span className="text-xs text-muted-foreground">{review.timeAgo}</span>
+      </div>
+
+      <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-slate-700">
+        <p className="line-clamp-6">{review.text ? `“${review.text}”` : "Rating-only review"}</p>
+      </blockquote>
+
+      <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-4">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-brand-blue">
+          {review.author.charAt(0).toUpperCase()}
+        </span>
+        <span className="min-w-0">
+          <span className="block truncate text-sm font-semibold text-brand-blue-dark">{review.author}</span>
+          <span className="block truncate text-xs text-muted-foreground">
+            Google review · {review.serviceLabel}
+          </span>
+        </span>
+      </figcaption>
+    </figure>
+  )
 }
 
 export function TestimonialsCarousel({
@@ -32,7 +72,7 @@ export function TestimonialsCarousel({
     if (!isAutoPlaying || isPaused || prefersReduced) return
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
+    }, 6000)
     return () => clearInterval(interval)
   }, [isAutoPlaying, isPaused, prefersReduced, testimonials.length])
 
@@ -55,70 +95,27 @@ export function TestimonialsCarousel({
     setCurrentIndex((prev) => (prev + 1) % testimonials.length)
   }
 
-  const goToSlide = (index: number) => {
-    setIsAutoPlaying(false)
-    setCurrentIndex(index)
-  }
-
-  // Get visible testimonials for desktop (3 at a time)
-  const getVisibleTestimonials = () => {
-    const items: (GoogleReview & { displayIndex: number })[] = []
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % testimonials.length
-      items.push({ ...testimonials[index], displayIndex: i })
-    }
-    return items
-  }
+  // Desktop shows three cards at a time, starting at the current index
+  const visibleTestimonials = [0, 1, 2].map(
+    (offset) => testimonials[(currentIndex + offset) % testimonials.length]
+  )
 
   return (
-    <section id="testimonials" className="py-14 sm:py-16 lg:py-20 bg-section-dark overflow-hidden">
+    <section id="testimonials" className="overflow-hidden bg-section-light py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-9">
-          <p className="text-ps-cyan font-semibold text-sm uppercase tracking-[0.28em] mb-2">
-            Google Customer Reviews
-          </p>
-          <h2 className="font-display uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl">
-            What Our <span className="text-ps-cyan text-glow-cyan">Customers Say</span>
-          </h2>
-          <p className="mt-3 text-ps-text-muted max-w-2xl mx-auto text-base">
-            {"Don't just take our word for it."} Rated{" "}
-            <span className="text-yellow-400 font-semibold">{rating.toFixed(1)} ★</span> across{" "}
-            <span className="text-white font-semibold">{reviewCount} Google reviews</span>.
-          </p>
-          <div className="mt-5 flex flex-wrap justify-center items-center gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="bg-brand-yellow text-brand-blue-dark font-bold hover:bg-brand-yellow-dark gap-2 shadow-lg"
-            >
-              <Link href="/reviews">
-                View All {reviewCount} Reviews
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-white/30 text-white bg-transparent hover:bg-white/10 gap-2"
-            >
-              <a
-                href={GOOGLE_BUSINESS_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View all reviews on Google (opens in a new tab)"
-              >
-                See Reviews on Google
-                <ExternalLink className="size-4" aria-hidden />
-              </a>
-            </Button>
-          </div>
-        </div>
+        <SectionHeading
+          eyebrow="Google reviews"
+          title="What our customers say"
+          description={
+            <>
+              Rated <strong className="font-semibold text-brand-blue-dark">{rating.toFixed(1)} out of 5</strong> across{" "}
+              {reviewCount} Google reviews.
+            </>
+          }
+        />
 
-        {/* Testimonials Carousel */}
         <div
-          className="relative"
+          className="relative mt-10"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onFocus={() => setIsPaused(true)}
@@ -126,191 +123,61 @@ export function TestimonialsCarousel({
           onTouchStart={() => setIsPaused(true)}
           aria-live="polite"
         >
-          {/* Desktop View - 3 cards */}
-          <div className="hidden md:grid md:grid-cols-3 gap-4">
-            {getVisibleTestimonials().map((testimonial, index) => (
-              <div
-                key={`${testimonial.id}-${index}`}
-                className={`relative flex flex-col justify-between rounded-xl p-5 transition-all duration-500 ${
-                  index === 1
-                    ? "bg-white/10 border-2 border-brand-yellow scale-[1.02] shadow-xl shadow-brand-yellow/10"
-                    : "bg-white/5 border border-white/10"
-                }`}
-              >
-                <div>
-                  {/* Quote Icon */}
-                  <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/25" />
-
-                  {/* Rating + Time */}
-                  <div className="flex items-center justify-between mb-3 pr-8">
-                    <div className="flex gap-1" aria-label={`${testimonial.rating} out of 5 stars`}>
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    <span className="text-xs text-white/50">{testimonial.timeAgo}</span>
-                  </div>
-
-                  {/* Text */}
-                  <p className="text-white/85 text-sm leading-relaxed mb-4 min-h-[72px]">
-                    {testimonial.text ? `"${testimonial.text}"` : "Rating-only review"}
-                  </p>
-                </div>
-
-                <div>
-                  {/* Author */}
-                  <div className="flex items-center gap-3 pt-3 border-t border-white/10">
-                    {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-ps-cyan flex items-center justify-center text-white font-bold text-sm shrink-0">
-                      {testimonial.author.charAt(0).toUpperCase()}
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-semibold text-white text-sm truncate flex items-center gap-1.5">
-                        <span>{testimonial.author}</span>
-                        {testimonial.isLocalGuide && (
-                          <span className="text-[10px] font-normal text-orange-400 bg-orange-400/10 px-1 py-0.2 rounded inline-flex items-center gap-0.5">
-                            <ShieldCheck className="size-2.5" /> Guide
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-white/50 text-xs">Google Review</p>
-                    </div>
-                  </div>
-
-                  {/* Service Badge */}
-                  <div className="mt-3 flex items-center justify-between">
-                    <div className="inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-2.5 py-0.5 rounded-full">
-                      {testimonial.serviceLabel}
-                    </div>
-                    {testimonial.highlightTag && (
-                      <span className="text-[11px] text-white/50 italic">
-                        {testimonial.highlightTag}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
+          {/* Desktop: three cards */}
+          <div className="hidden gap-4 md:grid md:grid-cols-3">
+            {visibleTestimonials.map((testimonial, index) => (
+              <ReviewCard key={`${testimonial.id}-${index}`} review={testimonial} featured={index === 1} />
             ))}
           </div>
 
-          {/* Mobile View - Single swipeable card */}
-          <div className="md:hidden touch-pan-y">
+          {/* Mobile: one swipeable card */}
+          <div className="touch-pan-y md:hidden">
             <motion.div
               key={currentIndex}
-              className="relative flex flex-col justify-between rounded-xl bg-white/10 border border-white/10 p-5 min-h-[260px]"
-              drag={prefersReduced ? false : "x"}
+              drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.18}
               onDragEnd={handleSwipeEnd}
-              initial={prefersReduced ? false : { opacity: 0, x: 24 }}
+              initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div>
-                {/* Quote Icon */}
-                <Quote className="absolute top-3 right-3 size-8 text-ps-cyan/25" />
-
-                {/* Rating */}
-                <div className="flex items-center justify-between mb-3 pr-8">
-                  <div className="flex gap-1">
-                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <span className="text-xs text-white/50">{testimonials[currentIndex].timeAgo}</span>
-                </div>
-
-                {/* Text */}
-                <p className="text-white/90 text-sm leading-relaxed mb-4">
-                  {testimonials[currentIndex].text
-                    ? `"${testimonials[currentIndex].text}"`
-                    : "Rating-only review"}
-                </p>
-              </div>
-
-              <div>
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-3 border-t border-white/10">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-ps-cyan flex items-center justify-center text-white font-bold text-sm shrink-0">
-                    {testimonials[currentIndex].author.charAt(0).toUpperCase()}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-white text-sm">
-                      {testimonials[currentIndex].author}
-                    </p>
-                    <p className="text-white/50 text-xs">Google Review</p>
-                  </div>
-                </div>
-
-                {/* Service Badge */}
-                <div className="mt-3 flex items-center justify-between">
-                  <div className="inline-block bg-brand-yellow/20 text-brand-yellow text-xs font-medium px-2.5 py-0.5 rounded-full">
-                    {testimonials[currentIndex].serviceLabel}
-                  </div>
-                  {testimonials[currentIndex].highlightTag && (
-                    <span className="text-[11px] text-white/50 italic">
-                      {testimonials[currentIndex].highlightTag}
-                    </span>
-                  )}
-                </div>
-              </div>
+              <ReviewCard review={testimonials[currentIndex]} />
             </motion.div>
-            <p className="mt-2 text-center text-xs text-white/40" aria-hidden>
-              Swipe to see more reviews
-            </p>
           </div>
+        </div>
 
-          {/* Navigation Arrows */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 p-3 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors hidden md:block"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="size-5" />
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <button type="button" onClick={goToPrevious} className={arrowClass} aria-label="Previous review">
+            <ChevronLeft className="size-5" aria-hidden />
           </button>
-          <button
-            onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 p-3 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors hidden md:block"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="size-5" />
+          <span className="min-w-[3.5rem] text-center text-sm tabular-nums text-muted-foreground">
+            {currentIndex + 1} / {testimonials.length}
+          </span>
+          <button type="button" onClick={goToNext} className={arrowClass} aria-label="Next review">
+            <ChevronRight className="size-5" aria-hidden />
           </button>
         </div>
 
-        {/* Dots Navigation */}
-        <div className="flex justify-center gap-2 mt-6">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentIndex
-                  ? "bg-brand-yellow w-6"
-                  : "bg-white/30 hover:bg-white/50"
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button asChild size="lg">
+            <Link href="/reviews">
+              Read all {reviewCount} reviews
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <a
+              href={GOOGLE_BUSINESS_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View all reviews on Google (opens in a new tab)"
+            >
+              See reviews on Google
+              <ExternalLink className="size-4" aria-hidden />
+            </a>
+          </Button>
         </div>
-
-        {/* Mobile Navigation Arrows */}
-        <div className="flex justify-center gap-4 mt-4 md:hidden">
-          <button
-            onClick={goToPrevious}
-            className="p-3 min-h-[44px] min-w-[44px] rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors flex items-center justify-center"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="size-5" />
-          </button>
-          <button
-            onClick={goToNext}
-            className="p-3 min-h-[44px] min-w-[44px] rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue-dark transition-colors flex items-center justify-center"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="size-5" />
-          </button>
-        </div>
-
       </div>
     </section>
   )

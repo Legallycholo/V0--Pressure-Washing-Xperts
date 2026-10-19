@@ -1,13 +1,11 @@
 "use client"
 
 import type { ComponentType, ReactNode } from "react"
-import { CalendarDays, Home, Phone, ShieldCheck, Star } from "lucide-react"
+import { CalendarDays, Home, ShieldCheck, Star } from "lucide-react"
 import { CountUp } from "@/components/motion/CountUp"
+import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
 
-/**
- * Full-width social-proof strip below the hero. Numbers count up on scroll.
- * Static row on desktop, auto-scrolling marquee on mobile.
- */
+/** Full-width trust strip shown below heroes. Numbers count up on scroll. */
 type Stat = {
   Icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>
   value: ReactNode
@@ -18,69 +16,42 @@ const stats: Stat[] = [
   {
     Icon: Home,
     value: <CountUp to={500} suffix="+" />,
-    label: "Homes Cleaned",
+    label: "Properties cleaned",
   },
   {
     Icon: Star,
-    value: <CountUp to={5} decimals={1} duration={1} />,
-    label: "Google Rating",
+    value: GOOGLE_REVIEW_RATING.toFixed(1),
+    label: `Google rating (${GOOGLE_REVIEW_COUNT} reviews)`,
   },
   {
     Icon: CalendarDays,
     value: <CountUp to={16} duration={0.8} />,
-    label: "Years in Business",
+    label: "Years in business",
   },
   {
     Icon: ShieldCheck,
     value: "Licensed",
-    label: "& Insured",
-  },
-  {
-    Icon: Phone,
-    value: "Same-Day",
-    label: "Availability",
+    label: "and fully insured",
   },
 ]
 
-function StatItem({ Icon, value, label }: Stat) {
-  return (
-    <div className="flex items-center gap-3 px-6 sm:px-8 whitespace-nowrap">
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ps-cyan/12 text-ps-cyan ring-1 ring-ps-cyan/20">
-        <Icon className="size-4.5" aria-hidden />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-2xl sm:text-3xl tracking-wide text-ps-cyan">
-          {value}
-        </span>
-        <span className="mt-1 text-xs sm:text-sm font-medium text-ps-text-muted">
-          {label}
-        </span>
-      </span>
-    </div>
-  )
-}
-
 export function SocialProofBar() {
   return (
-    <section
-      aria-label="Pressure Washing Xperts at a glance"
-      className="border-t border-ps-cyan/30 bg-ps-bg-alt overflow-hidden"
-    >
-      {/* Desktop: evenly spaced static row */}
-      <div className="mx-auto hidden max-w-7xl items-center justify-between px-4 py-6 sm:flex">
-        {stats.map((stat, i) => (
-          <StatItem key={i} {...stat} />
+    <section aria-label="Pressure Washing Xperts at a glance" className="border-y border-border bg-white">
+      <dl className="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 gap-y-6 px-4 py-8 sm:px-6 lg:grid-cols-4 lg:px-8">
+        {stats.map(({ Icon, value, label }) => (
+          <div key={label} className="flex items-center gap-3">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent text-brand-blue">
+              <Icon className="size-5" aria-hidden />
+            </span>
+            <div className="min-w-0">
+              <dt className="sr-only">{label}</dt>
+              <dd className="text-2xl font-bold leading-none tracking-tight text-brand-blue-dark">{value}</dd>
+              <dd className="mt-1 text-sm leading-snug text-muted-foreground">{label}</dd>
+            </div>
+          </div>
         ))}
-      </div>
-
-      {/* Mobile: auto-scrolling marquee (duplicated for seamless loop) */}
-      <div className="sm:hidden py-5">
-        <div className="flex w-max animate-ps-marquee">
-          {[...stats, ...stats].map((stat, i) => (
-            <StatItem key={i} {...stat} />
-          ))}
-        </div>
-      </div>
+      </dl>
     </section>
   )
 }

@@ -2,21 +2,17 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Phone, MessageSquareText } from "lucide-react"
-
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Phone } from "lucide-react"
+import { cn } from "@/lib/utils"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 
+/** Mobile-only sticky action bar that slides in once the visitor scrolls past the hero. */
 export function FloatingCallButton() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 100)
+      setIsVisible(window.scrollY > 320)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -24,43 +20,30 @@ export function FloatingCallButton() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const barClass =
-    "fixed bottom-0 left-0 right-0 z-40 flex gap-3 px-4 pb-safe pt-2 md:hidden transition-all duration-300 motion-reduce:transition-opacity bg-gradient-to-t from-brand-blue-dark/90 to-transparent"
-
   return (
     <div
-      className={`${barClass} ${
-        isVisible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-20 opacity-0"
-      }`}
+      className={cn(
+        "fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-border bg-white/95 px-3 pt-2 pb-safe shadow-[0_-8px_24px_-12px_rgba(11,34,57,0.25)] backdrop-blur-md transition-all duration-300 motion-reduce:transition-opacity md:hidden",
+        isVisible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0"
+      )}
       aria-hidden={!isVisible}
     >
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <a
-            href={businessPhoneTelHref}
-            className="animate-float-cta-ring motion-reduce:animate-none relative flex min-h-12 flex-[1.5] items-center justify-center gap-2 rounded-full bg-brand-yellow px-4 py-3 text-sm font-bold text-brand-blue-dark shadow-lg transition-transform duration-200 hover:bg-brand-yellow-dark active:scale-[0.97] motion-reduce:active:scale-100"
-            aria-label={`Call us now at ${businessPhoneDisplay}`}
-          >
-            <Phone className="size-5 shrink-0" />
-            <span>Call {businessPhoneDisplay}</span>
-          </a>
-        </TooltipTrigger>
-        <TooltipContent side="top">Tap to call: we answer 7 days a week</TooltipContent>
-      </Tooltip>
-
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            href="/#contact"
-            className="flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full border-2 border-white/80 bg-brand-blue-dark px-4 py-3 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:border-white hover:bg-brand-blue active:scale-[0.97] motion-reduce:active:scale-100"
-            aria-label="Request a free quote"
-          >
-            <MessageSquareText className="size-5 shrink-0" />
-            <span>Quote</span>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="top">Free quote, no obligation</TooltipContent>
-      </Tooltip>
+      <a
+        href={businessPhoneTelHref}
+        tabIndex={isVisible ? undefined : -1}
+        className="flex min-h-12 flex-[1.4] items-center justify-center gap-2 rounded-lg bg-brand-blue px-4 text-sm font-semibold text-white active:scale-[0.98]"
+        aria-label={`Call us now at ${businessPhoneDisplay}`}
+      >
+        <Phone className="size-4 shrink-0" aria-hidden />
+        Call {businessPhoneDisplay}
+      </a>
+      <Link
+        href="/contact"
+        tabIndex={isVisible ? undefined : -1}
+        className="flex min-h-12 flex-1 items-center justify-center rounded-lg border border-input bg-white px-4 text-sm font-semibold text-brand-blue-dark active:scale-[0.98]"
+      >
+        Free quote
+      </Link>
     </div>
   )
 }

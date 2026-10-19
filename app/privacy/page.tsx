@@ -4,8 +4,13 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
-import { businessAddress } from "@/data/site"
-import { ctaPress } from "@/lib/ctaInteraction"
+import { PageHero } from "@/components/sections/PageHero"
+import {
+  businessAddress,
+  businessEmail,
+  businessPhoneDisplay,
+  businessPhoneTelHref,
+} from "@/data/site"
 
 export default function PrivacyPolicyPage() {
 
@@ -13,28 +18,20 @@ export default function PrivacyPolicyPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-gradient-to-b from-section-light to-white">
-        <section className="relative bg-gradient-to-br from-brand-blue-dark to-brand-blue text-white py-12 pt-header-offset">
-          <div className="absolute inset-0 bg-hero-pattern opacity-10" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-                Privacy Policy
-              </h1>
-              <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed">
-                How Pressure Washing Xperts collects, uses, and protects information you share with us.
-              </p>
-            </div>
-          </div>
-        </section>
+      <main className="min-h-screen bg-white">
+        <PageHero
+          title="Privacy Policy"
+          description="How Pressure Washing Xperts collects, uses, and protects information you share with us."
+          showCtas={false}
+        />
 
-        <section className="py-10">
+        <section className="py-14 sm:py-16">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <p className="text-sm text-gray-500 mb-8">
+            <p className="text-sm text-muted-foreground mb-8">
               Last updated: April 12, 2026
             </p>
 
-            <div className="space-y-8 text-base text-gray-700 leading-relaxed">
+            <div className="space-y-8 text-base text-slate-700 leading-relaxed">
               <div>
                 <h2 className="text-xl font-bold text-brand-blue-dark mb-3">
                   Who we are
@@ -140,18 +137,18 @@ export default function PrivacyPolicyPage() {
                 <ul className="space-y-2">
                   <li>
                     <a
-                      href="mailto:pressurewashingxperts@gmail.com"
-                      className={`text-brand-blue-dark font-medium underline-offset-2 hover:underline ${ctaPress}`}
+                      href={`mailto:${businessEmail}`}
+                      className="font-medium text-brand-blue underline-offset-2 hover:underline"
                     >
-                      pressurewashingxperts@gmail.com
+                      {businessEmail}
                     </a>
                   </li>
                   <li>
                     <a
-                      href="tel:800-451-7213"
-                      className={`text-brand-blue-dark font-medium underline-offset-2 hover:underline ${ctaPress}`}
+                      href={businessPhoneTelHref}
+                      className="font-medium text-brand-blue underline-offset-2 hover:underline"
                     >
-                      (800) 451-7213
+                      {businessPhoneDisplay}
                     </a>
                   </li>
                   <li>{businessAddress}</li>

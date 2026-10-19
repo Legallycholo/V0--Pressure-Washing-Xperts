@@ -5,77 +5,56 @@
 
 :root {
   /* ───────────────────────────────────────────────────────────
-     "POWER SHIFT" THEME — dark navy + electric cyan.
-     Brand token NAMES are kept (brand-yellow, brand-blue) so the
-     whole site re-skins through the existing utility classes, but
-     their VALUES are now the cyan/navy palette.
-     brand-yellow* = cyan highlight/CTA · brand-blue* = blue/navy
+     "CLEAN WATER" THEME — white surfaces, deep navy ink, and the
+     logo's blue as the single brand color.
+     Legacy token NAMES are kept (brand-yellow, brand-blue) so older
+     utility classes keep working:
+     brand-blue       = logo blue, primary actions on light surfaces
+     brand-blue-dark  = navy ink, dark bands, footer
+     brand-yellow*    = sky accent (highlights + CTAs on navy)
      ─────────────────────────────────────────────────────────── */
-  --brand-blue: #0077B6;        /* accent secondary — deep blue   */
-  --brand-blue-light: #00B4D8;  /* cyan-blue                       */
-  --brand-blue-dark: #0A0F1E;   /* near-black navy (bg primary)    */
-  --brand-yellow: #00E5FF;      /* electric cyan — primary CTA/glow*/
-  --brand-yellow-dark: #00B4D8; /* cyan hover                      */
-  --brand-silver: #94A3B8;      /* muted slate                     */
+  --brand-blue: #1b6cb5;
+  --brand-blue-light: #4aa3e3;
+  --brand-blue-dark: #0b2239;
+  --brand-yellow: #4aa3e3;
+  --brand-yellow-dark: #2f8fd6;
+  --brand-silver: #94a3b8;
 
-  /* Power Shift surfaces (used by dark homepage + chrome) */
-  --ps-bg: #0A0F1E;
-  --ps-bg-alt: #0F1A2E;
-  --ps-cyan: #00E5FF;
-  --ps-cyan-deep: #0077B6;
-  --ps-text: #F0F4F8;
-  --ps-text-muted: #94A3B8;
-  --ps-line: rgba(0, 229, 255, 0.18);
-
-  /* Semantic Tokens — light base kept for forms + inner-page bodies,
-     accents retinted to cyan. */
+  /* Semantic Tokens */
   --background: #ffffff;
-  --foreground: #0F1A2E;
+  --foreground: #0b2239;
   --card: #ffffff;
-  --card-foreground: #0F1A2E;
+  --card-foreground: #0b2239;
   --popover: #ffffff;
-  --popover-foreground: #0F1A2E;
-  --primary: #0077B6;
+  --popover-foreground: #0b2239;
+  --primary: #1b6cb5;
   --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0F1A2E;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #00E5FF;
-  --accent-foreground: #0A0F1E;
-  --destructive: #ef4444;
+  --secondary: #f3f7fb;
+  --secondary-foreground: #0b2239;
+  --muted: #f3f7fb;
+  --muted-foreground: #52637a;
+  --accent: #eaf3fb;
+  --accent-foreground: #0b2239;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #00B4D8;
-  --radius: 0.625rem;
+  --input: #d5dde7;
+  --ring: #4aa3e3;
+  --radius: 0.75rem;
 
   /* Section Backgrounds */
-  --section-dark: #0A0F1E;
-  --section-dark-alt: #0F1A2E;
-  --section-light: #eef3f8;
-  
-  /* Glass Effects */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  /* Reserved for optional thin header strip (currently unused) */
-  --announcement-bar-height: 0rem;
-  --header-offset-mobile: calc(5rem + var(--announcement-bar-height));
-  --header-offset-desktop: calc(6rem + var(--announcement-bar-height));
+  --section-dark: #0b2239;
+  --section-dark-alt: #12304d;
+  --section-light: #f3f7fb;
+
+  /* Fixed header height (single row, no utility strip) */
+  --header-offset-mobile: 4rem;
+  --header-offset-desktop: 5rem;
 }
 
 @theme inline {
   --font-sans: var(--font-inter), 'Inter Fallback', system-ui, sans-serif;
-  --font-display: var(--font-bebas), 'Bebas Neue', 'Inter Fallback', sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-
-  /* Power Shift surfaces */
-  --color-ps-bg: var(--ps-bg);
-  --color-ps-bg-alt: var(--ps-bg-alt);
-  --color-ps-cyan: var(--ps-cyan);
-  --color-ps-cyan-deep: var(--ps-cyan-deep);
-  --color-ps-text: var(--ps-text);
-  --color-ps-text-muted: var(--ps-text-muted);
 
   /* Brand Colors */
   --color-brand-blue: var(--brand-blue);
@@ -84,17 +63,12 @@
   --color-brand-yellow: var(--brand-yellow);
   --color-brand-yellow-dark: var(--brand-yellow-dark);
   --color-brand-silver: var(--brand-silver);
-  /* Aliases used in service-areas/page.tsx */
-  --color-navy: var(--brand-blue-dark);
-  --color-navy-light: var(--brand-blue);
-  --color-brand: var(--brand-yellow);
-  --color-brand-light: var(--brand-yellow-dark);
 
   /* Section Colors */
   --color-section-dark: var(--section-dark);
   --color-section-dark-alt: var(--section-dark-alt);
   --color-section-light: var(--section-light);
-  
+
   /* Semantic Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -125,99 +99,18 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     scroll-behavior: smooth;
   }
-}
-
-/* Custom Animations */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  body {
+    @apply bg-background text-foreground antialiased;
+    overflow-x: clip;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px var(--brand-yellow), 0 0 10px var(--brand-yellow);
-  }
-  50% {
-    box-shadow: 0 0 20px var(--brand-yellow), 0 0 30px var(--brand-yellow);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in 0.4s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.5s ease-out forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in-up,
-  .animate-fade-in,
-  .animate-slide-in-right {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .animate-pulse-glow,
-  .animate-float-cta-ring {
-    animation: none !important;
-    box-shadow: none !important;
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Gentle ring pulse on mobile floating call CTA (transform-safe) */
-@keyframes float-cta-ring {
-  0%, 100% {
-    box-shadow:
-      0 10px 25px -5px rgb(0 0 0 / 0.25),
-      0 0 0 0 rgba(0, 229, 255, 0.55);
-  }
-  50% {
-    box-shadow:
-      0 10px 25px -5px rgb(0 0 0 / 0.25),
-      0 0 0 10px rgba(0, 229, 255, 0);
-  }
-}
-
-.animate-float-cta-ring {
-  animation: float-cta-ring 2.4s ease-in-out infinite;
 }
 
 /* Quote form success panel */
@@ -237,6 +130,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .animate-success-pop-in {
     animation: none !important;
     opacity: 1 !important;
@@ -244,74 +140,20 @@
   }
 }
 
-/* Glass Card Effect */
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-card-light {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Staggered Animation Delays */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
-.stagger-6 { animation-delay: 0.6s; }
-
-/* Slow Pulse Animations */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.05); }
-}
-
-@keyframes pulse-slower {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.1); }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
-}
-
-.animate-pulse-slower {
-  animation: pulse-slower 6s ease-in-out infinite;
-}
-
-/* Background Patterns */
-.bg-hero-pattern {
-  background-image: 
-    linear-gradient(30deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)),
-    linear-gradient(150deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)),
-    linear-gradient(30deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)),
-    linear-gradient(150deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)),
-    linear-gradient(60deg, rgba(255, 255, 255, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(255, 255, 255, 0.02) 75%, rgba(255, 255, 255, 0.02)),
-    linear-gradient(60deg, rgba(255, 255, 255, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(255, 255, 255, 0.02) 75%, rgba(255, 255, 255, 0.02));
-  background-size: 80px 140px;
-  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-}
-
-/* Navbar dropdown dark theme override */
-[data-slot="navigation-menu-viewport"],
-[data-slot="navigation-menu-content"] {
-  background-color: #0A0F1E !important;
-  color: #ffffff;
-  border: none;
-}
-
 .pt-header-offset {
   padding-top: var(--header-offset-mobile);
+}
+
+.top-header-offset {
+  top: var(--header-offset-mobile);
 }
 
 @media (min-width: 1024px) {
   .pt-header-offset {
     padding-top: var(--header-offset-desktop);
+  }
+  .top-header-offset {
+    top: var(--header-offset-desktop);
   }
 }
 
@@ -326,14 +168,6 @@
   }
 }
 
-/* ─── Mobile-first utilities ─── */
-
-/* 44px minimum touch target — apply to interactive elements on mobile */
-.touch-target {
-  min-height: 44px;
-  min-width: 44px;
-}
-
 /* Safe-area padding for devices with notches / home indicators */
 .pb-safe {
   padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
@@ -341,18 +175,8 @@
 
 /* Fixed-element stacking policy (bottom-up):
    z-40 → FloatingCallButton
-   z-50 → Header */
-
-/* Hero height on mobile: occupies the visible viewport minus the header */
-.hero-mobile-height {
-  min-height: calc(88vh - var(--header-offset-mobile));
-}
-
-@media (min-width: 1024px) {
-  .hero-mobile-height {
-    min-height: auto;
-  }
-}
+   z-50 → Chat widget
+   z-60 → Header (its mobile menu must cover the chat bubble) */
 
 /* Process stepper connector line */
 .step-connector {
@@ -362,15 +186,14 @@
 .step-connector::after {
   content: "";
   position: absolute;
-  top: 28px;
+  top: 24px;
   left: calc(50% + 32px);
   width: calc(100% - 64px);
   height: 2px;
-  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-blue-light));
-  opacity: 0.35;
+  background: var(--border);
 }
 
-@media (max-width: 639px) {
+@media (max-width: 1023px) {
   .step-connector::after {
     display: none;
   }
@@ -380,119 +203,3 @@
 .step-connector-last::after {
   display: none;
 }
-
-/* Gentle reveal when scrolled into view */
-@keyframes step-reveal {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.animate-step-reveal {
-  animation: step-reveal 0.5s ease-out both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-step-reveal {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .step-connector::after {
-    opacity: 0.25;
-  }
-}
-
-/* ─── POWER SHIFT theme helpers ─── */
-
-/* Display headline font (Bebas Neue) */
-.font-display {
-  font-family: var(--font-display);
-  letter-spacing: 0.01em;
-}
-
-/* Cyan text glow — phone numbers + hero accents */
-.text-glow-cyan {
-  text-shadow:
-    0 0 8px rgba(0, 229, 255, 0.55),
-    0 0 22px rgba(0, 229, 255, 0.35);
-}
-
-/* Hero "water pressure beam" sweep that wipes the dark bg on load */
-@keyframes water-beam {
-  0% {
-    transform: translateX(-120%) skewX(-12deg);
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(120%) skewX(-12deg);
-    opacity: 0;
-  }
-}
-
-.animate-water-beam {
-  animation: water-beam 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
-}
-
-/* ─── Scroll-stacking cards (StackCards.tsx) ───
-   Each card sticks below the fixed header; deeper cards sit slightly
-   lower so covered headers stay visible as a stacked deck. */
-.stack-card {
-  position: sticky;
-  top: calc(var(--header-offset-mobile) + 0.5rem + var(--stack-index, 0) * 0.75rem);
-}
-
-.stack-card + .stack-card {
-  margin-top: 1rem;
-}
-
-@media (min-width: 1024px) {
-  .stack-card {
-    top: calc(var(--header-offset-desktop) + 1rem + var(--stack-index, 0) * 1rem);
-  }
-
-  .stack-card + .stack-card {
-    margin-top: 1.5rem;
-  }
-}
-
-/* Marquee for the social-proof stats bar (mobile auto-scroll) */
-@keyframes ps-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.animate-ps-marquee {
-  animation: ps-marquee 22s linear infinite;
-}
-
-/* Cyan glow ring used by primary CTA buttons */
-@keyframes cyan-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.45), 0 8px 24px -6px rgba(0, 229, 255, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(0, 229, 255, 0), 0 8px 28px -4px rgba(0, 229, 255, 0.65);
-  }
-}
-
-.animate-cyan-pulse {
-  animation: cyan-pulse 2.2s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-water-beam,
-  .animate-ps-marquee,
-  .animate-cyan-pulse {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    box-shadow: none !important;
-  }
-}
-

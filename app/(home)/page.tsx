@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { MapPin } from "lucide-react"
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { Header } from "@/components/layout/Header"
 import { Hero } from "@/components/sections/Hero"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
@@ -12,8 +12,8 @@ import { BeforeAfter } from "@/components/sections/BeforeAfter"
 import { Testimonials } from "@/components/sections/Testimonials"
 import { CallBanner } from "@/components/sections/CallBanner"
 import { FAQ } from "@/components/sections/FAQ"
-import { Newsletter } from "@/components/sections/Newsletter"
 import { ContactSection } from "@/components/sections/ContactSection"
+import { SectionHeading } from "@/components/sections/SectionHeading"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { getServiceAreasForNavigation } from "@/data/service-areas"
@@ -33,51 +33,37 @@ export default function Home() {
         <WhyChooseUs />
         <Gallery variant="teaser" />
         <Testimonials />
-        <CallBanner />
         <Offers />
+        <CallBanner />
         <FAQ />
-        <Newsletter />
-        <section className="bg-ps-bg-alt py-14 sm:py-16 lg:py-20">
+        <section className="bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <Reveal className="text-center">
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-ps-cyan">
-                Service Areas
-              </p>
-              <h2 className="font-display uppercase tracking-wide text-white text-3xl sm:text-4xl lg:text-5xl">
-                Based in <span className="text-ps-cyan text-glow-cyan">Ellenwood, Georgia</span>
-              </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-sm text-ps-text-muted sm:text-base">
-                Based in Ellenwood, GA. Tap your city or call{" "}
-                <a
-                  href="tel:+18004517213"
-                  className="font-semibold text-ps-cyan underline-offset-2 hover:underline"
-                >
-                  (800) 451-7213
-                </a>{" "}
-                to confirm same-day availability.
-              </p>
-            </Reveal>
+            <SectionHeading
+              eyebrow="Service areas"
+              title="Serving Ellenwood and Metro Atlanta"
+              description="Based in Ellenwood, GA. Pick your city to see local work, reviews, and availability."
+            />
             <RevealGroup
               as="ul"
-              stagger={0.05}
-              className="mx-auto mt-8 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
+              stagger={0.03}
+              className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4"
             >
               {topServiceAreas.map((area) => (
                 <RevealItem key={area.slug} as="li">
                   <Link
                     href={`/service-areas/${area.slug}`}
-                    className="group flex items-center gap-2.5 rounded-xl border border-white/10 bg-ps-bg px-4 py-3 text-sm font-medium text-ps-text transition-all duration-200 hover:-translate-y-0.5 hover:border-ps-cyan/50 hover:shadow-[0_10px_24px_-10px_rgba(0,229,255,0.4)]"
+                    className="group flex items-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3 text-sm font-medium text-brand-blue-dark transition-colors hover:border-brand-blue/40 hover:bg-accent"
                   >
-                    <MapPin className="size-4 shrink-0 text-ps-cyan" aria-hidden />
-                    <span className="truncate group-hover:text-white">{area.cityName}, GA</span>
+                    <MapPin className="size-4 shrink-0 text-brand-blue" aria-hidden />
+                    <span className="truncate">{area.cityName}, GA</span>
                   </Link>
                 </RevealItem>
               ))}
             </RevealGroup>
-            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-ps-text-muted">
-              <span className="font-semibold text-white">Also serving:</span>{" "}
-              East Point, Hampton, Lovejoy, Union City, Fairburn, and Peachtree
-              City, plus surrounding communities across Georgia.
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
+              <span className="font-semibold text-brand-blue-dark">Also serving:</span>{" "}
+              East Point, Hampton, Lovejoy, Union City, Fairburn, and Peachtree City, plus surrounding
+              communities across Georgia.
             </p>
           </div>
         </section>
