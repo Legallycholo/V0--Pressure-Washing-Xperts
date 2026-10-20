@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { X, Send, MessageCircle, Phone, Droplets } from 'lucide-react'
-import { trackLeadConversion } from '@/lib/leadAnalytics'
 import type { ChatLeadPayload, LocalChrisState } from '@/lib/localChris'
 
 /* ─── Types ────────────────────────────────────────────────────────────────── */
@@ -159,7 +158,6 @@ export function ChrisChatWidget() {
           error?: string
         }
         if (leadResponse.ok) {
-          trackLeadConversion()
           setLocalState((current) =>
             current ? { ...current, submitted: true } : current,
           )

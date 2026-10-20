@@ -75,26 +75,9 @@ export default function RootLayout({
 }>) {
   const base = getSiteUrl()
   const logoUrl = defaultLogoAbsoluteUrl(base)
-  const isProduction = process.env.VERCEL_ENV === "production"
   return (
     <html lang="en" className={`${inter.variable} ${bebas.variable}`}>
       <body className="font-sans antialiased">
-        {/* Google tag: loads GA4 + Google Ads, production only (skipped on Vercel previews) */}
-        {isProduction && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src="https://www.googletagmanager.com/gtag/js?id=G-KY5L5PHMVH"
-            />
-            <Script id="google-tag" strategy="afterInteractive">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-KY5L5PHMVH');
-          gtag('config', 'AW-18151841356');
-        `}</Script>
-          </>
-        )}
         <Script id="active-lead-activity" strategy="afterInteractive">{`
 if (typeof window !== 'undefined') {
   const startTime = Date.now();
