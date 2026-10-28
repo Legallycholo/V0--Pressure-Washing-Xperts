@@ -131,7 +131,7 @@ export function Header() {
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-shrink-0">
         <div className="relative flex min-h-[48px] items-center">
-          <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center">
+          <div className="hidden lg:flex lg:shrink-0 lg:items-center">
             <Link
               href="/"
               onClick={scrollToHero}
@@ -166,7 +166,7 @@ export function Header() {
           </Link>
           {/* Desktop Navigation */}
           <NavigationMenu
-            className="relative z-20 hidden min-w-0 shrink-0 lg:flex"
+            className="relative z-20 hidden min-w-0 shrink-0 lg:mx-auto lg:flex lg:px-4"
             viewport={false}
             onValueChange={() => {}}
           >
@@ -289,8 +289,8 @@ export function Header() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Desktop CTA */}
-          <div className="hidden min-w-0 lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
+          {/* Desktop CTA: sized to its content so it never overlaps the nav */}
+          <div className="hidden lg:flex lg:shrink-0 lg:items-center lg:justify-end lg:gap-2 xl:gap-4">
             <Tooltip>
               <TooltipTrigger asChild>
                 <a
