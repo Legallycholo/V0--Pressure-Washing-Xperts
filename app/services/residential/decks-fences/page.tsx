@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialDecksFencesMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function DecksFencesPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Decks and Fences"
+        serviceName={SERVICE_NAMES["/services/residential/decks-fences"]}
         description="We remove mold, mildew, and algae from wood, composite, and vinyl decks and fences without stripping the finish."
         category="Residential"
         benefits={[

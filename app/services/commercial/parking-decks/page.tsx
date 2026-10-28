@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function ParkingDecksPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Parking Deck Cleaning"
+        serviceName={SERVICE_NAMES["/services/commercial/parking-decks"]}
         description="Decks, ramps, stairwells, and drives pressure washed to cut oil, rubber, and buildup while keeping access open with off-peak scheduling."
         category="Commercial"
         benefits={[

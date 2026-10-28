@@ -9,13 +9,39 @@ import { ContactForm } from "@/components/ContactForm"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { businessPhoneDisplay, businessPhoneTelHref } from "@/data/site"
 import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
-import residentialHeroImage from "@/public/services/home-residential.png"
+import { ownedPhraseSentenceCase } from "@/data/site"
+import heroImage from "@/public/hardest-working-pressure-washer-ellenwood-ga.jpg"
 
 interface HeroProps {
   onOpenQuoteForm?: () => void
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const
+
+const trustPills = [
+  {
+    Icon: Star,
+    label: `${GOOGLE_REVIEW_RATING.toFixed(1)} Rating (${GOOGLE_REVIEW_COUNT} Reviews)`,
+  },
+  { Icon: ShieldCheck, label: "Licensed & Insured" },
+  { Icon: Clock, label: "Same-Day Service" },
+]
+
+function TrustPills({ className }: { className?: string }) {
+  return (
+    <div className={className}>
+      {trustPills.map(({ Icon, label }) => (
+        <span
+          key={label}
+          className="inline-flex items-center gap-1.5 rounded-full border border-ps-cyan/40 bg-ps-cyan/5 px-3 py-1.5 text-xs sm:text-sm font-medium text-ps-text"
+        >
+          <Icon className="size-3.5 shrink-0 text-ps-cyan" aria-hidden />
+          {label}
+        </span>
+      ))}
+    </div>
+  )
+}
 
 /** Orchestrated entrance: content reveals after the water beam wipes (≈0.4s). */
 const heroContainer: Variants = {
@@ -42,8 +68,8 @@ export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
       {/* LCP-optimized hero background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={residentialHeroImage}
-          alt="Professional pressure washing service on a residential exterior in Ellenwood, GA"
+          src={heroImage}
+          alt={ownedPhraseSentenceCase}
           fill
           priority
           sizes="100vw"
@@ -80,40 +106,15 @@ export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
             <motion.h1
               variants={prefersReduced ? undefined : heroItem}
               className="font-display uppercase leading-[0.92] tracking-wide text-white"
-              style={{ fontSize: "clamp(2.75rem, 8vw, 6rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 6vw, 4.25rem)" }}
             >
-              Best <span className="text-ps-cyan text-glow-cyan">Pressure Washing</span>{" "}
+              Hardest-Working <span className="text-ps-cyan text-glow-cyan">Pressure Washer</span>{" "}
               in Ellenwood, GA
             </motion.h1>
 
-            <motion.p
-              variants={prefersReduced ? undefined : heroItem}
-              className="mt-4 text-base sm:text-lg font-semibold text-ps-text-muted"
-            >
-              Same-Day Free Quotes · Licensed &amp; Insured · Serving GA Since 2010
-            </motion.p>
-
-            {/* Trust pills */}
-            <motion.div
-              variants={prefersReduced ? undefined : heroItem}
-              className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2"
-            >
-              {[
-                {
-                  Icon: Star,
-                  label: `${GOOGLE_REVIEW_RATING.toFixed(1)} Rating (${GOOGLE_REVIEW_COUNT} Reviews)`,
-                },
-                { Icon: ShieldCheck, label: "Licensed & Insured" },
-                { Icon: Clock, label: "Same-Day Service" },
-              ].map(({ Icon, label }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-ps-cyan/40 bg-ps-cyan/5 px-3 py-1.5 text-xs sm:text-sm font-medium text-ps-text"
-                >
-                  <Icon className="size-3.5 shrink-0 text-ps-cyan" aria-hidden />
-                  {label}
-                </span>
-              ))}
+            {/* Trust pills: on desktop these sit under the contact form instead */}
+            <motion.div variants={prefersReduced ? undefined : heroItem} className="lg:hidden">
+              <TrustPills className="mt-5 flex flex-wrap justify-center gap-2" />
             </motion.div>
 
             {/* Phone number: largest, most prominent element above the fold */}
@@ -165,6 +166,7 @@ export function Hero({ onOpenQuoteForm }: HeroProps = {}) {
 
           <div className="hidden lg:block animate-fade-in-up lg:col-span-7 lg:pl-6 xl:pl-10 2xl:pl-12">
             <ContactForm />
+            <TrustPills className="mt-4 flex flex-wrap justify-center gap-2" />
           </div>
         </div>
       </div>

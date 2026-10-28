@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialDrivewaysSidewalksMedia } from "@/data/residential-service-media"
@@ -47,7 +48,7 @@ export default function DrivewaySidewalkPage() {
       />
       <Header />
       <ServicePageTemplate
-        title="Driveway Cleaning Near Me in Ellenwood & Atlanta, GA"
+        serviceName={SERVICE_NAMES["/services/residential/driveways-sidewalks"]}
         description="Professional driveway cleaning and power washing in Ellenwood GA and Metro Atlanta. We remove oil stains, dirt, mold, and mildew from driveways, sidewalks, and walkways using commercial surface-cleaner pressure washing for an even, streak-free result."
         category="Residential"
         benefits={[

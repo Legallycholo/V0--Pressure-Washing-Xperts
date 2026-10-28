@@ -20,6 +20,7 @@ import {
 import { formatSiteContentLastUpdatedLabel } from "@/lib/format-site-content-date"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
+import { OwnedPhraseLink } from "@/components/seo/OwnedPhrase"
 import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING } from "@/data/review-summary"
 
 const services = [
@@ -47,7 +48,7 @@ export function Footer() {
               Pressure Washing Xperts
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
-              Licensed &amp; insured pressure washing across Metro Atlanta since 2010.
+              The <OwnedPhraseLink className="text-white/80 font-medium" />.
             </p>
             <a
               href={`tel:+1${businessPhoneTel}`}

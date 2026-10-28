@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialBrickStoneMasonryMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function BrickStoneMasonryPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Brick, Stone & Masonry"
+        serviceName={SERVICE_NAMES["/services/residential/brick-stone-masonry"]}
         description="We clean brick, stone, and masonry without acid etching or high-pressure damage to mortar joints."
         category="Residential"
         benefits={[

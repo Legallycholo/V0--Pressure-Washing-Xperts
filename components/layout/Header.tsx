@@ -171,19 +171,6 @@ export function Header() {
             onValueChange={() => {}}
           >
             <NavigationMenuList className="gap-0 xl:gap-1">
-              {/* Home */}
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/"
-                    onClick={scrollToHero}
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-2.5 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-brand-yellow focus:bg-white/10 focus:text-brand-yellow focus:outline-none xl:px-4"
-                  >
-                    Home
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-
               {/* Residential */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent px-2.5 text-white/90 hover:bg-white/10 hover:text-brand-yellow data-[state=open]:bg-white/10 data-[state=open]:text-brand-yellow xl:px-4">
@@ -361,15 +348,6 @@ export function Header() {
               Exit menu
             </button>
           </div>
-
-          {/* Home */}
-          <Link
-            href="/"
-            onClick={scrollToHero}
-            className="block text-base font-medium text-white/90 transition-colors hover:text-brand-yellow py-3 min-h-[44px] flex items-center"
-          >
-            Home
-          </Link>
 
           {/* Residential Dropdown */}
           <div>

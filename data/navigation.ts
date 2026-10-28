@@ -128,13 +128,13 @@ export const residentialServices: NavLinkItem[] = [
     href: "/services/residential/rv-cleaning",
     label: "RV Cleaning",
     summary:
-      "Exterior soft wash plus interior cabin cleaning for RVs and campers — roofs, awnings, floors, and upholstery refreshed before your next trip.",
+      "Exterior soft wash plus interior cabin cleaning for RVs and campers. Roofs, awnings, floors, and upholstery refreshed before your next trip.",
   },
   {
     href: "/services/residential/tiny-house-cleaning",
     label: "Tiny House Cleaning",
     summary:
-      "Exterior soft wash plus interior deep cleaning for tiny homes — siding, roofing, skirting, floors, and fixtures refreshed room by room.",
+      "Exterior soft wash plus interior deep cleaning for tiny homes. Siding, roofing, skirting, floors, and fixtures refreshed room by room.",
   },
   {
     href: "/services/residential/window-cleaning",

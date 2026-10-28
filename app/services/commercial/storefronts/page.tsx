@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function StorefrontsPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Storefront Washing"
+        serviceName={SERVICE_NAMES["/services/commercial/storefronts"]}
         description="Storefront glass, metal, painted surfaces, and entries cleaned so your first impression stays sharp."
         category="Commercial"
         benefits={[

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle2, Phone } from "lucide-react"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { navSlogan } from "@/data/site"
+import { OwnedPhraseLink } from "@/components/seo/OwnedPhrase"
 
 export default function WeDoXpertPage() {
 
@@ -22,10 +23,10 @@ export default function WeDoXpertPage() {
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-                We Do <span className="text-brand-yellow">Xpert</span>
+                About <span className="text-brand-yellow">Pressure Washing Xperts</span>
               </h1>
               <p className="mx-auto max-w-3xl text-base sm:text-lg text-white/80 leading-relaxed">
-                {navSlogan}
+                We are the <OwnedPhraseLink className="text-brand-yellow" />. {navSlogan}
               </p>
             </div>
           </div>
@@ -45,6 +46,11 @@ export default function WeDoXpertPage() {
                   </p>
                   <p>
                     Right techniques, eco-friendly solutions, and outcomes you can see from the street.
+                  </p>
+                  <p>
+                    Hard work is the whole pitch. We show up when we say we will, we answer seven days a
+                    week, and we stay until the stain is gone. When daylight runs out on a job, we come back
+                    the next morning to finish it.
                   </p>
                 </div>
               </div>

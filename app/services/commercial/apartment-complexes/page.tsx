@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function ApartmentComplexesPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Apartment Complex Cleaning"
+        serviceName={SERVICE_NAMES["/services/commercial/apartment-complexes"]}
         description="Pressure washing for breezeways, pool decks, dumpster enclosures, parking, and building exteriors across Metro Atlanta multi-family properties."
         category="Commercial"
         benefits={[

@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function CommercialPostConstructionCleanupPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Commercial Post-Construction Clean Up"
+        serviceName={SERVICE_NAMES["/services/commercial/post-construction-cleanup"]}
         description="Dust, drywall residue, paint overspray, adhesive, and window film left behind by builders and subs read as unfinished to tenants and buyers. We clear it from concrete, glass, and facades so the site is ready for turnover."
         category="Commercial"
         benefits={[

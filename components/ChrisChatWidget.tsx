@@ -162,7 +162,7 @@ export function ChrisChatWidget() {
             current ? { ...current, submitted: true } : current,
           )
           reply =
-            "You're all set—I sent this to the team. Someone will reach out within 24 hours to schedule your free quote. You can also call (800) 451-7213 anytime."
+            "You're all set. I sent this to the team. Someone will reach out within 24 hours to schedule your free quote. You can also call (800) 451-7213 anytime."
         } else {
           reply = `${leadResult.error ?? "We couldn't send your request."} Your details are still here, so send “retry” or call (800) 451-7213.`
         }

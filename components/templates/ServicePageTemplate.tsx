@@ -10,13 +10,16 @@ import { SocialProofBar } from "@/components/sections/SocialProofBar"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
-import residentialHeroImage from "@/public/services/home-residential.png"
-import commercialHeroImage from "@/public/services/home-commercial.png"
+import { ServiceOwnedPhraseSentence } from "@/components/seo/OwnedPhrase"
+import { ownedPhraseSentenceCase } from "@/data/site"
+import residentialHeroImage from "@/public/hardest-working-pressure-washer-ellenwood-ga.jpg"
+import commercialHeroImage from "@/public/hardest-working-pressure-washer-ellenwood-ga-commercial.jpg"
 
 export type ServiceProcessStep = { title: string; description: string }
 
 interface ServicePageTemplateProps {
-  title: string
+  /** Service display name from `SERVICE_NAMES`; the H1 becomes "[Service] in Ellenwood, GA". */
+  serviceName: string
   description: string
   category: "Residential" | "Commercial"
   benefits?: string[]
@@ -49,7 +52,7 @@ interface ServicePageTemplateProps {
 }
 
 export function ServicePageTemplate({
-  title,
+  serviceName,
   description,
   category,
   benefits = [
@@ -82,10 +85,6 @@ export function ServicePageTemplate({
   contentRevised,
 }: ServicePageTemplateProps) {
   const heroImage = category === "Commercial" ? commercialHeroImage : residentialHeroImage
-  const heroImageAlt =
-    category === "Commercial"
-      ? "Commercial exterior cleaning and pressure washing project in Metro Atlanta"
-      : "Residential exterior pressure washing service in Ellenwood, GA"
   const showContactFormAside = benefitsAside === "contactForm"
   const showBeforeAfter =
     !showContactFormAside &&
@@ -123,7 +122,7 @@ export function ServicePageTemplate({
         <div className="absolute inset-0 z-0">
           <Image
             src={heroImage}
-            alt={heroImageAlt}
+            alt={ownedPhraseSentenceCase}
             fill
             priority
             sizes="100vw"
@@ -138,9 +137,10 @@ export function ServicePageTemplate({
               {category} Services
             </span>
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">
-              {title}
+              {serviceName} in Ellenwood, GA
             </h1>
             <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">
+              <ServiceOwnedPhraseSentence serviceName={serviceName} linkClassName="text-brand-yellow" />{" "}
               {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -178,7 +178,7 @@ export function ServicePageTemplate({
           >
             <Reveal>
               <h2 className="text-2xl font-bold text-brand-blue-dark mb-4">
-                Why Choose Our {title} Service?
+                Why Choose Us for {serviceName}?
               </h2>
               <RevealGroup as="ul" className="space-y-3" stagger={0.07}>
                 {benefits.map((benefit, index) => (

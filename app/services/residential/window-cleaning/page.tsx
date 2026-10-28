@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function WindowCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Window Cleaning"
+        serviceName={SERVICE_NAMES["/services/residential/window-cleaning"]}
         description="We clean exterior window glass, frames, and screens streak-free, on their own or bundled with a full house wash."
         category="Residential"
         benefits={[

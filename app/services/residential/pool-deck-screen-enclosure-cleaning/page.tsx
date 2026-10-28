@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function PoolDeckScreenEnclosureCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Pool Deck & Screen Enclosure Cleaning"
+        serviceName={SERVICE_NAMES["/services/residential/pool-deck-screen-enclosure-cleaning"]}
         description="We clean pool decking, cages, and lanai screens to lift algae, mineral scale, and pollen film without harming mesh or coatings."
         category="Residential"
         benefits={[

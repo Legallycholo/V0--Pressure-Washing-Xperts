@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function SolarPanelCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Solar Panel Cleaning"
+        serviceName={SERVICE_NAMES["/services/residential/solar-panel-cleaning"]}
         description="We rinse panels clear of pollen, dust, and bird droppings using soft-bristle, low-pressure methods that protect the glass and seals."
         category="Residential"
         benefits={[

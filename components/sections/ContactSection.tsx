@@ -44,7 +44,7 @@ export function ContactSection() {
               <Phone className="size-6 shrink-0 sm:size-7" aria-hidden />
               {businessPhoneDisplay}
             </a>
-            <p className="mt-1 mb-5 text-sm text-ps-text-muted">Mon–Sun · 8:00 AM – 10:00 PM ET</p>
+            <p className="mt-1 mb-5 text-sm text-ps-text-muted">Mon to Sun · 8:00 AM to 10:00 PM ET</p>
 
             {/* Primary call CTA */}
             <a

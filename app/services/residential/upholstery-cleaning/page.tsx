@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function UpholsteryCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Upholstery Cleaning"
+        serviceName={SERVICE_NAMES["/services/residential/upholstery-cleaning"]}
         description="Fabric-matched upholstery cleaning removes oils, dander, and odors vacuuming cannot reach, with faster dry times."
         category="Residential"
         benefits={[

@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function StainCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Stain Cleaning"
+        serviceName={SERVICE_NAMES["/services/residential/stain-cleaning"]}
         description="Targeted treatments plus pressure washing lift rust, oil, paint, and organic stains without damaging the surface."
         category="Residential"
         benefits={[

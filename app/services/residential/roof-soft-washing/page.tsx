@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { businessSiteHost, businessSiteUrl } from "@/data/site"
@@ -46,7 +47,7 @@ export default function RoofSoftWashingPage() {
       />
       <Header />
       <ServicePageTemplate
-        title="Roof Cleaning Near Me in Ellenwood & Atlanta, GA"
+        serviceName={SERVICE_NAMES["/services/residential/roof-soft-washing"]}
         description="Safe soft wash roof cleaning removes algae, moss, lichen, and black streaks from asphalt shingles without high-pressure damage. Our roof cleaning near me service covers Ellenwood GA, Atlanta, Alpharetta, McDonough, and surrounding Metro Atlanta areas."
         category="Residential"
         benefits={[

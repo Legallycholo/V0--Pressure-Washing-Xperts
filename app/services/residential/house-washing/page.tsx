@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialHouseWashingMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function HouseWashingPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="House Washing Near Me in Ellenwood & Atlanta, GA"
+        serviceName={SERVICE_NAMES["/services/residential/house-washing"]}
         description="Professional exterior house washing in Ellenwood GA and Metro Atlanta. We use soft wash house washing techniques to safely clean vinyl siding, brick, stucco, and painted surfaces. It removes mold, mildew, and algae without forcing water behind boards. Residential pressure washing you can trust."
         category="Residential"
         benefits={[

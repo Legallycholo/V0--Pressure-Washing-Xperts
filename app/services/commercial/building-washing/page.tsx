@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function BuildingWashingPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Commercial Building Washing"
+        serviceName={SERVICE_NAMES["/services/commercial/building-washing"]}
         description="Pressure or soft wash for Metro Atlanta office, retail, and commercial facades, matched to brick, stucco, EIFS, and metal."
         category="Commercial"
         benefits={[

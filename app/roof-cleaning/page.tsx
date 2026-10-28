@@ -1,5 +1,7 @@
 "use client"
 
+import { ServiceOwnedPhraseSentence } from "@/components/seo/OwnedPhrase"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
@@ -40,9 +42,10 @@ export default function RoofCleaningPage() {
               Ellenwood, GA &amp; Metro Atlanta
             </p>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-              Professional Roof Cleaning Services in Ellenwood, GA
+              {SERVICE_NAMES["/roof-cleaning"]} in Ellenwood, GA
             </h1>
             <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-8">
+              <ServiceOwnedPhraseSentence serviceName={SERVICE_NAMES["/roof-cleaning"]} linkClassName="text-brand-yellow" />{" "}
               We use low-pressure soft washing, the only method recommended by roofing manufacturers, to safely remove black streaks, algae, moss, and lichen from your roof without causing damage.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -106,7 +109,7 @@ export default function RoofCleaningPage() {
                   <h3 className="text-xl font-bold text-red-800">Pressure Washing a Roof</h3>
                 </div>
                 <p className="text-sm text-red-900 mb-4 leading-relaxed">
-                  High-pressure water (1,500–3,000 PSI) blasts surface stains away but causes serious physical damage to asphalt shingles in the process. Most roofing manufacturers explicitly state that pressure washing voids shingle warranties.
+                  High-pressure water (1,500 to 3,000 PSI) blasts surface stains away but causes serious physical damage to asphalt shingles in the process. Most roofing manufacturers explicitly state that pressure washing voids shingle warranties.
                 </p>
                 <p className="text-xs font-semibold text-red-700 uppercase tracking-wide mb-2">
                   Risks to your roof:

@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function HotelsHospitalityPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Hotels & Hospitality Cleaning"
+        serviceName={SERVICE_NAMES["/services/commercial/hotels-hospitality"]}
         description="Exteriors, entry drives, pool decks, porte-cocheres, and loading areas washed so arrivals match your hospitality standards."
         category="Commercial"
         benefits={[

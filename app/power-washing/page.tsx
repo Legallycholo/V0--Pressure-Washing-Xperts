@@ -1,5 +1,7 @@
 "use client"
 
+import { ServiceOwnedPhraseSentence } from "@/components/seo/OwnedPhrase"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
@@ -41,9 +43,10 @@ export default function PowerWashingPage() {
               Ellenwood, GA &amp; Metro Atlanta
             </p>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-              Professional Power Washing Services Near You in Ellenwood, GA
+              {SERVICE_NAMES["/power-washing"]} in Ellenwood, GA
             </h1>
             <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-8">
+              <ServiceOwnedPhraseSentence serviceName={SERVICE_NAMES["/power-washing"]} linkClassName="text-brand-yellow" />{" "}
               High-pressure power washing service for driveways, concrete, patios, building exteriors, and commercial surfaces. We match the right pressure and method to every surface for a deep clean that lasts.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function GlassMirrorCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Glass & Mirror Cleaning"
+        serviceName={SERVICE_NAMES["/services/commercial/glass-mirror-cleaning"]}
         description="Streak-free commercial glass and mirror cleaning from ground level to multi-story facades, lobbies, and storefronts."
         category="Commercial"
         benefits={[

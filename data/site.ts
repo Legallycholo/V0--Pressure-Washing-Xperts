@@ -21,6 +21,15 @@ export const businessEmail = "pressurewashingxperts@gmail.com" as const
 export const businessAreaServedDescription =
   "Metro Atlanta, Georgia and surrounding communities" as const
 
+/** Owned positioning phrase. Use word for word, never reword. */
+export const ownedPhrase = "Hardest-Working Pressure Washer in Ellenwood, GA" as const
+
+/** Same phrase for mid-sentence use and homepage link anchor text. */
+export const ownedPhraseInline = "hardest-working pressure washer in Ellenwood, GA" as const
+
+/** Sentence-case phrase: hero image alt text and Person schema description. */
+export const ownedPhraseSentenceCase = "Hardest-working pressure washer in Ellenwood, GA" as const
+
 export const navSlogan =
   'We don\'t do "good enough." We do Xpert.' as const
 
@@ -37,11 +46,11 @@ export const businessMapsUrl =
 
 /** Weekly rows for footer + contact disclosure (keep aligned with GBP). Times are Eastern Time. */
 export const businessHoursRows = [
-  { day: "Monday", hours: "8:00 AM–10:00 PM Eastern Time" },
-  { day: "Tuesday", hours: "8:00 AM–10:00 PM Eastern Time" },
-  { day: "Wednesday", hours: "8:00 AM–10:00 PM Eastern Time" },
-  { day: "Thursday", hours: "8:00 AM–10:00 PM Eastern Time" },
-  { day: "Friday", hours: "8:00 AM–10:00 PM Eastern Time" },
-  { day: "Saturday", hours: "8:00 AM–10:00 PM Eastern Time" },
-  { day: "Sunday", hours: "8:00 AM–10:00 PM Eastern Time" },
+  { day: "Monday", hours: "8:00 AM to 10:00 PM Eastern Time" },
+  { day: "Tuesday", hours: "8:00 AM to 10:00 PM Eastern Time" },
+  { day: "Wednesday", hours: "8:00 AM to 10:00 PM Eastern Time" },
+  { day: "Thursday", hours: "8:00 AM to 10:00 PM Eastern Time" },
+  { day: "Friday", hours: "8:00 AM to 10:00 PM Eastern Time" },
+  { day: "Saturday", hours: "8:00 AM to 10:00 PM Eastern Time" },
+  { day: "Sunday", hours: "8:00 AM to 10:00 PM Eastern Time" },
 ] as const

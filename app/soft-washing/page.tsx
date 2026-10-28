@@ -1,5 +1,7 @@
 "use client"
 
+import { ServiceOwnedPhraseSentence } from "@/components/seo/OwnedPhrase"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
@@ -40,9 +42,10 @@ export default function SoftWashingPage() {
               Ellenwood, GA &amp; Metro Atlanta
             </p>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-              Professional Soft Washing Services in Ellenwood, GA
+              {SERVICE_NAMES["/soft-washing"]} in Ellenwood, GA
             </h1>
             <p className="mx-auto max-w-3xl text-base text-white/80 leading-relaxed mb-8">
+              <ServiceOwnedPhraseSentence serviceName={SERVICE_NAMES["/soft-washing"]} linkClassName="text-brand-yellow" />{" "}
               Soft wash near you: low-pressure cleaning with biodegradable solutions that kill algae, mold, and mildew at the root. Safe for roofs, siding, and any surface that can&apos;t handle high-pressure washing.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

@@ -7,10 +7,12 @@ import type { NavLinkItem } from "@/data/navigation"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
+import { ServiceOwnedPhraseSentence } from "@/components/seo/OwnedPhrase"
 
 interface ServiceCategoryHubTemplateProps {
   categoryLabel: string
-  title: string
+  /** Service display name from `SERVICE_NAMES`; the H1 becomes "[Service] in Ellenwood, GA". */
+  serviceName: string
   description: string
   services: NavLinkItem[]
   onOpenQuoteForm?: () => void
@@ -19,7 +21,7 @@ interface ServiceCategoryHubTemplateProps {
 
 export function ServiceCategoryHubTemplate({
   categoryLabel,
-  title,
+  serviceName,
   description,
   services,
   onOpenQuoteForm,
@@ -33,8 +35,11 @@ export function ServiceCategoryHubTemplate({
           <span className="inline-block mb-2 px-3 py-1 bg-brand-yellow text-brand-blue-dark font-semibold rounded-full text-xs sm:text-sm uppercase tracking-wide">
             {categoryLabel}
           </span>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">{title}</h1>
-          <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">{description}</p>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-5xl mb-3">{serviceName} in Ellenwood, GA</h1>
+          <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-4">
+            <ServiceOwnedPhraseSentence serviceName={serviceName} linkClassName="text-brand-yellow" />{" "}
+            {description}
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               asChild

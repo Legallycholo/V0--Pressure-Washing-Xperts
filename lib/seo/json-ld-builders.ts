@@ -1,10 +1,14 @@
 import type { HomeFaqItem } from "@/data/home-faq"
+import { serviceAreaContent } from "@/data/service-areas"
 import {
   businessAddressLines,
   businessAreaServedDescription,
   businessEmail,
   businessLegalName,
   businessPhoneTel,
+  ownedPhrase,
+  ownedPhraseInline,
+  ownedPhraseSentenceCase,
 } from "@/data/site"
 import { absoluteUrl } from "@/lib/site-url"
 
@@ -12,14 +16,45 @@ const ORG_ID = (base: string) => `${base}/#organization`
 const LOCAL_ID = (base: string) => `${base}/#localbusiness`
 const WEBSITE_ID = (base: string) => `${base}/#website`
 
-export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
+function businessPostalAddress() {
   const street = businessAddressLines[0] ?? ""
   const cityStateZip = businessAddressLines[1] ?? ""
   const localityMatch = cityStateZip.match(/^([^,]+),\s*([A-Z]{2})\s+([\d-]+)$/)
-  const addressLocality = localityMatch?.[1]?.trim() ?? "Ellenwood"
-  const addressRegion = localityMatch?.[2] ?? "GA"
-  const postalCode = localityMatch?.[3] ?? "30294"
+  return {
+    "@type": "PostalAddress",
+    streetAddress: street,
+    addressLocality: localityMatch?.[1]?.trim() ?? "Ellenwood",
+    addressRegion: localityMatch?.[2] ?? "GA",
+    postalCode: localityMatch?.[3] ?? "30294",
+    addressCountry: "US",
+  }
+}
 
+const BUSINESS_GEO = {
+  "@type": "GeoCoordinates",
+  latitude: 33.6542916,
+  longitude: -84.2938419,
+}
+
+/** Matches `businessHoursRows` in data/site.ts (8 AM to 10 PM, seven days). */
+const BUSINESS_OPENING_HOURS = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "https://schema.org/Monday",
+      "https://schema.org/Tuesday",
+      "https://schema.org/Wednesday",
+      "https://schema.org/Thursday",
+      "https://schema.org/Friday",
+      "https://schema.org/Saturday",
+      "https://schema.org/Sunday",
+    ],
+    opens: "08:00",
+    closes: "22:00",
+  },
+]
+
+export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -42,39 +77,13 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
         email: businessEmail,
         priceRange: "$$",
         parentOrganization: { "@id": ORG_ID(baseUrl) },
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: street,
-          addressLocality,
-          addressRegion,
-          postalCode,
-          addressCountry: "US",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: 33.6542916,
-          longitude: -84.2938419,
-        },
+        address: businessPostalAddress(),
+        geo: BUSINESS_GEO,
         areaServed: {
           "@type": "AdministrativeArea",
           name: businessAreaServedDescription,
         },
-        openingHoursSpecification: [
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: [
-              "https://schema.org/Monday",
-              "https://schema.org/Tuesday",
-              "https://schema.org/Wednesday",
-              "https://schema.org/Thursday",
-              "https://schema.org/Friday",
-              "https://schema.org/Saturday",
-              "https://schema.org/Sunday",
-            ],
-            opens: "08:00",
-            closes: "22:00",
-          },
-        ],
+        openingHoursSpecification: BUSINESS_OPENING_HOURS,
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Exterior Cleaning Services",
@@ -189,6 +198,58 @@ export function buildGlobalJsonLdGraph(baseUrl: string, logoUrl: string) {
         publisher: { "@id": ORG_ID(baseUrl) },
       },
     ],
+  }
+}
+
+/**
+ * TODO(owner): confirm the owner's legal name. "Arthur Gray Jr." is taken from Google
+ * reviews ("Arthur Gray Jr. was great and informative."), not from the business itself.
+ */
+const OWNER_NAME = "Arthur Gray Jr."
+
+/** Homepage Person schema for the owner, tied to the owned phrase. */
+export function buildOwnerPersonJsonLd(baseUrl: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: OWNER_NAME,
+    jobTitle: "Pressure Washing Xpert",
+    worksFor: {
+      "@type": "LocalBusiness",
+      "@id": LOCAL_ID(baseUrl),
+      name: businessLegalName,
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Ellenwood",
+      addressRegion: "GA",
+      addressCountry: "US",
+    },
+    description: ownedPhraseSentenceCase,
+  }
+}
+
+/** Homepage LocalBusiness schema. Shares `@id` with the global graph so the two merge. */
+export function buildHomeLocalBusinessJsonLd(baseUrl: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": LOCAL_ID(baseUrl),
+    name: businessLegalName,
+    slogan: ownedPhrase,
+    description: `${businessLegalName} is the ${ownedPhraseInline}.`,
+    url: baseUrl,
+    image: absoluteUrl("/hardest-working-pressure-washer-ellenwood-ga.jpg"),
+    telephone: `+1${businessPhoneTel}`,
+    email: businessEmail,
+    priceRange: "$$",
+    address: businessPostalAddress(),
+    geo: BUSINESS_GEO,
+    areaServed: serviceAreaContent.map((city) => ({
+      "@type": "City",
+      name: `${city.cityName}, ${city.stateCode}`,
+    })),
+    openingHoursSpecification: BUSINESS_OPENING_HOURS,
   }
 }
 

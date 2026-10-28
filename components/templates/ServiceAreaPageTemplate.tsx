@@ -10,6 +10,7 @@ import { BeforeAfterSlider } from "@/components/sections/BeforeAfterSlider"
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { hubCardLight, ctaPress } from "@/lib/ctaInteraction"
 import { cn } from "@/lib/utils"
+import { OwnedPhraseLink } from "@/components/seo/OwnedPhrase"
 
 interface ServiceAreaPageTemplateProps {
   city: ServiceAreaPageContent
@@ -43,7 +44,9 @@ export function ServiceAreaPageTemplate({ city, onOpenQuoteForm }: ServiceAreaPa
               {city.hero.headline}
             </h1>
             <p className="mx-auto max-w-2xl text-sm sm:text-base text-white/80 leading-relaxed mb-2">
-              {city.hero.subheadline}
+              {city.hero.introBeforePhrase}
+              <OwnedPhraseLink className="text-brand-yellow" />
+              {city.hero.introAfterPhrase} {city.hero.subheadline}
             </p>
             <p className="mx-auto max-w-2xl text-xs sm:text-sm text-white/70 mb-4">
               Serving {city.cityName}, {city.stateCode} in {city.county} · {city.serviceAvailability}

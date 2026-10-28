@@ -1,4 +1,5 @@
 import { commercialServices, residentialServices } from "@/data/navigation"
+import { SERVICE_NAMES, serviceSeoDescription, serviceSeoTitle } from "@/data/service-names"
 import type { BreadcrumbItem } from "@/lib/seo/json-ld-builders"
 
 export interface MarketingRouteDefinition {
@@ -404,7 +405,7 @@ const manualResidential: Record<string, MarketingRouteDefinition> = {
   ),
 }
 
-export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
+const manualMarketing: Record<string, MarketingRouteDefinition> = {
   "/roof-cleaning": def(
     "Roof Cleaning Near Me in Ellenwood & Atlanta, GA | Pressure Washing Xperts",
     "Professional roof cleaning service near you in Ellenwood, GA and Metro Atlanta. Soft wash roof cleaning removes black streaks, algae, and moss without damaging shingles. Licensed & insured. Booking request.",
@@ -461,8 +462,8 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
     ]
   ),
   "/service-areas": def(
-    "Service Areas | Metro Atlanta Pressure Washing | Pressure Washing Xperts",
-    "Cities and neighborhoods we serve across Metro Atlanta, from intown to the northern suburbs, with localized pages for exterior and flatwork cleaning.",
+    "Service Areas | Hardest-Working Pressure Washer in Ellenwood, GA",
+    "Pressure Washing Xperts is the hardest-working pressure washer in Ellenwood, GA. See every city we serve from our Ellenwood base.",
     [
       { name: "Home", path: "/" },
       { name: "Service Areas", path: "/service-areas" },
@@ -485,11 +486,11 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
     ]
   ),
   "/about/we-do-xpert": def(
-    "We Do Xpert | Our Standard | Pressure Washing Xperts",
-    "What “Xpert” means for your property: thorough prep, honest scopes, and finishes you can walk with pride. Serving Metro Atlanta homeowners and businesses.",
+    "About Pressure Washing Xperts | Hardest-Working Pressure Washer in Ellenwood, GA",
+    "Pressure Washing Xperts is the hardest-working pressure washer in Ellenwood, GA. Meet the crew, see how we work, and read what customers say.",
     [
       { name: "Home", path: "/" },
-      { name: "We Do Xpert", path: "/about/we-do-xpert" },
+      { name: "About", path: "/about/we-do-xpert" },
     ]
   ),
   "/about/pressure-vs-soft-washing": def(
@@ -516,11 +517,28 @@ export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = {
       { name: "Reviews", path: "/reviews" },
     ]
   ),
-  ...buildFromNav(residentialServices, "Residential Services", RES_HUB),
-  ...manualResidential,
-  ...buildFromNav(commercialServices, "Commercial Services", COM_HUB),
-  ...manualCommercial,
 }
+
+/** Every service route gets the owned-phrase title and meta description format. */
+function withOwnedPhraseSeo(
+  routes: Record<string, MarketingRouteDefinition>
+): Record<string, MarketingRouteDefinition> {
+  const out: Record<string, MarketingRouteDefinition> = { ...routes }
+  for (const [path, name] of Object.entries(SERVICE_NAMES)) {
+    const route = out[path]
+    if (!route) continue
+    out[path] = { ...route, title: serviceSeoTitle(name), description: serviceSeoDescription(name) }
+  }
+  return out
+}
+
+export const MARKETING_ROUTE_SEO: Record<string, MarketingRouteDefinition> = withOwnedPhraseSeo({
+  ...buildFromNav(residentialServices, "Residential Services", RES_HUB),
+  ...buildFromNav(commercialServices, "Commercial Services", COM_HUB),
+  ...manualMarketing,
+  ...manualResidential,
+  ...manualCommercial,
+})
 
 export function getMarketingRoute(pathname: string): MarketingRouteDefinition | undefined {
   const key = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname

@@ -29,6 +29,9 @@ export interface ServiceAreaPageContent {
   priority: number
   hero: {
     headline: string
+    /** First line of body, split around the owned phrase so the template can link it home. */
+    introBeforePhrase: string
+    introAfterPhrase: string
     subheadline: string
   }
   trustPoints: string[]
@@ -202,6 +205,14 @@ const CITY_HERO_BY_SLUG: Record<string, { src: string; alt: string }> = {
     src: "/gallery/gallery-08.png",
     alt: "Front of a two-story home with light siding and brick around the garage after cleaning in Fayetteville, Georgia",
   },
+  conley: {
+    src: "/gallery/gallery-08.png",
+    alt: "Front of a two-story home with light siding and brick around the garage after cleaning in Conley, Georgia",
+  },
+  hampton: {
+    src: "/gallery/gallery-04.png",
+    alt: "Front of a split-level home with tan siding, brick, and garage after washing in Hampton, Georgia",
+  },
   snellville: {
     src: "/gallery/gallery-05.png",
     alt: "Long residential concrete driveway leading toward a garage after pressure washing in Snellville, Georgia",
@@ -238,6 +249,8 @@ const NEIGHBOR_SLUGS: Record<string, string[]> = {
   "college-park": ["riverdale", "forest-park", "atlanta"],
   fayetteville: ["riverdale", "college-park", "jonesboro"],
   snellville: ["tucker", "lithonia", "norcross"],
+  conley: ["ellenwood", "forest-park", "rex"],
+  hampton: ["mcdonough", "stockbridge", "jonesboro"],
 }
 
 function cardsForCity(cityName: string) {
@@ -334,6 +347,8 @@ const CITY_DEFINITIONS = [
   { cityName: "College Park", county: "Fulton County", priority: 27 },
   { cityName: "Fayetteville", county: "Fayette County", priority: 28 },
   { cityName: "Snellville", county: "Gwinnett County", priority: 29 },
+  { cityName: "Conley", county: "Clayton County", priority: 30 },
+  { cityName: "Hampton", county: "Henry County", priority: 31 },
 ] as const
 
 /** Scheduling and response copy per city (owner-style detail for planning). */
@@ -516,6 +531,32 @@ const TRUST_BY_SLUG: Partial<Record<string, string[]>> = {
   ],
 }
 
+const HOME_BASE_SLUG = "ellenwood"
+
+function heroIntro(slug: string, cityName: string) {
+  if (slug === HOME_BASE_SLUG) {
+    return { introBeforePhrase: "We are Pressure Washing Xperts, the ", introAfterPhrase: "." }
+  }
+  return {
+    introBeforePhrase: `Pressure Washing Xperts serves ${cityName} from our base in Ellenwood. We are the `,
+    introAfterPhrase: `, and ${cityName} is a short drive.`,
+  }
+}
+
+function cityServiceAreaSeo(slug: string, cityName: string) {
+  if (slug === HOME_BASE_SLUG) {
+    return {
+      title: "Pressure Washing in Ellenwood, GA | Hardest-Working Pressure Washer",
+      description:
+        "Pressure washing in Ellenwood, GA from Pressure Washing Xperts, the hardest-working pressure washer in Ellenwood, GA. Houses, roofs, driveways, and storefronts.",
+    }
+  }
+  return {
+    title: `Pressure Washing in ${cityName}, GA | Hardest-Working Pressure Washer Near ${cityName}`,
+    description: `Pressure washing in ${cityName}, GA from Pressure Washing Xperts, the hardest-working pressure washer in Ellenwood, GA. Houses, roofs, driveways, and storefronts.`,
+  }
+}
+
 function heroSubline(cityName: string) {
   return `${cityName} picks up pollen, humidity, and algae like the rest of the metro. We match soft wash and pressure washing to your surfaces and give you a clear service scope before we start.`
 }
@@ -557,7 +598,8 @@ function createServiceAreaContent(
     county,
     priority,
     hero: {
-      headline: `Pressure Washing Services in ${cityName}, Georgia`,
+      headline: `Pressure Washing in ${cityName}, GA`,
+      ...heroIntro(slug, cityName),
       subheadline: heroSubline(cityName),
     },
     ...(heroAsset
@@ -571,10 +613,7 @@ function createServiceAreaContent(
       primary: `Request Callback for ${cityName}`,
       secondary: `Call About ${cityName} Service`,
     },
-    seo: {
-      title: `Pressure Washing in ${cityName}, GA | Pressure Washing Xperts`,
-      description: `House washing, roof soft wash, concrete, and storefronts in ${cityName}, GA. Licensed crew, clear scheduling, work you can see from the curb.`,
-    },
+    seo: cityServiceAreaSeo(slug, cityName),
     cityGalleryItemIds: CITY_GALLERY_ITEM_IDS[slug] ?? [11, 12],
     testimonials: getCityTestimonials(slug),
     serviceAvailability:

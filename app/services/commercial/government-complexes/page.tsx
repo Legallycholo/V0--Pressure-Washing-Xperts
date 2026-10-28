@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function GovernmentComplexesPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Government Complex Cleaning"
+        serviceName={SERVICE_NAMES["/services/commercial/government-complexes"]}
         description="Scheduled washing for courthouses, civic centers, parking, and government-owned buildings, with service records and documentation on request."
         category="Commercial"
         benefits={[

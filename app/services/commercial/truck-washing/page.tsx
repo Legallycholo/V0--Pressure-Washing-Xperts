@@ -3,6 +3,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { commercialTruckWashingMedia } from "@/data/commercial-service-media"
@@ -14,7 +15,7 @@ export default function TruckWashingPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Commercial Truck Washing & Heavy Vehicle Cleaning in Metro Atlanta"
+        serviceName={SERVICE_NAMES["/services/commercial/truck-washing"]}
         description="Highway film, diesel soot, hydraulic grease, and Georgia red clay take a toll on your trucks and company reputation. We bring commercial-grade mobile wash rigs directly to your yard or job site to clean semi-trucks, box trucks, dump trucks, flatbeds, and utility work trucks without disrupting route schedules. Serving Ellenwood, GA and all Metro Atlanta freight corridors."
         category="Commercial"
         benefits={[

@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function OfficeBuildingsPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Office Building Pressure Washing"
+        serviceName={SERVICE_NAMES["/services/commercial/office-buildings"]}
         description="Facades, parking structures, entryways, and dumpster areas pressure washed so your property matches tenant and visitor expectations."
         category="Commercial"
         benefits={[

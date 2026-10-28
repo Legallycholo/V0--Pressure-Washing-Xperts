@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function TileAndGroutCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Tile & Grout Cleaning"
+        serviceName={SERVICE_NAMES["/services/residential/tile-and-grout-cleaning"]}
         description="Hot water extraction and grout-specific detergents deep-clean tile and grout where mopping cannot reach."
         category="Residential"
         benefits={[

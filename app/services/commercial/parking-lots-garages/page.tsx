@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function ParkingLotsGaragesPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Parking Lot & Garage Cleaning"
+        serviceName={SERVICE_NAMES["/services/commercial/parking-lots-garages"]}
         description="Deep cleaning for asphalt and concrete lots and garages removes oil, tire marks, and organic buildup. Night and weekend scheduling available."
         category="Commercial"
         benefits={[

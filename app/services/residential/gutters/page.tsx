@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialGuttersMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function GuttersPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Gutters"
+        serviceName={SERVICE_NAMES["/services/residential/gutters"]}
         description="We clear debris, flush gutters and downspouts, and restore drainage to help prevent fascia and foundation damage."
         category="Residential"
         benefits={[

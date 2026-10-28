@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialRvCleaningMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function RvCleaningPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="RV Cleaning Near Me in Ellenwood & Atlanta, GA"
+        serviceName={SERVICE_NAMES["/services/residential/rv-cleaning"]}
         description="Road film, oxidized fiberglass, and black streaks age the outside; dust, pet hair, and travel grime build up inside. We soft wash the exterior and detail the cabin so your RV is camp-ready inside and out. Serving Ellenwood, GA and Metro Atlanta."
         category="Residential"
         benefits={[

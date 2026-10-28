@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialPostConstructionCleanupMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function PostConstructionCleanupPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Post-Construction Clean Up Near Me in Ellenwood & Atlanta, GA"
+        serviceName={SERVICE_NAMES["/services/residential/post-construction-cleanup"]}
         description="New builds and renovations leave window film, paint overspray, drywall dust, and construction grime on siding, brick, driveways, and windows. We clear it off so your home is move-in ready. Serving Ellenwood, GA and Metro Atlanta."
         category="Residential"
         benefits={[

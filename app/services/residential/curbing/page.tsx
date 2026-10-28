@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialCurbingMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function CurbingPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Curbing"
+        serviceName={SERVICE_NAMES["/services/residential/curbing"]}
         description="We clean residential curbs and sidewalks to remove algae, dirt, and traffic staining without damage."
         category="Residential"
         benefits={[

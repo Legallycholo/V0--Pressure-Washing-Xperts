@@ -4,6 +4,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal"
 import { Header } from "@/components/layout/Header"
 import { Hero } from "@/components/sections/Hero"
 import { SocialProofBar } from "@/components/sections/SocialProofBar"
+import { HardestWorkingProof } from "@/components/sections/HardestWorkingProof"
 import { Services } from "@/components/sections/Services"
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs"
 import { Gallery } from "@/components/sections/Gallery"
@@ -28,6 +29,7 @@ export default function Home() {
       <main>
         <Hero />
         <SocialProofBar />
+        <HardestWorkingProof />
         <Services />
         <BeforeAfter />
         <WhyChooseUs />
@@ -76,7 +78,7 @@ export default function Home() {
             </RevealGroup>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-ps-text-muted">
               <span className="font-semibold text-white">Also serving:</span>{" "}
-              East Point, Hampton, Lovejoy, Union City, Fairburn, and Peachtree
+              East Point, Lovejoy, Union City, Fairburn, and Peachtree
               City, plus surrounding communities across Georgia.
             </p>
           </div>

@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function GraffitiRemovalPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Graffiti Removal Services"
+        serviceName={SERVICE_NAMES["/services/commercial/graffiti-removal"]}
         description="Fast removal of spray paint, marker, and tagging from brick, concrete, metal, and painted surfaces before stains set."
         category="Commercial"
         benefits={[

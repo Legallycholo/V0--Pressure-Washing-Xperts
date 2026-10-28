@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 
@@ -14,7 +15,7 @@ export default function CommercialRedClayRemovalPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Commercial Red Clay Removal"
+        serviceName={SERVICE_NAMES["/services/commercial/red-clay-removal"]}
         description="Red clay tracked in by vehicles, equipment, and runoff stains concrete, curbs, entries, and building faces. We remove it with chemistry made for iron-rich soil so your property reads maintained, not muddy."
         category="Commercial"
         benefits={[

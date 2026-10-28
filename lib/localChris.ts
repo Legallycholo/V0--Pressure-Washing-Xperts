@@ -106,7 +106,7 @@ function serviceAnswer(message: string): string | null {
   const normalized = message.toLowerCase()
 
   if (/\b(price|pricing|cost|how much|estimate)\b/.test(normalized)) {
-    return "We provide a free in-person quote so the price matches the size and condition. Driveways often start around $150–$250, but the team will confirm the exact price."
+    return "We provide a free in-person quote so the price matches the size and condition. Driveways often start around $150 to $250, but the team will confirm the exact price."
   }
   if (/\b(service|what do you (do|clean)|offer)\b/.test(normalized)) {
     return "We clean houses and siding, driveways, sidewalks, roofs, gutters, patios, decks, fences, windows, and commercial properties."
@@ -115,10 +115,10 @@ function serviceAnswer(message: string): string | null {
     return "We’re based in Metro Atlanta and quote jobs throughout Georgia."
   }
   if (/\b(insured|licensed|insurance)\b/.test(normalized)) {
-    return "Yes—we’re licensed and insured."
+    return "Yes, we’re licensed and insured."
   }
   if (/\b(hour|open|available|schedule)\b/.test(normalized)) {
-    return "We’re available Monday through Saturday, 7 AM–7 PM ET."
+    return "We’re available Monday through Saturday, 7 AM to 7 PM ET."
   }
   if (/\b(discount|special|deal|coupon|promo|offer)\b/.test(normalized)) {
     return "We offer 15% off for first-time customers and 20% off when you book 2 or more services in the same visit."
@@ -190,9 +190,9 @@ function normalizeSqft(message: string): string | null | "unknown" {
 function sqftLabel(value: string): string {
   const labels: Record<string, string> = {
     under_1500: "Under 1,500 sq ft",
-    "1500_2500": "1,500–2,500 sq ft",
-    "2501_3500": "2,501–3,500 sq ft",
-    "3501_4500": "3,501–4,500 sq ft",
+    "1500_2500": "1,500 to 2,500 sq ft",
+    "2501_3500": "2,501 to 3,500 sq ft",
+    "3501_4500": "3,501 to 4,500 sq ft",
     over_4500: "Over 4,500 sq ft",
   }
   return labels[value] ?? value
@@ -303,7 +303,7 @@ export function runLocalChris(messageValue: unknown, stateValue: unknown): Local
       }
       return {
         reply:
-          "About how large is the home or area: under 1,500; 1,500–2,500; 2,501–3,500; 3,501–4,500; or over 4,500 sq ft? You can also say “not sure.”",
+          "About how large is the home or area: under 1,500; 1,500 to 2,500; 2,501 to 3,500; 3,501 to 4,500; or over 4,500 sq ft? You can also say “not sure.”",
         state: withUpdate(state, "sqft", { zip }),
       }
     }
@@ -312,7 +312,7 @@ export function runLocalChris(messageValue: unknown, stateValue: unknown): Local
       if (!sqft) {
         return {
           reply:
-            "Which range is closest: under 1,500; 1,500–2,500; 2,501–3,500; 3,501–4,500; or over 4,500 sq ft? “Not sure” is okay too.",
+            "Which range is closest: under 1,500; 1,500 to 2,500; 2,501 to 3,500; 3,501 to 4,500; or over 4,500 sq ft? “Not sure” is okay too.",
           state,
         }
       }
@@ -325,7 +325,7 @@ export function runLocalChris(messageValue: unknown, stateValue: unknown): Local
       if (!lead) {
         return { reply: "What would you like us to clean?", state: initialState() }
       }
-      return { reply: "Thanks—I'm sending that to the team now.", state: next, lead }
+      return { reply: "Thanks, I'm sending that to the team now.", state: next, lead }
     }
     case "complete": {
       const lead = completedLead(state)

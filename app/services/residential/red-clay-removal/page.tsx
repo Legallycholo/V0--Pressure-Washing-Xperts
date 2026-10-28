@@ -4,6 +4,7 @@
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ServicePageTemplate } from "@/components/templates/ServicePageTemplate"
+import { SERVICE_NAMES } from "@/data/service-names"
 import { getServiceLeafCopy } from "@/data/service-leaf-meta"
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton"
 import { residentialRedClayRemovalMedia } from "@/data/residential-service-media"
@@ -15,7 +16,7 @@ export default function RedClayRemovalPage() {
     <>
       <Header />
       <ServicePageTemplate
-        title="Red Clay Removal Near Me in Ellenwood & Atlanta, GA"
+        serviceName={SERVICE_NAMES["/services/residential/red-clay-removal"]}
         description="Georgia red clay stains driveways, siding, brick, and curbs fast. We lift red clay splatter and iron-rich soil staining with detergents and pressure matched to each surface, so the orange tint comes out instead of spreading. Serving Ellenwood, GA and Metro Atlanta."
         category="Residential"
         benefits={[
